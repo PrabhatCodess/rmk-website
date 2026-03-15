@@ -1,0 +1,207 @@
+@font-face {
+  font-family: "Rage Italic";
+  /* Replace with the actual font files you provide */
+  src: url("/assets/fonts/RageItalic.woff2") format("woff2"),
+       url("/assets/fonts/RageItalic.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* apply the custom font to both display and body */
+:root {
+  --font-display: "Rage Italic", Georgia, serif;
+  --font-body: "Rage Italic", system-ui, sans-serif;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Fraunces (Display Serif) */
+@font-face {
+  font-family: "Fraunces";
+  src: url("/assets/fonts/Fraunces.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Figtree (Body) */
+@font-face {
+  font-family: "Figtree";
+  src: url("/assets/fonts/Figtree.woff2") format("woff2");
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+
+    /* Core palette: Warm Terracotta + Ivory + Sage */
+    --background:         0.97 0.012 68;
+    --foreground:         0.22 0.04  50;
+
+    --card:               0.99 0.006 75;
+    --card-foreground:    0.22 0.04  50;
+
+    --popover:            0.99 0.006 75;
+    --popover-foreground: 0.22 0.04  50;
+
+    /* Primary: deep terracotta */
+    --primary:            0.54 0.12  42;
+    --primary-foreground: 0.99 0.004 80;
+
+    /* Secondary: soft sage */
+    --secondary:          0.92 0.03  120;
+    --secondary-foreground: 0.28 0.06 110;
+
+    --muted:              0.94 0.014 65;
+    --muted-foreground:   0.52 0.04  55;
+
+    /* Accent: golden honey */
+    --accent:             0.88 0.08  72;
+    --accent-foreground:  0.25 0.06  55;
+
+    --destructive:        0.577 0.245 27.325;
+    --destructive-foreground: 0.985 0 0;
+
+    --border:             0.88 0.022 65;
+    --input:              0.88 0.022 65;
+    --ring:               0.54 0.12  42;
+
+    --chart-1: 0.646 0.222 41.116;
+    --chart-2: 0.6   0.118 184.704;
+    --chart-3: 0.398 0.07  227.392;
+    --chart-4: 0.828 0.189 84.429;
+    --chart-5: 0.769 0.188 70.08;
+
+    --sidebar:                  0.97 0.012 68;
+    --sidebar-foreground:       0.22 0.04  50;
+    --sidebar-primary:          0.54 0.12  42;
+    --sidebar-primary-foreground: 0.99 0.004 80;
+    --sidebar-accent:           0.92 0.03  120;
+    --sidebar-accent-foreground: 0.28 0.06 110;
+    --sidebar-border:           0.88 0.022 65;
+    --sidebar-ring:             0.54 0.12  42;
+
+    /* Custom homestay tokens */
+    --honey:    0.76 0.13  72;
+    --honey-l:  0.86 0.09  75;
+    --sage-mid: 0.65 0.06  148;
+    --bark:     0.32 0.06  52;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Figtree", system-ui, sans-serif;
+  }
+}
+
+/* Section scroll offset for sticky nav */
+section[id],
+div[id] {
+  scroll-margin-top: 5rem;
+}
+
+/* Decorative gradient wash on body */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 15% 0%, oklch(0.85 0.07 55 / 0.22) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 85% 100%, oklch(0.82 0.05 140 / 0.15) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Hero overlay */
+.hero-overlay {
+  background: linear-gradient(
+    160deg,
+    oklch(0.16 0.04 48 / 0.42) 0%,
+    oklch(0.14 0.03 50 / 0.62) 55%,
+    oklch(0.10 0.02 52 / 0.78) 100%
+  );
+}
+
+/* Subtle section divider */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, oklch(0.60 0.07 55 / 0.3), transparent);
+  margin: 0 auto;
+  max-width: 80%;
+}
+
+/* Gallery masonry */
+.masonry-grid {
+  columns: 1;
+  column-gap: 0.75rem;
+  margin: 0 auto;
+}
+
+@media (min-width: 640px) {
+  .masonry-grid {
+    columns: 2;
+    column-gap: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .masonry-grid {
+    columns: 3;
+    column-gap: 1.25rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .masonry-grid {
+    columns: 4;
+    column-gap: 1.5rem;
+  }
+}
+
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 1rem;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  display: block;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  background: #fff;
+  transition: box-shadow 0.2s ease;
+}
+
+.masonry-item:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Room card image hover */
+.room-img {
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.room-card:hover .room-img {
+  transform: scale(1.04);
+}
+
+/* Star filled/empty */
+.star-filled {
+  color: oklch(var(--honey));
+  fill: oklch(var(--honey));
+}
+.star-empty {
+  color: oklch(0.78 0.03 65);
+  fill: oklch(0.78 0.03 65);
+}
