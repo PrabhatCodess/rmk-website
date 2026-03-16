@@ -36,6 +36,7 @@ import { stairs } from "@lucide/lab";
 
 import { AnimatePresence, motion } from "motion/react";
 import { useRef, useState, useEffect, useCallback } from "react";
+import Loader from "./components/Loader";
 import type { GuestReview } from "./backend.d";
 import {
   useGetAllGuestReviews,
@@ -592,6 +593,7 @@ export default function App() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxRoomIdx, setLightboxRoomIdx] = useState(0);
   const [lightboxImageIdx, setLightboxImageIdx] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   const navLinks = [
     { href: "#about", label: "About" },
@@ -625,7 +627,7 @@ export default function App() {
     setLightboxOpen(false);
   };
 
-const getCurrentImageArray = () => {
+  const getCurrentImageArray = () => {
     if (lightboxRoomIdx === -1) {
       return GALLERY_IMAGES.map((i) => i.src);
     }
@@ -636,7 +638,7 @@ const getCurrentImageArray = () => {
     const images = getCurrentImageArray();
     setLightboxImageIdx((prev) => (prev - 1 + images.length) % images.length);
   };
-  
+
   const handleNextImage = () => {
     const images = getCurrentImageArray();
     setLightboxImageIdx((prev) => (prev + 1) % images.length);
@@ -662,6 +664,11 @@ const getCurrentImageArray = () => {
 
   return (
     <div className="relative min-h-screen font-body">
+      <AnimatePresence>
+        {loading && <Loader onFinish={() => setLoading(false)} />}
+      </AnimatePresence>
+      {!loading && (
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
       {/* Navigation */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-border">
         <nav className="max-w-6xl mx-auto px-4 sm:px-6 h-[4.5rem] flex items-center justify-between">
@@ -1612,6 +1619,8 @@ const getCurrentImageArray = () => {
             : FALLBACK_ROOMS[lightboxRoomIdx]?.name || "Room"
         }
       />
+        </motion.div>
+      )}
     </div>
   );
 }
