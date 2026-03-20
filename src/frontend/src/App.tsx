@@ -1425,7 +1425,7 @@ export default function App() {
                              +91 9044301567
                   </a>
                   <a
-                    href="mailto:rmk.vns@ithstays.com"
+                    href="mailto:rmkothivns@gmail.com"
                     data-ocid="contact.email_button"
                     className="inline-flex items-center gap-2 bg-secondary text-foreground hover:bg-secondary/80 border border-border rounded-full px-5 py-2.5 text-sm font-medium transition-colors"
                   >
@@ -1526,7 +1526,7 @@ export default function App() {
                 </span>
               </div>
               <p className="text-sm text-primary-foreground/60 leading-relaxed">
-                A 300-year-old heritage haveli managed by ITH Stays, in the
+                A 300-year-old heritage haveli managed by Mr. Dr V.N. Singh and Team Rudreshwar Kothi, in the
                 heart of Varanasi.
               </p>
             </div>
@@ -1555,10 +1555,10 @@ export default function App() {
                 <li className="flex items-center gap-2 text-sm text-primary-foreground/70">
                   <Mail className="w-4 h-4 flex-shrink-0 text-primary-foreground/40" />
                   <a
-                    href="mailto:rmk.vns@ithstays.com"
+                    href="mailto:rmkothivns@gmail.com"
                     className="hover:text-primary-foreground transition-colors"
                   >
-                    rmk.vns@ithstays.com
+                    rmkothivns@gmail.com
                   </a>
                 </li>
               </ul>
@@ -1588,21 +1588,7 @@ export default function App() {
 
           <div className="border-t border-primary-foreground/10 pt-6 text-center">
             <p className="text-sm text-primary-foreground/40">
-              (c) {new Date().getFullYear()} Rudreshwar Mahadeo Kothi - ITH Living
-              LLP. Built with{" "}
-              <Heart
-                className="w-3 h-3 inline text-primary"
-                fill="currentColor"
-              />{" "}
-              using{" "}
-              <a
-                href={`https://caffeine.ai?utm_source=caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(window.location.hostname)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline underline-offset-2 hover:text-primary-foreground/70 transition-colors"
-              >
-                caffeine.ai
-              </a>
+          © 2026 Rudreshwar Mahadeo Kothi — A Heritage Property. All rights reserved.{" "}
             </p>
           </div>
         </div>
@@ -1832,8 +1818,7 @@ function BookingForm() {
           Inquiry Sent!
         </h3>
         <p className="text-muted-foreground leading-relaxed max-w-sm mx-auto">
-          Thank you for reaching out. The ITH Stays team will confirm
-          availability within 24 hours.
+          Thank you for reaching out. Team Rudreshwar will confirm availability within 24 hours.
         </p>
         <Button
           onClick={() => setSubmitted(false)}
