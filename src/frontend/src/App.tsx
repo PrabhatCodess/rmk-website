@@ -1372,7 +1372,7 @@ export default function App() {
                             Address
                           </p>
                           <p>
-                            CK-37/29, Bansphatak Road, Varanasi 221001, Uttar
+                            CK-37/29, Bansphatak Road, Gate No.1 Near Pitambari Saree Opposite of Bank Of Baroda Varanasi 221001, Uttar
                             Pradesh, India
                           </p>
                         </div>
@@ -1407,7 +1407,7 @@ export default function App() {
                   Book Your Stay
                 </h2>
                 <p className="text-muted-foreground mb-5">
-                  Send us a message and the ITH Stays team will confirm
+                  Send us a message and Team Rudreshwar will confirm
                   availability within 24 hours.
                 </p>
 
@@ -1420,6 +1420,8 @@ export default function App() {
                   >
                     <Phone className="w-4 h-4" />
                     Call Us: +91 99206 85754
+                             +91 9889244273
+                             +91 9044301567
                   </a>
                   <a
                     href="mailto:rmk.vns@ithstays.com"
