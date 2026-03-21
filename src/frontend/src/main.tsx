@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import { InternetIdentityProvider } from "./hooks/useInternetIdentity";
 import "../index.css";
+import { inject } from '@vercel/analytics';
 
 BigInt.prototype.toJSON = function () {
   return this.toString();
@@ -15,6 +16,8 @@ declare global {
 }
 
 const queryClient = new QueryClient();
+
+inject();
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <QueryClientProvider client={queryClient}>
