@@ -48,10 +48,10 @@ import {
 /* Seed reviews  */
 const SEED_REVIEWS: GuestReview[] = [
   {
-    guestName: "SB0901",
+    guestName: "Karan Vadodara, India",
     rating: BigInt(5),
     comment:
-      "An Incredibly Beautiful House.. very aesthetically done... super comfortable... an Old World Charm... best location to stay in Varanasi, everything is just minutes-walk away. Hosts are very warm and super Caring. We had a great stay there and would definitely be staying there in future too.",
+      "A review here would mean a bunch of superlatives about how wonderful everything was, so I will keep it short, the days spent here made me feel right at home and the warmth and hospitality was unparalleled. Uncle and Aunty are both just incredible, I think one will only be able to understand after experiencing it, strongly recommend having an experience of this wonderful home and the hospitality. I would like to really thank them for making this a trip of a lifetime for me.",
     stayDate: "April 2025",
   },
   {
