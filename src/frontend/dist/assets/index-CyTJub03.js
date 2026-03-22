@@ -28329,13 +28329,51 @@ var Smooth = /* @__PURE__ */ function() {
 function Loader({ onFinish }) {
   const [progress2, setProgress] = reactExports.useState(0);
   reactExports.useEffect(() => {
-    if (progress2 < 100) {
-      const timeout2 = setTimeout(() => setProgress(progress2 + 2), 18);
-      return () => clearTimeout(timeout2);
-    } else {
-      setTimeout(onFinish, 500);
-    }
-  }, [progress2, onFinish]);
+    const timer = setTimeout(() => {
+      const images = Array.from(document.querySelectorAll("img"));
+      if (images.length === 0) {
+        setProgress(100);
+        setTimeout(onFinish, 500);
+        return;
+      }
+      let loadedCount = 0;
+      let hasFinished = false;
+      const updateProgress = () => {
+        if (hasFinished) return;
+        loadedCount++;
+        const percent2 = Math.floor(loadedCount / images.length * 100);
+        setProgress(percent2);
+        if (loadedCount >= images.length) {
+          hasFinished = true;
+          setProgress(100);
+          setTimeout(onFinish, 500);
+        }
+      };
+      images.forEach((img) => {
+        if (img.complete) {
+          updateProgress();
+        } else {
+          img.addEventListener("load", updateProgress);
+          img.addEventListener("error", updateProgress);
+        }
+      });
+      const fallback = setTimeout(() => {
+        if (!hasFinished) {
+          hasFinished = true;
+          setProgress(100);
+          setTimeout(onFinish, 500);
+        }
+      }, 1e4);
+      return () => {
+        clearTimeout(fallback);
+        images.forEach((img) => {
+          img.removeEventListener("load", updateProgress);
+          img.removeEventListener("error", updateProgress);
+        });
+      };
+    }, 50);
+    return () => clearTimeout(timer);
+  }, [onFinish]);
   return /* @__PURE__ */ jsxRuntimeExports.jsx(AnimatePresence, { children: progress2 < 100 && /* @__PURE__ */ jsxRuntimeExports.jsx(
     motion.div,
     {
@@ -41934,858 +41972,870 @@ function App() {
   }, [lightboxOpen, lightboxRoomIdx]);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative min-h-screen font-body", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(AnimatePresence, { children: loading && /* @__PURE__ */ jsxRuntimeExports.jsx(Loader, { onFinish: () => setLoading(false) }) }),
-    !loading && /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { initial: { opacity: 0 }, animate: { opacity: 1 }, exit: { opacity: 0 }, children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("header", { className: "fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-border", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("nav", { className: "max-w-6xl mx-auto px-4 sm:px-6 h-[4.5rem] flex items-center justify-between", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs(
-            "button",
-            {
-              type: "button",
-              onClick: () => scrollTo("#hero"),
-              className: "flex items-center gap-2 group",
-              children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-8 h-8 rounded-full bg-primary flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Flame, { className: "w-4 h-4 text-primary-foreground" }) }),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "font-display font-semibold text-lg text-foreground tracking-tight leading-none", children: [
-                  "Rudreshwar",
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs font-body font-medium text-muted-foreground tracking-widest uppercase", children: "Mahadeo Kothi" })
-                ] })
-              ]
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "hidden md:flex items-center gap-6", children: navLinks.map((link) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "a",
-            {
-              href: link.href,
-              "data-ocid": `nav.${link.label.toLowerCase()}.link`,
-              onClick: (e) => {
-                e.preventDefault();
-                scrollTo(link.href);
-              },
-              className: "text-sm font-medium text-muted-foreground hover:text-white transition-colors",
-              children: link.label
-            }
-          ) }, link.href)) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(
-              Button,
-              {
-                "data-ocid": "nav.book_button",
-                onClick: () => window.open(
-                  "https://reservations.ithstays.com/booking/book-rooms-rudreshwarmahadeokothibyithstays",
-                  "_blank"
-                ),
-                className: "hidden sm:flex bg-primary text-primary-foreground hover:bg-primary/90 text-sm px-5 rounded-full",
-                children: "Book Now"
-              }
-            ),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(
-              "button",
-              {
-                type: "button",
-                className: "md:hidden p-2 rounded-md text-foreground",
-                onClick: () => setMobileMenuOpen((v2) => !v2),
-                "aria-label": "Toggle menu",
-                children: mobileMenuOpen ? /* @__PURE__ */ jsxRuntimeExports.jsx(X$1, { className: "w-5 h-5" }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Menu, { className: "w-5 h-5" })
-              }
-            )
-          ] })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(AnimatePresence, { children: mobileMenuOpen && /* @__PURE__ */ jsxRuntimeExports.jsx(
-          motion.div,
-          {
-            initial: { height: 0, opacity: 0 },
-            animate: { height: "auto", opacity: 1 },
-            exit: { height: 0, opacity: 0 },
-            transition: { duration: 0.25 },
-            className: "md:hidden overflow-hidden bg-background border-t border-border",
-            children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "px-4 py-4 flex flex-col gap-3", children: [
-              navLinks.map((link) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      motion.div,
+      {
+        initial: { opacity: 0 },
+        animate: { opacity: loading ? 0 : 1 },
+        style: {
+          height: loading ? "100vh" : "auto",
+          overflow: loading ? "hidden" : "visible",
+          pointerEvents: loading ? "none" : "auto"
+        },
+        children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("header", { className: "fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-border", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("nav", { className: "max-w-6xl mx-auto px-4 sm:px-6 h-[4.5rem] flex items-center justify-between", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                "button",
+                {
+                  type: "button",
+                  onClick: () => scrollTo("#hero"),
+                  className: "flex items-center gap-2 group",
+                  children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-8 h-8 rounded-full bg-primary flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Flame, { className: "w-4 h-4 text-primary-foreground" }) }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "font-display font-semibold text-lg text-foreground tracking-tight leading-none", children: [
+                      "Rudreshwar",
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs font-body font-medium text-muted-foreground tracking-widest uppercase", children: "Mahadeo Kothi" })
+                    ] })
+                  ]
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "hidden md:flex items-center gap-6", children: navLinks.map((link) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
                 "a",
                 {
                   href: link.href,
+                  "data-ocid": `nav.${link.label.toLowerCase()}.link`,
                   onClick: (e) => {
                     e.preventDefault();
                     scrollTo(link.href);
                   },
-                  className: "py-2 text-base font-medium text-foreground border-b border-border/50 last:border-0",
+                  className: "text-sm font-medium text-muted-foreground hover:text-white transition-colors",
                   children: link.label
-                },
-                link.href
-              )),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(
-                Button,
-                {
-                  "data-ocid": "nav.book_button",
-                  onClick: () => window.open(
-                    "https://reservations.ithstays.com/booking/book-rooms-rudreshwarmahadeokothibyithstays",
-                    "_blank"
-                  ),
-                  className: "mt-2 bg-primary text-primary-foreground w-full rounded-full",
-                  children: "Book Now"
                 }
-              )
-            ] })
-          }
-        ) })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { ref: scrollRef, "data-scroll-container": true, children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { id: "hero", className: "relative min-h-screen flex flex-col", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute inset-0 overflow-hidden", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(
-                "img",
-                {
-                  src: "/assets/generated/hero-temple-shrine.dim_1200x700.jpg",
-                  alt: "Rudreshwar Mahadeo Kothi heritage haveli temple shrine entrance",
-                  className: "w-full h-full object-cover"
-                }
-              ),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "hero-overlay absolute inset-0" })
+              ) }, link.href)) }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  Button,
+                  {
+                    "data-ocid": "nav.book_button",
+                    onClick: () => window.open(
+                      "https://reservations.ithstays.com/booking/book-rooms-rudreshwarmahadeokothibyithstays",
+                      "_blank"
+                    ),
+                    className: "hidden sm:flex bg-primary text-primary-foreground hover:bg-primary/90 text-sm px-5 rounded-full",
+                    children: "Book Now"
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "button",
+                  {
+                    type: "button",
+                    className: "md:hidden p-2 rounded-md text-foreground",
+                    onClick: () => setMobileMenuOpen((v2) => !v2),
+                    "aria-label": "Toggle menu",
+                    children: mobileMenuOpen ? /* @__PURE__ */ jsxRuntimeExports.jsx(X$1, { className: "w-5 h-5" }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Menu, { className: "w-5 h-5" })
+                  }
+                )
+              ] })
             ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "relative z-10 flex-1 flex flex-col items-center justify-center text-center px-4 sm:px-6 pt-20", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            /* @__PURE__ */ jsxRuntimeExports.jsx(AnimatePresence, { children: mobileMenuOpen && /* @__PURE__ */ jsxRuntimeExports.jsx(
               motion.div,
               {
-                variants: stagger,
-                initial: "hidden",
-                animate: "visible",
-                className: "max-w-2xl",
-                children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(
-                    motion.div,
+                initial: { height: 0, opacity: 0 },
+                animate: { height: "auto", opacity: 1 },
+                exit: { height: 0, opacity: 0 },
+                transition: { duration: 0.25 },
+                className: "md:hidden overflow-hidden bg-background border-t border-border",
+                children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "px-4 py-4 flex flex-col gap-3", children: [
+                  navLinks.map((link) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "a",
                     {
-                      variants: fadeUp,
-                      className: "flex justify-center mb-6",
-                      children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm border border-white/25 rounded-full px-4 py-1.5", children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsx(Star, { className: "w-3.5 h-3.5 fill-amber-300 text-amber-300" }),
-                        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-white/90 text-xs font-medium tracking-widest uppercase", children: "Heritage Haveli - AirBnB Guest Favorite" })
-                      ] })
-                    }
-                  ),
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                    motion.h1,
-                    {
-                      variants: fadeUp,
-                      className: "font-display text-4xl sm:text-5xl md:text-6xl font-semibold text-white leading-[1.1] tracking-tight mb-4",
-                      children: [
-                        "Rudreshwar",
-                        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-                        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "italic text-amber-200", children: "Mahadeo Kothi" })
-                      ]
-                    }
-                  ),
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                    motion.p,
-                    {
-                      variants: fadeUp,
-                      className: "text-white/80 text-lg sm:text-xl font-light mb-8 leading-relaxed",
-                      children: [
-                        "Heritage Haveli in the Heart of Varanasi",
-                        /* @__PURE__ */ jsxRuntimeExports.jsx("br", { className: "hidden sm:block" }),
-                        "3 min walk from Kashi Vishwanath Temple"
-                      ]
-                    }
-                  ),
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                    motion.div,
-                    {
-                      variants: fadeUp,
-                      className: "flex flex-col sm:flex-row gap-3 justify-center",
-                      children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsx(
-                          Button,
-                          {
-                            "data-ocid": "hero.primary_button",
-                            onClick: () => window.open(
-                              "https://reservations.ithstays.com/booking/book-rooms-rudreshwarmahadeokothibyithstays",
-                              "_blank"
-                            ),
-                            size: "lg",
-                            className: "bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-6 text-base rounded-full shadow-lg",
-                            children: "Book Now"
-                          }
-                        ),
-                        /* @__PURE__ */ jsxRuntimeExports.jsx(
-                          Button,
-                          {
-                            onClick: () => scrollTo("#rooms"),
-                            size: "lg",
-                            variant: "outline",
-                            className: "border-white/40 text-white bg-white/10 hover:bg-white/20 hover:text-white px-8 py-6 text-base rounded-full",
-                            children: "View Rooms"
-                          }
-                        )
-                      ]
-                    }
-                  )
-                ]
-              }
-            ) }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "relative z-10 flex justify-center pb-8", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-              motion.button,
-              {
-                type: "button",
-                onClick: () => scrollTo("#about"),
-                animate: { y: [0, 6, 0] },
-                transition: {
-                  duration: 2,
-                  repeat: Number.POSITIVE_INFINITY,
-                  ease: "easeInOut"
-                },
-                className: "text-white/60 hover:text-white/90 transition-colors",
-                "aria-label": "Scroll down",
-                children: /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronDown, { className: "w-7 h-7" })
-              }
-            ) })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "section",
-            {
-              id: "about",
-              className: "py-20 sm:py-28 px-4 sm:px-6 bg-background relative z-10",
-              children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-5xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                motion.div,
-                {
-                  variants: stagger,
-                  initial: "hidden",
-                  whileInView: "visible",
-                  viewport: { once: true, margin: "-80px" },
-                  className: "grid md:grid-cols-2 gap-12 items-center",
-                  children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx(
-                        motion.p,
-                        {
-                          variants: fadeUp,
-                          className: "text-sm font-medium tracking-widest uppercase text-primary mb-3",
-                          children: "About Us"
-                        }
-                      ),
-                      /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                        motion.h2,
-                        {
-                          variants: fadeUp,
-                          className: "font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight mb-5",
-                          children: [
-                            "A 300-Year-Old",
-                            /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-                            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "italic font-light", children: "Heritage Haveli" })
-                          ]
-                        }
-                      ),
-                      /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                        motion.div,
-                        {
-                          variants: fadeUp,
-                          className: "space-y-4 text-muted-foreground leading-relaxed",
-                          children: [
-                            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Step into a world of royal elegance, deep spirituality, and living history at Rudreshwar Mahadeo Kothi - a 300-year-old ancestral haveli steeped in tradition. Just a 3-minute walk from the Kashi Vishwanath Temple and 10 minutes from the sacred ghats of the Ganges." }),
-                            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "This heritage home features soaring ceilings, ornate courtyards, intricate carvings, and an in-house Lord Vishwanath Temple - a rare private shrine within the property. The Yaksh Vinayaka Shrine, one of the 56 revered Vinayak temples of Varanasi, is also located here." }),
-                            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Traditional ritual facilities - Rudrabhishek, Mahamrityunjaya Path, and other pujas - can be arranged on request. Modern amenities ensure a seamless stay without losing the soul of this living heritage." })
-                          ]
-                        }
-                      )
-                    ] }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(motion.div, { variants: fadeUp, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "border-border shadow-sm overflow-hidden", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-primary/8 px-6 pt-0 pb-2 border-b border-border", children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display text-xl font-semibold text-foreground", children: "What's Included" }),
-                        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mt-1", children: "Every stay, every room" })
-                      ] }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "p-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-4", children: [
-                        {
-                          icon: Wifi,
-                          label: "Free High-Speed Wi-Fi",
-                          desc: "Throughout the property"
-                        },
-                        {
-                          icon: Coffee,
-                          label: "Vegetarian Breakfast",
-                          desc: "Free light breakfast for direct bookers"
-                        },
-                        {
-                          icon: Wind,
-                          label: "Air Conditioning",
-                          desc: "All rooms climate-controlled"
-                        },
-                        {
-                          icon: Droplets,
-                          label: "Hot & Cold Shower",
-                          desc: "24x7 in all bathrooms"
-                        },
-                        {
-                          icon: () => /* @__PURE__ */ jsxRuntimeExports.jsx(
-                            Icon,
-                            {
-                              iconNode: stairs,
-                              className: "w-4.5 h-4.5 text-secondary-foreground",
-                              style: { width: "1.1rem", height: "1.1rem" }
-                            }
-                          ),
-                          label: "Heritage Staircases",
-                          desc: "Access to rooms is via Steep traditional staircases. Elevators are not available."
-                        }
-                      ].map(({ icon: Icon2, label, desc }) => /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { className: "flex items-start gap-3", children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-9 h-9 rounded-lg bg-secondary flex items-center justify-center flex-shrink-0 mt-0.5", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-                          Icon2,
-                          {
-                            className: "w-4.5 h-4.5 text-secondary-foreground",
-                            style: { width: "1.1rem", height: "1.1rem" }
-                          }
-                        ) }),
-                        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-medium text-foreground text-sm", children: label }),
-                          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground mt-0.5", children: desc })
-                        ] })
-                      ] }, label)) }) })
-                    ] }) })
-                  ]
-                }
-              ) })
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "section-divider" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "section",
-            {
-              id: "rooms",
-              className: "py-20 sm:py-28 px-4 sm:px-6 relative z-10",
-              children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-6xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                motion.div,
-                {
-                  variants: stagger,
-                  initial: "hidden",
-                  whileInView: "visible",
-                  viewport: { once: true, margin: "-80px" },
-                  children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { variants: fadeUp, className: "text-center mb-14", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium tracking-widest uppercase text-primary mb-3", children: "Our Rooms" }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight", children: "Crafted for Your Comfort" })
-                    ] }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(
-                      RoomsGrid,
-                      {
-                        onInquire: () => {
-                          var _a4;
-                          return (_a4 = document.querySelector("#contact")) == null ? void 0 : _a4.scrollIntoView({ behavior: "smooth" });
-                        },
-                        onImageClick: handleImageClick
-                      }
-                    )
-                  ]
-                }
-              ) })
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "section-divider" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "section",
-            {
-              id: "amenities",
-              className: "py-20 sm:py-28 px-4 sm:px-6 bg-secondary/30 relative z-10",
-              children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-5xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                motion.div,
-                {
-                  variants: stagger,
-                  initial: "hidden",
-                  whileInView: "visible",
-                  viewport: { once: true, margin: "-80px" },
-                  children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { variants: fadeUp, className: "text-center mb-14", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium tracking-widest uppercase text-primary mb-3", children: "Facilities" }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight", children: "Everything You Need" })
-                    ] }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(
-                      motion.div,
-                      {
-                        variants: stagger,
-                        className: "grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6",
-                        children: [
-                          {
-                            icon: Coffee,
-                            label: "Hearty Breakfast",
-                            desc: "Fresh homemade vegetarian & vegan meals"
-                          },
-                          {
-                            icon: Clock,
-                            label: "Late Check-in",
-                            desc: "Available with advance notice"
-                          },
-                          {
-                            icon: Leaf,
-                            label: "Free Vegan Toiletries",
-                            desc: "Premium set for all rooms"
-                          },
-                          {
-                            icon: MapPin,
-                            label: "Local Experiences",
-                            desc: "City tours & cultural immersion"
-                          },
-                          {
-                            icon: Shirt,
-                            label: "Laundry Service",
-                            desc: "Washing machine available for fee"
-                          },
-                          {
-                            icon: Wifi,
-                            label: "Free Wi-Fi",
-                            desc: "High-speed throughout the property"
-                          },
-                          {
-                            icon: Droplets,
-                            label: "Hot & Cold Shower",
-                            desc: "24x7 in all bathrooms"
-                          },
-                          {
-                            icon: VolumeX,
-                            label: "Soundproofing",
-                            desc: "Soundproofed windows & doors"
-                          }
-                        ].map(({ icon: Icon2, label, desc }) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                          motion.div,
-                          {
-                            variants: fadeUp,
-                            className: "bg-card rounded-2xl p-5 flex flex-col items-center text-center border border-border shadow-xs hover:shadow-md transition-shadow",
-                            children: [
-                              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-3", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon2, { className: "w-5 h-5 text-primary" }) }),
-                              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-sm text-foreground", children: label }),
-                              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground mt-1", children: desc })
-                            ]
-                          },
-                          label
-                        ))
-                      }
-                    )
-                  ]
-                }
-              ) })
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "section-divider" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "section",
-            {
-              id: "distances",
-              className: "py-20 sm:py-28 px-4 sm:px-6 relative z-10",
-              children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-5xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                motion.div,
-                {
-                  variants: stagger,
-                  initial: "hidden",
-                  whileInView: "visible",
-                  viewport: { once: true, margin: "-80px" },
-                  children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { variants: fadeUp, className: "text-center mb-14", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium tracking-widest uppercase text-primary mb-3", children: "Location" }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight", children: "Important Distances" }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground mt-3", children: "Everything in Varanasi, minutes away" })
-                    ] }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(
-                      motion.div,
-                      {
-                        variants: stagger,
-                        className: "grid grid-cols-2 sm:grid-cols-3 gap-4",
-                        children: DISTANCES.map(({ place, time: time2, type }, idx) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-                          motion.div,
-                          {
-                            "data-ocid": `distances.item.${idx + 1}`,
-                            variants: fadeUp,
-                            className: "bg-card rounded-2xl border border-border p-5 shadow-xs hover:shadow-md transition-shadow",
-                            children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start gap-3", children: [
-                              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5", children: /* @__PURE__ */ jsxRuntimeExports.jsx(MapPin, { className: "w-4 h-4 text-primary" }) }),
-                              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-foreground text-sm leading-snug", children: place }),
-                                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-primary font-display font-semibold text-lg mt-1", children: time2 }),
-                                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground capitalize", children: type })
-                              ] })
-                            ] })
-                          },
-                          place
-                        ))
-                      }
-                    )
-                  ]
-                }
-              ) })
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "section-divider" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "section",
-            {
-              id: "gallery",
-              className: "py-20 sm:py-28 px-4 sm:px-6 bg-secondary/30 relative z-10",
-              children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-5xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                motion.div,
-                {
-                  initial: "hidden",
-                  whileInView: "visible",
-                  viewport: { once: true, margin: "-80px" },
-                  variants: stagger,
-                  children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { variants: fadeUp, className: "text-center mb-14", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium tracking-widest uppercase text-primary mb-3", children: "Gallery" }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight", children: "A Glimpse of the Haveli" })
-                    ] }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(motion.div, { variants: fadeUp, className: "masonry-grid", children: GALLERY_IMAGES.map(({ src: src2, alt }, idx) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-                      "div",
-                      {
-                        className: "masonry-item group cursor-zoom-in",
-                        onClick: () => handleGalleryClick(idx),
-                        children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-                          "img",
-                          {
-                            src: src2,
-                            alt: alt || "gallery image",
-                            className: "w-full object-cover transition-transform duration-500 group-hover:scale-105",
-                            loading: "lazy"
-                          }
-                        )
+                      href: link.href,
+                      onClick: (e) => {
+                        e.preventDefault();
+                        scrollTo(link.href);
                       },
-                      src2
-                    )) })
-                  ]
-                }
-              ) })
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "section-divider" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "section",
-            {
-              id: "reviews",
-              className: "py-20 sm:py-28 px-4 sm:px-6 relative z-10",
-              children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-5xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                motion.div,
-                {
-                  initial: "hidden",
-                  whileInView: "visible",
-                  viewport: { once: true, margin: "-80px" },
-                  variants: stagger,
-                  children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { variants: fadeUp, className: "text-center mb-14", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium tracking-widest uppercase text-primary mb-3", children: "Guest Stories" }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight mb-4", children: "Loved by Our Guests" }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "inline-flex items-center gap-2 bg-secondary rounded-full px-4 py-2 border border-border", children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex gap-0.5", children: [
-                          [1, 2, 3, 4].map((s2) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-                            Star,
-                            {
-                              className: "w-3.5 h-3.5 fill-amber-400 text-amber-400"
-                            },
-                            s2
-                          )),
-                          /* @__PURE__ */ jsxRuntimeExports.jsx(Star, { className: "w-3.5 h-3.5 fill-amber-400/60 text-amber-400/60" })
-                        ] }),
-                        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-semibold text-foreground", children: "Rated 4.6 / 5 on Google" })
-                      ] })
-                    ] }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(ReviewsSection, {})
-                  ]
-                }
-              ) })
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "section-divider" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "section",
-            {
-              id: "directions",
-              className: "py-16 sm:py-20 px-4 sm:px-6 bg-secondary/30 relative z-10",
-              children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-3xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                motion.div,
-                {
-                  initial: "hidden",
-                  whileInView: "visible",
-                  viewport: { once: true, margin: "-80px" },
-                  variants: stagger,
-                  children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { variants: fadeUp, className: "text-center mb-10", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium tracking-widest uppercase text-primary mb-3", children: "Getting Here" }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-3xl sm:text-4xl font-semibold text-foreground leading-tight", children: "How to Find Us" })
-                    ] }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { variants: fadeUp, children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                        "button",
-                        {
-                          type: "button",
-                          "data-ocid": "directions.toggle",
-                          onClick: () => setDirectionsOpen((v2) => !v2),
-                          className: "w-full flex items-center justify-between bg-card border border-border rounded-2xl px-6 py-4 text-left hover:shadow-md transition-shadow",
-                          children: [
-                            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-semibold text-foreground", children: "View Directions" }),
-                            /* @__PURE__ */ jsxRuntimeExports.jsx(
-                              ChevronDown,
-                              {
-                                className: `w-5 h-5 text-muted-foreground transition-transform duration-300 ${directionsOpen ? "rotate-180" : ""}`
-                              }
-                            )
-                          ]
-                        }
-                      ),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx(AnimatePresence, { children: directionsOpen && /* @__PURE__ */ jsxRuntimeExports.jsx(
-                        motion.div,
-                        {
-                          initial: { height: 0, opacity: 0 },
-                          animate: { height: "auto", opacity: 1 },
-                          exit: { height: 0, opacity: 0 },
-                          transition: { duration: 0.3 },
-                          className: "overflow-hidden",
-                          children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-card border border-t-0 border-border rounded-b-2xl px-6 py-6 space-y-6 text-sm text-muted-foreground leading-relaxed", children: [
-                            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                              /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "font-semibold text-foreground mb-2", children: "If Flying into Varanasi" }),
-                              /* @__PURE__ */ jsxRuntimeExports.jsxs("ol", { className: "list-decimal list-inside space-y-1", children: [
-                                /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
-                                  "Use pre-paid taxi to",
-                                  " ",
-                                  /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Godowlia Chauraha" }),
-                                  ", then switch to e-rickshaw (tuk-tuk) to the property."
-                                ] }),
-                                /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "We also offer a pick-up service for Rs 2,000 - our staff will meet you outside the terminal with a placard." })
-                              ] })
-                            ] }),
-                            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                              /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "font-semibold text-foreground mb-2", children: "If Taking a Train" }),
-                              /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "mb-2", children: [
-                                "From ",
-                                /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Varanasi Junction (BSB)" }),
-                                ",",
-                                " ",
-                                /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Banaras Station (BSBS)" }),
-                                ", or",
-                                " ",
-                                /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "DDU Junction" }),
-                                ":"
-                              ] }),
-                              /* @__PURE__ */ jsxRuntimeExports.jsxs("ol", { className: "list-decimal list-inside space-y-1", children: [
-                                /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
-                                  "Take a taxi/auto to",
-                                  " ",
-                                  /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Godowlia Chauraha" }),
-                                  ", then an e-rickshaw to the property."
-                                ] }),
-                                /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
-                                  "Get dropped at the entry to the lane of Gate 1 to",
-                                  " ",
-                                  /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Kashi Vishwanath Temple" }),
-                                  "."
-                                ] }),
-                                /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
-                                  "Walk about 20 metres -",
-                                  " ",
-                                  /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Rudreshwar Mahadeo Kothi" }),
-                                  " is the",
-                                  " ",
-                                  /* @__PURE__ */ jsxRuntimeExports.jsx("em", { children: "first house on the left" }),
-                                  " (one shop after Vishwanath Kothi Restaurant)."
-                                ] })
-                              ] })
-                            ] }),
-                            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-primary/5 border border-primary/20 rounded-xl px-4 py-3", children: [
-                              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-foreground font-medium text-xs uppercase tracking-wide mb-1", children: "Address" }),
-                              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "CK-37/29, Bansphatak Road, Gate No.1 Near Pitambari Saree Opposite of Bank Of Baroda Varanasi 221001, Uttar Pradesh, India" })
-                            ] })
-                          ] })
-                        }
-                      ) })
-                    ] })
-                  ]
-                }
-              ) })
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "section-divider" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "section",
-            {
-              id: "contact",
-              className: "py-20 sm:py-28 px-4 sm:px-6 relative z-10",
-              children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-3xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                motion.div,
-                {
-                  initial: "hidden",
-                  whileInView: "visible",
-                  viewport: { once: true, margin: "-80px" },
-                  variants: stagger,
-                  children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { variants: fadeUp, className: "text-center mb-8", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium tracking-widest uppercase text-primary mb-3", children: "Stay With Us" }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight mb-3", children: "Book Your Stay" }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground mb-5", children: "Send us a message and Team Rudreshwar will confirm availability within 24 hours." }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap gap-3 justify-center", children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                          "a",
-                          {
-                            href: "tel:+919920685754",
-                            "data-ocid": "contact.call_button",
-                            className: "inline-flex items-center gap-2 bg-secondary text-foreground hover:bg-secondary/80 border border-border rounded-full px-5 py-2.5 text-sm font-medium transition-colors",
-                            children: [
-                              /* @__PURE__ */ jsxRuntimeExports.jsx(Phone, { className: "w-4 h-4" }),
-                              "Call Us: +91 99206 85754 +91 9889244273 +91 9044301567"
-                            ]
-                          }
-                        ),
-                        /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                          "a",
-                          {
-                            href: "mailto:rmkothivns@gmail.com",
-                            "data-ocid": "contact.email_button",
-                            className: "inline-flex items-center gap-2 bg-secondary text-foreground hover:bg-secondary/80 border border-border rounded-full px-5 py-2.5 text-sm font-medium transition-colors",
-                            children: [
-                              /* @__PURE__ */ jsxRuntimeExports.jsx(Mail, { className: "w-4 h-4" }),
-                              "Email Us"
-                            ]
-                          }
-                        ),
-                        /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                          "a",
-                          {
-                            href: "https://reservations.ithstays.com/booking/book-rooms-rudreshwarmahadeokothibyithstays",
-                            target: "_blank",
-                            rel: "noopener noreferrer",
-                            "data-ocid": "contact.booking_button",
-                            className: "inline-flex items-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-5 py-2.5 text-sm font-medium transition-colors",
-                            children: [
-                              /* @__PURE__ */ jsxRuntimeExports.jsx(ExternalLink, { className: "w-4 h-4" }),
-                              "Book Online Now"
-                            ]
-                          }
-                        )
-                      ] }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex gap-6 justify-center mt-5 text-sm text-muted-foreground", children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
-                          /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { className: "text-foreground", children: "Check-in:" }),
-                          " 12 noon"
-                        ] }),
-                        /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
-                          /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { className: "text-foreground", children: "Check-out:" }),
-                          " 11 am"
-                        ] })
-                      ] })
-                    ] }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(motion.div, { variants: fadeUp, children: /* @__PURE__ */ jsxRuntimeExports.jsx(BookingForm, {}) }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { variants: fadeUp, className: "mt-8", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                        "button",
-                        {
-                          type: "button",
-                          "data-ocid": "rules.toggle",
-                          onClick: () => setRulesOpen((v2) => !v2),
-                          className: "w-full flex items-center justify-between bg-card border border-border rounded-2xl px-6 py-4 text-left hover:shadow-md transition-shadow",
-                          children: [
-                            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-semibold text-foreground", children: "House Rules" }),
-                            /* @__PURE__ */ jsxRuntimeExports.jsx(
-                              ChevronDown,
-                              {
-                                className: `w-5 h-5 text-muted-foreground transition-transform duration-300 ${rulesOpen ? "rotate-180" : ""}`
-                              }
-                            )
-                          ]
-                        }
-                      ),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx(AnimatePresence, { children: rulesOpen && /* @__PURE__ */ jsxRuntimeExports.jsx(
-                        motion.div,
-                        {
-                          initial: { height: 0, opacity: 0 },
-                          animate: { height: "auto", opacity: 1 },
-                          exit: { height: 0, opacity: 0 },
-                          transition: { duration: 0.3 },
-                          className: "overflow-hidden",
-                          children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-card border border-t-0 border-border rounded-b-2xl px-6 py-5", children: /* @__PURE__ */ jsxRuntimeExports.jsx("ol", { className: "space-y-2", children: HOUSE_RULES.map((rule, idx) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                            "li",
-                            {
-                              "data-ocid": `rules.item.${idx + 1}`,
-                              className: "flex items-start gap-3 text-sm text-muted-foreground",
-                              children: [
-                                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "w-5 h-5 rounded-full bg-primary/10 text-primary text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5", children: idx + 1 }),
-                                rule
-                              ]
-                            },
-                            rule
-                          )) }) })
-                        }
-                      ) })
-                    ] })
-                  ]
-                }
-              ) })
-            }
-          )
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("footer", { className: "bg-foreground text-primary-foreground py-14 px-4 sm:px-6 relative z-10", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid sm:grid-cols-3 gap-10 mb-10", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-4", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-8 h-8 rounded-full bg-primary flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Flame, { className: "w-4 h-4 text-primary-foreground" }) }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-display text-lg font-semibold text-primary-foreground", children: "Rudreshwar Mahadeo Kothi" })
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-primary-foreground/60 leading-relaxed", children: "A 300-year-old heritage haveli managed by Mr. Dr V.N. Singh and Team Rudreshwar Kothi, in the heart of Varanasi." })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "font-semibold text-sm uppercase tracking-widest text-primary-foreground/50 mb-4", children: "Contact" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("ul", { className: "space-y-3", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { className: "flex items-start gap-2 text-sm text-primary-foreground/70", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(MapPin, { className: "w-4 h-4 mt-0.5 flex-shrink-0 text-primary-foreground/40" }),
-                  "CK-37/29, Bansphatak Road,",
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-                  "Varanasi 221001, UP, India"
-                ] }),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { className: "flex items-center gap-2 text-sm text-primary-foreground/70", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(Phone, { className: "w-4 h-4 flex-shrink-0 text-primary-foreground/40" }),
+                      className: "py-2 text-base font-medium text-foreground border-b border-border/50 last:border-0",
+                      children: link.label
+                    },
+                    link.href
+                  )),
                   /* @__PURE__ */ jsxRuntimeExports.jsx(
-                    "a",
+                    Button,
                     {
-                      href: "tel:+919920685754",
-                      className: "hover:text-primary-foreground transition-colors",
-                      children: "+91 99206 85754"
-                    }
-                  )
-                ] }),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { className: "flex items-center gap-2 text-sm text-primary-foreground/70", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(Mail, { className: "w-4 h-4 flex-shrink-0 text-primary-foreground/40" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(
-                    "a",
-                    {
-                      href: "mailto:rmkothivns@gmail.com",
-                      className: "hover:text-primary-foreground transition-colors",
-                      children: "rmkothivns@gmail.com"
+                      "data-ocid": "nav.book_button",
+                      onClick: () => window.open(
+                        "https://reservations.ithstays.com/booking/book-rooms-rudreshwarmahadeokothibyithstays",
+                        "_blank"
+                      ),
+                      className: "mt-2 bg-primary text-primary-foreground w-full rounded-full",
+                      children: "Book Now"
                     }
                   )
                 ] })
-              ] })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "font-semibold text-sm uppercase tracking-widest text-primary-foreground/50 mb-4", children: "Quick Links" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-2", children: ["About", "Rooms", "Amenities", "Gallery", "Reviews"].map(
-                (item) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-                  "a",
-                  {
-                    href: `#${item.toLowerCase()}`,
-                    className: "text-sm text-primary-foreground/60 hover:text-primary-foreground transition-colors",
-                    children: item
-                  }
-                ) }, item)
-              ) })
-            ] })
+              }
+            ) })
           ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border-t border-primary-foreground/10 pt-6 text-center", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm text-primary-foreground/40", children: [
-            "© 2026 Rudreshwar Mahadeo Kothi — A Heritage Property. All rights reserved.",
-            " "
-          ] }) })
-        ] }) })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        ImageLightbox,
-        {
-          isOpen: lightboxOpen,
-          images: getCurrentImageArray(),
-          currentIndex: lightboxImageIdx,
-          onClose: handleCloseLightbox,
-          onPrev: handlePrevImage,
-          onNext: handleNextImage,
-          roomName: lightboxRoomIdx === -1 ? "Gallery" : ((_a3 = FALLBACK_ROOMS[lightboxRoomIdx]) == null ? void 0 : _a3.name) || "Room"
-        }
-      )
-    ] })
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { ref: scrollRef, "data-scroll-container": true, children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { id: "hero", className: "relative min-h-screen flex flex-col", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute inset-0 overflow-hidden", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "img",
+                    {
+                      src: "/assets/generated/hero-temple-shrine.dim_1200x700.jpg",
+                      alt: "Rudreshwar Mahadeo Kothi heritage haveli temple shrine entrance",
+                      className: "w-full h-full object-cover"
+                    }
+                  ),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "hero-overlay absolute inset-0" })
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "relative z-10 flex-1 flex flex-col items-center justify-center text-center px-4 sm:px-6 pt-20", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                  motion.div,
+                  {
+                    variants: stagger,
+                    initial: "hidden",
+                    animate: "visible",
+                    className: "max-w-2xl",
+                    children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(
+                        motion.div,
+                        {
+                          variants: fadeUp,
+                          className: "flex justify-center mb-6",
+                          children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm border border-white/25 rounded-full px-4 py-1.5", children: [
+                            /* @__PURE__ */ jsxRuntimeExports.jsx(Star, { className: "w-3.5 h-3.5 fill-amber-300 text-amber-300" }),
+                            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-white/90 text-xs font-medium tracking-widest uppercase", children: "Heritage Haveli - AirBnB Guest Favorite" })
+                          ] })
+                        }
+                      ),
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                        motion.h1,
+                        {
+                          variants: fadeUp,
+                          className: "font-display text-4xl sm:text-5xl md:text-6xl font-semibold text-white leading-[1.1] tracking-tight mb-4",
+                          children: [
+                            "Rudreshwar",
+                            /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+                            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "italic text-amber-200", children: "Mahadeo Kothi" })
+                          ]
+                        }
+                      ),
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                        motion.p,
+                        {
+                          variants: fadeUp,
+                          className: "text-white/80 text-lg sm:text-xl font-light mb-8 leading-relaxed",
+                          children: [
+                            "Heritage Haveli in the Heart of Varanasi",
+                            /* @__PURE__ */ jsxRuntimeExports.jsx("br", { className: "hidden sm:block" }),
+                            "3 min walk from Kashi Vishwanath Temple"
+                          ]
+                        }
+                      ),
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                        motion.div,
+                        {
+                          variants: fadeUp,
+                          className: "flex flex-col sm:flex-row gap-3 justify-center",
+                          children: [
+                            /* @__PURE__ */ jsxRuntimeExports.jsx(
+                              Button,
+                              {
+                                "data-ocid": "hero.primary_button",
+                                onClick: () => window.open(
+                                  "https://reservations.ithstays.com/booking/book-rooms-rudreshwarmahadeokothibyithstays",
+                                  "_blank"
+                                ),
+                                size: "lg",
+                                className: "bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-6 text-base rounded-full shadow-lg",
+                                children: "Book Now"
+                              }
+                            ),
+                            /* @__PURE__ */ jsxRuntimeExports.jsx(
+                              Button,
+                              {
+                                onClick: () => scrollTo("#rooms"),
+                                size: "lg",
+                                variant: "outline",
+                                className: "border-white/40 text-white bg-white/10 hover:bg-white/20 hover:text-white px-8 py-6 text-base rounded-full",
+                                children: "View Rooms"
+                              }
+                            )
+                          ]
+                        }
+                      )
+                    ]
+                  }
+                ) }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "relative z-10 flex justify-center pb-8", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  motion.button,
+                  {
+                    type: "button",
+                    onClick: () => scrollTo("#about"),
+                    animate: { y: [0, 6, 0] },
+                    transition: {
+                      duration: 2,
+                      repeat: Number.POSITIVE_INFINITY,
+                      ease: "easeInOut"
+                    },
+                    className: "text-white/60 hover:text-white/90 transition-colors",
+                    "aria-label": "Scroll down",
+                    children: /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronDown, { className: "w-7 h-7" })
+                  }
+                ) })
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "section",
+                {
+                  id: "about",
+                  className: "py-20 sm:py-28 px-4 sm:px-6 bg-background relative z-10",
+                  children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-5xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                    motion.div,
+                    {
+                      variants: stagger,
+                      initial: "hidden",
+                      whileInView: "visible",
+                      viewport: { once: true, margin: "-80px" },
+                      className: "grid md:grid-cols-2 gap-12 items-center",
+                      children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(
+                            motion.p,
+                            {
+                              variants: fadeUp,
+                              className: "text-sm font-medium tracking-widest uppercase text-primary mb-3",
+                              children: "About Us"
+                            }
+                          ),
+                          /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                            motion.h2,
+                            {
+                              variants: fadeUp,
+                              className: "font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight mb-5",
+                              children: [
+                                "A 300-Year-Old",
+                                /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+                                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "italic font-light", children: "Heritage Haveli" })
+                              ]
+                            }
+                          ),
+                          /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                            motion.div,
+                            {
+                              variants: fadeUp,
+                              className: "space-y-4 text-muted-foreground leading-relaxed",
+                              children: [
+                                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Step into a world of royal elegance, deep spirituality, and living history at Rudreshwar Mahadeo Kothi - a 300-year-old ancestral haveli steeped in tradition. Just a 3-minute walk from the Kashi Vishwanath Temple and 10 minutes from the sacred ghats of the Ganges." }),
+                                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "This heritage home features soaring ceilings, ornate courtyards, intricate carvings, and an in-house Lord Vishwanath Temple - a rare private shrine within the property. The Yaksh Vinayaka Shrine, one of the 56 revered Vinayak temples of Varanasi, is also located here." }),
+                                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Traditional ritual facilities - Rudrabhishek, Mahamrityunjaya Path, and other pujas - can be arranged on request. Modern amenities ensure a seamless stay without losing the soul of this living heritage." })
+                              ]
+                            }
+                          )
+                        ] }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(motion.div, { variants: fadeUp, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "border-border shadow-sm overflow-hidden", children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-primary/8 px-6 pt-0 pb-2 border-b border-border", children: [
+                            /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display text-xl font-semibold text-foreground", children: "What's Included" }),
+                            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mt-1", children: "Every stay, every room" })
+                          ] }),
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "p-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-4", children: [
+                            {
+                              icon: Wifi,
+                              label: "Free High-Speed Wi-Fi",
+                              desc: "Throughout the property"
+                            },
+                            {
+                              icon: Coffee,
+                              label: "Vegetarian Breakfast",
+                              desc: "Free light breakfast for direct bookers"
+                            },
+                            {
+                              icon: Wind,
+                              label: "Air Conditioning",
+                              desc: "All rooms climate-controlled"
+                            },
+                            {
+                              icon: Droplets,
+                              label: "Hot & Cold Shower",
+                              desc: "24x7 in all bathrooms"
+                            },
+                            {
+                              icon: () => /* @__PURE__ */ jsxRuntimeExports.jsx(
+                                Icon,
+                                {
+                                  iconNode: stairs,
+                                  className: "w-4.5 h-4.5 text-secondary-foreground",
+                                  style: { width: "1.1rem", height: "1.1rem" }
+                                }
+                              ),
+                              label: "Heritage Staircases",
+                              desc: "Access to rooms is via Steep traditional staircases. Elevators are not available."
+                            }
+                          ].map(({ icon: Icon2, label, desc }) => /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { className: "flex items-start gap-3", children: [
+                            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-9 h-9 rounded-lg bg-secondary flex items-center justify-center flex-shrink-0 mt-0.5", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                              Icon2,
+                              {
+                                className: "w-4.5 h-4.5 text-secondary-foreground",
+                                style: { width: "1.1rem", height: "1.1rem" }
+                              }
+                            ) }),
+                            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-medium text-foreground text-sm", children: label }),
+                              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground mt-0.5", children: desc })
+                            ] })
+                          ] }, label)) }) })
+                        ] }) })
+                      ]
+                    }
+                  ) })
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "section-divider" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "section",
+                {
+                  id: "rooms",
+                  className: "py-20 sm:py-28 px-4 sm:px-6 relative z-10",
+                  children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-6xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                    motion.div,
+                    {
+                      variants: stagger,
+                      initial: "hidden",
+                      whileInView: "visible",
+                      viewport: { once: true, margin: "-80px" },
+                      children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { variants: fadeUp, className: "text-center mb-14", children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium tracking-widest uppercase text-primary mb-3", children: "Our Rooms" }),
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight", children: "Crafted for Your Comfort" })
+                        ] }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(
+                          RoomsGrid,
+                          {
+                            onInquire: () => {
+                              var _a4;
+                              return (_a4 = document.querySelector("#contact")) == null ? void 0 : _a4.scrollIntoView({ behavior: "smooth" });
+                            },
+                            onImageClick: handleImageClick
+                          }
+                        )
+                      ]
+                    }
+                  ) })
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "section-divider" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "section",
+                {
+                  id: "amenities",
+                  className: "py-20 sm:py-28 px-4 sm:px-6 bg-secondary/30 relative z-10",
+                  children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-5xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                    motion.div,
+                    {
+                      variants: stagger,
+                      initial: "hidden",
+                      whileInView: "visible",
+                      viewport: { once: true, margin: "-80px" },
+                      children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { variants: fadeUp, className: "text-center mb-14", children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium tracking-widest uppercase text-primary mb-3", children: "Facilities" }),
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight", children: "Everything You Need" })
+                        ] }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(
+                          motion.div,
+                          {
+                            variants: stagger,
+                            className: "grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6",
+                            children: [
+                              {
+                                icon: Coffee,
+                                label: "Hearty Breakfast",
+                                desc: "Fresh homemade vegetarian & vegan meals"
+                              },
+                              {
+                                icon: Clock,
+                                label: "Late Check-in",
+                                desc: "Available with advance notice"
+                              },
+                              {
+                                icon: Leaf,
+                                label: "Free Vegan Toiletries",
+                                desc: "Premium set for all rooms"
+                              },
+                              {
+                                icon: MapPin,
+                                label: "Local Experiences",
+                                desc: "City tours & cultural immersion"
+                              },
+                              {
+                                icon: Shirt,
+                                label: "Laundry Service",
+                                desc: "Washing machine available for fee"
+                              },
+                              {
+                                icon: Wifi,
+                                label: "Free Wi-Fi",
+                                desc: "High-speed throughout the property"
+                              },
+                              {
+                                icon: Droplets,
+                                label: "Hot & Cold Shower",
+                                desc: "24x7 in all bathrooms"
+                              },
+                              {
+                                icon: VolumeX,
+                                label: "Soundproofing",
+                                desc: "Soundproofed windows & doors"
+                              }
+                            ].map(({ icon: Icon2, label, desc }) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                              motion.div,
+                              {
+                                variants: fadeUp,
+                                className: "bg-card rounded-2xl p-5 flex flex-col items-center text-center border border-border shadow-xs hover:shadow-md transition-shadow",
+                                children: [
+                                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-3", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon2, { className: "w-5 h-5 text-primary" }) }),
+                                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-sm text-foreground", children: label }),
+                                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground mt-1", children: desc })
+                                ]
+                              },
+                              label
+                            ))
+                          }
+                        )
+                      ]
+                    }
+                  ) })
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "section-divider" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "section",
+                {
+                  id: "distances",
+                  className: "py-20 sm:py-28 px-4 sm:px-6 relative z-10",
+                  children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-5xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                    motion.div,
+                    {
+                      variants: stagger,
+                      initial: "hidden",
+                      whileInView: "visible",
+                      viewport: { once: true, margin: "-80px" },
+                      children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { variants: fadeUp, className: "text-center mb-14", children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium tracking-widest uppercase text-primary mb-3", children: "Location" }),
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight", children: "Important Distances" }),
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground mt-3", children: "Everything in Varanasi, minutes away" })
+                        ] }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(
+                          motion.div,
+                          {
+                            variants: stagger,
+                            className: "grid grid-cols-2 sm:grid-cols-3 gap-4",
+                            children: DISTANCES.map(({ place, time: time2, type }, idx) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+                              motion.div,
+                              {
+                                "data-ocid": `distances.item.${idx + 1}`,
+                                variants: fadeUp,
+                                className: "bg-card rounded-2xl border border-border p-5 shadow-xs hover:shadow-md transition-shadow",
+                                children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start gap-3", children: [
+                                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5", children: /* @__PURE__ */ jsxRuntimeExports.jsx(MapPin, { className: "w-4 h-4 text-primary" }) }),
+                                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-foreground text-sm leading-snug", children: place }),
+                                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-primary font-display font-semibold text-lg mt-1", children: time2 }),
+                                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground capitalize", children: type })
+                                  ] })
+                                ] })
+                              },
+                              place
+                            ))
+                          }
+                        )
+                      ]
+                    }
+                  ) })
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "section-divider" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "section",
+                {
+                  id: "gallery",
+                  className: "py-20 sm:py-28 px-4 sm:px-6 bg-secondary/30 relative z-10",
+                  children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-5xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                    motion.div,
+                    {
+                      initial: "hidden",
+                      whileInView: "visible",
+                      viewport: { once: true, margin: "-80px" },
+                      variants: stagger,
+                      children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { variants: fadeUp, className: "text-center mb-14", children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium tracking-widest uppercase text-primary mb-3", children: "Gallery" }),
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight", children: "A Glimpse of the Haveli" })
+                        ] }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(motion.div, { variants: fadeUp, className: "masonry-grid", children: GALLERY_IMAGES.map(({ src: src2, alt }, idx) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+                          "div",
+                          {
+                            className: "masonry-item group cursor-zoom-in",
+                            onClick: () => handleGalleryClick(idx),
+                            children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                              "img",
+                              {
+                                src: src2,
+                                alt: alt || "gallery image",
+                                className: "w-full object-cover transition-transform duration-500 group-hover:scale-105",
+                                loading: "lazy"
+                              }
+                            )
+                          },
+                          src2
+                        )) })
+                      ]
+                    }
+                  ) })
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "section-divider" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "section",
+                {
+                  id: "reviews",
+                  className: "py-20 sm:py-28 px-4 sm:px-6 relative z-10",
+                  children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-5xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                    motion.div,
+                    {
+                      initial: "hidden",
+                      whileInView: "visible",
+                      viewport: { once: true, margin: "-80px" },
+                      variants: stagger,
+                      children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { variants: fadeUp, className: "text-center mb-14", children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium tracking-widest uppercase text-primary mb-3", children: "Guest Stories" }),
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight mb-4", children: "Loved by Our Guests" }),
+                          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "inline-flex items-center gap-2 bg-secondary rounded-full px-4 py-2 border border-border", children: [
+                            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex gap-0.5", children: [
+                              [1, 2, 3, 4].map((s2) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+                                Star,
+                                {
+                                  className: "w-3.5 h-3.5 fill-amber-400 text-amber-400"
+                                },
+                                s2
+                              )),
+                              /* @__PURE__ */ jsxRuntimeExports.jsx(Star, { className: "w-3.5 h-3.5 fill-amber-400/60 text-amber-400/60" })
+                            ] }),
+                            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-semibold text-foreground", children: "Rated 4.6 / 5 on Google" })
+                          ] })
+                        ] }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(ReviewsSection, {})
+                      ]
+                    }
+                  ) })
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "section-divider" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "section",
+                {
+                  id: "directions",
+                  className: "py-16 sm:py-20 px-4 sm:px-6 bg-secondary/30 relative z-10",
+                  children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-3xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                    motion.div,
+                    {
+                      initial: "hidden",
+                      whileInView: "visible",
+                      viewport: { once: true, margin: "-80px" },
+                      variants: stagger,
+                      children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { variants: fadeUp, className: "text-center mb-10", children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium tracking-widest uppercase text-primary mb-3", children: "Getting Here" }),
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-3xl sm:text-4xl font-semibold text-foreground leading-tight", children: "How to Find Us" })
+                        ] }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { variants: fadeUp, children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                            "button",
+                            {
+                              type: "button",
+                              "data-ocid": "directions.toggle",
+                              onClick: () => setDirectionsOpen((v2) => !v2),
+                              className: "w-full flex items-center justify-between bg-card border border-border rounded-2xl px-6 py-4 text-left hover:shadow-md transition-shadow",
+                              children: [
+                                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-semibold text-foreground", children: "View Directions" }),
+                                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                                  ChevronDown,
+                                  {
+                                    className: `w-5 h-5 text-muted-foreground transition-transform duration-300 ${directionsOpen ? "rotate-180" : ""}`
+                                  }
+                                )
+                              ]
+                            }
+                          ),
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(AnimatePresence, { children: directionsOpen && /* @__PURE__ */ jsxRuntimeExports.jsx(
+                            motion.div,
+                            {
+                              initial: { height: 0, opacity: 0 },
+                              animate: { height: "auto", opacity: 1 },
+                              exit: { height: 0, opacity: 0 },
+                              transition: { duration: 0.3 },
+                              className: "overflow-hidden",
+                              children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-card border border-t-0 border-border rounded-b-2xl px-6 py-6 space-y-6 text-sm text-muted-foreground leading-relaxed", children: [
+                                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                                  /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "font-semibold text-foreground mb-2", children: "If Flying into Varanasi" }),
+                                  /* @__PURE__ */ jsxRuntimeExports.jsxs("ol", { className: "list-decimal list-inside space-y-1", children: [
+                                    /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+                                      "Use pre-paid taxi to",
+                                      " ",
+                                      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Godowlia Chauraha" }),
+                                      ", then switch to e-rickshaw (tuk-tuk) to the property."
+                                    ] }),
+                                    /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "We also offer a pick-up service for Rs 2,000 - our staff will meet you outside the terminal with a placard." })
+                                  ] })
+                                ] }),
+                                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                                  /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "font-semibold text-foreground mb-2", children: "If Taking a Train" }),
+                                  /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "mb-2", children: [
+                                    "From ",
+                                    /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Varanasi Junction (BSB)" }),
+                                    ",",
+                                    " ",
+                                    /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Banaras Station (BSBS)" }),
+                                    ", or",
+                                    " ",
+                                    /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "DDU Junction" }),
+                                    ":"
+                                  ] }),
+                                  /* @__PURE__ */ jsxRuntimeExports.jsxs("ol", { className: "list-decimal list-inside space-y-1", children: [
+                                    /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+                                      "Take a taxi/auto to",
+                                      " ",
+                                      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Godowlia Chauraha" }),
+                                      ", then an e-rickshaw to the property."
+                                    ] }),
+                                    /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+                                      "Get dropped at the entry to the lane of Gate 1 to",
+                                      " ",
+                                      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Kashi Vishwanath Temple" }),
+                                      "."
+                                    ] }),
+                                    /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+                                      "Walk about 20 metres -",
+                                      " ",
+                                      /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Rudreshwar Mahadeo Kothi" }),
+                                      " is the",
+                                      " ",
+                                      /* @__PURE__ */ jsxRuntimeExports.jsx("em", { children: "first house on the left" }),
+                                      " (one shop after Vishwanath Kothi Restaurant)."
+                                    ] })
+                                  ] })
+                                ] }),
+                                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-primary/5 border border-primary/20 rounded-xl px-4 py-3", children: [
+                                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-foreground font-medium text-xs uppercase tracking-wide mb-1", children: "Address" }),
+                                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "CK-37/29, Bansphatak Road, Gate No.1 Near Pitambari Saree Opposite of Bank Of Baroda Varanasi 221001, Uttar Pradesh, India" })
+                                ] })
+                              ] })
+                            }
+                          ) })
+                        ] })
+                      ]
+                    }
+                  ) })
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "section-divider" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "section",
+                {
+                  id: "contact",
+                  className: "py-20 sm:py-28 px-4 sm:px-6 relative z-10",
+                  children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-3xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                    motion.div,
+                    {
+                      initial: "hidden",
+                      whileInView: "visible",
+                      viewport: { once: true, margin: "-80px" },
+                      variants: stagger,
+                      children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { variants: fadeUp, className: "text-center mb-8", children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium tracking-widest uppercase text-primary mb-3", children: "Stay With Us" }),
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight mb-3", children: "Book Your Stay" }),
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground mb-5", children: "Send us a message and Team Rudreshwar will confirm availability within 24 hours." }),
+                          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap gap-3 justify-center", children: [
+                            /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                              "a",
+                              {
+                                href: "tel:+919920685754",
+                                "data-ocid": "contact.call_button",
+                                className: "inline-flex items-center gap-2 bg-secondary text-foreground hover:bg-secondary/80 border border-border rounded-full px-5 py-2.5 text-sm font-medium transition-colors",
+                                children: [
+                                  /* @__PURE__ */ jsxRuntimeExports.jsx(Phone, { className: "w-4 h-4" }),
+                                  "Call Us: +91 99206 85754 +91 9889244273 +91 9044301567"
+                                ]
+                              }
+                            ),
+                            /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                              "a",
+                              {
+                                href: "mailto:rmkothivns@gmail.com",
+                                "data-ocid": "contact.email_button",
+                                className: "inline-flex items-center gap-2 bg-secondary text-foreground hover:bg-secondary/80 border border-border rounded-full px-5 py-2.5 text-sm font-medium transition-colors",
+                                children: [
+                                  /* @__PURE__ */ jsxRuntimeExports.jsx(Mail, { className: "w-4 h-4" }),
+                                  "Email Us"
+                                ]
+                              }
+                            ),
+                            /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                              "a",
+                              {
+                                href: "https://reservations.ithstays.com/booking/book-rooms-rudreshwarmahadeokothibyithstays",
+                                target: "_blank",
+                                rel: "noopener noreferrer",
+                                "data-ocid": "contact.booking_button",
+                                className: "inline-flex items-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-5 py-2.5 text-sm font-medium transition-colors",
+                                children: [
+                                  /* @__PURE__ */ jsxRuntimeExports.jsx(ExternalLink, { className: "w-4 h-4" }),
+                                  "Book Online Now"
+                                ]
+                              }
+                            )
+                          ] }),
+                          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex gap-6 justify-center mt-5 text-sm text-muted-foreground", children: [
+                            /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+                              /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { className: "text-foreground", children: "Check-in:" }),
+                              " 12 noon"
+                            ] }),
+                            /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+                              /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { className: "text-foreground", children: "Check-out:" }),
+                              " 11 am"
+                            ] })
+                          ] })
+                        ] }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(motion.div, { variants: fadeUp, children: /* @__PURE__ */ jsxRuntimeExports.jsx(BookingForm, {}) }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { variants: fadeUp, className: "mt-8", children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                            "button",
+                            {
+                              type: "button",
+                              "data-ocid": "rules.toggle",
+                              onClick: () => setRulesOpen((v2) => !v2),
+                              className: "w-full flex items-center justify-between bg-card border border-border rounded-2xl px-6 py-4 text-left hover:shadow-md transition-shadow",
+                              children: [
+                                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-semibold text-foreground", children: "House Rules" }),
+                                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                                  ChevronDown,
+                                  {
+                                    className: `w-5 h-5 text-muted-foreground transition-transform duration-300 ${rulesOpen ? "rotate-180" : ""}`
+                                  }
+                                )
+                              ]
+                            }
+                          ),
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(AnimatePresence, { children: rulesOpen && /* @__PURE__ */ jsxRuntimeExports.jsx(
+                            motion.div,
+                            {
+                              initial: { height: 0, opacity: 0 },
+                              animate: { height: "auto", opacity: 1 },
+                              exit: { height: 0, opacity: 0 },
+                              transition: { duration: 0.3 },
+                              className: "overflow-hidden",
+                              children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-card border border-t-0 border-border rounded-b-2xl px-6 py-5", children: /* @__PURE__ */ jsxRuntimeExports.jsx("ol", { className: "space-y-2", children: HOUSE_RULES.map((rule, idx) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                                "li",
+                                {
+                                  "data-ocid": `rules.item.${idx + 1}`,
+                                  className: "flex items-start gap-3 text-sm text-muted-foreground",
+                                  children: [
+                                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "w-5 h-5 rounded-full bg-primary/10 text-primary text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5", children: idx + 1 }),
+                                    rule
+                                  ]
+                                },
+                                rule
+                              )) }) })
+                            }
+                          ) })
+                        ] })
+                      ]
+                    }
+                  ) })
+                }
+              )
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("footer", { className: "bg-foreground text-primary-foreground py-14 px-4 sm:px-6 relative z-10", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid sm:grid-cols-3 gap-10 mb-10", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-4", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-8 h-8 rounded-full bg-primary flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Flame, { className: "w-4 h-4 text-primary-foreground" }) }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-display text-lg font-semibold text-primary-foreground", children: "Rudreshwar Mahadeo Kothi" })
+                  ] }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-primary-foreground/60 leading-relaxed", children: "A 300-year-old heritage haveli managed by Mr. Dr V.N. Singh and Team Rudreshwar Kothi, in the heart of Varanasi." })
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "font-semibold text-sm uppercase tracking-widest text-primary-foreground/50 mb-4", children: "Contact" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("ul", { className: "space-y-3", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { className: "flex items-start gap-2 text-sm text-primary-foreground/70", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(MapPin, { className: "w-4 h-4 mt-0.5 flex-shrink-0 text-primary-foreground/40" }),
+                      "CK-37/29, Bansphatak Road,",
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+                      "Varanasi 221001, UP, India"
+                    ] }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { className: "flex items-center gap-2 text-sm text-primary-foreground/70", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(Phone, { className: "w-4 h-4 flex-shrink-0 text-primary-foreground/40" }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(
+                        "a",
+                        {
+                          href: "tel:+919920685754",
+                          className: "hover:text-primary-foreground transition-colors",
+                          children: "+91 99206 85754"
+                        }
+                      )
+                    ] }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { className: "flex items-center gap-2 text-sm text-primary-foreground/70", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(Mail, { className: "w-4 h-4 flex-shrink-0 text-primary-foreground/40" }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(
+                        "a",
+                        {
+                          href: "mailto:rmkothivns@gmail.com",
+                          className: "hover:text-primary-foreground transition-colors",
+                          children: "rmkothivns@gmail.com"
+                        }
+                      )
+                    ] })
+                  ] })
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "font-semibold text-sm uppercase tracking-widest text-primary-foreground/50 mb-4", children: "Quick Links" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-2", children: ["About", "Rooms", "Amenities", "Gallery", "Reviews"].map(
+                    (item) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      "a",
+                      {
+                        href: `#${item.toLowerCase()}`,
+                        className: "text-sm text-primary-foreground/60 hover:text-primary-foreground transition-colors",
+                        children: item
+                      }
+                    ) }, item)
+                  ) })
+                ] })
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border-t border-primary-foreground/10 pt-6 text-center", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm text-primary-foreground/40", children: [
+                "© 2026 Rudreshwar Mahadeo Kothi — A Heritage Property. All rights reserved.",
+                " "
+              ] }) })
+            ] }) })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            ImageLightbox,
+            {
+              isOpen: lightboxOpen,
+              images: getCurrentImageArray(),
+              currentIndex: lightboxImageIdx,
+              onClose: handleCloseLightbox,
+              onPrev: handlePrevImage,
+              onNext: handleNextImage,
+              roomName: lightboxRoomIdx === -1 ? "Gallery" : ((_a3 = FALLBACK_ROOMS[lightboxRoomIdx]) == null ? void 0 : _a3.name) || "Room"
+            }
+          )
+        ]
+      }
+    )
   ] });
 }
 function RoomsGrid({ onInquire, onImageClick }) {

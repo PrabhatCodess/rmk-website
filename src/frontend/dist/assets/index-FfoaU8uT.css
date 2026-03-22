@@ -2256,14 +2256,17 @@ body {
 html.has-scroll-smooth {
   overflow: hidden;
 }
+
 html.has-scroll-dragging {
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
 }
+
 .has-scroll-smooth body {
   overflow: hidden;
 }
+
 .has-scroll-smooth [data-scroll-container] {
   min-height: 100vh;
 }
@@ -2279,7 +2282,8 @@ html.has-scroll-dragging {
   right: 20px;
   top: 400px;
   width: 10px;
-  height: 20vh; /* Total height of scrollbar */
+  height: 20vh;
+  /* Total height of scrollbar */
   transform-origin: center right;
   border-radius: 10px;
   background-color: rgba(0, 0, 0, 0.1);
@@ -2293,7 +2297,8 @@ html.has-scroll-dragging {
   top: 0;
   right: 0;
   width: 7px;
-  min-height: 50px; /* Adjust as necessary */
+  min-height: 50px;
+  /* Adjust as necessary */
   background-color: #000000;
   border-radius: 10px;
   opacity: 0.5;

@@ -36,8 +36,8 @@ import { stairs } from "@lucide/lab";
 
 
 import { AnimatePresence, motion } from "motion/react";
-import { useRef, useState, useEffect, useCallback } from "react";
-import LocomotiveScroll from "locomotive-scroll";
+import { useState, useEffect, useCallback, useRef } from "react";
+import Lenis from "lenis";
 import Loader from "./components/Loader";
 import type { GuestReview } from "./backend.d";
 import {
@@ -635,25 +635,20 @@ export default function App() {
   const [lightboxImageIdx, setLightboxImageIdx] = useState(0);
   const [loading, setLoading] = useState(true);
 
-  const scrollRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
     if (loading) return;
-    
-    let scroll: any;
-    const t = setTimeout(() => {
-      if (scrollRef.current) {
-        scroll = new LocomotiveScroll({
-          el: scrollRef.current,
-          smooth: true,
-          multiplier: 1,
-        });
-      }
-    }, 150);
-    
+
+    const lenis = new Lenis();
+
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    const rafId = requestAnimationFrame(raf);
+
     return () => {
-      clearTimeout(t);
-      if (scroll) scroll.destroy();
+      cancelAnimationFrame(rafId);
+      lenis.destroy();
     };
   }, [loading]);
 
@@ -841,820 +836,820 @@ export default function App() {
             </AnimatePresence>
           </header>
 
-          <div ref={scrollRef} data-scroll-container>
+          <div>
             <main>
-            {/* Hero */}
-            <section id="hero" className="relative min-h-screen flex flex-col">
-              {/* Background image */}
-              <div className="absolute inset-0 overflow-hidden">
-                <img
-                  src="/assets/generated/hero-temple-shrine.dim_1200x700.jpg"
-                  alt="Rudreshwar Mahadeo Kothi heritage haveli temple shrine entrance"
-                  className="w-full h-full object-cover"
-                />
-                <div className="hero-overlay absolute inset-0" />
-              </div>
+              {/* Hero */}
+              <section id="hero" className="relative min-h-screen flex flex-col">
+                {/* Background image */}
+                <div className="absolute inset-0 overflow-hidden">
+                  <img
+                    src="/assets/generated/hero-temple-shrine.dim_1200x700.jpg"
+                    alt="Rudreshwar Mahadeo Kothi heritage haveli temple shrine entrance"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="hero-overlay absolute inset-0" />
+                </div>
 
-              {/* Content */}
-              <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-4 sm:px-6 pt-20">
-                <motion.div
-                  variants={stagger}
-                  initial="hidden"
-                  animate="visible"
-                  className="max-w-2xl"
-                >
-                  {/* Badge */}
+                {/* Content */}
+                <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-4 sm:px-6 pt-20">
                   <motion.div
-                    variants={fadeUp}
-                    className="flex justify-center mb-6"
+                    variants={stagger}
+                    initial="hidden"
+                    animate="visible"
+                    className="max-w-2xl"
                   >
-                    <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm border border-white/25 rounded-full px-4 py-1.5">
-                      <Star className="w-3.5 h-3.5 fill-amber-300 text-amber-300" />
-                      <span className="text-white/90 text-xs font-medium tracking-widest uppercase">
-                        Heritage Haveli - AirBnB Guest Favorite
-                      </span>
-                    </div>
-                  </motion.div>
-
-                  <motion.h1
-                    variants={fadeUp}
-                    className="font-display text-4xl sm:text-5xl md:text-6xl font-semibold text-white leading-[1.1] tracking-tight mb-4"
-                  >
-                    Rudreshwar
-                    <br />
-                    <span className="italic text-amber-200">Mahadeo Kothi</span>
-                  </motion.h1>
-
-                  <motion.p
-                    variants={fadeUp}
-                    className="text-white/80 text-lg sm:text-xl font-light mb-8 leading-relaxed"
-                  >
-                    Heritage Haveli in the Heart of Varanasi
-                    <br className="hidden sm:block" />3 min walk from Kashi
-                    Vishwanath Temple
-                  </motion.p>
-
-                  <motion.div
-                    variants={fadeUp}
-                    className="flex flex-col sm:flex-row gap-3 justify-center"
-                  >
-                    <Button
-                      data-ocid="hero.primary_button"
-                      onClick={() =>
-                        window.open(
-                          "https://reservations.ithstays.com/booking/book-rooms-rudreshwarmahadeokothibyithstays",
-                          "_blank",
-                        )
-                      }
-                      size="lg"
-                      className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-6 text-base rounded-full shadow-lg"
-                    >
-                      Book Now
-                    </Button>
-                    <Button
-                      onClick={() => scrollTo("#rooms")}
-                      size="lg"
-                      variant="outline"
-                      className="border-white/40 text-white bg-white/10 hover:bg-white/20 hover:text-white px-8 py-6 text-base rounded-full"
-                    >
-                      View Rooms
-                    </Button>
-                  </motion.div>
-                </motion.div>
-              </div>
-
-              {/* Scroll cue */}
-              <div className="relative z-10 flex justify-center pb-8">
-                <motion.button
-                  type="button"
-                  onClick={() => scrollTo("#about")}
-                  animate={{ y: [0, 6, 0] }}
-                  transition={{
-                    duration: 2,
-                    repeat: Number.POSITIVE_INFINITY,
-                    ease: "easeInOut",
-                  }}
-                  className="text-white/60 hover:text-white/90 transition-colors"
-                  aria-label="Scroll down"
-                >
-                  <ChevronDown className="w-7 h-7" />
-                </motion.button>
-              </div>
-            </section>
-
-            {/* About */}
-            <section
-              id="about"
-              className="py-20 sm:py-28 px-4 sm:px-6 bg-background relative z-10"
-            >
-              <div className="max-w-5xl mx-auto">
-                <motion.div
-                  variants={stagger}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: "-80px" }}
-                  className="grid md:grid-cols-2 gap-12 items-center"
-                >
-                  {/* Text */}
-                  <div>
-                    <motion.p
-                      variants={fadeUp}
-                      className="text-sm font-medium tracking-widest uppercase text-primary mb-3"
-                    >
-                      About Us
-                    </motion.p>
-                    <motion.h2
-                      variants={fadeUp}
-                      className="font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight mb-5"
-                    >
-                      A 300-Year-Old
-                      <br />
-                      <span className="italic font-light">Heritage Haveli</span>
-                    </motion.h2>
+                    {/* Badge */}
                     <motion.div
                       variants={fadeUp}
-                      className="space-y-4 text-muted-foreground leading-relaxed"
+                      className="flex justify-center mb-6"
                     >
-                      <p>
-                        Step into a world of royal elegance, deep spirituality, and
-                        living history at Rudreshwar Mahadeo Kothi - a 300-year-old
-                        ancestral haveli steeped in tradition. Just a 3-minute walk
-                        from the Kashi Vishwanath Temple and 10 minutes from the
-                        sacred ghats of the Ganges.
+                      <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm border border-white/25 rounded-full px-4 py-1.5">
+                        <Star className="w-3.5 h-3.5 fill-amber-300 text-amber-300" />
+                        <span className="text-white/90 text-xs font-medium tracking-widest uppercase">
+                          Heritage Haveli - AirBnB Guest Favorite
+                        </span>
+                      </div>
+                    </motion.div>
+
+                    <motion.h1
+                      variants={fadeUp}
+                      className="font-display text-4xl sm:text-5xl md:text-6xl font-semibold text-white leading-[1.1] tracking-tight mb-4"
+                    >
+                      Rudreshwar
+                      <br />
+                      <span className="italic text-amber-200">Mahadeo Kothi</span>
+                    </motion.h1>
+
+                    <motion.p
+                      variants={fadeUp}
+                      className="text-white/80 text-lg sm:text-xl font-light mb-8 leading-relaxed"
+                    >
+                      Heritage Haveli in the Heart of Varanasi
+                      <br className="hidden sm:block" />3 min walk from Kashi
+                      Vishwanath Temple
+                    </motion.p>
+
+                    <motion.div
+                      variants={fadeUp}
+                      className="flex flex-col sm:flex-row gap-3 justify-center"
+                    >
+                      <Button
+                        data-ocid="hero.primary_button"
+                        onClick={() =>
+                          window.open(
+                            "https://reservations.ithstays.com/booking/book-rooms-rudreshwarmahadeokothibyithstays",
+                            "_blank",
+                          )
+                        }
+                        size="lg"
+                        className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-6 text-base rounded-full shadow-lg"
+                      >
+                        Book Now
+                      </Button>
+                      <Button
+                        onClick={() => scrollTo("#rooms")}
+                        size="lg"
+                        variant="outline"
+                        className="border-white/40 text-white bg-white/10 hover:bg-white/20 hover:text-white px-8 py-6 text-base rounded-full"
+                      >
+                        View Rooms
+                      </Button>
+                    </motion.div>
+                  </motion.div>
+                </div>
+
+                {/* Scroll cue */}
+                <div className="relative z-10 flex justify-center pb-8">
+                  <motion.button
+                    type="button"
+                    onClick={() => scrollTo("#about")}
+                    animate={{ y: [0, 6, 0] }}
+                    transition={{
+                      duration: 2,
+                      repeat: Number.POSITIVE_INFINITY,
+                      ease: "easeInOut",
+                    }}
+                    className="text-white/60 hover:text-white/90 transition-colors"
+                    aria-label="Scroll down"
+                  >
+                    <ChevronDown className="w-7 h-7" />
+                  </motion.button>
+                </div>
+              </section>
+
+              {/* About */}
+              <section
+                id="about"
+                className="py-20 sm:py-28 px-4 sm:px-6 bg-background relative z-10"
+              >
+                <div className="max-w-5xl mx-auto">
+                  <motion.div
+                    variants={stagger}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-80px" }}
+                    className="grid md:grid-cols-2 gap-12 items-center"
+                  >
+                    {/* Text */}
+                    <div>
+                      <motion.p
+                        variants={fadeUp}
+                        className="text-sm font-medium tracking-widest uppercase text-primary mb-3"
+                      >
+                        About Us
+                      </motion.p>
+                      <motion.h2
+                        variants={fadeUp}
+                        className="font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight mb-5"
+                      >
+                        A 300-Year-Old
+                        <br />
+                        <span className="italic font-light">Heritage Haveli</span>
+                      </motion.h2>
+                      <motion.div
+                        variants={fadeUp}
+                        className="space-y-4 text-muted-foreground leading-relaxed"
+                      >
+                        <p>
+                          Step into a world of royal elegance, deep spirituality, and
+                          living history at Rudreshwar Mahadeo Kothi - a 300-year-old
+                          ancestral haveli steeped in tradition. Just a 3-minute walk
+                          from the Kashi Vishwanath Temple and 10 minutes from the
+                          sacred ghats of the Ganges.
+                        </p>
+                        <p>
+                          This heritage home features soaring ceilings, ornate
+                          courtyards, intricate carvings, and an in-house Lord
+                          Vishwanath Temple - a rare private shrine within the
+                          property. The Yaksh Vinayaka Shrine, one of the 56 revered
+                          Vinayak temples of Varanasi, is also located here.
+                        </p>
+                        <p>
+                          Traditional ritual facilities - Rudrabhishek,
+                          Mahamrityunjaya Path, and other pujas - can be arranged on
+                          request. Modern amenities ensure a seamless stay without
+                          losing the soul of this living heritage.
+                        </p>
+                      </motion.div>
+                    </div>
+
+                    {/* Highlights card */}
+                    <motion.div variants={fadeUp}>
+                      <Card className="border-border shadow-sm overflow-hidden">
+                        <div className="bg-primary/8 px-6 pt-0 pb-2 border-b border-border">
+                          <h3 className="font-display text-xl font-semibold text-foreground">
+                            What's Included
+                          </h3>
+                          <p className="text-sm text-muted-foreground mt-1">
+                            Every stay, every room
+                          </p>
+                        </div>
+                        <CardContent className="p-6">
+                          <ul className="space-y-4">
+                            {[
+                              {
+                                icon: Wifi,
+                                label: "Free High-Speed Wi-Fi",
+                                desc: "Throughout the property",
+                              },
+                              {
+                                icon: Coffee,
+                                label: "Vegetarian Breakfast",
+                                desc: "Free light breakfast for direct bookers",
+                              },
+                              {
+                                icon: Wind,
+                                label: "Air Conditioning",
+                                desc: "All rooms climate-controlled",
+                              },
+                              {
+                                icon: Droplets,
+                                label: "Hot & Cold Shower",
+                                desc: "24x7 in all bathrooms",
+                              },
+                              {
+                                icon: () => (
+                                  <Icon
+                                    iconNode={stairs}
+                                    className="w-4.5 h-4.5 text-secondary-foreground"
+                                    style={{ width: "1.1rem", height: "1.1rem" }}
+                                  />
+                                ),
+                                label: "Heritage Staircases",
+                                desc: "Access to rooms is via Steep traditional staircases. Elevators are not available.",
+                              },
+                            ].map(({ icon: Icon, label, desc }) => (
+                              <li key={label} className="flex items-start gap-3">
+                                <div className="w-9 h-9 rounded-lg bg-secondary flex items-center justify-center flex-shrink-0 mt-0.5">
+                                  <Icon
+                                    className="w-4.5 h-4.5 text-secondary-foreground"
+                                    style={{ width: "1.1rem", height: "1.1rem" }}
+                                  />
+                                </div>
+                                <div>
+                                  <p className="font-medium text-foreground text-sm">
+                                    {label}
+                                  </p>
+                                  <p className="text-xs text-muted-foreground mt-0.5">
+                                    {desc}
+                                  </p>
+                                </div>
+                              </li>
+                            ))}
+                          </ul>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  </motion.div>
+                </div>
+              </section>
+
+              <div className="section-divider" />
+
+              {/* Rooms */}
+              <section
+                id="rooms"
+                className="py-20 sm:py-28 px-4 sm:px-6 relative z-10"
+              >
+                <div className="max-w-6xl mx-auto">
+                  <motion.div
+                    variants={stagger}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-80px" }}
+                  >
+                    <motion.div variants={fadeUp} className="text-center mb-14">
+                      <p className="text-sm font-medium tracking-widest uppercase text-primary mb-3">
+                        Our Rooms
                       </p>
-                      <p>
-                        This heritage home features soaring ceilings, ornate
-                        courtyards, intricate carvings, and an in-house Lord
-                        Vishwanath Temple - a rare private shrine within the
-                        property. The Yaksh Vinayaka Shrine, one of the 56 revered
-                        Vinayak temples of Varanasi, is also located here.
+                      <h2 className="font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight">
+                        Crafted for Your Comfort
+                      </h2>
+                    </motion.div>
+
+                    <RoomsGrid
+                      onInquire={() =>
+                        document
+                          .querySelector("#contact")
+                          ?.scrollIntoView({ behavior: "smooth" })
+                      }
+                      onImageClick={handleImageClick}
+                    />
+                  </motion.div>
+                </div>
+              </section>
+
+              <div className="section-divider" />
+
+              {/* Amenities */}
+              <section
+                id="amenities"
+                className="py-20 sm:py-28 px-4 sm:px-6 bg-secondary/30 relative z-10"
+              >
+                <div className="max-w-5xl mx-auto">
+                  <motion.div
+                    variants={stagger}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-80px" }}
+                  >
+                    <motion.div variants={fadeUp} className="text-center mb-14">
+                      <p className="text-sm font-medium tracking-widest uppercase text-primary mb-3">
+                        Facilities
                       </p>
-                      <p>
-                        Traditional ritual facilities - Rudrabhishek,
-                        Mahamrityunjaya Path, and other pujas - can be arranged on
-                        request. Modern amenities ensure a seamless stay without
-                        losing the soul of this living heritage.
+                      <h2 className="font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight">
+                        Everything You Need
+                      </h2>
+                    </motion.div>
+
+                    <motion.div
+                      variants={stagger}
+                      className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6"
+                    >
+                      {[
+                        {
+                          icon: Coffee,
+                          label: "Hearty Breakfast",
+                          desc: "Fresh homemade vegetarian & vegan meals",
+                        },
+                        {
+                          icon: Clock,
+                          label: "Late Check-in",
+                          desc: "Available with advance notice",
+                        },
+                        {
+                          icon: Leaf,
+                          label: "Free Vegan Toiletries",
+                          desc: "Premium set for all rooms",
+                        },
+                        {
+                          icon: MapPin,
+                          label: "Local Experiences",
+                          desc: "City tours & cultural immersion",
+                        },
+                        {
+                          icon: Shirt,
+                          label: "Laundry Service",
+                          desc: "Washing machine available for fee",
+                        },
+                        {
+                          icon: Wifi,
+                          label: "Free Wi-Fi",
+                          desc: "High-speed throughout the property",
+                        },
+                        {
+                          icon: Droplets,
+                          label: "Hot & Cold Shower",
+                          desc: "24x7 in all bathrooms",
+                        },
+                        {
+                          icon: VolumeX,
+                          label: "Soundproofing",
+                          desc: "Soundproofed windows & doors",
+                        },
+                      ].map(({ icon: Icon, label, desc }) => (
+                        <motion.div
+                          key={label}
+                          variants={fadeUp}
+                          className="bg-card rounded-2xl p-5 flex flex-col items-center text-center border border-border shadow-xs hover:shadow-md transition-shadow"
+                        >
+                          <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-3">
+                            <Icon className="w-5 h-5 text-primary" />
+                          </div>
+                          <p className="font-semibold text-sm text-foreground">
+                            {label}
+                          </p>
+                          <p className="text-xs text-muted-foreground mt-1">{desc}</p>
+                        </motion.div>
+                      ))}
+                    </motion.div>
+                  </motion.div>
+                </div>
+              </section>
+
+              <div className="section-divider" />
+
+              {/* Important Distances */}
+              <section
+                id="distances"
+                className="py-20 sm:py-28 px-4 sm:px-6 relative z-10"
+              >
+                <div className="max-w-5xl mx-auto">
+                  <motion.div
+                    variants={stagger}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-80px" }}
+                  >
+                    <motion.div variants={fadeUp} className="text-center mb-14">
+                      <p className="text-sm font-medium tracking-widest uppercase text-primary mb-3">
+                        Location
+                      </p>
+                      <h2 className="font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight">
+                        Important Distances
+                      </h2>
+                      <p className="text-muted-foreground mt-3">
+                        Everything in Varanasi, minutes away
                       </p>
                     </motion.div>
-                  </div>
 
-                  {/* Highlights card */}
-                  <motion.div variants={fadeUp}>
-                    <Card className="border-border shadow-sm overflow-hidden">
-                      <div className="bg-primary/8 px-6 pt-0 pb-2 border-b border-border">
-                        <h3 className="font-display text-xl font-semibold text-foreground">
-                          What's Included
-                        </h3>
-                        <p className="text-sm text-muted-foreground mt-1">
-                          Every stay, every room
-                        </p>
+                    <motion.div
+                      variants={stagger}
+                      className="grid grid-cols-2 sm:grid-cols-3 gap-4"
+                    >
+                      {DISTANCES.map(({ place, time, type }, idx) => (
+                        <motion.div
+                          key={place}
+                          data-ocid={`distances.item.${idx + 1}`}
+                          variants={fadeUp}
+                          className="bg-card rounded-2xl border border-border p-5 shadow-xs hover:shadow-md transition-shadow"
+                        >
+                          <div className="flex items-start gap-3">
+                            <div className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                              <MapPin className="w-4 h-4 text-primary" />
+                            </div>
+                            <div>
+                              <p className="font-semibold text-foreground text-sm leading-snug">
+                                {place}
+                              </p>
+                              <p className="text-primary font-display font-semibold text-lg mt-1">
+                                {time}
+                              </p>
+                              <p className="text-xs text-muted-foreground capitalize">
+                                {type}
+                              </p>
+                            </div>
+                          </div>
+                        </motion.div>
+                      ))}
+                    </motion.div>
+                  </motion.div>
+                </div>
+              </section>
+
+              <div className="section-divider" />
+
+              {/* Gallery */}
+              <section
+                id="gallery"
+                className="py-20 sm:py-28 px-4 sm:px-6 bg-secondary/30 relative z-10"
+              >
+                <div className="max-w-5xl mx-auto">
+                  <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-80px" }}
+                    variants={stagger}
+                  >
+                    <motion.div variants={fadeUp} className="text-center mb-14">
+                      <p className="text-sm font-medium tracking-widest uppercase text-primary mb-3">
+                        Gallery
+                      </p>
+                      <h2 className="font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight">
+                        A Glimpse of the Haveli
+                      </h2>
+                    </motion.div>
+
+                    <motion.div variants={fadeUp} className="masonry-grid">
+                      {GALLERY_IMAGES.map(({ src, alt }, idx) => (
+                        <div
+                          key={src}
+                          className="masonry-item group cursor-zoom-in"
+                          onClick={() => handleGalleryClick(idx)}
+                        >
+                          <img
+                            src={src}
+                            alt={alt || "gallery image"}
+                            className="w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            loading="lazy"
+                          />
+                        </div>
+                      ))}
+                    </motion.div>
+                  </motion.div>
+                </div>
+              </section>
+
+              <div className="section-divider" />
+
+              {/* Reviews */}
+              <section
+                id="reviews"
+                className="py-20 sm:py-28 px-4 sm:px-6 relative z-10"
+              >
+                <div className="max-w-5xl mx-auto">
+                  <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-80px" }}
+                    variants={stagger}
+                  >
+                    <motion.div variants={fadeUp} className="text-center mb-14">
+                      <p className="text-sm font-medium tracking-widest uppercase text-primary mb-3">
+                        Guest Stories
+                      </p>
+                      <h2 className="font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight mb-4">
+                        Loved by Our Guests
+                      </h2>
+                      {/* Google rating badge */}
+                      <div className="inline-flex items-center gap-2 bg-secondary rounded-full px-4 py-2 border border-border">
+                        <div className="flex gap-0.5">
+                          {[1, 2, 3, 4].map((s) => (
+                            <Star
+                              key={s}
+                              className="w-3.5 h-3.5 fill-amber-400 text-amber-400"
+                            />
+                          ))}
+                          <Star className="w-3.5 h-3.5 fill-amber-400/60 text-amber-400/60" />
+                        </div>
+                        <span className="text-sm font-semibold text-foreground">
+                          Rated 4.6 / 5 on Google
+                        </span>
                       </div>
-                      <CardContent className="p-6">
-                        <ul className="space-y-4">
-                          {[
-                            {
-                              icon: Wifi,
-                              label: "Free High-Speed Wi-Fi",
-                              desc: "Throughout the property",
-                            },
-                            {
-                              icon: Coffee,
-                              label: "Vegetarian Breakfast",
-                              desc: "Free light breakfast for direct bookers",
-                            },
-                            {
-                              icon: Wind,
-                              label: "Air Conditioning",
-                              desc: "All rooms climate-controlled",
-                            },
-                            {
-                              icon: Droplets,
-                              label: "Hot & Cold Shower",
-                              desc: "24x7 in all bathrooms",
-                            },
-                            {
-                              icon: () => (
-                                <Icon
-                                  iconNode={stairs}
-                                  className="w-4.5 h-4.5 text-secondary-foreground"
-                                  style={{ width: "1.1rem", height: "1.1rem" }}
-                                />
-                              ),
-                              label: "Heritage Staircases",
-                              desc: "Access to rooms is via Steep traditional staircases. Elevators are not available.",
-                            },
-                          ].map(({ icon: Icon, label, desc }) => (
-                            <li key={label} className="flex items-start gap-3">
-                              <div className="w-9 h-9 rounded-lg bg-secondary flex items-center justify-center flex-shrink-0 mt-0.5">
-                                <Icon
-                                  className="w-4.5 h-4.5 text-secondary-foreground"
-                                  style={{ width: "1.1rem", height: "1.1rem" }}
-                                />
+                    </motion.div>
+
+                    <ReviewsSection />
+                  </motion.div>
+                </div>
+              </section>
+
+              <div className="section-divider" />
+
+              {/* Directions */}
+              <section
+                id="directions"
+                className="py-16 sm:py-20 px-4 sm:px-6 bg-secondary/30 relative z-10"
+              >
+                <div className="max-w-3xl mx-auto">
+                  <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-80px" }}
+                    variants={stagger}
+                  >
+                    <motion.div variants={fadeUp} className="text-center mb-10">
+                      <p className="text-sm font-medium tracking-widest uppercase text-primary mb-3">
+                        Getting Here
+                      </p>
+                      <h2 className="font-display text-3xl sm:text-4xl font-semibold text-foreground leading-tight">
+                        How to Find Us
+                      </h2>
+                    </motion.div>
+
+                    <motion.div variants={fadeUp}>
+                      <button
+                        type="button"
+                        data-ocid="directions.toggle"
+                        onClick={() => setDirectionsOpen((v) => !v)}
+                        className="w-full flex items-center justify-between bg-card border border-border rounded-2xl px-6 py-4 text-left hover:shadow-md transition-shadow"
+                      >
+                        <span className="font-semibold text-foreground">
+                          View Directions
+                        </span>
+                        <ChevronDown
+                          className={`w-5 h-5 text-muted-foreground transition-transform duration-300 ${directionsOpen ? "rotate-180" : ""}`}
+                        />
+                      </button>
+
+                      <AnimatePresence>
+                        {directionsOpen && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.3 }}
+                            className="overflow-hidden"
+                          >
+                            <div className="bg-card border border-t-0 border-border rounded-b-2xl px-6 py-6 space-y-6 text-sm text-muted-foreground leading-relaxed">
+                              <div>
+                                <h4 className="font-semibold text-foreground mb-2">
+                                  If Flying into Varanasi
+                                </h4>
+                                <ol className="list-decimal list-inside space-y-1">
+                                  <li>
+                                    Use pre-paid taxi to{" "}
+                                    <strong>Godowlia Chauraha</strong>, then switch to
+                                    e-rickshaw (tuk-tuk) to the property.
+                                  </li>
+                                  <li>
+                                    We also offer a pick-up service for Rs 2,000 - our
+                                    staff will meet you outside the terminal with a
+                                    placard.
+                                  </li>
+                                </ol>
                               </div>
                               <div>
-                                <p className="font-medium text-foreground text-sm">
-                                  {label}
+                                <h4 className="font-semibold text-foreground mb-2">
+                                  If Taking a Train
+                                </h4>
+                                <p className="mb-2">
+                                  From <strong>Varanasi Junction (BSB)</strong>,{" "}
+                                  <strong>Banaras Station (BSBS)</strong>, or{" "}
+                                  <strong>DDU Junction</strong>:
                                 </p>
-                                <p className="text-xs text-muted-foreground mt-0.5">
-                                  {desc}
+                                <ol className="list-decimal list-inside space-y-1">
+                                  <li>
+                                    Take a taxi/auto to{" "}
+                                    <strong>Godowlia Chauraha</strong>, then an
+                                    e-rickshaw to the property.
+                                  </li>
+                                  <li>
+                                    Get dropped at the entry to the lane of Gate 1 to{" "}
+                                    <strong>Kashi Vishwanath Temple</strong>.
+                                  </li>
+                                  <li>
+                                    Walk about 20 metres -{" "}
+                                    <strong>Rudreshwar Mahadeo Kothi</strong> is the{" "}
+                                    <em>first house on the left</em> (one shop after
+                                    Vishwanath Kothi Restaurant).
+                                  </li>
+                                </ol>
+                              </div>
+                              <div className="bg-primary/5 border border-primary/20 rounded-xl px-4 py-3">
+                                <p className="text-foreground font-medium text-xs uppercase tracking-wide mb-1">
+                                  Address
+                                </p>
+                                <p>
+                                  CK-37/29, Bansphatak Road, Gate No.1 Near Pitambari Saree Opposite of Bank Of Baroda Varanasi 221001, Uttar
+                                  Pradesh, India
                                 </p>
                               </div>
-                            </li>
-                          ))}
-                        </ul>
-                      </CardContent>
-                    </Card>
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </motion.div>
                   </motion.div>
-                </motion.div>
-              </div>
-            </section>
+                </div>
+              </section>
 
-            <div className="section-divider" />
+              <div className="section-divider" />
 
-            {/* Rooms */}
-            <section
-              id="rooms"
-              className="py-20 sm:py-28 px-4 sm:px-6 relative z-10"
-            >
-              <div className="max-w-6xl mx-auto">
-                <motion.div
-                  variants={stagger}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: "-80px" }}
-                >
-                  <motion.div variants={fadeUp} className="text-center mb-14">
-                    <p className="text-sm font-medium tracking-widest uppercase text-primary mb-3">
-                      Our Rooms
-                    </p>
-                    <h2 className="font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight">
-                      Crafted for Your Comfort
-                    </h2>
-                  </motion.div>
-
-                  <RoomsGrid
-                    onInquire={() =>
-                      document
-                        .querySelector("#contact")
-                        ?.scrollIntoView({ behavior: "smooth" })
-                    }
-                    onImageClick={handleImageClick}
-                  />
-                </motion.div>
-              </div>
-            </section>
-
-            <div className="section-divider" />
-
-            {/* Amenities */}
-            <section
-              id="amenities"
-              className="py-20 sm:py-28 px-4 sm:px-6 bg-secondary/30 relative z-10"
-            >
-              <div className="max-w-5xl mx-auto">
-                <motion.div
-                  variants={stagger}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: "-80px" }}
-                >
-                  <motion.div variants={fadeUp} className="text-center mb-14">
-                    <p className="text-sm font-medium tracking-widest uppercase text-primary mb-3">
-                      Facilities
-                    </p>
-                    <h2 className="font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight">
-                      Everything You Need
-                    </h2>
-                  </motion.div>
-
+              {/* Booking Form */}
+              <section
+                id="contact"
+                className="py-20 sm:py-28 px-4 sm:px-6 relative z-10"
+              >
+                <div className="max-w-3xl mx-auto">
                   <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-80px" }}
                     variants={stagger}
-                    className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6"
                   >
-                    {[
-                      {
-                        icon: Coffee,
-                        label: "Hearty Breakfast",
-                        desc: "Fresh homemade vegetarian & vegan meals",
-                      },
-                      {
-                        icon: Clock,
-                        label: "Late Check-in",
-                        desc: "Available with advance notice",
-                      },
-                      {
-                        icon: Leaf,
-                        label: "Free Vegan Toiletries",
-                        desc: "Premium set for all rooms",
-                      },
-                      {
-                        icon: MapPin,
-                        label: "Local Experiences",
-                        desc: "City tours & cultural immersion",
-                      },
-                      {
-                        icon: Shirt,
-                        label: "Laundry Service",
-                        desc: "Washing machine available for fee",
-                      },
-                      {
-                        icon: Wifi,
-                        label: "Free Wi-Fi",
-                        desc: "High-speed throughout the property",
-                      },
-                      {
-                        icon: Droplets,
-                        label: "Hot & Cold Shower",
-                        desc: "24x7 in all bathrooms",
-                      },
-                      {
-                        icon: VolumeX,
-                        label: "Soundproofing",
-                        desc: "Soundproofed windows & doors",
-                      },
-                    ].map(({ icon: Icon, label, desc }) => (
-                      <motion.div
-                        key={label}
-                        variants={fadeUp}
-                        className="bg-card rounded-2xl p-5 flex flex-col items-center text-center border border-border shadow-xs hover:shadow-md transition-shadow"
+                    <motion.div variants={fadeUp} className="text-center mb-8">
+                      <p className="text-sm font-medium tracking-widest uppercase text-primary mb-3">
+                        Stay With Us
+                      </p>
+                      <h2 className="font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight mb-3">
+                        Book Your Stay
+                      </h2>
+                      <p className="text-muted-foreground mb-5">
+                        Send us a message and Team Rudreshwar will confirm
+                        availability within 24 hours.
+                      </p>
+
+                      {/* Direct contact links */}
+                      <div className="flex flex-wrap gap-3 justify-center">
+                        <a
+                          href="tel:+919920685754"
+                          data-ocid="contact.call_button"
+                          className="inline-flex items-center gap-2 bg-secondary text-foreground hover:bg-secondary/80 border border-border rounded-full px-5 py-2.5 text-sm font-medium transition-colors"
+                        >
+                          <Phone className="w-4 h-4" />
+                          Call Us: +91 99206 85754
+                          +91 9889244273
+                          +91 9044301567
+                        </a>
+                        <a
+                          href="mailto:rmkothivns@gmail.com"
+                          data-ocid="contact.email_button"
+                          className="inline-flex items-center gap-2 bg-secondary text-foreground hover:bg-secondary/80 border border-border rounded-full px-5 py-2.5 text-sm font-medium transition-colors"
+                        >
+                          <Mail className="w-4 h-4" />
+                          Email Us
+                        </a>
+                        <a
+                          href="https://reservations.ithstays.com/booking/book-rooms-rudreshwarmahadeokothibyithstays"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          data-ocid="contact.booking_button"
+                          className="inline-flex items-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-5 py-2.5 text-sm font-medium transition-colors"
+                        >
+                          <ExternalLink className="w-4 h-4" />
+                          Book Online Now
+                        </a>
+                      </div>
+
+                      {/* Check-in / out info */}
+                      <div className="flex gap-6 justify-center mt-5 text-sm text-muted-foreground">
+                        <span>
+                          <strong className="text-foreground">Check-in:</strong> 12
+                          noon
+                        </span>
+                        <span>
+                          <strong className="text-foreground">Check-out:</strong> 11
+                          am
+                        </span>
+                      </div>
+                    </motion.div>
+
+                    <motion.div variants={fadeUp}>
+                      <BookingForm />
+                    </motion.div>
+
+                    {/* House Rules collapsible */}
+                    <motion.div variants={fadeUp} className="mt-8">
+                      <button
+                        type="button"
+                        data-ocid="rules.toggle"
+                        onClick={() => setRulesOpen((v) => !v)}
+                        className="w-full flex items-center justify-between bg-card border border-border rounded-2xl px-6 py-4 text-left hover:shadow-md transition-shadow"
                       >
-                        <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-3">
-                          <Icon className="w-5 h-5 text-primary" />
-                        </div>
-                        <p className="font-semibold text-sm text-foreground">
-                          {label}
-                        </p>
-                        <p className="text-xs text-muted-foreground mt-1">{desc}</p>
-                      </motion.div>
-                    ))}
-                  </motion.div>
-                </motion.div>
-              </div>
-            </section>
-
-            <div className="section-divider" />
-
-            {/* Important Distances */}
-            <section
-              id="distances"
-              className="py-20 sm:py-28 px-4 sm:px-6 relative z-10"
-            >
-              <div className="max-w-5xl mx-auto">
-                <motion.div
-                  variants={stagger}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: "-80px" }}
-                >
-                  <motion.div variants={fadeUp} className="text-center mb-14">
-                    <p className="text-sm font-medium tracking-widest uppercase text-primary mb-3">
-                      Location
-                    </p>
-                    <h2 className="font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight">
-                      Important Distances
-                    </h2>
-                    <p className="text-muted-foreground mt-3">
-                      Everything in Varanasi, minutes away
-                    </p>
-                  </motion.div>
-
-                  <motion.div
-                    variants={stagger}
-                    className="grid grid-cols-2 sm:grid-cols-3 gap-4"
-                  >
-                    {DISTANCES.map(({ place, time, type }, idx) => (
-                      <motion.div
-                        key={place}
-                        data-ocid={`distances.item.${idx + 1}`}
-                        variants={fadeUp}
-                        className="bg-card rounded-2xl border border-border p-5 shadow-xs hover:shadow-md transition-shadow"
-                      >
-                        <div className="flex items-start gap-3">
-                          <div className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                            <MapPin className="w-4 h-4 text-primary" />
-                          </div>
-                          <div>
-                            <p className="font-semibold text-foreground text-sm leading-snug">
-                              {place}
-                            </p>
-                            <p className="text-primary font-display font-semibold text-lg mt-1">
-                              {time}
-                            </p>
-                            <p className="text-xs text-muted-foreground capitalize">
-                              {type}
-                            </p>
-                          </div>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </motion.div>
-                </motion.div>
-              </div>
-            </section>
-
-            <div className="section-divider" />
-
-            {/* Gallery */}
-            <section
-              id="gallery"
-              className="py-20 sm:py-28 px-4 sm:px-6 bg-secondary/30 relative z-10"
-            >
-              <div className="max-w-5xl mx-auto">
-                <motion.div
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: "-80px" }}
-                  variants={stagger}
-                >
-                  <motion.div variants={fadeUp} className="text-center mb-14">
-                    <p className="text-sm font-medium tracking-widest uppercase text-primary mb-3">
-                      Gallery
-                    </p>
-                    <h2 className="font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight">
-                      A Glimpse of the Haveli
-                    </h2>
-                  </motion.div>
-
-                  <motion.div variants={fadeUp} className="masonry-grid">
-                    {GALLERY_IMAGES.map(({ src, alt }, idx) => (
-                      <div
-                        key={src}
-                        className="masonry-item group cursor-zoom-in"
-                        onClick={() => handleGalleryClick(idx)}
-                      >
-                        <img
-                          src={src}
-                          alt={alt || "gallery image"}
-                          className="w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                          loading="lazy"
+                        <span className="font-semibold text-foreground">
+                          House Rules
+                        </span>
+                        <ChevronDown
+                          className={`w-5 h-5 text-muted-foreground transition-transform duration-300 ${rulesOpen ? "rotate-180" : ""}`}
                         />
-                      </div>
-                    ))}
+                      </button>
+
+                      <AnimatePresence>
+                        {rulesOpen && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.3 }}
+                            className="overflow-hidden"
+                          >
+                            <div className="bg-card border border-t-0 border-border rounded-b-2xl px-6 py-5">
+                              <ol className="space-y-2">
+                                {HOUSE_RULES.map((rule, idx) => (
+                                  <li
+                                    key={rule}
+                                    data-ocid={`rules.item.${idx + 1}`}
+                                    className="flex items-start gap-3 text-sm text-muted-foreground"
+                                  >
+                                    <span className="w-5 h-5 rounded-full bg-primary/10 text-primary text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">
+                                      {idx + 1}
+                                    </span>
+                                    {rule}
+                                  </li>
+                                ))}
+                              </ol>
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </motion.div>
                   </motion.div>
-                </motion.div>
-              </div>
-            </section>
+                </div>
+              </section>
+            </main>
 
-            <div className="section-divider" />
-
-            {/* Reviews */}
-            <section
-              id="reviews"
-              className="py-20 sm:py-28 px-4 sm:px-6 relative z-10"
-            >
+            {/* Footer */}
+            <footer className="bg-foreground text-primary-foreground py-14 px-4 sm:px-6 relative z-10">
               <div className="max-w-5xl mx-auto">
-                <motion.div
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: "-80px" }}
-                  variants={stagger}
-                >
-                  <motion.div variants={fadeUp} className="text-center mb-14">
-                    <p className="text-sm font-medium tracking-widest uppercase text-primary mb-3">
-                      Guest Stories
-                    </p>
-                    <h2 className="font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight mb-4">
-                      Loved by Our Guests
-                    </h2>
-                    {/* Google rating badge */}
-                    <div className="inline-flex items-center gap-2 bg-secondary rounded-full px-4 py-2 border border-border">
-                      <div className="flex gap-0.5">
-                        {[1, 2, 3, 4].map((s) => (
-                          <Star
-                            key={s}
-                            className="w-3.5 h-3.5 fill-amber-400 text-amber-400"
-                          />
-                        ))}
-                        <Star className="w-3.5 h-3.5 fill-amber-400/60 text-amber-400/60" />
+                <div className="grid sm:grid-cols-3 gap-10 mb-10">
+                  {/* Brand */}
+                  <div>
+                    <div className="flex items-center gap-2 mb-4">
+                      <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+                        <Flame className="w-4 h-4 text-primary-foreground" />
                       </div>
-                      <span className="text-sm font-semibold text-foreground">
-                        Rated 4.6 / 5 on Google
+                      <span className="font-display text-lg font-semibold text-primary-foreground">
+                        Rudreshwar Mahadeo Kothi
                       </span>
                     </div>
-                  </motion.div>
-
-                  <ReviewsSection />
-                </motion.div>
-              </div>
-            </section>
-
-            <div className="section-divider" />
-
-            {/* Directions */}
-            <section
-              id="directions"
-              className="py-16 sm:py-20 px-4 sm:px-6 bg-secondary/30 relative z-10"
-            >
-              <div className="max-w-3xl mx-auto">
-                <motion.div
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: "-80px" }}
-                  variants={stagger}
-                >
-                  <motion.div variants={fadeUp} className="text-center mb-10">
-                    <p className="text-sm font-medium tracking-widest uppercase text-primary mb-3">
-                      Getting Here
+                    <p className="text-sm text-primary-foreground/60 leading-relaxed">
+                      A 300-year-old heritage haveli managed by Mr. Dr V.N. Singh and Team Rudreshwar Kothi, in the
+                      heart of Varanasi.
                     </p>
-                    <h2 className="font-display text-3xl sm:text-4xl font-semibold text-foreground leading-tight">
-                      How to Find Us
-                    </h2>
-                  </motion.div>
-
-                  <motion.div variants={fadeUp}>
-                    <button
-                      type="button"
-                      data-ocid="directions.toggle"
-                      onClick={() => setDirectionsOpen((v) => !v)}
-                      className="w-full flex items-center justify-between bg-card border border-border rounded-2xl px-6 py-4 text-left hover:shadow-md transition-shadow"
-                    >
-                      <span className="font-semibold text-foreground">
-                        View Directions
-                      </span>
-                      <ChevronDown
-                        className={`w-5 h-5 text-muted-foreground transition-transform duration-300 ${directionsOpen ? "rotate-180" : ""}`}
-                      />
-                    </button>
-
-                    <AnimatePresence>
-                      {directionsOpen && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.3 }}
-                          className="overflow-hidden"
-                        >
-                          <div className="bg-card border border-t-0 border-border rounded-b-2xl px-6 py-6 space-y-6 text-sm text-muted-foreground leading-relaxed">
-                            <div>
-                              <h4 className="font-semibold text-foreground mb-2">
-                                If Flying into Varanasi
-                              </h4>
-                              <ol className="list-decimal list-inside space-y-1">
-                                <li>
-                                  Use pre-paid taxi to{" "}
-                                  <strong>Godowlia Chauraha</strong>, then switch to
-                                  e-rickshaw (tuk-tuk) to the property.
-                                </li>
-                                <li>
-                                  We also offer a pick-up service for Rs 2,000 - our
-                                  staff will meet you outside the terminal with a
-                                  placard.
-                                </li>
-                              </ol>
-                            </div>
-                            <div>
-                              <h4 className="font-semibold text-foreground mb-2">
-                                If Taking a Train
-                              </h4>
-                              <p className="mb-2">
-                                From <strong>Varanasi Junction (BSB)</strong>,{" "}
-                                <strong>Banaras Station (BSBS)</strong>, or{" "}
-                                <strong>DDU Junction</strong>:
-                              </p>
-                              <ol className="list-decimal list-inside space-y-1">
-                                <li>
-                                  Take a taxi/auto to{" "}
-                                  <strong>Godowlia Chauraha</strong>, then an
-                                  e-rickshaw to the property.
-                                </li>
-                                <li>
-                                  Get dropped at the entry to the lane of Gate 1 to{" "}
-                                  <strong>Kashi Vishwanath Temple</strong>.
-                                </li>
-                                <li>
-                                  Walk about 20 metres -{" "}
-                                  <strong>Rudreshwar Mahadeo Kothi</strong> is the{" "}
-                                  <em>first house on the left</em> (one shop after
-                                  Vishwanath Kothi Restaurant).
-                                </li>
-                              </ol>
-                            </div>
-                            <div className="bg-primary/5 border border-primary/20 rounded-xl px-4 py-3">
-                              <p className="text-foreground font-medium text-xs uppercase tracking-wide mb-1">
-                                Address
-                              </p>
-                              <p>
-                                CK-37/29, Bansphatak Road, Gate No.1 Near Pitambari Saree Opposite of Bank Of Baroda Varanasi 221001, Uttar
-                                Pradesh, India
-                              </p>
-                            </div>
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </motion.div>
-                </motion.div>
-              </div>
-            </section>
-
-            <div className="section-divider" />
-
-            {/* Booking Form */}
-            <section
-              id="contact"
-              className="py-20 sm:py-28 px-4 sm:px-6 relative z-10"
-            >
-              <div className="max-w-3xl mx-auto">
-                <motion.div
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: "-80px" }}
-                  variants={stagger}
-                >
-                  <motion.div variants={fadeUp} className="text-center mb-8">
-                    <p className="text-sm font-medium tracking-widest uppercase text-primary mb-3">
-                      Stay With Us
-                    </p>
-                    <h2 className="font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight mb-3">
-                      Book Your Stay
-                    </h2>
-                    <p className="text-muted-foreground mb-5">
-                      Send us a message and Team Rudreshwar will confirm
-                      availability within 24 hours.
-                    </p>
-
-                    {/* Direct contact links */}
-                    <div className="flex flex-wrap gap-3 justify-center">
-                      <a
-                        href="tel:+919920685754"
-                        data-ocid="contact.call_button"
-                        className="inline-flex items-center gap-2 bg-secondary text-foreground hover:bg-secondary/80 border border-border rounded-full px-5 py-2.5 text-sm font-medium transition-colors"
-                      >
-                        <Phone className="w-4 h-4" />
-                        Call Us: +91 99206 85754
-                        +91 9889244273
-                        +91 9044301567
-                      </a>
-                      <a
-                        href="mailto:rmkothivns@gmail.com"
-                        data-ocid="contact.email_button"
-                        className="inline-flex items-center gap-2 bg-secondary text-foreground hover:bg-secondary/80 border border-border rounded-full px-5 py-2.5 text-sm font-medium transition-colors"
-                      >
-                        <Mail className="w-4 h-4" />
-                        Email Us
-                      </a>
-                      <a
-                        href="https://reservations.ithstays.com/booking/book-rooms-rudreshwarmahadeokothibyithstays"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        data-ocid="contact.booking_button"
-                        className="inline-flex items-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-5 py-2.5 text-sm font-medium transition-colors"
-                      >
-                        <ExternalLink className="w-4 h-4" />
-                        Book Online Now
-                      </a>
-                    </div>
-
-                    {/* Check-in / out info */}
-                    <div className="flex gap-6 justify-center mt-5 text-sm text-muted-foreground">
-                      <span>
-                        <strong className="text-foreground">Check-in:</strong> 12
-                        noon
-                      </span>
-                      <span>
-                        <strong className="text-foreground">Check-out:</strong> 11
-                        am
-                      </span>
-                    </div>
-                  </motion.div>
-
-                  <motion.div variants={fadeUp}>
-                    <BookingForm />
-                  </motion.div>
-
-                  {/* House Rules collapsible */}
-                  <motion.div variants={fadeUp} className="mt-8">
-                    <button
-                      type="button"
-                      data-ocid="rules.toggle"
-                      onClick={() => setRulesOpen((v) => !v)}
-                      className="w-full flex items-center justify-between bg-card border border-border rounded-2xl px-6 py-4 text-left hover:shadow-md transition-shadow"
-                    >
-                      <span className="font-semibold text-foreground">
-                        House Rules
-                      </span>
-                      <ChevronDown
-                        className={`w-5 h-5 text-muted-foreground transition-transform duration-300 ${rulesOpen ? "rotate-180" : ""}`}
-                      />
-                    </button>
-
-                    <AnimatePresence>
-                      {rulesOpen && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.3 }}
-                          className="overflow-hidden"
-                        >
-                          <div className="bg-card border border-t-0 border-border rounded-b-2xl px-6 py-5">
-                            <ol className="space-y-2">
-                              {HOUSE_RULES.map((rule, idx) => (
-                                <li
-                                  key={rule}
-                                  data-ocid={`rules.item.${idx + 1}`}
-                                  className="flex items-start gap-3 text-sm text-muted-foreground"
-                                >
-                                  <span className="w-5 h-5 rounded-full bg-primary/10 text-primary text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">
-                                    {idx + 1}
-                                  </span>
-                                  {rule}
-                                </li>
-                              ))}
-                            </ol>
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </motion.div>
-                </motion.div>
-              </div>
-            </section>
-          </main>
-
-          {/* Footer */}
-          <footer className="bg-foreground text-primary-foreground py-14 px-4 sm:px-6 relative z-10">
-            <div className="max-w-5xl mx-auto">
-              <div className="grid sm:grid-cols-3 gap-10 mb-10">
-                {/* Brand */}
-                <div>
-                  <div className="flex items-center gap-2 mb-4">
-                    <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
-                      <Flame className="w-4 h-4 text-primary-foreground" />
-                    </div>
-                    <span className="font-display text-lg font-semibold text-primary-foreground">
-                      Rudreshwar Mahadeo Kothi
-                    </span>
                   </div>
-                  <p className="text-sm text-primary-foreground/60 leading-relaxed">
-                    A 300-year-old heritage haveli managed by Mr. Dr V.N. Singh and Team Rudreshwar Kothi, in the
-                    heart of Varanasi.
+
+                  {/* Contact */}
+                  <div>
+                    <h4 className="font-semibold text-sm uppercase tracking-widest text-primary-foreground/50 mb-4">
+                      Contact
+                    </h4>
+                    <ul className="space-y-3">
+                      <li className="flex items-start gap-2 text-sm text-primary-foreground/70">
+                        <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0 text-primary-foreground/40" />
+                        CK-37/29, Bansphatak Road,
+                        <br />
+                        Varanasi 221001, UP, India
+                      </li>
+                      <li className="flex items-center gap-2 text-sm text-primary-foreground/70">
+                        <Phone className="w-4 h-4 flex-shrink-0 text-primary-foreground/40" />
+                        <a
+                          href="tel:+919920685754"
+                          className="hover:text-primary-foreground transition-colors"
+                        >
+                          +91 99206 85754
+                        </a>
+                      </li>
+                      <li className="flex items-center gap-2 text-sm text-primary-foreground/70">
+                        <Mail className="w-4 h-4 flex-shrink-0 text-primary-foreground/40" />
+                        <a
+                          href="mailto:rmkothivns@gmail.com"
+                          className="hover:text-primary-foreground transition-colors"
+                        >
+                          rmkothivns@gmail.com
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+
+                  {/* Quick links */}
+                  <div>
+                    <h4 className="font-semibold text-sm uppercase tracking-widest text-primary-foreground/50 mb-4">
+                      Quick Links
+                    </h4>
+                    <ul className="space-y-2">
+                      {["About", "Rooms", "Amenities", "Gallery", "Reviews"].map(
+                        (item) => (
+                          <li key={item}>
+                            <a
+                              href={`#${item.toLowerCase()}`}
+                              className="text-sm text-primary-foreground/60 hover:text-primary-foreground transition-colors"
+                            >
+                              {item}
+                            </a>
+                          </li>
+                        ),
+                      )}
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="border-t border-primary-foreground/10 pt-6 text-center">
+                  <p className="text-sm text-primary-foreground/40">
+                    © 2026 Rudreshwar Mahadeo Kothi — A Heritage Property. All rights reserved.{" "}
                   </p>
                 </div>
-
-                {/* Contact */}
-                <div>
-                  <h4 className="font-semibold text-sm uppercase tracking-widest text-primary-foreground/50 mb-4">
-                    Contact
-                  </h4>
-                  <ul className="space-y-3">
-                    <li className="flex items-start gap-2 text-sm text-primary-foreground/70">
-                      <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0 text-primary-foreground/40" />
-                      CK-37/29, Bansphatak Road,
-                      <br />
-                      Varanasi 221001, UP, India
-                    </li>
-                    <li className="flex items-center gap-2 text-sm text-primary-foreground/70">
-                      <Phone className="w-4 h-4 flex-shrink-0 text-primary-foreground/40" />
-                      <a
-                        href="tel:+919920685754"
-                        className="hover:text-primary-foreground transition-colors"
-                      >
-                        +91 99206 85754
-                      </a>
-                    </li>
-                    <li className="flex items-center gap-2 text-sm text-primary-foreground/70">
-                      <Mail className="w-4 h-4 flex-shrink-0 text-primary-foreground/40" />
-                      <a
-                        href="mailto:rmkothivns@gmail.com"
-                        className="hover:text-primary-foreground transition-colors"
-                      >
-                        rmkothivns@gmail.com
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-
-                {/* Quick links */}
-                <div>
-                  <h4 className="font-semibold text-sm uppercase tracking-widest text-primary-foreground/50 mb-4">
-                    Quick Links
-                  </h4>
-                  <ul className="space-y-2">
-                    {["About", "Rooms", "Amenities", "Gallery", "Reviews"].map(
-                      (item) => (
-                        <li key={item}>
-                          <a
-                            href={`#${item.toLowerCase()}`}
-                            className="text-sm text-primary-foreground/60 hover:text-primary-foreground transition-colors"
-                          >
-                            {item}
-                          </a>
-                        </li>
-                      ),
-                    )}
-                  </ul>
-                </div>
               </div>
-
-              <div className="border-t border-primary-foreground/10 pt-6 text-center">
-                <p className="text-sm text-primary-foreground/40">
-                  © 2026 Rudreshwar Mahadeo Kothi — A Heritage Property. All rights reserved.{" "}
-                </p>
-              </div>
-            </div>
-          </footer>
+            </footer>
           </div>
 
           {/* Image Lightbox */}
@@ -1793,11 +1788,11 @@ function ReviewsSection() {
   return (
     <div className="grid sm:grid-cols-3 gap-5">
       {allReviews.slice(0, 9).map((review, idx) => (
-        <ReviewItem 
-          key={`${review.guestName}-${idx}`} 
-          review={review} 
-          idx={idx} 
-          marker={reviewMarkers[idx] ?? `reviews.item.${idx + 1}`} 
+        <ReviewItem
+          key={`${review.guestName}-${idx}`}
+          review={review}
+          idx={idx}
+          marker={reviewMarkers[idx] ?? `reviews.item.${idx + 1}`}
         />
       ))}
     </div>

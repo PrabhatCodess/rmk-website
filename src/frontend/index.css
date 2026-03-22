@@ -131,29 +131,8 @@
   }
 }
 
-/* Locomotive Scroll Core CSS */
-html.has-scroll-smooth {
-  overflow: hidden;
-}
-
-html.has-scroll-dragging {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-.has-scroll-smooth body {
-  overflow: hidden;
-}
-
-.has-scroll-smooth [data-scroll-container] {
-  min-height: 100vh;
-}
-
-/* Hide Native Webkit Scrollbar ONLY when smooth scroll is active */
-/* This ensures mobile users still get a native scrollbar if Locomotive disables smooth on phones */
-html.has-scroll-smooth ::-webkit-scrollbar {
+/* Hide Native Webkit Scrollbar */
+::-webkit-scrollbar {
   display: none;
 }
 
@@ -163,6 +142,7 @@ html.has-scroll-smooth ::-webkit-scrollbar {
   right: 20px;
   top: 400px;
   width: 10px;
+  display: none;
   height: 20vh;
   /* Total height of scrollbar */
   transform-origin: center right;
@@ -177,32 +157,19 @@ html.has-scroll-smooth ::-webkit-scrollbar {
   position: absolute;
   top: 0;
   right: 0;
-  width: 7px;
+  width: 10px;
   min-height: 50px;
   /* Adjust as necessary */
-  background-color: #000000;
+  background-color: #a75431;
   border-radius: 10px;
   opacity: 0.5;
+  display: none;
   transition: opacity 0.3s;
   pointer-events: none;
 }
 
 .c-scrollbar_thumb:hover {
   opacity: 0.8;
-}
-
-/* Responsive constraints for Mobile & Tablets */
-@media (max-width: 768px) {
-  .c-scrollbar {
-    right: 5px; /* Bring it closer to edge to save space */
-    top: 20vh; /* Sit higher so it remains visible */
-    width: 6px;
-    height: 30vh;
-  }
-  .c-scrollbar_thumb {
-    width: 4px;
-    min-height: 30px;
-  }
 }
 
 /* Section scroll offset for sticky nav */
