@@ -37,6 +37,7 @@ import { stairs } from "@lucide/lab";
 
 import { AnimatePresence, motion } from "motion/react";
 import { useRef, useState, useEffect, useCallback } from "react";
+import LocomotiveScroll from "locomotive-scroll";
 import Loader from "./components/Loader";
 import type { GuestReview } from "./backend.d";
 import {
@@ -634,6 +635,28 @@ export default function App() {
   const [lightboxImageIdx, setLightboxImageIdx] = useState(0);
   const [loading, setLoading] = useState(true);
 
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (loading) return;
+    
+    let scroll: any;
+    const t = setTimeout(() => {
+      if (scrollRef.current) {
+        scroll = new LocomotiveScroll({
+          el: scrollRef.current,
+          smooth: true,
+          multiplier: 1,
+        });
+      }
+    }, 150);
+    
+    return () => {
+      clearTimeout(t);
+      if (scroll) scroll.destroy();
+    };
+  }, [loading]);
+
   const navLinks = [
     { href: "#about", label: "About" },
     { href: "#rooms", label: "Rooms" },
@@ -818,7 +841,8 @@ export default function App() {
             </AnimatePresence>
           </header>
 
-          <main>
+          <div ref={scrollRef} data-scroll-container>
+            <main>
             {/* Hero */}
             <section id="hero" className="relative min-h-screen flex flex-col">
               {/* Background image */}
@@ -1631,6 +1655,7 @@ export default function App() {
               </div>
             </div>
           </footer>
+          </div>
 
           {/* Image Lightbox */}
           <ImageLightbox

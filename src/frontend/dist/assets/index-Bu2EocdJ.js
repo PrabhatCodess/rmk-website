@@ -2520,9 +2520,9 @@ var QueryClient = (_k = class {
     });
   }
   getQueryDefaults(queryKey) {
-    const defaults = [...__privateGet(this, _queryDefaults).values()];
+    const defaults2 = [...__privateGet(this, _queryDefaults).values()];
     const result = {};
-    defaults.forEach((queryDefault) => {
+    defaults2.forEach((queryDefault) => {
       if (partialMatchKey(queryKey, queryDefault.queryKey)) {
         Object.assign(result, queryDefault.defaultOptions);
       }
@@ -2536,9 +2536,9 @@ var QueryClient = (_k = class {
     });
   }
   getMutationDefaults(mutationKey) {
-    const defaults = [...__privateGet(this, _mutationDefaults).values()];
+    const defaults2 = [...__privateGet(this, _mutationDefaults).values()];
     const result = {};
-    defaults.forEach((queryDefault) => {
+    defaults2.forEach((queryDefault) => {
       if (partialMatchKey(mutationKey, queryDefault.mutationKey)) {
         Object.assign(result, queryDefault.defaultOptions);
       }
@@ -2649,7 +2649,7 @@ var pureComponentPrototype = PureComponent.prototype = new ComponentDummy();
 pureComponentPrototype.constructor = PureComponent;
 assign$1(pureComponentPrototype, Component.prototype);
 pureComponentPrototype.isPureReactComponent = true;
-var isArrayImpl$1 = Array.isArray, ReactSharedInternals$2 = { H: null, A: null, T: null, S: null, V: null }, hasOwnProperty$1 = Object.prototype.hasOwnProperty;
+var isArrayImpl$1 = Array.isArray, ReactSharedInternals$2 = { H: null, A: null, T: null, S: null, V: null }, hasOwnProperty$3 = Object.prototype.hasOwnProperty;
 function ReactElement(type, key, self2, source, owner, props) {
   self2 = props.ref;
   return {
@@ -2883,7 +2883,7 @@ react_production.cloneElement = function(element, config, children) {
   var props = assign$1({}, element.props), key = element.key, owner = void 0;
   if (null != config)
     for (propName in void 0 !== config.ref && (owner = void 0), void 0 !== config.key && (key = "" + config.key), config)
-      !hasOwnProperty$1.call(config, propName) || "key" === propName || "__self" === propName || "__source" === propName || "ref" === propName && void 0 === config.ref || (props[propName] = config[propName]);
+      !hasOwnProperty$3.call(config, propName) || "key" === propName || "__self" === propName || "__source" === propName || "ref" === propName && void 0 === config.ref || (props[propName] = config[propName]);
   var propName = arguments.length - 2;
   if (1 === propName) props.children = children;
   else if (1 < propName) {
@@ -2913,7 +2913,7 @@ react_production.createElement = function(type, config, children) {
   var propName, props = {}, key = null;
   if (null != config)
     for (propName in void 0 !== config.key && (key = "" + config.key), config)
-      hasOwnProperty$1.call(config, propName) && "key" !== propName && "__self" !== propName && "__source" !== propName && (props[propName] = config[propName]);
+      hasOwnProperty$3.call(config, propName) && "key" !== propName && "__self" !== propName && "__source" !== propName && (props[propName] = config[propName]);
   var childrenLength = arguments.length - 2;
   if (1 === childrenLength) props.children = children;
   else if (1 < childrenLength) {
@@ -3883,7 +3883,7 @@ function popHostContext(fiber) {
   contextFiberStackCursor.current === fiber && (pop(contextStackCursor), pop(contextFiberStackCursor));
   hostTransitionProviderCursor.current === fiber && (pop(hostTransitionProviderCursor), HostTransitionContext._currentValue = sharedNotPendingObject);
 }
-var hasOwnProperty = Object.prototype.hasOwnProperty, scheduleCallback$3 = Scheduler.unstable_scheduleCallback, cancelCallback$1 = Scheduler.unstable_cancelCallback, shouldYield = Scheduler.unstable_shouldYield, requestPaint = Scheduler.unstable_requestPaint, now$1 = Scheduler.unstable_now, getCurrentPriorityLevel = Scheduler.unstable_getCurrentPriorityLevel, ImmediatePriority = Scheduler.unstable_ImmediatePriority, UserBlockingPriority = Scheduler.unstable_UserBlockingPriority, NormalPriority$1 = Scheduler.unstable_NormalPriority, LowPriority = Scheduler.unstable_LowPriority, IdlePriority = Scheduler.unstable_IdlePriority, log$1 = Scheduler.log, unstable_setDisableYieldValue = Scheduler.unstable_setDisableYieldValue, rendererID = null, injectedHook = null;
+var hasOwnProperty$2 = Object.prototype.hasOwnProperty, scheduleCallback$3 = Scheduler.unstable_scheduleCallback, cancelCallback$1 = Scheduler.unstable_cancelCallback, shouldYield = Scheduler.unstable_shouldYield, requestPaint = Scheduler.unstable_requestPaint, now$1 = Scheduler.unstable_now, getCurrentPriorityLevel = Scheduler.unstable_getCurrentPriorityLevel, ImmediatePriority = Scheduler.unstable_ImmediatePriority, UserBlockingPriority = Scheduler.unstable_UserBlockingPriority, NormalPriority$1 = Scheduler.unstable_NormalPriority, LowPriority = Scheduler.unstable_LowPriority, IdlePriority = Scheduler.unstable_IdlePriority, log$1 = Scheduler.log, unstable_setDisableYieldValue = Scheduler.unstable_setDisableYieldValue, rendererID = null, injectedHook = null;
 function setIsStrictModeForDevtools(newIsStrictMode) {
   "function" === typeof log$1 && unstable_setDisableYieldValue(newIsStrictMode);
   if (injectedHook && "function" === typeof injectedHook.setStrictMode)
@@ -4184,9 +4184,9 @@ var VALID_ATTRIBUTE_NAME_REGEX = RegExp(
   "^[:A-Z_a-z\\u00C0-\\u00D6\\u00D8-\\u00F6\\u00F8-\\u02FF\\u0370-\\u037D\\u037F-\\u1FFF\\u200C-\\u200D\\u2070-\\u218F\\u2C00-\\u2FEF\\u3001-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFFD][:A-Z_a-z\\u00C0-\\u00D6\\u00D8-\\u00F6\\u00F8-\\u02FF\\u0370-\\u037D\\u037F-\\u1FFF\\u200C-\\u200D\\u2070-\\u218F\\u2C00-\\u2FEF\\u3001-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFFD\\-.0-9\\u00B7\\u0300-\\u036F\\u203F-\\u2040]*$"
 ), illegalAttributeNameCache = {}, validatedAttributeNameCache = {};
 function isAttributeNameSafe(attributeName) {
-  if (hasOwnProperty.call(validatedAttributeNameCache, attributeName))
+  if (hasOwnProperty$2.call(validatedAttributeNameCache, attributeName))
     return true;
-  if (hasOwnProperty.call(illegalAttributeNameCache, attributeName)) return false;
+  if (hasOwnProperty$2.call(illegalAttributeNameCache, attributeName)) return false;
   if (VALID_ATTRIBUTE_NAME_REGEX.test(attributeName))
     return validatedAttributeNameCache[attributeName] = true;
   illegalAttributeNameCache[attributeName] = true;
@@ -5165,7 +5165,7 @@ function shallowEqual(objA, objB) {
   if (keysA.length !== keysB.length) return false;
   for (keysB = 0; keysB < keysA.length; keysB++) {
     var currentKey = keysA[keysB];
-    if (!hasOwnProperty.call(objB, currentKey) || !objectIs(objA[currentKey], objB[currentKey]))
+    if (!hasOwnProperty$2.call(objB, currentKey) || !objectIs(objA[currentKey], objB[currentKey]))
       return false;
   }
   return true;
@@ -13697,12 +13697,12 @@ function preinitStyle(href, precedence, options) {
     }
   }
 }
-function preinitScript(src, options) {
-  previousDispatcher.X(src, options);
+function preinitScript(src2, options) {
+  previousDispatcher.X(src2, options);
   var ownerDocument = globalDocument;
-  if (ownerDocument && src) {
-    var scripts = getResourcesFromRoot(ownerDocument).hoistableScripts, key = getScriptKey(src), resource = scripts.get(key);
-    resource || (resource = ownerDocument.querySelector(getScriptSelectorFromKey(key)), resource || (src = assign({ src, async: true }, options), (options = preloadPropsMap.get(key)) && adoptPreloadPropsForScript(src, options), resource = ownerDocument.createElement("script"), markNodeAsHoistable(resource), setInitialProperties(resource, "link", src), ownerDocument.head.appendChild(resource)), resource = {
+  if (ownerDocument && src2) {
+    var scripts = getResourcesFromRoot(ownerDocument).hoistableScripts, key = getScriptKey(src2), resource = scripts.get(key);
+    resource || (resource = ownerDocument.querySelector(getScriptSelectorFromKey(key)), resource || (src2 = assign({ src: src2, async: true }, options), (options = preloadPropsMap.get(key)) && adoptPreloadPropsForScript(src2, options), resource = ownerDocument.createElement("script"), markNodeAsHoistable(resource), setInitialProperties(resource, "link", src2), ownerDocument.head.appendChild(resource)), resource = {
       type: "script",
       instance: resource,
       count: 1,
@@ -13710,12 +13710,12 @@ function preinitScript(src, options) {
     }, scripts.set(key, resource));
   }
 }
-function preinitModuleScript(src, options) {
-  previousDispatcher.M(src, options);
+function preinitModuleScript(src2, options) {
+  previousDispatcher.M(src2, options);
   var ownerDocument = globalDocument;
-  if (ownerDocument && src) {
-    var scripts = getResourcesFromRoot(ownerDocument).hoistableScripts, key = getScriptKey(src), resource = scripts.get(key);
-    resource || (resource = ownerDocument.querySelector(getScriptSelectorFromKey(key)), resource || (src = assign({ src, async: true, type: "module" }, options), (options = preloadPropsMap.get(key)) && adoptPreloadPropsForScript(src, options), resource = ownerDocument.createElement("script"), markNodeAsHoistable(resource), setInitialProperties(resource, "link", src), ownerDocument.head.appendChild(resource)), resource = {
+  if (ownerDocument && src2) {
+    var scripts = getResourcesFromRoot(ownerDocument).hoistableScripts, key = getScriptKey(src2), resource = scripts.get(key);
+    resource || (resource = ownerDocument.querySelector(getScriptSelectorFromKey(key)), resource || (src2 = assign({ src: src2, async: true, type: "module" }, options), (options = preloadPropsMap.get(key)) && adoptPreloadPropsForScript(src2, options), resource = ownerDocument.createElement("script"), markNodeAsHoistable(resource), setInitialProperties(resource, "link", src2), ownerDocument.head.appendChild(resource)), resource = {
       type: "script",
       instance: resource,
       count: 1,
@@ -13806,8 +13806,8 @@ function preloadStylesheet(ownerDocument, key, preloadProps, state) {
     return state.loading |= 2;
   }), setInitialProperties(key, "link", preloadProps), markNodeAsHoistable(key), ownerDocument.head.appendChild(key));
 }
-function getScriptKey(src) {
-  return '[src="' + escapeSelectorAttributeValueInsideDoubleQuotes(src) + '"]';
+function getScriptKey(src2) {
+  return '[src="' + escapeSelectorAttributeValueInsideDoubleQuotes(src2) + '"]';
 }
 function getScriptSelectorFromKey(key) {
   return "script[async]" + key;
@@ -14720,1242 +14720,6 @@ function checkDCE() {
 }
 var clientExports = client.exports;
 const ReactDOM = /* @__PURE__ */ getDefaultExportFromCjs(clientExports);
-var version = "1.3.19";
-function clamp$1(min, input, max) {
-  return Math.max(min, Math.min(input, max));
-}
-function lerp(x2, y2, t) {
-  return (1 - t) * x2 + t * y2;
-}
-function damp(x2, y2, lambda, deltaTime) {
-  return lerp(x2, y2, 1 - Math.exp(-lambda * deltaTime));
-}
-function modulo(n, d2) {
-  return (n % d2 + d2) % d2;
-}
-var Animate = class {
-  constructor() {
-    __publicField(this, "isRunning", false);
-    __publicField(this, "value", 0);
-    __publicField(this, "from", 0);
-    __publicField(this, "to", 0);
-    __publicField(this, "currentTime", 0);
-    // These are instanciated in the fromTo method
-    __publicField(this, "lerp");
-    __publicField(this, "duration");
-    __publicField(this, "easing");
-    __publicField(this, "onUpdate");
-  }
-  /**
-   * Advance the animation by the given delta time
-   *
-   * @param deltaTime - The time in seconds to advance the animation
-   */
-  advance(deltaTime) {
-    var _a3;
-    if (!this.isRunning) return;
-    let completed = false;
-    if (this.duration && this.easing) {
-      this.currentTime += deltaTime;
-      const linearProgress = clamp$1(0, this.currentTime / this.duration, 1);
-      completed = linearProgress >= 1;
-      const easedProgress = completed ? 1 : this.easing(linearProgress);
-      this.value = this.from + (this.to - this.from) * easedProgress;
-    } else if (this.lerp) {
-      this.value = damp(this.value, this.to, this.lerp * 60, deltaTime);
-      if (Math.round(this.value) === this.to) {
-        this.value = this.to;
-        completed = true;
-      }
-    } else {
-      this.value = this.to;
-      completed = true;
-    }
-    if (completed) {
-      this.stop();
-    }
-    (_a3 = this.onUpdate) == null ? void 0 : _a3.call(this, this.value, completed);
-  }
-  /** Stop the animation */
-  stop() {
-    this.isRunning = false;
-  }
-  /**
-   * Set up the animation from a starting value to an ending value
-   * with optional parameters for lerping, duration, easing, and onUpdate callback
-   *
-   * @param from - The starting value
-   * @param to - The ending value
-   * @param options - Options for the animation
-   */
-  fromTo(from, to, { lerp: lerp2, duration, easing, onStart, onUpdate }) {
-    this.from = this.value = from;
-    this.to = to;
-    this.lerp = lerp2;
-    this.duration = duration;
-    this.easing = easing;
-    this.currentTime = 0;
-    this.isRunning = true;
-    onStart == null ? void 0 : onStart();
-    this.onUpdate = onUpdate;
-  }
-};
-function debounce(callback, delay2) {
-  let timer;
-  return function(...args) {
-    clearTimeout(timer);
-    timer = setTimeout(() => {
-      timer = void 0;
-      callback.apply(this, args);
-    }, delay2);
-  };
-}
-var Dimensions = class {
-  constructor(wrapper, content, { autoResize = true, debounce: debounceValue = 250 } = {}) {
-    __publicField(this, "width", 0);
-    __publicField(this, "height", 0);
-    __publicField(this, "scrollHeight", 0);
-    __publicField(this, "scrollWidth", 0);
-    // These are instanciated in the constructor as they need information from the options
-    __publicField(this, "debouncedResize");
-    __publicField(this, "wrapperResizeObserver");
-    __publicField(this, "contentResizeObserver");
-    __publicField(this, "resize", () => {
-      this.onWrapperResize();
-      this.onContentResize();
-    });
-    __publicField(this, "onWrapperResize", () => {
-      if (this.wrapper instanceof Window) {
-        this.width = window.innerWidth;
-        this.height = window.innerHeight;
-      } else {
-        this.width = this.wrapper.clientWidth;
-        this.height = this.wrapper.clientHeight;
-      }
-    });
-    __publicField(this, "onContentResize", () => {
-      if (this.wrapper instanceof Window) {
-        this.scrollHeight = this.content.scrollHeight;
-        this.scrollWidth = this.content.scrollWidth;
-      } else {
-        this.scrollHeight = this.wrapper.scrollHeight;
-        this.scrollWidth = this.wrapper.scrollWidth;
-      }
-    });
-    this.wrapper = wrapper;
-    this.content = content;
-    if (autoResize) {
-      this.debouncedResize = debounce(this.resize, debounceValue);
-      if (this.wrapper instanceof Window) {
-        window.addEventListener("resize", this.debouncedResize);
-      } else {
-        this.wrapperResizeObserver = new ResizeObserver(this.debouncedResize);
-        this.wrapperResizeObserver.observe(this.wrapper);
-      }
-      this.contentResizeObserver = new ResizeObserver(this.debouncedResize);
-      this.contentResizeObserver.observe(this.content);
-    }
-    this.resize();
-  }
-  destroy() {
-    var _a3, _b3;
-    (_a3 = this.wrapperResizeObserver) == null ? void 0 : _a3.disconnect();
-    (_b3 = this.contentResizeObserver) == null ? void 0 : _b3.disconnect();
-    if (this.wrapper === window && this.debouncedResize) {
-      window.removeEventListener("resize", this.debouncedResize);
-    }
-  }
-  get limit() {
-    return {
-      x: this.scrollWidth - this.width,
-      y: this.scrollHeight - this.height
-    };
-  }
-};
-var Emitter = class {
-  constructor() {
-    __publicField(this, "events", {});
-  }
-  /**
-   * Emit an event with the given data
-   * @param event Event name
-   * @param args Data to pass to the event handlers
-   */
-  emit(event, ...args) {
-    var _a3;
-    const callbacks = this.events[event] || [];
-    for (let i = 0, length = callbacks.length; i < length; i++) {
-      (_a3 = callbacks[i]) == null ? void 0 : _a3.call(callbacks, ...args);
-    }
-  }
-  /**
-   * Add a callback to the event
-   * @param event Event name
-   * @param cb Callback function
-   * @returns Unsubscribe function
-   */
-  on(event, cb) {
-    if (this.events[event]) {
-      this.events[event].push(cb);
-    } else {
-      this.events[event] = [cb];
-    }
-    return () => {
-      var _a3;
-      this.events[event] = (_a3 = this.events[event]) == null ? void 0 : _a3.filter((i) => cb !== i);
-    };
-  }
-  /**
-   * Remove a callback from the event
-   * @param event Event name
-   * @param callback Callback function
-   */
-  off(event, callback) {
-    var _a3;
-    this.events[event] = (_a3 = this.events[event]) == null ? void 0 : _a3.filter((i) => callback !== i);
-  }
-  /**
-   * Remove all event listeners and clean up
-   */
-  destroy() {
-    this.events = {};
-  }
-};
-var LINE_HEIGHT = 100 / 6;
-var listenerOptions = { passive: false };
-function getDeltaMultiplier(deltaMode, size) {
-  if (deltaMode === 1) return LINE_HEIGHT;
-  if (deltaMode === 2) return size;
-  return 1;
-}
-var VirtualScroll = class {
-  constructor(element, options = { wheelMultiplier: 1, touchMultiplier: 1 }) {
-    __publicField(this, "touchStart", {
-      x: 0,
-      y: 0
-    });
-    __publicField(this, "lastDelta", {
-      x: 0,
-      y: 0
-    });
-    __publicField(this, "window", {
-      width: 0,
-      height: 0
-    });
-    __publicField(this, "emitter", new Emitter());
-    /**
-     * Event handler for 'touchstart' event
-     *
-     * @param event Touch event
-     */
-    __publicField(this, "onTouchStart", (event) => {
-      const { clientX, clientY } = event.targetTouches ? event.targetTouches[0] : event;
-      this.touchStart.x = clientX;
-      this.touchStart.y = clientY;
-      this.lastDelta = {
-        x: 0,
-        y: 0
-      };
-      this.emitter.emit("scroll", {
-        deltaX: 0,
-        deltaY: 0,
-        event
-      });
-    });
-    /** Event handler for 'touchmove' event */
-    __publicField(this, "onTouchMove", (event) => {
-      const { clientX, clientY } = event.targetTouches ? event.targetTouches[0] : event;
-      const deltaX = -(clientX - this.touchStart.x) * this.options.touchMultiplier;
-      const deltaY = -(clientY - this.touchStart.y) * this.options.touchMultiplier;
-      this.touchStart.x = clientX;
-      this.touchStart.y = clientY;
-      this.lastDelta = {
-        x: deltaX,
-        y: deltaY
-      };
-      this.emitter.emit("scroll", {
-        deltaX,
-        deltaY,
-        event
-      });
-    });
-    __publicField(this, "onTouchEnd", (event) => {
-      this.emitter.emit("scroll", {
-        deltaX: this.lastDelta.x,
-        deltaY: this.lastDelta.y,
-        event
-      });
-    });
-    /** Event handler for 'wheel' event */
-    __publicField(this, "onWheel", (event) => {
-      let { deltaX, deltaY, deltaMode } = event;
-      const multiplierX = getDeltaMultiplier(deltaMode, this.window.width);
-      const multiplierY = getDeltaMultiplier(deltaMode, this.window.height);
-      deltaX *= multiplierX;
-      deltaY *= multiplierY;
-      deltaX *= this.options.wheelMultiplier;
-      deltaY *= this.options.wheelMultiplier;
-      this.emitter.emit("scroll", { deltaX, deltaY, event });
-    });
-    __publicField(this, "onWindowResize", () => {
-      this.window = {
-        width: window.innerWidth,
-        height: window.innerHeight
-      };
-    });
-    this.element = element;
-    this.options = options;
-    window.addEventListener("resize", this.onWindowResize);
-    this.onWindowResize();
-    this.element.addEventListener("wheel", this.onWheel, listenerOptions);
-    this.element.addEventListener(
-      "touchstart",
-      this.onTouchStart,
-      listenerOptions
-    );
-    this.element.addEventListener(
-      "touchmove",
-      this.onTouchMove,
-      listenerOptions
-    );
-    this.element.addEventListener("touchend", this.onTouchEnd, listenerOptions);
-  }
-  /**
-   * Add an event listener for the given event and callback
-   *
-   * @param event Event name
-   * @param callback Callback function
-   */
-  on(event, callback) {
-    return this.emitter.on(event, callback);
-  }
-  /** Remove all event listeners and clean up */
-  destroy() {
-    this.emitter.destroy();
-    window.removeEventListener("resize", this.onWindowResize);
-    this.element.removeEventListener("wheel", this.onWheel, listenerOptions);
-    this.element.removeEventListener(
-      "touchstart",
-      this.onTouchStart,
-      listenerOptions
-    );
-    this.element.removeEventListener(
-      "touchmove",
-      this.onTouchMove,
-      listenerOptions
-    );
-    this.element.removeEventListener(
-      "touchend",
-      this.onTouchEnd,
-      listenerOptions
-    );
-  }
-};
-var defaultEasing$1 = (t) => Math.min(1, 1.001 - 2 ** (-10 * t));
-var Lenis = class {
-  constructor({
-    wrapper = window,
-    content = document.documentElement,
-    eventsTarget = wrapper,
-    smoothWheel = true,
-    syncTouch = false,
-    syncTouchLerp = 0.075,
-    touchInertiaExponent = 1.7,
-    duration,
-    // in seconds
-    easing,
-    lerp: lerp2 = 0.1,
-    infinite = false,
-    orientation = "vertical",
-    // vertical, horizontal
-    gestureOrientation = orientation === "horizontal" ? "both" : "vertical",
-    // vertical, horizontal, both
-    touchMultiplier = 1,
-    wheelMultiplier = 1,
-    autoResize = true,
-    prevent,
-    virtualScroll,
-    overscroll = true,
-    autoRaf = false,
-    anchors = false,
-    autoToggle = false,
-    // https://caniuse.com/?search=transition-behavior
-    allowNestedScroll = false,
-    __experimental__naiveDimensions = false,
-    naiveDimensions = __experimental__naiveDimensions,
-    stopInertiaOnNavigate = false
-  } = {}) {
-    __publicField(this, "_isScrolling", false);
-    // true when scroll is animating
-    __publicField(this, "_isStopped", false);
-    // true if user should not be able to scroll - enable/disable programmatically
-    __publicField(this, "_isLocked", false);
-    // same as isStopped but enabled/disabled when scroll reaches target
-    __publicField(this, "_preventNextNativeScrollEvent", false);
-    __publicField(this, "_resetVelocityTimeout", null);
-    __publicField(this, "_rafId", null);
-    /**
-     * Whether or not the user is touching the screen
-     */
-    __publicField(this, "isTouching");
-    /**
-     * The time in ms since the lenis instance was created
-     */
-    __publicField(this, "time", 0);
-    /**
-     * User data that will be forwarded through the scroll event
-     *
-     * @example
-     * lenis.scrollTo(100, {
-     *   userData: {
-     *     foo: 'bar'
-     *   }
-     * })
-     */
-    __publicField(this, "userData", {});
-    /**
-     * The last velocity of the scroll
-     */
-    __publicField(this, "lastVelocity", 0);
-    /**
-     * The current velocity of the scroll
-     */
-    __publicField(this, "velocity", 0);
-    /**
-     * The direction of the scroll
-     */
-    __publicField(this, "direction", 0);
-    /**
-     * The options passed to the lenis instance
-     */
-    __publicField(this, "options");
-    /**
-     * The target scroll value
-     */
-    __publicField(this, "targetScroll");
-    /**
-     * The animated scroll value
-     */
-    __publicField(this, "animatedScroll");
-    // These are instanciated here as they don't need information from the options
-    __publicField(this, "animate", new Animate());
-    __publicField(this, "emitter", new Emitter());
-    // These are instanciated in the constructor as they need information from the options
-    __publicField(this, "dimensions");
-    // This is not private because it's used in the Snap class
-    __publicField(this, "virtualScroll");
-    __publicField(this, "onScrollEnd", (e) => {
-      if (!(e instanceof CustomEvent)) {
-        if (this.isScrolling === "smooth" || this.isScrolling === false) {
-          e.stopPropagation();
-        }
-      }
-    });
-    __publicField(this, "dispatchScrollendEvent", () => {
-      this.options.wrapper.dispatchEvent(
-        new CustomEvent("scrollend", {
-          bubbles: this.options.wrapper === window,
-          // cancelable: false,
-          detail: {
-            lenisScrollEnd: true
-          }
-        })
-      );
-    });
-    __publicField(this, "onTransitionEnd", (event) => {
-      if (event.propertyName.includes("overflow")) {
-        this.checkOverflow();
-      }
-    });
-    __publicField(this, "onClick", (event) => {
-      const path = event.composedPath();
-      const linkElements = path.filter(
-        (node) => node instanceof HTMLAnchorElement && node.href
-      );
-      const linkElementsUrls = linkElements.map(
-        (element) => new URL(element.href)
-      );
-      const currentUrl = new URL(window.location.href);
-      if (this.options.anchors) {
-        const anchorElementUrl = linkElementsUrls.find(
-          (targetUrl) => currentUrl.host === targetUrl.host && currentUrl.pathname === targetUrl.pathname && targetUrl.hash
-        );
-        if (anchorElementUrl) {
-          const options = typeof this.options.anchors === "object" && this.options.anchors ? this.options.anchors : void 0;
-          const target = `#${anchorElementUrl.hash.split("#")[1]}`;
-          this.scrollTo(target, options);
-          return;
-        }
-      }
-      if (this.options.stopInertiaOnNavigate) {
-        const hasPageLinkElementUrl = linkElementsUrls.some(
-          (targetUrl) => currentUrl.host === targetUrl.host && currentUrl.pathname !== targetUrl.pathname
-        );
-        if (hasPageLinkElementUrl) {
-          this.reset();
-          return;
-        }
-      }
-    });
-    __publicField(this, "onPointerDown", (event) => {
-      if (event.button === 1) {
-        this.reset();
-      }
-    });
-    __publicField(this, "onVirtualScroll", (data) => {
-      if (typeof this.options.virtualScroll === "function" && this.options.virtualScroll(data) === false)
-        return;
-      const { deltaX, deltaY, event } = data;
-      this.emitter.emit("virtual-scroll", { deltaX, deltaY, event });
-      if (event.ctrlKey) return;
-      if (event.lenisStopPropagation) return;
-      const isTouch = event.type.includes("touch");
-      const isWheel = event.type.includes("wheel");
-      this.isTouching = event.type === "touchstart" || event.type === "touchmove";
-      const isClickOrTap = deltaX === 0 && deltaY === 0;
-      const isTapToStop = this.options.syncTouch && isTouch && event.type === "touchstart" && isClickOrTap && !this.isStopped && !this.isLocked;
-      if (isTapToStop) {
-        this.reset();
-        return;
-      }
-      const isUnknownGesture = this.options.gestureOrientation === "vertical" && deltaY === 0 || this.options.gestureOrientation === "horizontal" && deltaX === 0;
-      if (isClickOrTap || isUnknownGesture) {
-        return;
-      }
-      let composedPath = event.composedPath();
-      composedPath = composedPath.slice(0, composedPath.indexOf(this.rootElement));
-      const prevent = this.options.prevent;
-      const gestureOrientation = Math.abs(deltaX) >= Math.abs(deltaY) ? "horizontal" : "vertical";
-      if (composedPath.find(
-        (node) => {
-          var _a3, _b3, _c2, _d2, _e2;
-          return node instanceof HTMLElement && (typeof prevent === "function" && (prevent == null ? void 0 : prevent(node)) || ((_a3 = node.hasAttribute) == null ? void 0 : _a3.call(node, "data-lenis-prevent")) || gestureOrientation === "vertical" && ((_b3 = node.hasAttribute) == null ? void 0 : _b3.call(node, "data-lenis-prevent-vertical")) || gestureOrientation === "horizontal" && ((_c2 = node.hasAttribute) == null ? void 0 : _c2.call(node, "data-lenis-prevent-horizontal")) || isTouch && ((_d2 = node.hasAttribute) == null ? void 0 : _d2.call(node, "data-lenis-prevent-touch")) || isWheel && ((_e2 = node.hasAttribute) == null ? void 0 : _e2.call(node, "data-lenis-prevent-wheel")) || this.options.allowNestedScroll && this.hasNestedScroll(node, {
-            deltaX,
-            deltaY
-          }));
-        }
-      ))
-        return;
-      if (this.isStopped || this.isLocked) {
-        if (event.cancelable) {
-          event.preventDefault();
-        }
-        return;
-      }
-      const isSmooth = this.options.syncTouch && isTouch || this.options.smoothWheel && isWheel;
-      if (!isSmooth) {
-        this.isScrolling = "native";
-        this.animate.stop();
-        event.lenisStopPropagation = true;
-        return;
-      }
-      let delta = deltaY;
-      if (this.options.gestureOrientation === "both") {
-        delta = Math.abs(deltaY) > Math.abs(deltaX) ? deltaY : deltaX;
-      } else if (this.options.gestureOrientation === "horizontal") {
-        delta = deltaX;
-      }
-      if (!this.options.overscroll || this.options.infinite || this.options.wrapper !== window && this.limit > 0 && (this.animatedScroll > 0 && this.animatedScroll < this.limit || this.animatedScroll === 0 && deltaY > 0 || this.animatedScroll === this.limit && deltaY < 0)) {
-        event.lenisStopPropagation = true;
-      }
-      if (event.cancelable) {
-        event.preventDefault();
-      }
-      const isSyncTouch = isTouch && this.options.syncTouch;
-      const isTouchEnd = isTouch && event.type === "touchend";
-      const hasTouchInertia = isTouchEnd;
-      if (hasTouchInertia) {
-        delta = Math.sign(this.velocity) * Math.abs(this.velocity) ** this.options.touchInertiaExponent;
-      }
-      this.scrollTo(this.targetScroll + delta, {
-        programmatic: false,
-        ...isSyncTouch ? {
-          lerp: hasTouchInertia ? this.options.syncTouchLerp : 1
-        } : {
-          lerp: this.options.lerp,
-          duration: this.options.duration,
-          easing: this.options.easing
-        }
-      });
-    });
-    __publicField(this, "onNativeScroll", () => {
-      if (this._resetVelocityTimeout !== null) {
-        clearTimeout(this._resetVelocityTimeout);
-        this._resetVelocityTimeout = null;
-      }
-      if (this._preventNextNativeScrollEvent) {
-        this._preventNextNativeScrollEvent = false;
-        return;
-      }
-      if (this.isScrolling === false || this.isScrolling === "native") {
-        const lastScroll = this.animatedScroll;
-        this.animatedScroll = this.targetScroll = this.actualScroll;
-        this.lastVelocity = this.velocity;
-        this.velocity = this.animatedScroll - lastScroll;
-        this.direction = Math.sign(
-          this.animatedScroll - lastScroll
-        );
-        if (!this.isStopped) {
-          this.isScrolling = "native";
-        }
-        this.emit();
-        if (this.velocity !== 0) {
-          this._resetVelocityTimeout = setTimeout(() => {
-            this.lastVelocity = this.velocity;
-            this.velocity = 0;
-            this.isScrolling = false;
-            this.emit();
-          }, 400);
-        }
-      }
-    });
-    /**
-     * RequestAnimationFrame for lenis
-     *
-     * @param time The time in ms from an external clock like `requestAnimationFrame` or Tempus
-     */
-    __publicField(this, "raf", (time2) => {
-      const deltaTime = time2 - (this.time || time2);
-      this.time = time2;
-      this.animate.advance(deltaTime * 1e-3);
-      if (this.options.autoRaf) {
-        this._rafId = requestAnimationFrame(this.raf);
-      }
-    });
-    window.lenisVersion = version;
-    if (!window.lenis) {
-      window.lenis = {};
-    }
-    window.lenis.version = version;
-    if (orientation === "horizontal") {
-      window.lenis.horizontal = true;
-    }
-    if (syncTouch === true) {
-      window.lenis.touch = true;
-    }
-    if (!wrapper || wrapper === document.documentElement) {
-      wrapper = window;
-    }
-    if (typeof duration === "number" && typeof easing !== "function") {
-      easing = defaultEasing$1;
-    } else if (typeof easing === "function" && typeof duration !== "number") {
-      duration = 1;
-    }
-    this.options = {
-      wrapper,
-      content,
-      eventsTarget,
-      smoothWheel,
-      syncTouch,
-      syncTouchLerp,
-      touchInertiaExponent,
-      duration,
-      easing,
-      lerp: lerp2,
-      infinite,
-      gestureOrientation,
-      orientation,
-      touchMultiplier,
-      wheelMultiplier,
-      autoResize,
-      prevent,
-      virtualScroll,
-      overscroll,
-      autoRaf,
-      anchors,
-      autoToggle,
-      allowNestedScroll,
-      naiveDimensions,
-      stopInertiaOnNavigate
-    };
-    this.dimensions = new Dimensions(wrapper, content, { autoResize });
-    this.updateClassName();
-    this.targetScroll = this.animatedScroll = this.actualScroll;
-    this.options.wrapper.addEventListener("scroll", this.onNativeScroll);
-    this.options.wrapper.addEventListener("scrollend", this.onScrollEnd, {
-      capture: true
-    });
-    if (this.options.anchors || this.options.stopInertiaOnNavigate) {
-      this.options.wrapper.addEventListener(
-        "click",
-        this.onClick
-      );
-    }
-    this.options.wrapper.addEventListener(
-      "pointerdown",
-      this.onPointerDown
-    );
-    this.virtualScroll = new VirtualScroll(eventsTarget, {
-      touchMultiplier,
-      wheelMultiplier
-    });
-    this.virtualScroll.on("scroll", this.onVirtualScroll);
-    if (this.options.autoToggle) {
-      this.checkOverflow();
-      this.rootElement.addEventListener("transitionend", this.onTransitionEnd);
-    }
-    if (this.options.autoRaf) {
-      this._rafId = requestAnimationFrame(this.raf);
-    }
-  }
-  /**
-   * Destroy the lenis instance, remove all event listeners and clean up the class name
-   */
-  destroy() {
-    this.emitter.destroy();
-    this.options.wrapper.removeEventListener("scroll", this.onNativeScroll);
-    this.options.wrapper.removeEventListener("scrollend", this.onScrollEnd, {
-      capture: true
-    });
-    this.options.wrapper.removeEventListener(
-      "pointerdown",
-      this.onPointerDown
-    );
-    if (this.options.anchors || this.options.stopInertiaOnNavigate) {
-      this.options.wrapper.removeEventListener(
-        "click",
-        this.onClick
-      );
-    }
-    this.virtualScroll.destroy();
-    this.dimensions.destroy();
-    this.cleanUpClassName();
-    if (this._rafId) {
-      cancelAnimationFrame(this._rafId);
-    }
-  }
-  on(event, callback) {
-    return this.emitter.on(event, callback);
-  }
-  off(event, callback) {
-    return this.emitter.off(event, callback);
-  }
-  get overflow() {
-    const property = this.isHorizontal ? "overflow-x" : "overflow-y";
-    return getComputedStyle(this.rootElement)[property];
-  }
-  checkOverflow() {
-    if (["hidden", "clip"].includes(this.overflow)) {
-      this.internalStop();
-    } else {
-      this.internalStart();
-    }
-  }
-  setScroll(scroll) {
-    if (this.isHorizontal) {
-      this.options.wrapper.scrollTo({ left: scroll, behavior: "instant" });
-    } else {
-      this.options.wrapper.scrollTo({ top: scroll, behavior: "instant" });
-    }
-  }
-  /**
-   * Force lenis to recalculate the dimensions
-   */
-  resize() {
-    this.dimensions.resize();
-    this.animatedScroll = this.targetScroll = this.actualScroll;
-    this.emit();
-  }
-  emit() {
-    this.emitter.emit("scroll", this);
-  }
-  reset() {
-    this.isLocked = false;
-    this.isScrolling = false;
-    this.animatedScroll = this.targetScroll = this.actualScroll;
-    this.lastVelocity = this.velocity = 0;
-    this.animate.stop();
-  }
-  /**
-   * Start lenis scroll after it has been stopped
-   */
-  start() {
-    if (!this.isStopped) return;
-    if (this.options.autoToggle) {
-      this.rootElement.style.removeProperty("overflow");
-      return;
-    }
-    this.internalStart();
-  }
-  internalStart() {
-    if (!this.isStopped) return;
-    this.reset();
-    this.isStopped = false;
-    this.emit();
-  }
-  /**
-   * Stop lenis scroll
-   */
-  stop() {
-    if (this.isStopped) return;
-    if (this.options.autoToggle) {
-      this.rootElement.style.setProperty("overflow", "clip");
-      return;
-    }
-    this.internalStop();
-  }
-  internalStop() {
-    if (this.isStopped) return;
-    this.reset();
-    this.isStopped = true;
-    this.emit();
-  }
-  /**
-   * Scroll to a target value
-   *
-   * @param target The target value to scroll to
-   * @param options The options for the scroll
-   *
-   * @example
-   * lenis.scrollTo(100, {
-   *   offset: 100,
-   *   duration: 1,
-   *   easing: (t) => 1 - Math.cos((t * Math.PI) / 2),
-   *   lerp: 0.1,
-   *   onStart: () => {
-   *     console.log('onStart')
-   *   },
-   *   onComplete: () => {
-   *     console.log('onComplete')
-   *   },
-   * })
-   */
-  scrollTo(_target, {
-    offset = 0,
-    immediate = false,
-    lock = false,
-    programmatic = true,
-    // called from outside of the class
-    lerp: lerp2 = programmatic ? this.options.lerp : void 0,
-    duration = programmatic ? this.options.duration : void 0,
-    easing = programmatic ? this.options.easing : void 0,
-    onStart,
-    onComplete,
-    force = false,
-    // scroll even if stopped
-    userData
-  } = {}) {
-    if ((this.isStopped || this.isLocked) && !force) return;
-    let target = _target;
-    let adjustedOffset = offset;
-    if (typeof target === "string" && ["top", "left", "start", "#"].includes(target)) {
-      target = 0;
-    } else if (typeof target === "string" && ["bottom", "right", "end"].includes(target)) {
-      target = this.limit;
-    } else {
-      let node = null;
-      if (typeof target === "string") {
-        node = document.querySelector(target);
-        if (!node) {
-          if (target === "#top") {
-            target = 0;
-          } else {
-            console.warn("Lenis: Target not found", target);
-          }
-        }
-      } else if (target instanceof HTMLElement && (target == null ? void 0 : target.nodeType)) {
-        node = target;
-      }
-      if (node) {
-        if (this.options.wrapper !== window) {
-          const wrapperRect = this.rootElement.getBoundingClientRect();
-          adjustedOffset -= this.isHorizontal ? wrapperRect.left : wrapperRect.top;
-        }
-        const rect = node.getBoundingClientRect();
-        target = (this.isHorizontal ? rect.left : rect.top) + this.animatedScroll;
-      }
-    }
-    if (typeof target !== "number") return;
-    target += adjustedOffset;
-    target = Math.round(target);
-    if (this.options.infinite) {
-      if (programmatic) {
-        this.targetScroll = this.animatedScroll = this.scroll;
-        const distance2 = target - this.animatedScroll;
-        if (distance2 > this.limit / 2) {
-          target -= this.limit;
-        } else if (distance2 < -this.limit / 2) {
-          target += this.limit;
-        }
-      }
-    } else {
-      target = clamp$1(0, target, this.limit);
-    }
-    if (target === this.targetScroll) {
-      onStart == null ? void 0 : onStart(this);
-      onComplete == null ? void 0 : onComplete(this);
-      return;
-    }
-    this.userData = userData ?? {};
-    if (immediate) {
-      this.animatedScroll = this.targetScroll = target;
-      this.setScroll(this.scroll);
-      this.reset();
-      this.preventNextNativeScrollEvent();
-      this.emit();
-      onComplete == null ? void 0 : onComplete(this);
-      this.userData = {};
-      requestAnimationFrame(() => {
-        this.dispatchScrollendEvent();
-      });
-      return;
-    }
-    if (!programmatic) {
-      this.targetScroll = target;
-    }
-    if (typeof duration === "number" && typeof easing !== "function") {
-      easing = defaultEasing$1;
-    } else if (typeof easing === "function" && typeof duration !== "number") {
-      duration = 1;
-    }
-    this.animate.fromTo(this.animatedScroll, target, {
-      duration,
-      easing,
-      lerp: lerp2,
-      onStart: () => {
-        if (lock) this.isLocked = true;
-        this.isScrolling = "smooth";
-        onStart == null ? void 0 : onStart(this);
-      },
-      onUpdate: (value, completed) => {
-        this.isScrolling = "smooth";
-        this.lastVelocity = this.velocity;
-        this.velocity = value - this.animatedScroll;
-        this.direction = Math.sign(this.velocity);
-        this.animatedScroll = value;
-        this.setScroll(this.scroll);
-        if (programmatic) {
-          this.targetScroll = value;
-        }
-        if (!completed) this.emit();
-        if (completed) {
-          this.reset();
-          this.emit();
-          onComplete == null ? void 0 : onComplete(this);
-          this.userData = {};
-          requestAnimationFrame(() => {
-            this.dispatchScrollendEvent();
-          });
-          this.preventNextNativeScrollEvent();
-        }
-      }
-    });
-  }
-  preventNextNativeScrollEvent() {
-    this._preventNextNativeScrollEvent = true;
-    requestAnimationFrame(() => {
-      this._preventNextNativeScrollEvent = false;
-    });
-  }
-  hasNestedScroll(node, { deltaX, deltaY }) {
-    const time2 = Date.now();
-    if (!node._lenis) node._lenis = {};
-    const cache = node._lenis;
-    let hasOverflowX;
-    let hasOverflowY;
-    let isScrollableX;
-    let isScrollableY;
-    let hasOverscrollBehaviorX;
-    let hasOverscrollBehaviorY;
-    let scrollWidth;
-    let scrollHeight;
-    let clientWidth;
-    let clientHeight;
-    if (time2 - (cache.time ?? 0) > 2e3) {
-      cache.time = Date.now();
-      const computedStyle = window.getComputedStyle(node);
-      cache.computedStyle = computedStyle;
-      hasOverflowX = ["auto", "overlay", "scroll"].includes(
-        computedStyle.overflowX
-      );
-      hasOverflowY = ["auto", "overlay", "scroll"].includes(
-        computedStyle.overflowY
-      );
-      hasOverscrollBehaviorX = ["auto"].includes(
-        computedStyle.overscrollBehaviorX
-      );
-      hasOverscrollBehaviorY = ["auto"].includes(
-        computedStyle.overscrollBehaviorY
-      );
-      cache.hasOverflowX = hasOverflowX;
-      cache.hasOverflowY = hasOverflowY;
-      if (!(hasOverflowX || hasOverflowY)) return false;
-      scrollWidth = node.scrollWidth;
-      scrollHeight = node.scrollHeight;
-      clientWidth = node.clientWidth;
-      clientHeight = node.clientHeight;
-      isScrollableX = scrollWidth > clientWidth;
-      isScrollableY = scrollHeight > clientHeight;
-      cache.isScrollableX = isScrollableX;
-      cache.isScrollableY = isScrollableY;
-      cache.scrollWidth = scrollWidth;
-      cache.scrollHeight = scrollHeight;
-      cache.clientWidth = clientWidth;
-      cache.clientHeight = clientHeight;
-      cache.hasOverscrollBehaviorX = hasOverscrollBehaviorX;
-      cache.hasOverscrollBehaviorY = hasOverscrollBehaviorY;
-    } else {
-      isScrollableX = cache.isScrollableX;
-      isScrollableY = cache.isScrollableY;
-      hasOverflowX = cache.hasOverflowX;
-      hasOverflowY = cache.hasOverflowY;
-      scrollWidth = cache.scrollWidth;
-      scrollHeight = cache.scrollHeight;
-      clientWidth = cache.clientWidth;
-      clientHeight = cache.clientHeight;
-      hasOverscrollBehaviorX = cache.hasOverscrollBehaviorX;
-      hasOverscrollBehaviorY = cache.hasOverscrollBehaviorY;
-    }
-    if (!(hasOverflowX && isScrollableX || hasOverflowY && isScrollableY)) {
-      return false;
-    }
-    const orientation = Math.abs(deltaX) >= Math.abs(deltaY) ? "horizontal" : "vertical";
-    let scroll;
-    let maxScroll;
-    let delta;
-    let hasOverflow;
-    let isScrollable;
-    let hasOverscrollBehavior;
-    if (orientation === "horizontal") {
-      scroll = Math.round(node.scrollLeft);
-      maxScroll = scrollWidth - clientWidth;
-      delta = deltaX;
-      hasOverflow = hasOverflowX;
-      isScrollable = isScrollableX;
-      hasOverscrollBehavior = hasOverscrollBehaviorX;
-    } else if (orientation === "vertical") {
-      scroll = Math.round(node.scrollTop);
-      maxScroll = scrollHeight - clientHeight;
-      delta = deltaY;
-      hasOverflow = hasOverflowY;
-      isScrollable = isScrollableY;
-      hasOverscrollBehavior = hasOverscrollBehaviorY;
-    } else {
-      return false;
-    }
-    if (!hasOverscrollBehavior && (scroll >= maxScroll || scroll <= 0)) {
-      return true;
-    }
-    const willScroll = delta > 0 ? scroll < maxScroll : scroll > 0;
-    return willScroll && hasOverflow && isScrollable;
-  }
-  /**
-   * The root element on which lenis is instanced
-   */
-  get rootElement() {
-    return this.options.wrapper === window ? document.documentElement : this.options.wrapper;
-  }
-  /**
-   * The limit which is the maximum scroll value
-   */
-  get limit() {
-    if (this.options.naiveDimensions) {
-      if (this.isHorizontal) {
-        return this.rootElement.scrollWidth - this.rootElement.clientWidth;
-      }
-      return this.rootElement.scrollHeight - this.rootElement.clientHeight;
-    }
-    return this.dimensions.limit[this.isHorizontal ? "x" : "y"];
-  }
-  /**
-   * Whether or not the scroll is horizontal
-   */
-  get isHorizontal() {
-    return this.options.orientation === "horizontal";
-  }
-  /**
-   * The actual scroll value
-   */
-  get actualScroll() {
-    const wrapper = this.options.wrapper;
-    return this.isHorizontal ? wrapper.scrollX ?? wrapper.scrollLeft : wrapper.scrollY ?? wrapper.scrollTop;
-  }
-  /**
-   * The current scroll value
-   */
-  get scroll() {
-    return this.options.infinite ? modulo(this.animatedScroll, this.limit) : this.animatedScroll;
-  }
-  /**
-   * The progress of the scroll relative to the limit
-   */
-  get progress() {
-    return this.limit === 0 ? 1 : this.scroll / this.limit;
-  }
-  /**
-   * Current scroll state
-   */
-  get isScrolling() {
-    return this._isScrolling;
-  }
-  set isScrolling(value) {
-    if (this._isScrolling !== value) {
-      this._isScrolling = value;
-      this.updateClassName();
-    }
-  }
-  /**
-   * Check if lenis is stopped
-   */
-  get isStopped() {
-    return this._isStopped;
-  }
-  set isStopped(value) {
-    if (this._isStopped !== value) {
-      this._isStopped = value;
-      this.updateClassName();
-    }
-  }
-  /**
-   * Check if lenis is locked
-   */
-  get isLocked() {
-    return this._isLocked;
-  }
-  set isLocked(value) {
-    if (this._isLocked !== value) {
-      this._isLocked = value;
-      this.updateClassName();
-    }
-  }
-  /**
-   * Check if lenis is smooth scrolling
-   */
-  get isSmooth() {
-    return this.isScrolling === "smooth";
-  }
-  /**
-   * The class name applied to the wrapper element
-   */
-  get className() {
-    let className = "lenis";
-    if (this.options.autoToggle) className += " lenis-autoToggle";
-    if (this.isStopped) className += " lenis-stopped";
-    if (this.isLocked) className += " lenis-locked";
-    if (this.isScrolling) className += " lenis-scrolling";
-    if (this.isScrolling === "smooth") className += " lenis-smooth";
-    return className;
-  }
-  updateClassName() {
-    this.cleanUpClassName();
-    this.rootElement.className = `${this.rootElement.className} ${this.className}`.trim();
-  }
-  cleanUpClassName() {
-    this.rootElement.className = this.rootElement.className.replace(/lenis(-\w+)?/g, "").trim();
-  }
-};
-var Store = class {
-  constructor(state) {
-    __publicField(this, "listeners", []);
-    this.state = state;
-  }
-  set(state) {
-    this.state = state;
-    for (const listener of this.listeners) {
-      listener(this.state);
-    }
-  }
-  subscribe(listener) {
-    this.listeners = [...this.listeners, listener];
-    return () => {
-      this.listeners = this.listeners.filter((l) => l !== listener);
-    };
-  }
-  get() {
-    return this.state;
-  }
-};
-var LenisContext = reactExports.createContext(null);
-var rootLenisContextStore = new Store(null);
-var ReactLenis = reactExports.forwardRef(
-  ({
-    children,
-    root: root2 = false,
-    options = {},
-    autoRaf = true,
-    className = "",
-    ...props
-  }, ref) => {
-    const wrapperRef = reactExports.useRef(null);
-    const contentRef = reactExports.useRef(null);
-    const [lenis, setLenis] = reactExports.useState(void 0);
-    reactExports.useImperativeHandle(
-      ref,
-      () => ({
-        wrapper: wrapperRef.current,
-        content: contentRef.current,
-        lenis
-      }),
-      [lenis]
-    );
-    reactExports.useEffect(() => {
-      const lenis2 = new Lenis({
-        ...options,
-        ...wrapperRef.current && contentRef.current && {
-          wrapper: wrapperRef.current,
-          content: contentRef.current
-        },
-        autoRaf: (options == null ? void 0 : options.autoRaf) ?? autoRaf
-        // this is to avoid breaking the autoRaf prop if it's still used (require breaking change)
-      });
-      setLenis(lenis2);
-      return () => {
-        lenis2.destroy();
-        setLenis(void 0);
-      };
-    }, [autoRaf, JSON.stringify({ ...options, wrapper: null, content: null })]);
-    const callbacksRefs = reactExports.useRef([]);
-    const addCallback = reactExports.useCallback(
-      (callback, priority) => {
-        callbacksRefs.current.push({ callback, priority });
-        callbacksRefs.current.sort((a2, b2) => a2.priority - b2.priority);
-      },
-      []
-    );
-    const removeCallback = reactExports.useCallback(
-      (callback) => {
-        callbacksRefs.current = callbacksRefs.current.filter(
-          (cb) => cb.callback !== callback
-        );
-      },
-      []
-    );
-    reactExports.useEffect(() => {
-      if (root2 && lenis) {
-        rootLenisContextStore.set({ lenis, addCallback, removeCallback });
-        return () => rootLenisContextStore.set(null);
-      }
-    }, [root2, lenis, addCallback, removeCallback]);
-    reactExports.useEffect(() => {
-      if (!lenis) return;
-      const onScroll = (data) => {
-        for (const { callback } of callbacksRefs.current) {
-          callback(data);
-        }
-      };
-      lenis.on("scroll", onScroll);
-      return () => {
-        lenis.off("scroll", onScroll);
-      };
-    }, [lenis]);
-    if (!children) return null;
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(
-      LenisContext.Provider,
-      {
-        value: { lenis, addCallback, removeCallback },
-        children: root2 && root2 !== "asChild" ? children : /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "div",
-          {
-            ref: wrapperRef,
-            className: `${className} ${(lenis == null ? void 0 : lenis.className) ?? ""}`.trim(),
-            ...props,
-            children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { ref: contentRef, children })
-          }
-        )
-      }
-    );
-  }
-);
 function setRef$1(ref, value) {
   if (typeof ref === "function") {
     return ref(value);
@@ -19283,16 +18047,16 @@ const millisecondsToSeconds = /* @__NO_SIDE_EFFECTS__ */ (milliseconds) => milli
 function velocityPerSecond(velocity, frameDuration) {
   return frameDuration ? velocity * (1e3 / frameDuration) : 0;
 }
-const calcBezier = (t, a1, a2) => (((1 - 3 * a2 + 3 * a1) * t + (3 * a2 - 6 * a1)) * t + 3 * a1) * t;
+const calcBezier$1 = (t, a1, a2) => (((1 - 3 * a2 + 3 * a1) * t + (3 * a2 - 6 * a1)) * t + 3 * a1) * t;
 const subdivisionPrecision = 1e-7;
 const subdivisionMaxIterations = 12;
-function binarySubdivide(x2, lowerBound, upperBound, mX1, mX2) {
+function binarySubdivide$1(x2, lowerBound, upperBound, mX1, mX2) {
   let currentX;
   let currentT;
   let i = 0;
   do {
     currentT = lowerBound + (upperBound - lowerBound) / 2;
-    currentX = calcBezier(currentT, mX1, mX2) - x2;
+    currentX = calcBezier$1(currentT, mX1, mX2) - x2;
     if (currentX > 0) {
       upperBound = currentT;
     } else {
@@ -19304,8 +18068,8 @@ function binarySubdivide(x2, lowerBound, upperBound, mX1, mX2) {
 function cubicBezier(mX1, mY1, mX2, mY2) {
   if (mX1 === mY1 && mX2 === mY2)
     return noop;
-  const getTForX = (aX) => binarySubdivide(aX, 0, 1, mX1, mX2);
-  return (t) => t === 0 || t === 1 ? t : calcBezier(getTForX(t), mY1, mY2);
+  const getTForX = (aX) => binarySubdivide$1(aX, 0, 1, mX1, mX2);
+  return (t) => t === 0 || t === 1 ? t : calcBezier$1(getTForX(t), mY1, mY2);
 }
 const mirrorEasing = (easing) => (p2) => p2 <= 0.5 ? easing(2 * p2) / 2 : (2 - easing(2 * (1 - p2))) / 2;
 const reverseEasing = (easing) => (p2) => 1 - easing(1 - p2);
@@ -26180,29 +24944,29 @@ function transformPoint(info, transformPagePoint) {
 function subtractPoint(a2, b2) {
   return { x: a2.x - b2.x, y: a2.y - b2.y };
 }
-function getPanInfo({ point }, history) {
+function getPanInfo({ point }, history2) {
   return {
     point,
-    delta: subtractPoint(point, lastDevicePoint(history)),
-    offset: subtractPoint(point, startDevicePoint(history)),
-    velocity: getVelocity(history, 0.1)
+    delta: subtractPoint(point, lastDevicePoint(history2)),
+    offset: subtractPoint(point, startDevicePoint(history2)),
+    velocity: getVelocity(history2, 0.1)
   };
 }
-function startDevicePoint(history) {
-  return history[0];
+function startDevicePoint(history2) {
+  return history2[0];
 }
-function lastDevicePoint(history) {
-  return history[history.length - 1];
+function lastDevicePoint(history2) {
+  return history2[history2.length - 1];
 }
-function getVelocity(history, timeDelta) {
-  if (history.length < 2) {
+function getVelocity(history2, timeDelta) {
+  if (history2.length < 2) {
     return { x: 0, y: 0 };
   }
-  let i = history.length - 1;
+  let i = history2.length - 1;
   let timestampedPoint = null;
-  const lastPoint = lastDevicePoint(history);
+  const lastPoint = lastDevicePoint(history2);
   while (i >= 0) {
-    timestampedPoint = history[i];
+    timestampedPoint = history2[i];
     if (lastPoint.timestamp - timestampedPoint.timestamp > /* @__PURE__ */ secondsToMilliseconds(timeDelta)) {
       break;
     }
@@ -26211,8 +24975,8 @@ function getVelocity(history, timeDelta) {
   if (!timestampedPoint) {
     return { x: 0, y: 0 };
   }
-  if (timestampedPoint === history[0] && history.length > 2 && lastPoint.timestamp - timestampedPoint.timestamp > /* @__PURE__ */ secondsToMilliseconds(timeDelta) * 2) {
-    timestampedPoint = history[1];
+  if (timestampedPoint === history2[0] && history2.length > 2 && lastPoint.timestamp - timestampedPoint.timestamp > /* @__PURE__ */ secondsToMilliseconds(timeDelta) * 2) {
+    timestampedPoint = history2[1];
   }
   const time2 = /* @__PURE__ */ millisecondsToSeconds(lastPoint.timestamp - timestampedPoint.timestamp);
   if (time2 === 0) {
@@ -27087,6 +25851,2481 @@ const featureBundle = {
   ...layout
 };
 const motion = /* @__PURE__ */ createMotionProxy(featureBundle, createDomVisualElement);
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  return Constructor;
+}
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+  return obj;
+}
+function ownKeys(object, enumerableOnly) {
+  var keys = Object.keys(object);
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    if (enumerableOnly) symbols = symbols.filter(function(sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    });
+    keys.push.apply(keys, symbols);
+  }
+  return keys;
+}
+function _objectSpread2(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+    if (i % 2) {
+      ownKeys(Object(source), true).forEach(function(key) {
+        _defineProperty(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys(Object(source)).forEach(function(key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+  }
+  return target;
+}
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function");
+  }
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) _setPrototypeOf(subClass, superClass);
+}
+function _getPrototypeOf(o2) {
+  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf2(o3) {
+    return o3.__proto__ || Object.getPrototypeOf(o3);
+  };
+  return _getPrototypeOf(o2);
+}
+function _setPrototypeOf(o2, p2) {
+  _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf2(o3, p3) {
+    o3.__proto__ = p3;
+    return o3;
+  };
+  return _setPrototypeOf(o2, p2);
+}
+function _isNativeReflectConstruct() {
+  if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+  if (Reflect.construct.sham) return false;
+  if (typeof Proxy === "function") return true;
+  try {
+    Date.prototype.toString.call(Reflect.construct(Date, [], function() {
+    }));
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+function _assertThisInitialized(self2) {
+  if (self2 === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+  return self2;
+}
+function _possibleConstructorReturn(self2, call) {
+  if (call && (typeof call === "object" || typeof call === "function")) {
+    return call;
+  }
+  return _assertThisInitialized(self2);
+}
+function _createSuper(Derived) {
+  var hasNativeReflectConstruct = _isNativeReflectConstruct();
+  return function _createSuperInternal() {
+    var Super = _getPrototypeOf(Derived), result;
+    if (hasNativeReflectConstruct) {
+      var NewTarget = _getPrototypeOf(this).constructor;
+      result = Reflect.construct(Super, arguments, NewTarget);
+    } else {
+      result = Super.apply(this, arguments);
+    }
+    return _possibleConstructorReturn(this, result);
+  };
+}
+function _superPropBase(object, property) {
+  while (!Object.prototype.hasOwnProperty.call(object, property)) {
+    object = _getPrototypeOf(object);
+    if (object === null) break;
+  }
+  return object;
+}
+function _get(target, property, receiver) {
+  if (typeof Reflect !== "undefined" && Reflect.get) {
+    _get = Reflect.get;
+  } else {
+    _get = function _get2(target2, property2, receiver2) {
+      var base = _superPropBase(target2, property2);
+      if (!base) return;
+      var desc = Object.getOwnPropertyDescriptor(base, property2);
+      if (desc.get) {
+        return desc.get.call(receiver2);
+      }
+      return desc.value;
+    };
+  }
+  return _get(target, property, receiver || target);
+}
+function _slicedToArray(arr, i) {
+  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+}
+function _toConsumableArray(arr) {
+  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
+}
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) return _arrayLikeToArray(arr);
+}
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+function _iterableToArray(iter) {
+  if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);
+}
+function _iterableToArrayLimit(arr, i) {
+  if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
+  var _arr = [];
+  var _n = true;
+  var _d2 = false;
+  var _e2 = void 0;
+  try {
+    for (var _i2 = arr[Symbol.iterator](), _s; !(_n = (_s = _i2.next()).done); _n = true) {
+      _arr.push(_s.value);
+      if (i && _arr.length === i) break;
+    }
+  } catch (err) {
+    _d2 = true;
+    _e2 = err;
+  } finally {
+    try {
+      if (!_n && _i2["return"] != null) _i2["return"]();
+    } finally {
+      if (_d2) throw _e2;
+    }
+  }
+  return _arr;
+}
+function _unsupportedIterableToArray(o2, minLen) {
+  if (!o2) return;
+  if (typeof o2 === "string") return _arrayLikeToArray(o2, minLen);
+  var n = Object.prototype.toString.call(o2).slice(8, -1);
+  if (n === "Object" && o2.constructor) n = o2.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o2);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o2, minLen);
+}
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+  return arr2;
+}
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+var defaults = {
+  el: document,
+  name: "scroll",
+  offset: [0, 0],
+  repeat: false,
+  smooth: false,
+  initPosition: {
+    x: 0,
+    y: 0
+  },
+  direction: "vertical",
+  gestureDirection: "vertical",
+  reloadOnContextChange: false,
+  lerp: 0.1,
+  "class": "is-inview",
+  scrollbarContainer: false,
+  scrollbarClass: "c-scrollbar",
+  scrollingClass: "has-scroll-scrolling",
+  draggingClass: "has-scroll-dragging",
+  smoothClass: "has-scroll-smooth",
+  initClass: "has-scroll-init",
+  getSpeed: false,
+  getDirection: false,
+  scrollFromAnywhere: false,
+  multiplier: 1,
+  firefoxMultiplier: 50,
+  touchMultiplier: 2,
+  resetNativeScroll: true,
+  tablet: {
+    smooth: false,
+    direction: "vertical",
+    gestureDirection: "vertical",
+    breakpoint: 1024
+  },
+  smartphone: {
+    smooth: false,
+    direction: "vertical",
+    gestureDirection: "vertical"
+  }
+};
+var _default = /* @__PURE__ */ function() {
+  function _default2() {
+    var options = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : {};
+    _classCallCheck(this, _default2);
+    Object.assign(this, defaults, options);
+    this.smartphone = defaults.smartphone;
+    if (options.smartphone) Object.assign(this.smartphone, options.smartphone);
+    this.tablet = defaults.tablet;
+    if (options.tablet) Object.assign(this.tablet, options.tablet);
+    this.namespace = "locomotive";
+    this.html = document.documentElement;
+    this.windowHeight = window.innerHeight;
+    this.windowWidth = window.innerWidth;
+    this.windowMiddle = {
+      x: this.windowWidth / 2,
+      y: this.windowHeight / 2
+    };
+    this.els = {};
+    this.currentElements = {};
+    this.listeners = {};
+    this.hasScrollTicking = false;
+    this.hasCallEventSet = false;
+    this.checkScroll = this.checkScroll.bind(this);
+    this.checkResize = this.checkResize.bind(this);
+    this.checkEvent = this.checkEvent.bind(this);
+    this.instance = {
+      scroll: {
+        x: 0,
+        y: 0
+      },
+      limit: {
+        x: this.html.offsetWidth,
+        y: this.html.offsetHeight
+      },
+      currentElements: this.currentElements
+    };
+    if (this.isMobile) {
+      if (this.isTablet) {
+        this.context = "tablet";
+      } else {
+        this.context = "smartphone";
+      }
+    } else {
+      this.context = "desktop";
+    }
+    if (this.isMobile) this.direction = this[this.context].direction;
+    if (this.direction === "horizontal") {
+      this.directionAxis = "x";
+    } else {
+      this.directionAxis = "y";
+    }
+    if (this.getDirection) {
+      this.instance.direction = null;
+    }
+    if (this.getDirection) {
+      this.instance.speed = 0;
+    }
+    this.html.classList.add(this.initClass);
+    window.addEventListener("resize", this.checkResize, false);
+  }
+  _createClass(_default2, [{
+    key: "init",
+    value: function init() {
+      this.initEvents();
+    }
+  }, {
+    key: "checkScroll",
+    value: function checkScroll() {
+      this.dispatchScroll();
+    }
+  }, {
+    key: "checkResize",
+    value: function checkResize() {
+      var _this = this;
+      if (!this.resizeTick) {
+        this.resizeTick = true;
+        requestAnimationFrame(function() {
+          _this.resize();
+          _this.resizeTick = false;
+        });
+      }
+    }
+  }, {
+    key: "resize",
+    value: function resize2() {
+    }
+  }, {
+    key: "checkContext",
+    value: function checkContext() {
+      if (!this.reloadOnContextChange) return;
+      this.isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1 || this.windowWidth < this.tablet.breakpoint;
+      this.isTablet = this.isMobile && this.windowWidth >= this.tablet.breakpoint;
+      var oldContext = this.context;
+      if (this.isMobile) {
+        if (this.isTablet) {
+          this.context = "tablet";
+        } else {
+          this.context = "smartphone";
+        }
+      } else {
+        this.context = "desktop";
+      }
+      if (oldContext != this.context) {
+        var oldSmooth = oldContext == "desktop" ? this.smooth : this[oldContext].smooth;
+        var newSmooth = this.context == "desktop" ? this.smooth : this[this.context].smooth;
+        if (oldSmooth != newSmooth) window.location.reload();
+      }
+    }
+  }, {
+    key: "initEvents",
+    value: function initEvents() {
+      var _this2 = this;
+      this.scrollToEls = this.el.querySelectorAll("[data-".concat(this.name, "-to]"));
+      this.setScrollTo = this.setScrollTo.bind(this);
+      this.scrollToEls.forEach(function(el) {
+        el.addEventListener("click", _this2.setScrollTo, false);
+      });
+    }
+  }, {
+    key: "setScrollTo",
+    value: function setScrollTo(event) {
+      event.preventDefault();
+      this.scrollTo(event.currentTarget.getAttribute("data-".concat(this.name, "-href")) || event.currentTarget.getAttribute("href"), {
+        offset: event.currentTarget.getAttribute("data-".concat(this.name, "-offset"))
+      });
+    }
+  }, {
+    key: "addElements",
+    value: function addElements() {
+    }
+  }, {
+    key: "detectElements",
+    value: function detectElements(hasCallEventSet) {
+      var _this3 = this;
+      var scrollTop = this.instance.scroll.y;
+      var scrollBottom = scrollTop + this.windowHeight;
+      var scrollLeft = this.instance.scroll.x;
+      var scrollRight = scrollLeft + this.windowWidth;
+      Object.entries(this.els).forEach(function(_ref) {
+        var _ref2 = _slicedToArray(_ref, 2), i = _ref2[0], el = _ref2[1];
+        if (el && (!el.inView || hasCallEventSet)) {
+          if (_this3.direction === "horizontal") {
+            if (scrollRight >= el.left && scrollLeft < el.right) {
+              _this3.setInView(el, i);
+            }
+          } else {
+            if (scrollBottom >= el.top && scrollTop < el.bottom) {
+              _this3.setInView(el, i);
+            }
+          }
+        }
+        if (el && el.inView) {
+          if (_this3.direction === "horizontal") {
+            var width = el.right - el.left;
+            el.progress = (_this3.instance.scroll.x - (el.left - _this3.windowWidth)) / (width + _this3.windowWidth);
+            if (scrollRight < el.left || scrollLeft > el.right) {
+              _this3.setOutOfView(el, i);
+            }
+          } else {
+            var height = el.bottom - el.top;
+            el.progress = (_this3.instance.scroll.y - (el.top - _this3.windowHeight)) / (height + _this3.windowHeight);
+            if (scrollBottom < el.top || scrollTop > el.bottom) {
+              _this3.setOutOfView(el, i);
+            }
+          }
+        }
+      });
+      this.hasScrollTicking = false;
+    }
+  }, {
+    key: "setInView",
+    value: function setInView(current, i) {
+      this.els[i].inView = true;
+      current.el.classList.add(current["class"]);
+      this.currentElements[i] = current;
+      if (current.call && this.hasCallEventSet) {
+        this.dispatchCall(current, "enter");
+        if (!current.repeat) {
+          this.els[i].call = false;
+        }
+      }
+    }
+  }, {
+    key: "setOutOfView",
+    value: function setOutOfView(current, i) {
+      var _this4 = this;
+      this.els[i].inView = false;
+      Object.keys(this.currentElements).forEach(function(el) {
+        el === i && delete _this4.currentElements[el];
+      });
+      if (current.call && this.hasCallEventSet) {
+        this.dispatchCall(current, "exit");
+      }
+      if (current.repeat) {
+        current.el.classList.remove(current["class"]);
+      }
+    }
+  }, {
+    key: "dispatchCall",
+    value: function dispatchCall(current, way) {
+      this.callWay = way;
+      this.callValue = current.call.split(",").map(function(item) {
+        return item.trim();
+      });
+      this.callObj = current;
+      if (this.callValue.length == 1) this.callValue = this.callValue[0];
+      var callEvent = new Event(this.namespace + "call");
+      this.el.dispatchEvent(callEvent);
+    }
+  }, {
+    key: "dispatchScroll",
+    value: function dispatchScroll() {
+      var scrollEvent = new Event(this.namespace + "scroll");
+      this.el.dispatchEvent(scrollEvent);
+    }
+  }, {
+    key: "setEvents",
+    value: function setEvents(event, func) {
+      if (!this.listeners[event]) {
+        this.listeners[event] = [];
+      }
+      var list = this.listeners[event];
+      list.push(func);
+      if (list.length === 1) {
+        this.el.addEventListener(this.namespace + event, this.checkEvent, false);
+      }
+      if (event === "call") {
+        this.hasCallEventSet = true;
+        this.detectElements(true);
+      }
+    }
+  }, {
+    key: "unsetEvents",
+    value: function unsetEvents(event, func) {
+      if (!this.listeners[event]) return;
+      var list = this.listeners[event];
+      var index2 = list.indexOf(func);
+      if (index2 < 0) return;
+      list.splice(index2, 1);
+      if (list.index === 0) {
+        this.el.removeEventListener(this.namespace + event, this.checkEvent, false);
+      }
+    }
+  }, {
+    key: "checkEvent",
+    value: function checkEvent(event) {
+      var _this5 = this;
+      var name = event.type.replace(this.namespace, "");
+      var list = this.listeners[name];
+      if (!list || list.length === 0) return;
+      list.forEach(function(func) {
+        switch (name) {
+          case "scroll":
+            return func(_this5.instance);
+          case "call":
+            return func(_this5.callValue, _this5.callWay, _this5.callObj);
+          default:
+            return func();
+        }
+      });
+    }
+  }, {
+    key: "startScroll",
+    value: function startScroll() {
+    }
+  }, {
+    key: "stopScroll",
+    value: function stopScroll() {
+    }
+  }, {
+    key: "setScroll",
+    value: function setScroll(x2, y2) {
+      this.instance.scroll = {
+        x: 0,
+        y: 0
+      };
+    }
+  }, {
+    key: "destroy",
+    value: function destroy() {
+      var _this6 = this;
+      window.removeEventListener("resize", this.checkResize, false);
+      Object.keys(this.listeners).forEach(function(event) {
+        _this6.el.removeEventListener(_this6.namespace + event, _this6.checkEvent, false);
+      });
+      this.listeners = {};
+      this.scrollToEls.forEach(function(el) {
+        el.removeEventListener("click", _this6.setScrollTo, false);
+      });
+      this.html.classList.remove(this.initClass);
+    }
+  }]);
+  return _default2;
+}();
+var commonjsGlobal = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
+function createCommonjsModule(fn, module) {
+  return module = { exports: {} }, fn(module, module.exports), module.exports;
+}
+var smoothscroll = createCommonjsModule(function(module, exports) {
+  (function() {
+    function polyfill2() {
+      var w2 = window;
+      var d2 = document;
+      if ("scrollBehavior" in d2.documentElement.style && w2.__forceSmoothScrollPolyfill__ !== true) {
+        return;
+      }
+      var Element2 = w2.HTMLElement || w2.Element;
+      var SCROLL_TIME = 468;
+      var original = {
+        scroll: w2.scroll || w2.scrollTo,
+        scrollBy: w2.scrollBy,
+        elementScroll: Element2.prototype.scroll || scrollElement,
+        scrollIntoView: Element2.prototype.scrollIntoView
+      };
+      var now2 = w2.performance && w2.performance.now ? w2.performance.now.bind(w2.performance) : Date.now;
+      function isMicrosoftBrowser(userAgent) {
+        var userAgentPatterns = ["MSIE ", "Trident/", "Edge/"];
+        return new RegExp(userAgentPatterns.join("|")).test(userAgent);
+      }
+      var ROUNDING_TOLERANCE = isMicrosoftBrowser(w2.navigator.userAgent) ? 1 : 0;
+      function scrollElement(x2, y2) {
+        this.scrollLeft = x2;
+        this.scrollTop = y2;
+      }
+      function ease2(k2) {
+        return 0.5 * (1 - Math.cos(Math.PI * k2));
+      }
+      function shouldBailOut(firstArg) {
+        if (firstArg === null || typeof firstArg !== "object" || firstArg.behavior === void 0 || firstArg.behavior === "auto" || firstArg.behavior === "instant") {
+          return true;
+        }
+        if (typeof firstArg === "object" && firstArg.behavior === "smooth") {
+          return false;
+        }
+        throw new TypeError(
+          "behavior member of ScrollOptions " + firstArg.behavior + " is not a valid value for enumeration ScrollBehavior."
+        );
+      }
+      function hasScrollableSpace(el, axis) {
+        if (axis === "Y") {
+          return el.clientHeight + ROUNDING_TOLERANCE < el.scrollHeight;
+        }
+        if (axis === "X") {
+          return el.clientWidth + ROUNDING_TOLERANCE < el.scrollWidth;
+        }
+      }
+      function canOverflow(el, axis) {
+        var overflowValue = w2.getComputedStyle(el, null)["overflow" + axis];
+        return overflowValue === "auto" || overflowValue === "scroll";
+      }
+      function isScrollable(el) {
+        var isScrollableY = hasScrollableSpace(el, "Y") && canOverflow(el, "Y");
+        var isScrollableX = hasScrollableSpace(el, "X") && canOverflow(el, "X");
+        return isScrollableY || isScrollableX;
+      }
+      function findScrollableParent(el) {
+        while (el !== d2.body && isScrollable(el) === false) {
+          el = el.parentNode || el.host;
+        }
+        return el;
+      }
+      function step(context) {
+        var time2 = now2();
+        var value;
+        var currentX;
+        var currentY;
+        var elapsed = (time2 - context.startTime) / SCROLL_TIME;
+        elapsed = elapsed > 1 ? 1 : elapsed;
+        value = ease2(elapsed);
+        currentX = context.startX + (context.x - context.startX) * value;
+        currentY = context.startY + (context.y - context.startY) * value;
+        context.method.call(context.scrollable, currentX, currentY);
+        if (currentX !== context.x || currentY !== context.y) {
+          w2.requestAnimationFrame(step.bind(w2, context));
+        }
+      }
+      function smoothScroll(el, x2, y2) {
+        var scrollable;
+        var startX;
+        var startY;
+        var method;
+        var startTime = now2();
+        if (el === d2.body) {
+          scrollable = w2;
+          startX = w2.scrollX || w2.pageXOffset;
+          startY = w2.scrollY || w2.pageYOffset;
+          method = original.scroll;
+        } else {
+          scrollable = el;
+          startX = el.scrollLeft;
+          startY = el.scrollTop;
+          method = scrollElement;
+        }
+        step({
+          scrollable,
+          method,
+          startTime,
+          startX,
+          startY,
+          x: x2,
+          y: y2
+        });
+      }
+      w2.scroll = w2.scrollTo = function() {
+        if (arguments[0] === void 0) {
+          return;
+        }
+        if (shouldBailOut(arguments[0]) === true) {
+          original.scroll.call(
+            w2,
+            arguments[0].left !== void 0 ? arguments[0].left : typeof arguments[0] !== "object" ? arguments[0] : w2.scrollX || w2.pageXOffset,
+            // use top prop, second argument if present or fallback to scrollY
+            arguments[0].top !== void 0 ? arguments[0].top : arguments[1] !== void 0 ? arguments[1] : w2.scrollY || w2.pageYOffset
+          );
+          return;
+        }
+        smoothScroll.call(
+          w2,
+          d2.body,
+          arguments[0].left !== void 0 ? ~~arguments[0].left : w2.scrollX || w2.pageXOffset,
+          arguments[0].top !== void 0 ? ~~arguments[0].top : w2.scrollY || w2.pageYOffset
+        );
+      };
+      w2.scrollBy = function() {
+        if (arguments[0] === void 0) {
+          return;
+        }
+        if (shouldBailOut(arguments[0])) {
+          original.scrollBy.call(
+            w2,
+            arguments[0].left !== void 0 ? arguments[0].left : typeof arguments[0] !== "object" ? arguments[0] : 0,
+            arguments[0].top !== void 0 ? arguments[0].top : arguments[1] !== void 0 ? arguments[1] : 0
+          );
+          return;
+        }
+        smoothScroll.call(
+          w2,
+          d2.body,
+          ~~arguments[0].left + (w2.scrollX || w2.pageXOffset),
+          ~~arguments[0].top + (w2.scrollY || w2.pageYOffset)
+        );
+      };
+      Element2.prototype.scroll = Element2.prototype.scrollTo = function() {
+        if (arguments[0] === void 0) {
+          return;
+        }
+        if (shouldBailOut(arguments[0]) === true) {
+          if (typeof arguments[0] === "number" && arguments[1] === void 0) {
+            throw new SyntaxError("Value could not be converted");
+          }
+          original.elementScroll.call(
+            this,
+            // use left prop, first number argument or fallback to scrollLeft
+            arguments[0].left !== void 0 ? ~~arguments[0].left : typeof arguments[0] !== "object" ? ~~arguments[0] : this.scrollLeft,
+            // use top prop, second argument or fallback to scrollTop
+            arguments[0].top !== void 0 ? ~~arguments[0].top : arguments[1] !== void 0 ? ~~arguments[1] : this.scrollTop
+          );
+          return;
+        }
+        var left = arguments[0].left;
+        var top = arguments[0].top;
+        smoothScroll.call(
+          this,
+          this,
+          typeof left === "undefined" ? this.scrollLeft : ~~left,
+          typeof top === "undefined" ? this.scrollTop : ~~top
+        );
+      };
+      Element2.prototype.scrollBy = function() {
+        if (arguments[0] === void 0) {
+          return;
+        }
+        if (shouldBailOut(arguments[0]) === true) {
+          original.elementScroll.call(
+            this,
+            arguments[0].left !== void 0 ? ~~arguments[0].left + this.scrollLeft : ~~arguments[0] + this.scrollLeft,
+            arguments[0].top !== void 0 ? ~~arguments[0].top + this.scrollTop : ~~arguments[1] + this.scrollTop
+          );
+          return;
+        }
+        this.scroll({
+          left: ~~arguments[0].left + this.scrollLeft,
+          top: ~~arguments[0].top + this.scrollTop,
+          behavior: arguments[0].behavior
+        });
+      };
+      Element2.prototype.scrollIntoView = function() {
+        if (shouldBailOut(arguments[0]) === true) {
+          original.scrollIntoView.call(
+            this,
+            arguments[0] === void 0 ? true : arguments[0]
+          );
+          return;
+        }
+        var scrollableParent = findScrollableParent(this);
+        var parentRects = scrollableParent.getBoundingClientRect();
+        var clientRects = this.getBoundingClientRect();
+        if (scrollableParent !== d2.body) {
+          smoothScroll.call(
+            this,
+            scrollableParent,
+            scrollableParent.scrollLeft + clientRects.left - parentRects.left,
+            scrollableParent.scrollTop + clientRects.top - parentRects.top
+          );
+          if (w2.getComputedStyle(scrollableParent).position !== "fixed") {
+            w2.scrollBy({
+              left: parentRects.left,
+              top: parentRects.top,
+              behavior: "smooth"
+            });
+          }
+        } else {
+          w2.scrollBy({
+            left: clientRects.left,
+            top: clientRects.top,
+            behavior: "smooth"
+          });
+        }
+      };
+    }
+    {
+      module.exports = { polyfill: polyfill2 };
+    }
+  })();
+});
+smoothscroll.polyfill;
+var _default$1 = /* @__PURE__ */ function(_Core) {
+  _inherits(_default2, _Core);
+  var _super = _createSuper(_default2);
+  function _default2() {
+    var _this;
+    var options = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : {};
+    _classCallCheck(this, _default2);
+    _this = _super.call(this, options);
+    if (_this.resetNativeScroll) {
+      if (history.scrollRestoration) {
+        history.scrollRestoration = "manual";
+      }
+      window.scrollTo(0, 0);
+    }
+    window.addEventListener("scroll", _this.checkScroll, false);
+    if (window.smoothscrollPolyfill === void 0) {
+      window.smoothscrollPolyfill = smoothscroll;
+      window.smoothscrollPolyfill.polyfill();
+    }
+    return _this;
+  }
+  _createClass(_default2, [{
+    key: "init",
+    value: function init() {
+      this.instance.scroll.y = window.pageYOffset;
+      this.addElements();
+      this.detectElements();
+      _get(_getPrototypeOf(_default2.prototype), "init", this).call(this);
+    }
+  }, {
+    key: "checkScroll",
+    value: function checkScroll() {
+      var _this2 = this;
+      _get(_getPrototypeOf(_default2.prototype), "checkScroll", this).call(this);
+      if (this.getDirection) {
+        this.addDirection();
+      }
+      if (this.getSpeed) {
+        this.addSpeed();
+        this.speedTs = Date.now();
+      }
+      this.instance.scroll.y = window.pageYOffset;
+      if (Object.entries(this.els).length) {
+        if (!this.hasScrollTicking) {
+          requestAnimationFrame(function() {
+            _this2.detectElements();
+          });
+          this.hasScrollTicking = true;
+        }
+      }
+    }
+  }, {
+    key: "addDirection",
+    value: function addDirection() {
+      if (window.pageYOffset > this.instance.scroll.y) {
+        if (this.instance.direction !== "down") {
+          this.instance.direction = "down";
+        }
+      } else if (window.pageYOffset < this.instance.scroll.y) {
+        if (this.instance.direction !== "up") {
+          this.instance.direction = "up";
+        }
+      }
+    }
+  }, {
+    key: "addSpeed",
+    value: function addSpeed() {
+      if (window.pageYOffset != this.instance.scroll.y) {
+        this.instance.speed = (window.pageYOffset - this.instance.scroll.y) / Math.max(1, Date.now() - this.speedTs);
+      } else {
+        this.instance.speed = 0;
+      }
+    }
+  }, {
+    key: "resize",
+    value: function resize2() {
+      if (Object.entries(this.els).length) {
+        this.windowHeight = window.innerHeight;
+        this.updateElements();
+      }
+    }
+  }, {
+    key: "addElements",
+    value: function addElements() {
+      var _this3 = this;
+      this.els = {};
+      var els = this.el.querySelectorAll("[data-" + this.name + "]");
+      els.forEach(function(el, index2) {
+        el.getBoundingClientRect();
+        var cl = el.dataset[_this3.name + "Class"] || _this3["class"];
+        var id2 = typeof el.dataset[_this3.name + "Id"] === "string" ? el.dataset[_this3.name + "Id"] : index2;
+        var top;
+        var left;
+        var offset = typeof el.dataset[_this3.name + "Offset"] === "string" ? el.dataset[_this3.name + "Offset"].split(",") : _this3.offset;
+        var repeat = el.dataset[_this3.name + "Repeat"];
+        var call = el.dataset[_this3.name + "Call"];
+        var target = el.dataset[_this3.name + "Target"];
+        var targetEl;
+        if (target !== void 0) {
+          targetEl = document.querySelector("".concat(target));
+        } else {
+          targetEl = el;
+        }
+        var targetElBCR = targetEl.getBoundingClientRect();
+        top = targetElBCR.top + _this3.instance.scroll.y;
+        left = targetElBCR.left + _this3.instance.scroll.x;
+        var bottom = top + targetEl.offsetHeight;
+        var right = left + targetEl.offsetWidth;
+        if (repeat == "false") {
+          repeat = false;
+        } else if (repeat != void 0) {
+          repeat = true;
+        } else {
+          repeat = _this3.repeat;
+        }
+        var relativeOffset = _this3.getRelativeOffset(offset);
+        top = top + relativeOffset[0];
+        bottom = bottom - relativeOffset[1];
+        var mappedEl = {
+          el,
+          targetEl,
+          id: id2,
+          "class": cl,
+          top,
+          bottom,
+          left,
+          right,
+          offset,
+          progress: 0,
+          repeat,
+          inView: false,
+          call
+        };
+        _this3.els[id2] = mappedEl;
+        if (el.classList.contains(cl)) {
+          _this3.setInView(_this3.els[id2], id2);
+        }
+      });
+    }
+  }, {
+    key: "updateElements",
+    value: function updateElements() {
+      var _this4 = this;
+      Object.entries(this.els).forEach(function(_ref) {
+        var _ref2 = _slicedToArray(_ref, 2), i = _ref2[0], el = _ref2[1];
+        var top = el.targetEl.getBoundingClientRect().top + _this4.instance.scroll.y;
+        var bottom = top + el.targetEl.offsetHeight;
+        var relativeOffset = _this4.getRelativeOffset(el.offset);
+        _this4.els[i].top = top + relativeOffset[0];
+        _this4.els[i].bottom = bottom - relativeOffset[1];
+      });
+      this.hasScrollTicking = false;
+    }
+  }, {
+    key: "getRelativeOffset",
+    value: function getRelativeOffset(offset) {
+      var relativeOffset = [0, 0];
+      if (offset) {
+        for (var i = 0; i < offset.length; i++) {
+          if (typeof offset[i] == "string") {
+            if (offset[i].includes("%")) {
+              relativeOffset[i] = parseInt(offset[i].replace("%", "") * this.windowHeight / 100);
+            } else {
+              relativeOffset[i] = parseInt(offset[i]);
+            }
+          } else {
+            relativeOffset[i] = offset[i];
+          }
+        }
+      }
+      return relativeOffset;
+    }
+    /**
+     * Scroll to a desired target.
+     *
+     * @param  Available options :
+     *          target {node, string, "top", "bottom", int} - The DOM element we want to scroll to
+     *          options {object} - Options object for additionnal settings.
+     * @return {void}
+     */
+  }, {
+    key: "scrollTo",
+    value: function scrollTo(target) {
+      var options = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
+      var offset = parseInt(options.offset) || 0;
+      var callback = options.callback ? options.callback : false;
+      if (typeof target === "string") {
+        if (target === "top") {
+          target = this.html;
+        } else if (target === "bottom") {
+          target = this.html.offsetHeight - window.innerHeight;
+        } else {
+          target = document.querySelector(target);
+          if (!target) {
+            return;
+          }
+        }
+      } else if (typeof target === "number") {
+        target = parseInt(target);
+      } else if (target && target.tagName) ;
+      else {
+        console.warn("`target` parameter is not valid");
+        return;
+      }
+      if (typeof target !== "number") {
+        offset = target.getBoundingClientRect().top + offset + this.instance.scroll.y;
+      } else {
+        offset = target + offset;
+      }
+      var isTargetReached = function isTargetReached2() {
+        return parseInt(window.pageYOffset) === parseInt(offset);
+      };
+      if (callback) {
+        if (isTargetReached()) {
+          callback();
+          return;
+        } else {
+          var onScroll = function onScroll2() {
+            if (isTargetReached()) {
+              window.removeEventListener("scroll", onScroll2);
+              callback();
+            }
+          };
+          window.addEventListener("scroll", onScroll);
+        }
+      }
+      window.scrollTo({
+        top: offset,
+        behavior: options.duration === 0 ? "auto" : "smooth"
+      });
+    }
+  }, {
+    key: "update",
+    value: function update() {
+      this.addElements();
+      this.detectElements();
+    }
+  }, {
+    key: "destroy",
+    value: function destroy() {
+      _get(_getPrototypeOf(_default2.prototype), "destroy", this).call(this);
+      window.removeEventListener("scroll", this.checkScroll, false);
+    }
+  }]);
+  return _default2;
+}(_default);
+/*
+object-assign
+(c) Sindre Sorhus
+@license MIT
+*/
+var getOwnPropertySymbols = Object.getOwnPropertySymbols;
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+function toObject(val) {
+  if (val === null || val === void 0) {
+    throw new TypeError("Object.assign cannot be called with null or undefined");
+  }
+  return Object(val);
+}
+function shouldUseNative() {
+  try {
+    if (!Object.assign) {
+      return false;
+    }
+    var test1 = new String("abc");
+    test1[5] = "de";
+    if (Object.getOwnPropertyNames(test1)[0] === "5") {
+      return false;
+    }
+    var test2 = {};
+    for (var i = 0; i < 10; i++) {
+      test2["_" + String.fromCharCode(i)] = i;
+    }
+    var order2 = Object.getOwnPropertyNames(test2).map(function(n) {
+      return test2[n];
+    });
+    if (order2.join("") !== "0123456789") {
+      return false;
+    }
+    var test3 = {};
+    "abcdefghijklmnopqrst".split("").forEach(function(letter) {
+      test3[letter] = letter;
+    });
+    if (Object.keys(Object.assign({}, test3)).join("") !== "abcdefghijklmnopqrst") {
+      return false;
+    }
+    return true;
+  } catch (err) {
+    return false;
+  }
+}
+var objectAssign = shouldUseNative() ? Object.assign : function(target, source) {
+  var from;
+  var to = toObject(target);
+  var symbols;
+  for (var s2 = 1; s2 < arguments.length; s2++) {
+    from = Object(arguments[s2]);
+    for (var key in from) {
+      if (hasOwnProperty.call(from, key)) {
+        to[key] = from[key];
+      }
+    }
+    if (getOwnPropertySymbols) {
+      symbols = getOwnPropertySymbols(from);
+      for (var i = 0; i < symbols.length; i++) {
+        if (propIsEnumerable.call(from, symbols[i])) {
+          to[symbols[i]] = from[symbols[i]];
+        }
+      }
+    }
+  }
+  return to;
+};
+function E$1() {
+}
+E$1.prototype = {
+  on: function(name, callback, ctx) {
+    var e = this.e || (this.e = {});
+    (e[name] || (e[name] = [])).push({
+      fn: callback,
+      ctx
+    });
+    return this;
+  },
+  once: function(name, callback, ctx) {
+    var self2 = this;
+    function listener() {
+      self2.off(name, listener);
+      callback.apply(ctx, arguments);
+    }
+    listener._ = callback;
+    return this.on(name, listener, ctx);
+  },
+  emit: function(name) {
+    var data = [].slice.call(arguments, 1);
+    var evtArr = ((this.e || (this.e = {}))[name] || []).slice();
+    var i = 0;
+    var len = evtArr.length;
+    for (i; i < len; i++) {
+      evtArr[i].fn.apply(evtArr[i].ctx, data);
+    }
+    return this;
+  },
+  off: function(name, callback) {
+    var e = this.e || (this.e = {});
+    var evts = e[name];
+    var liveEvents = [];
+    if (evts && callback) {
+      for (var i = 0, len = evts.length; i < len; i++) {
+        if (evts[i].fn !== callback && evts[i].fn._ !== callback)
+          liveEvents.push(evts[i]);
+      }
+    }
+    liveEvents.length ? e[name] = liveEvents : delete e[name];
+    return this;
+  }
+};
+var tinyEmitter = E$1;
+var lethargy = createCommonjsModule(function(module, exports) {
+  (function() {
+    var root2;
+    root2 = exports !== null ? exports : this;
+    root2.Lethargy = function() {
+      function Lethargy2(stability, sensitivity, tolerance, delay2) {
+        this.stability = stability != null ? Math.abs(stability) : 8;
+        this.sensitivity = sensitivity != null ? 1 + Math.abs(sensitivity) : 100;
+        this.tolerance = tolerance != null ? 1 + Math.abs(tolerance) : 1.1;
+        this.delay = delay2 != null ? delay2 : 150;
+        this.lastUpDeltas = (function() {
+          var i, ref, results;
+          results = [];
+          for (i = 1, ref = this.stability * 2; 1 <= ref ? i <= ref : i >= ref; 1 <= ref ? i++ : i--) {
+            results.push(null);
+          }
+          return results;
+        }).call(this);
+        this.lastDownDeltas = (function() {
+          var i, ref, results;
+          results = [];
+          for (i = 1, ref = this.stability * 2; 1 <= ref ? i <= ref : i >= ref; 1 <= ref ? i++ : i--) {
+            results.push(null);
+          }
+          return results;
+        }).call(this);
+        this.deltasTimestamp = (function() {
+          var i, ref, results;
+          results = [];
+          for (i = 1, ref = this.stability * 2; 1 <= ref ? i <= ref : i >= ref; 1 <= ref ? i++ : i--) {
+            results.push(null);
+          }
+          return results;
+        }).call(this);
+      }
+      Lethargy2.prototype.check = function(e) {
+        var lastDelta;
+        e = e.originalEvent || e;
+        if (e.wheelDelta != null) {
+          lastDelta = e.wheelDelta;
+        } else if (e.deltaY != null) {
+          lastDelta = e.deltaY * -40;
+        } else if (e.detail != null || e.detail === 0) {
+          lastDelta = e.detail * -40;
+        }
+        this.deltasTimestamp.push(Date.now());
+        this.deltasTimestamp.shift();
+        if (lastDelta > 0) {
+          this.lastUpDeltas.push(lastDelta);
+          this.lastUpDeltas.shift();
+          return this.isInertia(1);
+        } else {
+          this.lastDownDeltas.push(lastDelta);
+          this.lastDownDeltas.shift();
+          return this.isInertia(-1);
+        }
+      };
+      Lethargy2.prototype.isInertia = function(direction) {
+        var lastDeltas, lastDeltasNew, lastDeltasOld, newAverage, newSum, oldAverage, oldSum;
+        lastDeltas = direction === -1 ? this.lastDownDeltas : this.lastUpDeltas;
+        if (lastDeltas[0] === null) {
+          return direction;
+        }
+        if (this.deltasTimestamp[this.stability * 2 - 2] + this.delay > Date.now() && lastDeltas[0] === lastDeltas[this.stability * 2 - 1]) {
+          return false;
+        }
+        lastDeltasOld = lastDeltas.slice(0, this.stability);
+        lastDeltasNew = lastDeltas.slice(this.stability, this.stability * 2);
+        oldSum = lastDeltasOld.reduce(function(t, s2) {
+          return t + s2;
+        });
+        newSum = lastDeltasNew.reduce(function(t, s2) {
+          return t + s2;
+        });
+        oldAverage = oldSum / lastDeltasOld.length;
+        newAverage = newSum / lastDeltasNew.length;
+        if (Math.abs(oldAverage) < Math.abs(newAverage * this.tolerance) && this.sensitivity < Math.abs(newAverage)) {
+          return direction;
+        } else {
+          return false;
+        }
+      };
+      Lethargy2.prototype.showLastUpDeltas = function() {
+        return this.lastUpDeltas;
+      };
+      Lethargy2.prototype.showLastDownDeltas = function() {
+        return this.lastDownDeltas;
+      };
+      return Lethargy2;
+    }();
+  }).call(commonjsGlobal);
+});
+var support = function getSupport() {
+  return {
+    hasWheelEvent: "onwheel" in document,
+    hasMouseWheelEvent: "onmousewheel" in document,
+    hasTouch: "ontouchstart" in window || window.TouchEvent || window.DocumentTouch && document instanceof DocumentTouch,
+    hasTouchWin: navigator.msMaxTouchPoints && navigator.msMaxTouchPoints > 1,
+    hasPointer: !!window.navigator.msPointerEnabled,
+    hasKeyDown: "onkeydown" in document,
+    isFirefox: navigator.userAgent.indexOf("Firefox") > -1
+  };
+}();
+var toString = Object.prototype.toString, hasOwnProperty$1 = Object.prototype.hasOwnProperty;
+var bindallStandalone = function(object) {
+  if (!object) return console.warn("bindAll requires at least one argument.");
+  var functions = Array.prototype.slice.call(arguments, 1);
+  if (functions.length === 0) {
+    for (var method in object) {
+      if (hasOwnProperty$1.call(object, method)) {
+        if (typeof object[method] == "function" && toString.call(object[method]) == "[object Function]") {
+          functions.push(method);
+        }
+      }
+    }
+  }
+  for (var i = 0; i < functions.length; i++) {
+    var f = functions[i];
+    object[f] = bind(object[f], object);
+  }
+};
+function bind(func, context) {
+  return function() {
+    return func.apply(context, arguments);
+  };
+}
+var Lethargy = lethargy.Lethargy;
+var EVT_ID = "virtualscroll";
+var src = VirtualScroll;
+var keyCodes = {
+  LEFT: 37,
+  UP: 38,
+  RIGHT: 39,
+  DOWN: 40,
+  SPACE: 32
+};
+function VirtualScroll(options) {
+  bindallStandalone(this, "_onWheel", "_onMouseWheel", "_onTouchStart", "_onTouchMove", "_onKeyDown");
+  this.el = window;
+  if (options && options.el) {
+    this.el = options.el;
+    delete options.el;
+  }
+  this.options = objectAssign({
+    mouseMultiplier: 1,
+    touchMultiplier: 2,
+    firefoxMultiplier: 15,
+    keyStep: 120,
+    preventTouch: false,
+    unpreventTouchClass: "vs-touchmove-allowed",
+    limitInertia: false,
+    useKeyboard: true,
+    useTouch: true
+  }, options);
+  if (this.options.limitInertia) this._lethargy = new Lethargy();
+  this._emitter = new tinyEmitter();
+  this._event = {
+    y: 0,
+    x: 0,
+    deltaX: 0,
+    deltaY: 0
+  };
+  this.touchStartX = null;
+  this.touchStartY = null;
+  this.bodyTouchAction = null;
+  if (this.options.passive !== void 0) {
+    this.listenerOptions = { passive: this.options.passive };
+  }
+}
+VirtualScroll.prototype._notify = function(e) {
+  var evt = this._event;
+  evt.x += evt.deltaX;
+  evt.y += evt.deltaY;
+  this._emitter.emit(EVT_ID, {
+    x: evt.x,
+    y: evt.y,
+    deltaX: evt.deltaX,
+    deltaY: evt.deltaY,
+    originalEvent: e
+  });
+};
+VirtualScroll.prototype._onWheel = function(e) {
+  var options = this.options;
+  if (this._lethargy && this._lethargy.check(e) === false) return;
+  var evt = this._event;
+  evt.deltaX = e.wheelDeltaX || e.deltaX * -1;
+  evt.deltaY = e.wheelDeltaY || e.deltaY * -1;
+  if (support.isFirefox && e.deltaMode == 1) {
+    evt.deltaX *= options.firefoxMultiplier;
+    evt.deltaY *= options.firefoxMultiplier;
+  }
+  evt.deltaX *= options.mouseMultiplier;
+  evt.deltaY *= options.mouseMultiplier;
+  this._notify(e);
+};
+VirtualScroll.prototype._onMouseWheel = function(e) {
+  if (this.options.limitInertia && this._lethargy.check(e) === false) return;
+  var evt = this._event;
+  evt.deltaX = e.wheelDeltaX ? e.wheelDeltaX : 0;
+  evt.deltaY = e.wheelDeltaY ? e.wheelDeltaY : e.wheelDelta;
+  this._notify(e);
+};
+VirtualScroll.prototype._onTouchStart = function(e) {
+  var t = e.targetTouches ? e.targetTouches[0] : e;
+  this.touchStartX = t.pageX;
+  this.touchStartY = t.pageY;
+};
+VirtualScroll.prototype._onTouchMove = function(e) {
+  var options = this.options;
+  if (options.preventTouch && !e.target.classList.contains(options.unpreventTouchClass)) {
+    e.preventDefault();
+  }
+  var evt = this._event;
+  var t = e.targetTouches ? e.targetTouches[0] : e;
+  evt.deltaX = (t.pageX - this.touchStartX) * options.touchMultiplier;
+  evt.deltaY = (t.pageY - this.touchStartY) * options.touchMultiplier;
+  this.touchStartX = t.pageX;
+  this.touchStartY = t.pageY;
+  this._notify(e);
+};
+VirtualScroll.prototype._onKeyDown = function(e) {
+  var evt = this._event;
+  evt.deltaX = evt.deltaY = 0;
+  var windowHeight = window.innerHeight - 40;
+  switch (e.keyCode) {
+    case keyCodes.LEFT:
+    case keyCodes.UP:
+      evt.deltaY = this.options.keyStep;
+      break;
+    case keyCodes.RIGHT:
+    case keyCodes.DOWN:
+      evt.deltaY = -this.options.keyStep;
+      break;
+    case e.shiftKey:
+      evt.deltaY = windowHeight;
+      break;
+    case keyCodes.SPACE:
+      evt.deltaY = -windowHeight;
+      break;
+    default:
+      return;
+  }
+  this._notify(e);
+};
+VirtualScroll.prototype._bind = function() {
+  if (support.hasWheelEvent) this.el.addEventListener("wheel", this._onWheel, this.listenerOptions);
+  if (support.hasMouseWheelEvent) this.el.addEventListener("mousewheel", this._onMouseWheel, this.listenerOptions);
+  if (support.hasTouch && this.options.useTouch) {
+    this.el.addEventListener("touchstart", this._onTouchStart, this.listenerOptions);
+    this.el.addEventListener("touchmove", this._onTouchMove, this.listenerOptions);
+  }
+  if (support.hasPointer && support.hasTouchWin) {
+    this.bodyTouchAction = document.body.style.msTouchAction;
+    document.body.style.msTouchAction = "none";
+    this.el.addEventListener("MSPointerDown", this._onTouchStart, true);
+    this.el.addEventListener("MSPointerMove", this._onTouchMove, true);
+  }
+  if (support.hasKeyDown && this.options.useKeyboard) document.addEventListener("keydown", this._onKeyDown);
+};
+VirtualScroll.prototype._unbind = function() {
+  if (support.hasWheelEvent) this.el.removeEventListener("wheel", this._onWheel);
+  if (support.hasMouseWheelEvent) this.el.removeEventListener("mousewheel", this._onMouseWheel);
+  if (support.hasTouch) {
+    this.el.removeEventListener("touchstart", this._onTouchStart);
+    this.el.removeEventListener("touchmove", this._onTouchMove);
+  }
+  if (support.hasPointer && support.hasTouchWin) {
+    document.body.style.msTouchAction = this.bodyTouchAction;
+    this.el.removeEventListener("MSPointerDown", this._onTouchStart, true);
+    this.el.removeEventListener("MSPointerMove", this._onTouchMove, true);
+  }
+  if (support.hasKeyDown && this.options.useKeyboard) document.removeEventListener("keydown", this._onKeyDown);
+};
+VirtualScroll.prototype.on = function(cb, ctx) {
+  this._emitter.on(EVT_ID, cb, ctx);
+  var events2 = this._emitter.e;
+  if (events2 && events2[EVT_ID] && events2[EVT_ID].length === 1) this._bind();
+};
+VirtualScroll.prototype.off = function(cb, ctx) {
+  this._emitter.off(EVT_ID, cb, ctx);
+  var events2 = this._emitter.e;
+  if (!events2[EVT_ID] || events2[EVT_ID].length <= 0) this._unbind();
+};
+VirtualScroll.prototype.reset = function() {
+  var evt = this._event;
+  evt.x = 0;
+  evt.y = 0;
+};
+VirtualScroll.prototype.destroy = function() {
+  this._emitter.off();
+  this._unbind();
+};
+function lerp(start, end, amt) {
+  return (1 - amt) * start + amt * end;
+}
+function getTranslate(el) {
+  var translate = {};
+  if (!window.getComputedStyle) return;
+  var style2 = getComputedStyle(el);
+  var transform = style2.transform || style2.webkitTransform || style2.mozTransform;
+  var mat = transform.match(/^matrix3d\((.+)\)$/);
+  if (mat) {
+    translate.x = mat ? parseFloat(mat[1].split(", ")[12]) : 0;
+    translate.y = mat ? parseFloat(mat[1].split(", ")[13]) : 0;
+  } else {
+    mat = transform.match(/^matrix\((.+)\)$/);
+    translate.x = mat ? parseFloat(mat[1].split(", ")[4]) : 0;
+    translate.y = mat ? parseFloat(mat[1].split(", ")[5]) : 0;
+  }
+  return translate;
+}
+function getParents(elem) {
+  var parents = [];
+  for (; elem && elem !== document; elem = elem.parentNode) {
+    parents.push(elem);
+  }
+  return parents;
+}
+var NEWTON_ITERATIONS = 4;
+var NEWTON_MIN_SLOPE = 1e-3;
+var SUBDIVISION_PRECISION = 1e-7;
+var SUBDIVISION_MAX_ITERATIONS = 10;
+var kSplineTableSize = 11;
+var kSampleStepSize = 1 / (kSplineTableSize - 1);
+var float32ArraySupported = typeof Float32Array === "function";
+function A$1(aA1, aA2) {
+  return 1 - 3 * aA2 + 3 * aA1;
+}
+function B$1(aA1, aA2) {
+  return 3 * aA2 - 6 * aA1;
+}
+function C$1(aA1) {
+  return 3 * aA1;
+}
+function calcBezier(aT, aA1, aA2) {
+  return ((A$1(aA1, aA2) * aT + B$1(aA1, aA2)) * aT + C$1(aA1)) * aT;
+}
+function getSlope(aT, aA1, aA2) {
+  return 3 * A$1(aA1, aA2) * aT * aT + 2 * B$1(aA1, aA2) * aT + C$1(aA1);
+}
+function binarySubdivide(aX, aA, aB, mX1, mX2) {
+  var currentX, currentT, i = 0;
+  do {
+    currentT = aA + (aB - aA) / 2;
+    currentX = calcBezier(currentT, mX1, mX2) - aX;
+    if (currentX > 0) {
+      aB = currentT;
+    } else {
+      aA = currentT;
+    }
+  } while (Math.abs(currentX) > SUBDIVISION_PRECISION && ++i < SUBDIVISION_MAX_ITERATIONS);
+  return currentT;
+}
+function newtonRaphsonIterate(aX, aGuessT, mX1, mX2) {
+  for (var i = 0; i < NEWTON_ITERATIONS; ++i) {
+    var currentSlope = getSlope(aGuessT, mX1, mX2);
+    if (currentSlope === 0) {
+      return aGuessT;
+    }
+    var currentX = calcBezier(aGuessT, mX1, mX2) - aX;
+    aGuessT -= currentX / currentSlope;
+  }
+  return aGuessT;
+}
+function LinearEasing(x2) {
+  return x2;
+}
+var src$1 = function bezier(mX1, mY1, mX2, mY2) {
+  if (!(0 <= mX1 && mX1 <= 1 && 0 <= mX2 && mX2 <= 1)) {
+    throw new Error("bezier x values must be in [0, 1] range");
+  }
+  if (mX1 === mY1 && mX2 === mY2) {
+    return LinearEasing;
+  }
+  var sampleValues = float32ArraySupported ? new Float32Array(kSplineTableSize) : new Array(kSplineTableSize);
+  for (var i = 0; i < kSplineTableSize; ++i) {
+    sampleValues[i] = calcBezier(i * kSampleStepSize, mX1, mX2);
+  }
+  function getTForX(aX) {
+    var intervalStart = 0;
+    var currentSample = 1;
+    var lastSample = kSplineTableSize - 1;
+    for (; currentSample !== lastSample && sampleValues[currentSample] <= aX; ++currentSample) {
+      intervalStart += kSampleStepSize;
+    }
+    --currentSample;
+    var dist = (aX - sampleValues[currentSample]) / (sampleValues[currentSample + 1] - sampleValues[currentSample]);
+    var guessForT = intervalStart + dist * kSampleStepSize;
+    var initialSlope = getSlope(guessForT, mX1, mX2);
+    if (initialSlope >= NEWTON_MIN_SLOPE) {
+      return newtonRaphsonIterate(aX, guessForT, mX1, mX2);
+    } else if (initialSlope === 0) {
+      return guessForT;
+    } else {
+      return binarySubdivide(aX, intervalStart, intervalStart + kSampleStepSize, mX1, mX2);
+    }
+  }
+  return function BezierEasing(x2) {
+    if (x2 === 0) {
+      return 0;
+    }
+    if (x2 === 1) {
+      return 1;
+    }
+    return calcBezier(getTForX(x2), mY1, mY2);
+  };
+};
+var keyCodes$1 = {
+  UP: 38,
+  DOWN: 40,
+  SPACE: 32,
+  TAB: 9,
+  PAGEUP: 33,
+  PAGEDOWN: 34,
+  HOME: 36,
+  END: 35
+};
+var _default$2 = /* @__PURE__ */ function(_Core) {
+  _inherits(_default2, _Core);
+  var _super = _createSuper(_default2);
+  function _default2() {
+    var _this;
+    var options = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : {};
+    _classCallCheck(this, _default2);
+    if (history.scrollRestoration) {
+      history.scrollRestoration = "manual";
+    }
+    window.scrollTo(0, 0);
+    _this = _super.call(this, options);
+    if (_this.inertia) _this.lerp = _this.inertia * 0.1;
+    _this.isScrolling = false;
+    _this.isDraggingScrollbar = false;
+    _this.isTicking = false;
+    _this.hasScrollTicking = false;
+    _this.parallaxElements = {};
+    _this.stop = false;
+    _this.scrollbarContainer = options.scrollbarContainer;
+    _this.checkKey = _this.checkKey.bind(_assertThisInitialized(_this));
+    window.addEventListener("keydown", _this.checkKey, false);
+    return _this;
+  }
+  _createClass(_default2, [{
+    key: "init",
+    value: function init() {
+      var _this2 = this;
+      this.html.classList.add(this.smoothClass);
+      this.html.setAttribute("data-".concat(this.name, "-direction"), this.direction);
+      this.instance = _objectSpread2({
+        delta: {
+          x: this.initPosition.x,
+          y: this.initPosition.y
+        },
+        scroll: {
+          x: this.initPosition.x,
+          y: this.initPosition.y
+        }
+      }, this.instance);
+      this.vs = new src({
+        el: this.scrollFromAnywhere ? document : this.el,
+        mouseMultiplier: navigator.platform.indexOf("Win") > -1 ? 1 : 0.4,
+        firefoxMultiplier: this.firefoxMultiplier,
+        touchMultiplier: this.touchMultiplier,
+        useKeyboard: false,
+        passive: true
+      });
+      this.vs.on(function(e) {
+        if (_this2.stop) {
+          return;
+        }
+        if (!_this2.isDraggingScrollbar) {
+          requestAnimationFrame(function() {
+            _this2.updateDelta(e);
+            if (!_this2.isScrolling) _this2.startScrolling();
+          });
+        }
+      });
+      this.setScrollLimit();
+      this.initScrollBar();
+      this.addSections();
+      this.addElements();
+      this.checkScroll(true);
+      this.transformElements(true, true);
+      _get(_getPrototypeOf(_default2.prototype), "init", this).call(this);
+    }
+  }, {
+    key: "setScrollLimit",
+    value: function setScrollLimit() {
+      this.instance.limit.y = this.el.offsetHeight - this.windowHeight;
+      if (this.direction === "horizontal") {
+        var totalWidth = 0;
+        var nodes = this.el.children;
+        for (var i = 0; i < nodes.length; i++) {
+          totalWidth += nodes[i].offsetWidth;
+        }
+        this.instance.limit.x = totalWidth - this.windowWidth;
+      }
+    }
+  }, {
+    key: "startScrolling",
+    value: function startScrolling() {
+      this.startScrollTs = Date.now();
+      this.isScrolling = true;
+      this.checkScroll();
+      this.html.classList.add(this.scrollingClass);
+    }
+  }, {
+    key: "stopScrolling",
+    value: function stopScrolling() {
+      cancelAnimationFrame(this.checkScrollRaf);
+      this.startScrollTs = void 0;
+      if (this.scrollToRaf) {
+        cancelAnimationFrame(this.scrollToRaf);
+        this.scrollToRaf = null;
+      }
+      this.isScrolling = false;
+      this.instance.scroll.y = Math.round(this.instance.scroll.y);
+      this.html.classList.remove(this.scrollingClass);
+    }
+  }, {
+    key: "checkKey",
+    value: function checkKey(e) {
+      var _this3 = this;
+      if (this.stop) {
+        if (e.keyCode == keyCodes$1.TAB) {
+          requestAnimationFrame(function() {
+            _this3.html.scrollTop = 0;
+            document.body.scrollTop = 0;
+            _this3.html.scrollLeft = 0;
+            document.body.scrollLeft = 0;
+          });
+        }
+        return;
+      }
+      switch (e.keyCode) {
+        case keyCodes$1.TAB:
+          requestAnimationFrame(function() {
+            _this3.html.scrollTop = 0;
+            document.body.scrollTop = 0;
+            _this3.html.scrollLeft = 0;
+            document.body.scrollLeft = 0;
+            _this3.scrollTo(document.activeElement, {
+              offset: -window.innerHeight / 2
+            });
+          });
+          break;
+        case keyCodes$1.UP:
+          if (this.isActiveElementScrollSensitive()) {
+            this.instance.delta[this.directionAxis] -= 240;
+          }
+          break;
+        case keyCodes$1.DOWN:
+          if (this.isActiveElementScrollSensitive()) {
+            this.instance.delta[this.directionAxis] += 240;
+          }
+          break;
+        case keyCodes$1.PAGEUP:
+          this.instance.delta[this.directionAxis] -= window.innerHeight;
+          break;
+        case keyCodes$1.PAGEDOWN:
+          this.instance.delta[this.directionAxis] += window.innerHeight;
+          break;
+        case keyCodes$1.HOME:
+          this.instance.delta[this.directionAxis] -= this.instance.limit[this.directionAxis];
+          break;
+        case keyCodes$1.END:
+          this.instance.delta[this.directionAxis] += this.instance.limit[this.directionAxis];
+          break;
+        case keyCodes$1.SPACE:
+          if (this.isActiveElementScrollSensitive()) {
+            if (e.shiftKey) {
+              this.instance.delta[this.directionAxis] -= window.innerHeight;
+            } else {
+              this.instance.delta[this.directionAxis] += window.innerHeight;
+            }
+          }
+          break;
+        default:
+          return;
+      }
+      if (this.instance.delta[this.directionAxis] < 0) this.instance.delta[this.directionAxis] = 0;
+      if (this.instance.delta[this.directionAxis] > this.instance.limit[this.directionAxis]) this.instance.delta[this.directionAxis] = this.instance.limit[this.directionAxis];
+      this.stopScrolling();
+      this.isScrolling = true;
+      this.checkScroll();
+      this.html.classList.add(this.scrollingClass);
+    }
+  }, {
+    key: "isActiveElementScrollSensitive",
+    value: function isActiveElementScrollSensitive() {
+      return !(document.activeElement instanceof HTMLInputElement) && !(document.activeElement instanceof HTMLTextAreaElement) && !(document.activeElement instanceof HTMLButtonElement) && !(document.activeElement instanceof HTMLSelectElement);
+    }
+  }, {
+    key: "checkScroll",
+    value: function checkScroll() {
+      var _this4 = this;
+      var forced = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : false;
+      if (forced || this.isScrolling || this.isDraggingScrollbar) {
+        if (!this.hasScrollTicking) {
+          this.checkScrollRaf = requestAnimationFrame(function() {
+            return _this4.checkScroll();
+          });
+          this.hasScrollTicking = true;
+        }
+        this.updateScroll();
+        var distance2 = Math.abs(this.instance.delta[this.directionAxis] - this.instance.scroll[this.directionAxis]);
+        var timeSinceStart = Date.now() - this.startScrollTs;
+        if (!this.animatingScroll && timeSinceStart > 100 && (distance2 < 0.5 && this.instance.delta[this.directionAxis] != 0 || distance2 < 0.5 && this.instance.delta[this.directionAxis] == 0)) {
+          this.stopScrolling();
+        }
+        Object.entries(this.sections).forEach(function(_ref) {
+          var _ref2 = _slicedToArray(_ref, 2);
+          _ref2[0];
+          var section = _ref2[1];
+          if (section.persistent || _this4.instance.scroll[_this4.directionAxis] > section.offset[_this4.directionAxis] && _this4.instance.scroll[_this4.directionAxis] < section.limit[_this4.directionAxis]) {
+            if (_this4.direction === "horizontal") {
+              _this4.transform(section.el, -_this4.instance.scroll[_this4.directionAxis], 0);
+            } else {
+              _this4.transform(section.el, 0, -_this4.instance.scroll[_this4.directionAxis]);
+            }
+            if (!section.inView) {
+              section.inView = true;
+              section.el.style.opacity = 1;
+              section.el.style.pointerEvents = "all";
+              section.el.setAttribute("data-".concat(_this4.name, "-section-inview"), "");
+            }
+          } else {
+            if (section.inView || forced) {
+              section.inView = false;
+              section.el.style.opacity = 0;
+              section.el.style.pointerEvents = "none";
+              section.el.removeAttribute("data-".concat(_this4.name, "-section-inview"));
+            }
+            _this4.transform(section.el, 0, 0);
+          }
+        });
+        if (this.getDirection) {
+          this.addDirection();
+        }
+        if (this.getSpeed) {
+          this.addSpeed();
+          this.speedTs = Date.now();
+        }
+        this.detectElements();
+        this.transformElements();
+        if (this.hasScrollbar) {
+          var scrollBarTranslation = this.instance.scroll[this.directionAxis] / this.instance.limit[this.directionAxis] * this.scrollBarLimit[this.directionAxis];
+          if (this.direction === "horizontal") {
+            this.transform(this.scrollbarThumb, scrollBarTranslation, 0);
+          } else {
+            this.transform(this.scrollbarThumb, 0, scrollBarTranslation);
+          }
+        }
+        _get(_getPrototypeOf(_default2.prototype), "checkScroll", this).call(this);
+        this.hasScrollTicking = false;
+      }
+    }
+  }, {
+    key: "resize",
+    value: function resize2() {
+      this.windowHeight = window.innerHeight;
+      this.windowWidth = window.innerWidth;
+      this.checkContext();
+      this.windowMiddle = {
+        x: this.windowWidth / 2,
+        y: this.windowHeight / 2
+      };
+      this.update();
+    }
+  }, {
+    key: "updateDelta",
+    value: function updateDelta(e) {
+      var delta;
+      var gestureDirection = this[this.context] && this[this.context].gestureDirection ? this[this.context].gestureDirection : this.gestureDirection;
+      if (gestureDirection === "both") {
+        delta = e.deltaX + e.deltaY;
+      } else if (gestureDirection === "vertical") {
+        delta = e.deltaY;
+      } else if (gestureDirection === "horizontal") {
+        delta = e.deltaX;
+      } else {
+        delta = e.deltaY;
+      }
+      this.instance.delta[this.directionAxis] -= delta * this.multiplier;
+      if (this.instance.delta[this.directionAxis] < 0) this.instance.delta[this.directionAxis] = 0;
+      if (this.instance.delta[this.directionAxis] > this.instance.limit[this.directionAxis]) this.instance.delta[this.directionAxis] = this.instance.limit[this.directionAxis];
+    }
+  }, {
+    key: "updateScroll",
+    value: function updateScroll(e) {
+      if (this.isScrolling || this.isDraggingScrollbar) {
+        this.instance.scroll[this.directionAxis] = lerp(this.instance.scroll[this.directionAxis], this.instance.delta[this.directionAxis], this.lerp);
+      } else {
+        if (this.instance.scroll[this.directionAxis] > this.instance.limit[this.directionAxis]) {
+          this.setScroll(this.instance.scroll[this.directionAxis], this.instance.limit[this.directionAxis]);
+        } else if (this.instance.scroll.y < 0) {
+          this.setScroll(this.instance.scroll[this.directionAxis], 0);
+        } else {
+          this.setScroll(this.instance.scroll[this.directionAxis], this.instance.delta[this.directionAxis]);
+        }
+      }
+    }
+  }, {
+    key: "addDirection",
+    value: function addDirection() {
+      if (this.instance.delta.y > this.instance.scroll.y) {
+        if (this.instance.direction !== "down") {
+          this.instance.direction = "down";
+        }
+      } else if (this.instance.delta.y < this.instance.scroll.y) {
+        if (this.instance.direction !== "up") {
+          this.instance.direction = "up";
+        }
+      }
+      if (this.instance.delta.x > this.instance.scroll.x) {
+        if (this.instance.direction !== "right") {
+          this.instance.direction = "right";
+        }
+      } else if (this.instance.delta.x < this.instance.scroll.x) {
+        if (this.instance.direction !== "left") {
+          this.instance.direction = "left";
+        }
+      }
+    }
+  }, {
+    key: "addSpeed",
+    value: function addSpeed() {
+      if (this.instance.delta[this.directionAxis] != this.instance.scroll[this.directionAxis]) {
+        this.instance.speed = (this.instance.delta[this.directionAxis] - this.instance.scroll[this.directionAxis]) / Math.max(1, Date.now() - this.speedTs);
+      } else {
+        this.instance.speed = 0;
+      }
+    }
+  }, {
+    key: "initScrollBar",
+    value: function initScrollBar() {
+      this.scrollbar = document.createElement("span");
+      this.scrollbarThumb = document.createElement("span");
+      this.scrollbar.classList.add("".concat(this.scrollbarClass));
+      this.scrollbarThumb.classList.add("".concat(this.scrollbarClass, "_thumb"));
+      this.scrollbar.append(this.scrollbarThumb);
+      if (this.scrollbarContainer) {
+        this.scrollbarContainer.append(this.scrollbar);
+      } else {
+        document.body.append(this.scrollbar);
+      }
+      this.getScrollBar = this.getScrollBar.bind(this);
+      this.releaseScrollBar = this.releaseScrollBar.bind(this);
+      this.moveScrollBar = this.moveScrollBar.bind(this);
+      this.scrollbarThumb.addEventListener("mousedown", this.getScrollBar);
+      window.addEventListener("mouseup", this.releaseScrollBar);
+      window.addEventListener("mousemove", this.moveScrollBar);
+      this.hasScrollbar = false;
+      if (this.direction == "horizontal") {
+        if (this.instance.limit.x + this.windowWidth <= this.windowWidth) {
+          return;
+        }
+      } else {
+        if (this.instance.limit.y + this.windowHeight <= this.windowHeight) {
+          return;
+        }
+      }
+      this.hasScrollbar = true;
+      this.scrollbarBCR = this.scrollbar.getBoundingClientRect();
+      this.scrollbarHeight = this.scrollbarBCR.height;
+      this.scrollbarWidth = this.scrollbarBCR.width;
+      if (this.direction === "horizontal") {
+        this.scrollbarThumb.style.width = "".concat(this.scrollbarWidth * this.scrollbarWidth / (this.instance.limit.x + this.scrollbarWidth), "px");
+      } else {
+        this.scrollbarThumb.style.height = "".concat(this.scrollbarHeight * this.scrollbarHeight / (this.instance.limit.y + this.scrollbarHeight), "px");
+      }
+      this.scrollbarThumbBCR = this.scrollbarThumb.getBoundingClientRect();
+      this.scrollBarLimit = {
+        x: this.scrollbarWidth - this.scrollbarThumbBCR.width,
+        y: this.scrollbarHeight - this.scrollbarThumbBCR.height
+      };
+    }
+  }, {
+    key: "reinitScrollBar",
+    value: function reinitScrollBar() {
+      this.hasScrollbar = false;
+      if (this.direction == "horizontal") {
+        if (this.instance.limit.x + this.windowWidth <= this.windowWidth) {
+          return;
+        }
+      } else {
+        if (this.instance.limit.y + this.windowHeight <= this.windowHeight) {
+          return;
+        }
+      }
+      this.hasScrollbar = true;
+      this.scrollbarBCR = this.scrollbar.getBoundingClientRect();
+      this.scrollbarHeight = this.scrollbarBCR.height;
+      this.scrollbarWidth = this.scrollbarBCR.width;
+      if (this.direction === "horizontal") {
+        this.scrollbarThumb.style.width = "".concat(this.scrollbarWidth * this.scrollbarWidth / (this.instance.limit.x + this.scrollbarWidth), "px");
+      } else {
+        this.scrollbarThumb.style.height = "".concat(this.scrollbarHeight * this.scrollbarHeight / (this.instance.limit.y + this.scrollbarHeight), "px");
+      }
+      this.scrollbarThumbBCR = this.scrollbarThumb.getBoundingClientRect();
+      this.scrollBarLimit = {
+        x: this.scrollbarWidth - this.scrollbarThumbBCR.width,
+        y: this.scrollbarHeight - this.scrollbarThumbBCR.height
+      };
+    }
+  }, {
+    key: "destroyScrollBar",
+    value: function destroyScrollBar() {
+      this.scrollbarThumb.removeEventListener("mousedown", this.getScrollBar);
+      window.removeEventListener("mouseup", this.releaseScrollBar);
+      window.removeEventListener("mousemove", this.moveScrollBar);
+      this.scrollbar.remove();
+    }
+  }, {
+    key: "getScrollBar",
+    value: function getScrollBar(e) {
+      this.isDraggingScrollbar = true;
+      this.checkScroll();
+      this.html.classList.remove(this.scrollingClass);
+      this.html.classList.add(this.draggingClass);
+    }
+  }, {
+    key: "releaseScrollBar",
+    value: function releaseScrollBar(e) {
+      this.isDraggingScrollbar = false;
+      if (this.isScrolling) {
+        this.html.classList.add(this.scrollingClass);
+      }
+      this.html.classList.remove(this.draggingClass);
+    }
+  }, {
+    key: "moveScrollBar",
+    value: function moveScrollBar(e) {
+      var _this5 = this;
+      if (this.isDraggingScrollbar) {
+        requestAnimationFrame(function() {
+          var x2 = (e.clientX - _this5.scrollbarBCR.left) * 100 / _this5.scrollbarWidth * _this5.instance.limit.x / 100;
+          var y2 = (e.clientY - _this5.scrollbarBCR.top) * 100 / _this5.scrollbarHeight * _this5.instance.limit.y / 100;
+          if (y2 > 0 && y2 < _this5.instance.limit.y) {
+            _this5.instance.delta.y = y2;
+          }
+          if (x2 > 0 && x2 < _this5.instance.limit.x) {
+            _this5.instance.delta.x = x2;
+          }
+        });
+      }
+    }
+  }, {
+    key: "addElements",
+    value: function addElements() {
+      var _this6 = this;
+      this.els = {};
+      this.parallaxElements = {};
+      var els = this.el.querySelectorAll("[data-".concat(this.name, "]"));
+      els.forEach(function(el, index2) {
+        var targetParents = getParents(el);
+        var section = Object.entries(_this6.sections).map(function(_ref3) {
+          var _ref4 = _slicedToArray(_ref3, 2);
+          _ref4[0];
+          var section2 = _ref4[1];
+          return section2;
+        }).find(function(section2) {
+          return targetParents.includes(section2.el);
+        });
+        var cl = el.dataset[_this6.name + "Class"] || _this6["class"];
+        var id2 = typeof el.dataset[_this6.name + "Id"] === "string" ? el.dataset[_this6.name + "Id"] : "el" + index2;
+        var top;
+        var left;
+        var repeat = el.dataset[_this6.name + "Repeat"];
+        var call = el.dataset[_this6.name + "Call"];
+        var position = el.dataset[_this6.name + "Position"];
+        var delay2 = el.dataset[_this6.name + "Delay"];
+        var direction = el.dataset[_this6.name + "Direction"];
+        var sticky = typeof el.dataset[_this6.name + "Sticky"] === "string";
+        var speed = el.dataset[_this6.name + "Speed"] ? parseFloat(el.dataset[_this6.name + "Speed"]) / 10 : false;
+        var offset = typeof el.dataset[_this6.name + "Offset"] === "string" ? el.dataset[_this6.name + "Offset"].split(",") : _this6.offset;
+        var target = el.dataset[_this6.name + "Target"];
+        var targetEl;
+        if (target !== void 0) {
+          targetEl = document.querySelector("".concat(target));
+        } else {
+          targetEl = el;
+        }
+        var targetElBCR = targetEl.getBoundingClientRect();
+        if (section === null) {
+          top = targetElBCR.top + _this6.instance.scroll.y - getTranslate(targetEl).y;
+          left = targetElBCR.left + _this6.instance.scroll.x - getTranslate(targetEl).x;
+        } else {
+          if (!section.inView) {
+            top = targetElBCR.top - getTranslate(section.el).y - getTranslate(targetEl).y;
+            left = targetElBCR.left - getTranslate(section.el).x - getTranslate(targetEl).x;
+          } else {
+            top = targetElBCR.top + _this6.instance.scroll.y - getTranslate(targetEl).y;
+            left = targetElBCR.left + _this6.instance.scroll.x - getTranslate(targetEl).x;
+          }
+        }
+        var bottom = top + targetEl.offsetHeight;
+        var right = left + targetEl.offsetWidth;
+        var middle = {
+          x: (right - left) / 2 + left,
+          y: (bottom - top) / 2 + top
+        };
+        if (sticky) {
+          var elBCR = el.getBoundingClientRect();
+          var elTop = elBCR.top;
+          var elLeft = elBCR.left;
+          var elDistance = {
+            x: elLeft - left,
+            y: elTop - top
+          };
+          top += window.innerHeight;
+          left += window.innerWidth;
+          bottom = elTop + targetEl.offsetHeight - el.offsetHeight - elDistance[_this6.directionAxis];
+          right = elLeft + targetEl.offsetWidth - el.offsetWidth - elDistance[_this6.directionAxis];
+          middle = {
+            x: (right - left) / 2 + left,
+            y: (bottom - top) / 2 + top
+          };
+        }
+        if (repeat == "false") {
+          repeat = false;
+        } else if (repeat != void 0) {
+          repeat = true;
+        } else {
+          repeat = _this6.repeat;
+        }
+        var relativeOffset = [0, 0];
+        if (offset) {
+          if (_this6.direction === "horizontal") {
+            for (var i = 0; i < offset.length; i++) {
+              if (typeof offset[i] == "string") {
+                if (offset[i].includes("%")) {
+                  relativeOffset[i] = parseInt(offset[i].replace("%", "") * _this6.windowWidth / 100);
+                } else {
+                  relativeOffset[i] = parseInt(offset[i]);
+                }
+              } else {
+                relativeOffset[i] = offset[i];
+              }
+            }
+            left = left + relativeOffset[0];
+            right = right - relativeOffset[1];
+          } else {
+            for (var i = 0; i < offset.length; i++) {
+              if (typeof offset[i] == "string") {
+                if (offset[i].includes("%")) {
+                  relativeOffset[i] = parseInt(offset[i].replace("%", "") * _this6.windowHeight / 100);
+                } else {
+                  relativeOffset[i] = parseInt(offset[i]);
+                }
+              } else {
+                relativeOffset[i] = offset[i];
+              }
+            }
+            top = top + relativeOffset[0];
+            bottom = bottom - relativeOffset[1];
+          }
+        }
+        var mappedEl = {
+          el,
+          id: id2,
+          "class": cl,
+          section,
+          top,
+          middle,
+          bottom,
+          left,
+          right,
+          offset,
+          progress: 0,
+          repeat,
+          inView: false,
+          call,
+          speed,
+          delay: delay2,
+          position,
+          target: targetEl,
+          direction,
+          sticky
+        };
+        _this6.els[id2] = mappedEl;
+        if (el.classList.contains(cl)) {
+          _this6.setInView(_this6.els[id2], id2);
+        }
+        if (speed !== false || sticky) {
+          _this6.parallaxElements[id2] = mappedEl;
+        }
+      });
+    }
+  }, {
+    key: "addSections",
+    value: function addSections() {
+      var _this7 = this;
+      this.sections = {};
+      var sections = this.el.querySelectorAll("[data-".concat(this.name, "-section]"));
+      if (sections.length === 0) {
+        sections = [this.el];
+      }
+      sections.forEach(function(section, index2) {
+        var id2 = typeof section.dataset[_this7.name + "Id"] === "string" ? section.dataset[_this7.name + "Id"] : "section" + index2;
+        var sectionBCR = section.getBoundingClientRect();
+        var offset = {
+          x: sectionBCR.left - window.innerWidth * 1.5 - getTranslate(section).x,
+          y: sectionBCR.top - window.innerHeight * 1.5 - getTranslate(section).y
+        };
+        var limit = {
+          x: offset.x + sectionBCR.width + window.innerWidth * 2,
+          y: offset.y + sectionBCR.height + window.innerHeight * 2
+        };
+        var persistent = typeof section.dataset[_this7.name + "Persistent"] === "string";
+        section.setAttribute("data-scroll-section-id", id2);
+        var mappedSection = {
+          el: section,
+          offset,
+          limit,
+          inView: false,
+          persistent,
+          id: id2
+        };
+        _this7.sections[id2] = mappedSection;
+      });
+    }
+  }, {
+    key: "transform",
+    value: function transform(element, x2, y2, delay2) {
+      var transform2;
+      if (!delay2) {
+        transform2 = "matrix3d(1,0,0.00,0,0.00,1,0.00,0,0,0,1,0,".concat(x2, ",").concat(y2, ",0,1)");
+      } else {
+        var start = getTranslate(element);
+        var lerpX = lerp(start.x, x2, delay2);
+        var lerpY = lerp(start.y, y2, delay2);
+        transform2 = "matrix3d(1,0,0.00,0,0.00,1,0.00,0,0,0,1,0,".concat(lerpX, ",").concat(lerpY, ",0,1)");
+      }
+      element.style.webkitTransform = transform2;
+      element.style.msTransform = transform2;
+      element.style.transform = transform2;
+    }
+  }, {
+    key: "transformElements",
+    value: function transformElements(isForced2) {
+      var _this8 = this;
+      var setAllElements = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : false;
+      var scrollRight = this.instance.scroll.x + this.windowWidth;
+      var scrollBottom = this.instance.scroll.y + this.windowHeight;
+      var scrollMiddle = {
+        x: this.instance.scroll.x + this.windowMiddle.x,
+        y: this.instance.scroll.y + this.windowMiddle.y
+      };
+      Object.entries(this.parallaxElements).forEach(function(_ref5) {
+        var _ref6 = _slicedToArray(_ref5, 2);
+        _ref6[0];
+        var current = _ref6[1];
+        var transformDistance = false;
+        if (isForced2) {
+          transformDistance = 0;
+        }
+        if (current.inView || setAllElements) {
+          switch (current.position) {
+            case "top":
+              transformDistance = _this8.instance.scroll[_this8.directionAxis] * -current.speed;
+              break;
+            case "elementTop":
+              transformDistance = (scrollBottom - current.top) * -current.speed;
+              break;
+            case "bottom":
+              transformDistance = (_this8.instance.limit[_this8.directionAxis] - scrollBottom + _this8.windowHeight) * current.speed;
+              break;
+            case "left":
+              transformDistance = _this8.instance.scroll[_this8.directionAxis] * -current.speed;
+              break;
+            case "elementLeft":
+              transformDistance = (scrollRight - current.left) * -current.speed;
+              break;
+            case "right":
+              transformDistance = (_this8.instance.limit[_this8.directionAxis] - scrollRight + _this8.windowHeight) * current.speed;
+              break;
+            default:
+              transformDistance = (scrollMiddle[_this8.directionAxis] - current.middle[_this8.directionAxis]) * -current.speed;
+              break;
+          }
+        }
+        if (current.sticky) {
+          if (current.inView) {
+            if (_this8.direction === "horizontal") {
+              transformDistance = _this8.instance.scroll.x - current.left + window.innerWidth;
+            } else {
+              transformDistance = _this8.instance.scroll.y - current.top + window.innerHeight;
+            }
+          } else {
+            if (_this8.direction === "horizontal") {
+              if (_this8.instance.scroll.x < current.left - window.innerWidth && _this8.instance.scroll.x < current.left - window.innerWidth / 2) {
+                transformDistance = 0;
+              } else if (_this8.instance.scroll.x > current.right && _this8.instance.scroll.x > current.right + 100) {
+                transformDistance = current.right - current.left + window.innerWidth;
+              } else {
+                transformDistance = false;
+              }
+            } else {
+              if (_this8.instance.scroll.y < current.top - window.innerHeight && _this8.instance.scroll.y < current.top - window.innerHeight / 2) {
+                transformDistance = 0;
+              } else if (_this8.instance.scroll.y > current.bottom && _this8.instance.scroll.y > current.bottom + 100) {
+                transformDistance = current.bottom - current.top + window.innerHeight;
+              } else {
+                transformDistance = false;
+              }
+            }
+          }
+        }
+        if (transformDistance !== false) {
+          if (current.direction === "horizontal" || _this8.direction === "horizontal" && current.direction !== "vertical") {
+            _this8.transform(current.el, transformDistance, 0, isForced2 ? false : current.delay);
+          } else {
+            _this8.transform(current.el, 0, transformDistance, isForced2 ? false : current.delay);
+          }
+        }
+      });
+    }
+    /**
+     * Scroll to a desired target.
+     *
+     * @param  Available options :
+     *          target {node, string, "top", "bottom", int} - The DOM element we want to scroll to
+     *          options {object} - Options object for additionnal settings.
+     * @return {void}
+     */
+  }, {
+    key: "scrollTo",
+    value: function scrollTo(target) {
+      var _this9 = this;
+      var options = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
+      var offset = parseInt(options.offset) || 0;
+      var duration = !isNaN(parseInt(options.duration)) ? parseInt(options.duration) : 1e3;
+      var easing = options.easing || [0.25, 0, 0.35, 1];
+      var disableLerp = options.disableLerp ? true : false;
+      var callback = options.callback ? options.callback : false;
+      easing = src$1.apply(void 0, _toConsumableArray(easing));
+      if (typeof target === "string") {
+        if (target === "top") {
+          target = 0;
+        } else if (target === "bottom") {
+          target = this.instance.limit.y;
+        } else if (target === "left") {
+          target = 0;
+        } else if (target === "right") {
+          target = this.instance.limit.x;
+        } else {
+          target = document.querySelector(target);
+          if (!target) {
+            return;
+          }
+        }
+      } else if (typeof target === "number") {
+        target = parseInt(target);
+      } else if (target && target.tagName) ;
+      else {
+        console.warn("`target` parameter is not valid");
+        return;
+      }
+      if (typeof target !== "number") {
+        var targetInScope = getParents(target).includes(this.el);
+        if (!targetInScope) {
+          return;
+        }
+        var targetBCR = target.getBoundingClientRect();
+        var offsetTop = targetBCR.top;
+        var offsetLeft = targetBCR.left;
+        var targetParents = getParents(target);
+        var parentSection = targetParents.find(function(candidate) {
+          return Object.entries(_this9.sections).map(function(_ref7) {
+            var _ref8 = _slicedToArray(_ref7, 2);
+            _ref8[0];
+            var section = _ref8[1];
+            return section;
+          }).find(function(section) {
+            return section.el == candidate;
+          });
+        });
+        var parentSectionOffset = 0;
+        if (parentSection) {
+          parentSectionOffset = getTranslate(parentSection)[this.directionAxis];
+        } else {
+          parentSectionOffset = -this.instance.scroll[this.directionAxis];
+        }
+        if (this.direction === "horizontal") {
+          offset = offsetLeft + offset - parentSectionOffset;
+        } else {
+          offset = offsetTop + offset - parentSectionOffset;
+        }
+      } else {
+        offset = target + offset;
+      }
+      var scrollStart = parseFloat(this.instance.delta[this.directionAxis]);
+      var scrollTarget = Math.max(0, Math.min(offset, this.instance.limit[this.directionAxis]));
+      var scrollDiff = scrollTarget - scrollStart;
+      var render = function render2(p2) {
+        if (disableLerp) {
+          if (_this9.direction === "horizontal") {
+            _this9.setScroll(scrollStart + scrollDiff * p2, _this9.instance.delta.y);
+          } else {
+            _this9.setScroll(_this9.instance.delta.x, scrollStart + scrollDiff * p2);
+          }
+        } else {
+          _this9.instance.delta[_this9.directionAxis] = scrollStart + scrollDiff * p2;
+        }
+      };
+      this.animatingScroll = true;
+      this.stopScrolling();
+      this.startScrolling();
+      var start = Date.now();
+      var loop = function loop2() {
+        var p2 = (Date.now() - start) / duration;
+        if (p2 > 1) {
+          render(1);
+          _this9.animatingScroll = false;
+          if (duration == 0) _this9.update();
+          if (callback) callback();
+        } else {
+          _this9.scrollToRaf = requestAnimationFrame(loop2);
+          render(easing(p2));
+        }
+      };
+      loop();
+    }
+  }, {
+    key: "update",
+    value: function update() {
+      this.setScrollLimit();
+      this.addSections();
+      this.addElements();
+      this.detectElements();
+      this.updateScroll();
+      this.transformElements(true);
+      this.reinitScrollBar();
+      this.checkScroll(true);
+    }
+  }, {
+    key: "startScroll",
+    value: function startScroll() {
+      this.stop = false;
+    }
+  }, {
+    key: "stopScroll",
+    value: function stopScroll() {
+      this.stop = true;
+    }
+  }, {
+    key: "setScroll",
+    value: function setScroll(x2, y2) {
+      this.instance = _objectSpread2(_objectSpread2({}, this.instance), {}, {
+        scroll: {
+          x: x2,
+          y: y2
+        },
+        delta: {
+          x: x2,
+          y: y2
+        },
+        speed: 0
+      });
+    }
+  }, {
+    key: "destroy",
+    value: function destroy() {
+      _get(_getPrototypeOf(_default2.prototype), "destroy", this).call(this);
+      this.stopScrolling();
+      this.html.classList.remove(this.smoothClass);
+      this.vs.destroy();
+      this.destroyScrollBar();
+      window.removeEventListener("keydown", this.checkKey, false);
+    }
+  }]);
+  return _default2;
+}(_default);
+var Smooth = /* @__PURE__ */ function() {
+  function Smooth2() {
+    var options = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : {};
+    _classCallCheck(this, Smooth2);
+    this.options = options;
+    Object.assign(this, defaults, options);
+    this.smartphone = defaults.smartphone;
+    if (options.smartphone) Object.assign(this.smartphone, options.smartphone);
+    this.tablet = defaults.tablet;
+    if (options.tablet) Object.assign(this.tablet, options.tablet);
+    if (!this.smooth && this.direction == "horizontal") console.warn("🚨 `smooth:false` & `horizontal` direction are not yet compatible");
+    if (!this.tablet.smooth && this.tablet.direction == "horizontal") console.warn("🚨 `smooth:false` & `horizontal` direction are not yet compatible (tablet)");
+    if (!this.smartphone.smooth && this.smartphone.direction == "horizontal") console.warn("🚨 `smooth:false` & `horizontal` direction are not yet compatible (smartphone)");
+    this.init();
+  }
+  _createClass(Smooth2, [{
+    key: "init",
+    value: function init() {
+      this.options.isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1 || window.innerWidth < this.tablet.breakpoint;
+      this.options.isTablet = this.options.isMobile && window.innerWidth >= this.tablet.breakpoint;
+      if (this.smooth && !this.options.isMobile || this.tablet.smooth && this.options.isTablet || this.smartphone.smooth && this.options.isMobile && !this.options.isTablet) {
+        this.scroll = new _default$2(this.options);
+      } else {
+        this.scroll = new _default$1(this.options);
+      }
+      this.scroll.init();
+      if (window.location.hash) {
+        var id2 = window.location.hash.slice(1, window.location.hash.length);
+        var target = document.getElementById(id2);
+        if (target) this.scroll.scrollTo(target);
+      }
+    }
+  }, {
+    key: "update",
+    value: function update() {
+      this.scroll.update();
+    }
+  }, {
+    key: "start",
+    value: function start() {
+      this.scroll.startScroll();
+    }
+  }, {
+    key: "stop",
+    value: function stop() {
+      this.scroll.stopScroll();
+    }
+  }, {
+    key: "scrollTo",
+    value: function scrollTo(target, options) {
+      this.scroll.scrollTo(target, options);
+    }
+  }, {
+    key: "setScroll",
+    value: function setScroll(x2, y2) {
+      this.scroll.setScroll(x2, y2);
+    }
+  }, {
+    key: "on",
+    value: function on(event, func) {
+      this.scroll.setEvents(event, func);
+    }
+  }, {
+    key: "off",
+    value: function off(event, func) {
+      this.scroll.unsetEvents(event, func);
+    }
+  }, {
+    key: "destroy",
+    value: function destroy() {
+      this.scroll.destroy();
+    }
+  }]);
+  return Smooth2;
+}();
 function Loader({ onFinish }) {
   const [progress2, setProgress] = reactExports.useState(0);
   reactExports.useEffect(() => {
@@ -31923,21 +33162,21 @@ function mod(a2, b2) {
   const result = a2 % b2;
   return result >= _0n$6 ? result : b2 + result;
 }
-function pow2(x2, power, modulo2) {
+function pow2(x2, power, modulo) {
   let res = x2;
   while (power-- > _0n$6) {
     res *= res;
-    res %= modulo2;
+    res %= modulo;
   }
   return res;
 }
-function invert(number2, modulo2) {
+function invert(number2, modulo) {
   if (number2 === _0n$6)
     throw new Error("invert: expected non-zero number");
-  if (modulo2 <= _0n$6)
-    throw new Error("invert: expected positive modulus, got " + modulo2);
-  let a2 = mod(number2, modulo2);
-  let b2 = modulo2;
+  if (modulo <= _0n$6)
+    throw new Error("invert: expected positive modulus, got " + modulo);
+  let a2 = mod(number2, modulo);
+  let b2 = modulo;
   let x2 = _0n$6, u = _1n$7;
   while (a2 !== _0n$6) {
     const q2 = b2 / a2;
@@ -31948,7 +33187,7 @@ function invert(number2, modulo2) {
   const gcd = b2;
   if (gcd !== _1n$7)
     throw new Error("invert: does not exist");
-  return mod(x2, modulo2);
+  return mod(x2, modulo);
 }
 function assertIsSquare(Fp3, root2, n) {
   if (!Fp3.eql(Fp3.sqr(root2), n))
@@ -32050,7 +33289,7 @@ function FpSqrt(P2) {
     return sqrt9mod16(P2);
   return tonelliShanks(P2);
 }
-const isNegativeLE = (num, modulo2) => (mod(num, modulo2) & _1n$7) === _1n$7;
+const isNegativeLE = (num, modulo) => (mod(num, modulo) & _1n$7) === _1n$7;
 const FIELD_FIELDS = [
   "create",
   "isValid",
@@ -32641,7 +33880,7 @@ function isogenyMap(field, map) {
   };
 }
 const _DST_scalar = utf8ToBytes("HashToScalar-");
-function createHasher(Point, mapToCurve, defaults) {
+function createHasher(Point, mapToCurve, defaults2) {
   if (typeof mapToCurve !== "function")
     throw new Error("mapToCurve() must be defined");
   function map(num) {
@@ -32655,17 +33894,17 @@ function createHasher(Point, mapToCurve, defaults) {
     return P2;
   }
   return {
-    defaults,
+    defaults: defaults2,
     hashToCurve(msg, options) {
-      const opts = Object.assign({}, defaults, options);
+      const opts = Object.assign({}, defaults2, options);
       const u = hash_to_field(msg, 2, opts);
       const u0 = map(u[0]);
       const u1 = map(u[1]);
       return clear(u0.add(u1));
     },
     encodeToCurve(msg, options) {
-      const optsDst = defaults.encodeDST ? { DST: defaults.encodeDST } : {};
-      const opts = Object.assign({}, defaults, optsDst, options);
+      const optsDst = defaults2.encodeDST ? { DST: defaults2.encodeDST } : {};
+      const opts = Object.assign({}, defaults2, optsDst, options);
       const u = hash_to_field(msg, 1, opts);
       const u0 = map(u[0]);
       return clear(u0);
@@ -32683,7 +33922,7 @@ function createHasher(Point, mapToCurve, defaults) {
     // RFC 9380, draft-irtf-cfrg-bbs-signatures-08
     hashToScalar(msg, options) {
       const N2 = Point.Fn.ORDER;
-      const opts = Object.assign({}, defaults, { p: N2, m: 1, DST: _DST_scalar }, options);
+      const opts = Object.assign({}, defaults2, { p: N2, m: 1, DST: _DST_scalar }, options);
       return hash_to_field(msg, 1, opts)[0][0];
     }
   };
@@ -39145,7 +40384,7 @@ class IdleManager {
     events.forEach(function(name) {
       document.addEventListener(name, _resetTimer, true);
     });
-    const debounce2 = (func, wait) => {
+    const debounce = (func, wait) => {
       let timeout2;
       return (...args) => {
         const context = this;
@@ -39158,7 +40397,7 @@ class IdleManager {
       };
     };
     if (options == null ? void 0 : options.captureScroll) {
-      const scroll = debounce2(_resetTimer, (options == null ? void 0 : options.scrollDebounce) ?? 100);
+      const scroll = debounce(_resetTimer, (options == null ? void 0 : options.scrollDebounce) ?? 100);
       window.addEventListener("scroll", scroll, true);
     }
     _resetTimer();
@@ -39343,8 +40582,8 @@ function wrap(value) {
   return newValue;
 }
 const unwrap = (value) => reverseTransformCache.get(value);
-function openDB(name, version2, { blocked, upgrade, blocking, terminated } = {}) {
-  const request2 = indexedDB.open(name, version2);
+function openDB(name, version, { blocked, upgrade, blocking, terminated } = {}) {
+  const request2 = indexedDB.open(name, version);
   const openPromise = wrap(request2);
   if (upgrade) {
     request2.addEventListener("upgradeneeded", (event) => {
@@ -39407,12 +40646,12 @@ replaceTraps((oldTraps) => ({
 }));
 const AUTH_DB_NAME = "auth-client-db";
 const OBJECT_STORE_NAME = "ic-keyval";
-const _openDbStore = async (dbName = AUTH_DB_NAME, storeName = OBJECT_STORE_NAME, version2) => {
+const _openDbStore = async (dbName = AUTH_DB_NAME, storeName = OBJECT_STORE_NAME, version) => {
   if (isBrowser && (localStorage == null ? void 0 : localStorage.getItem(KEY_STORAGE_DELEGATION))) {
     localStorage.removeItem(KEY_STORAGE_DELEGATION);
     localStorage.removeItem(KEY_STORAGE_KEY);
   }
-  return await openDB(dbName, version2, {
+  return await openDB(dbName, version, {
     upgrade: (database) => {
       if (database.objectStoreNames.contains(storeName)) {
         database.clear(storeName);
@@ -39447,8 +40686,8 @@ class IdbKeyVal {
    * @param {DBCreateOptions['version']} options.version version of the database. Increment to safely upgrade
    */
   static async create(options) {
-    const { dbName = AUTH_DB_NAME, storeName = OBJECT_STORE_NAME, version: version2 = DB_VERSION } = options ?? {};
-    const db = await _openDbStore(dbName, storeName, version2);
+    const { dbName = AUTH_DB_NAME, storeName = OBJECT_STORE_NAME, version = DB_VERSION } = options ?? {};
+    const db = await _openDbStore(dbName, storeName, version);
     return new IdbKeyVal(db, storeName);
   }
   /**
@@ -40621,6 +41860,24 @@ function App() {
   const [lightboxRoomIdx, setLightboxRoomIdx] = reactExports.useState(0);
   const [lightboxImageIdx, setLightboxImageIdx] = reactExports.useState(0);
   const [loading, setLoading] = reactExports.useState(true);
+  const scrollRef = reactExports.useRef(null);
+  reactExports.useEffect(() => {
+    if (loading) return;
+    let scroll;
+    const t = setTimeout(() => {
+      if (scrollRef.current) {
+        scroll = new Smooth({
+          el: scrollRef.current,
+          smooth: true,
+          multiplier: 1
+        });
+      }
+    }, 150);
+    return () => {
+      clearTimeout(t);
+      if (scroll) scroll.destroy();
+    };
+  }, [loading]);
   const navLinks = [
     { href: "#about", label: "About" },
     { href: "#rooms", label: "Rooms" },
@@ -40772,305 +42029,183 @@ function App() {
           }
         ) })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { id: "hero", className: "relative min-h-screen flex flex-col", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute inset-0 overflow-hidden", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(
-              "img",
-              {
-                src: "/assets/generated/hero-temple-shrine.dim_1200x700.jpg",
-                alt: "Rudreshwar Mahadeo Kothi heritage haveli temple shrine entrance",
-                className: "w-full h-full object-cover"
-              }
-            ),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "hero-overlay absolute inset-0" })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "relative z-10 flex-1 flex flex-col items-center justify-center text-center px-4 sm:px-6 pt-20", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
-            motion.div,
-            {
-              variants: stagger,
-              initial: "hidden",
-              animate: "visible",
-              className: "max-w-2xl",
-              children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx(
-                  motion.div,
-                  {
-                    variants: fadeUp,
-                    className: "flex justify-center mb-6",
-                    children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm border border-white/25 rounded-full px-4 py-1.5", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx(Star, { className: "w-3.5 h-3.5 fill-amber-300 text-amber-300" }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-white/90 text-xs font-medium tracking-widest uppercase", children: "Heritage Haveli - AirBnB Guest Favorite" })
-                    ] })
-                  }
-                ),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                  motion.h1,
-                  {
-                    variants: fadeUp,
-                    className: "font-display text-4xl sm:text-5xl md:text-6xl font-semibold text-white leading-[1.1] tracking-tight mb-4",
-                    children: [
-                      "Rudreshwar",
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "italic text-amber-200", children: "Mahadeo Kothi" })
-                    ]
-                  }
-                ),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                  motion.p,
-                  {
-                    variants: fadeUp,
-                    className: "text-white/80 text-lg sm:text-xl font-light mb-8 leading-relaxed",
-                    children: [
-                      "Heritage Haveli in the Heart of Varanasi",
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("br", { className: "hidden sm:block" }),
-                      "3 min walk from Kashi Vishwanath Temple"
-                    ]
-                  }
-                ),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                  motion.div,
-                  {
-                    variants: fadeUp,
-                    className: "flex flex-col sm:flex-row gap-3 justify-center",
-                    children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx(
-                        Button,
-                        {
-                          "data-ocid": "hero.primary_button",
-                          onClick: () => window.open(
-                            "https://reservations.ithstays.com/booking/book-rooms-rudreshwarmahadeokothibyithstays",
-                            "_blank"
-                          ),
-                          size: "lg",
-                          className: "bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-6 text-base rounded-full shadow-lg",
-                          children: "Book Now"
-                        }
-                      ),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx(
-                        Button,
-                        {
-                          onClick: () => scrollTo("#rooms"),
-                          size: "lg",
-                          variant: "outline",
-                          className: "border-white/40 text-white bg-white/10 hover:bg-white/20 hover:text-white px-8 py-6 text-base rounded-full",
-                          children: "View Rooms"
-                        }
-                      )
-                    ]
-                  }
-                )
-              ]
-            }
-          ) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "relative z-10 flex justify-center pb-8", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-            motion.button,
-            {
-              type: "button",
-              onClick: () => scrollTo("#about"),
-              animate: { y: [0, 6, 0] },
-              transition: {
-                duration: 2,
-                repeat: Number.POSITIVE_INFINITY,
-                ease: "easeInOut"
-              },
-              className: "text-white/60 hover:text-white/90 transition-colors",
-              "aria-label": "Scroll down",
-              children: /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronDown, { className: "w-7 h-7" })
-            }
-          ) })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "section",
-          {
-            id: "about",
-            className: "py-20 sm:py-28 px-4 sm:px-6 bg-background relative z-10",
-            children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-5xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { ref: scrollRef, "data-scroll-container": true, children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { id: "hero", className: "relative min-h-screen flex flex-col", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute inset-0 overflow-hidden", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "img",
+                {
+                  src: "/assets/generated/hero-temple-shrine.dim_1200x700.jpg",
+                  alt: "Rudreshwar Mahadeo Kothi heritage haveli temple shrine entrance",
+                  className: "w-full h-full object-cover"
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "hero-overlay absolute inset-0" })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "relative z-10 flex-1 flex flex-col items-center justify-center text-center px-4 sm:px-6 pt-20", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
               motion.div,
               {
                 variants: stagger,
                 initial: "hidden",
-                whileInView: "visible",
-                viewport: { once: true, margin: "-80px" },
-                className: "grid md:grid-cols-2 gap-12 items-center",
+                animate: "visible",
+                className: "max-w-2xl",
                 children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(
-                      motion.p,
-                      {
-                        variants: fadeUp,
-                        className: "text-sm font-medium tracking-widest uppercase text-primary mb-3",
-                        children: "About Us"
-                      }
-                    ),
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                      motion.h2,
-                      {
-                        variants: fadeUp,
-                        className: "font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight mb-5",
-                        children: [
-                          "A 300-Year-Old",
-                          /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-                          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "italic font-light", children: "Heritage Haveli" })
-                        ]
-                      }
-                    ),
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                      motion.div,
-                      {
-                        variants: fadeUp,
-                        className: "space-y-4 text-muted-foreground leading-relaxed",
-                        children: [
-                          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Step into a world of royal elegance, deep spirituality, and living history at Rudreshwar Mahadeo Kothi - a 300-year-old ancestral haveli steeped in tradition. Just a 3-minute walk from the Kashi Vishwanath Temple and 10 minutes from the sacred ghats of the Ganges." }),
-                          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "This heritage home features soaring ceilings, ornate courtyards, intricate carvings, and an in-house Lord Vishwanath Temple - a rare private shrine within the property. The Yaksh Vinayaka Shrine, one of the 56 revered Vinayak temples of Varanasi, is also located here." }),
-                          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Traditional ritual facilities - Rudrabhishek, Mahamrityunjaya Path, and other pujas - can be arranged on request. Modern amenities ensure a seamless stay without losing the soul of this living heritage." })
-                        ]
-                      }
-                    )
-                  ] }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(motion.div, { variants: fadeUp, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "border-border shadow-sm overflow-hidden", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-primary/8 px-6 pt-0 pb-2 border-b border-border", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display text-xl font-semibold text-foreground", children: "What's Included" }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mt-1", children: "Every stay, every room" })
-                    ] }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "p-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-4", children: [
-                      {
-                        icon: Wifi,
-                        label: "Free High-Speed Wi-Fi",
-                        desc: "Throughout the property"
-                      },
-                      {
-                        icon: Coffee,
-                        label: "Vegetarian Breakfast",
-                        desc: "Free light breakfast for direct bookers"
-                      },
-                      {
-                        icon: Wind,
-                        label: "Air Conditioning",
-                        desc: "All rooms climate-controlled"
-                      },
-                      {
-                        icon: Droplets,
-                        label: "Hot & Cold Shower",
-                        desc: "24x7 in all bathrooms"
-                      },
-                      {
-                        icon: () => /* @__PURE__ */ jsxRuntimeExports.jsx(
-                          Icon,
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    motion.div,
+                    {
+                      variants: fadeUp,
+                      className: "flex justify-center mb-6",
+                      children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm border border-white/25 rounded-full px-4 py-1.5", children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(Star, { className: "w-3.5 h-3.5 fill-amber-300 text-amber-300" }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-white/90 text-xs font-medium tracking-widest uppercase", children: "Heritage Haveli - AirBnB Guest Favorite" })
+                      ] })
+                    }
+                  ),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                    motion.h1,
+                    {
+                      variants: fadeUp,
+                      className: "font-display text-4xl sm:text-5xl md:text-6xl font-semibold text-white leading-[1.1] tracking-tight mb-4",
+                      children: [
+                        "Rudreshwar",
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "italic text-amber-200", children: "Mahadeo Kothi" })
+                      ]
+                    }
+                  ),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                    motion.p,
+                    {
+                      variants: fadeUp,
+                      className: "text-white/80 text-lg sm:text-xl font-light mb-8 leading-relaxed",
+                      children: [
+                        "Heritage Haveli in the Heart of Varanasi",
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("br", { className: "hidden sm:block" }),
+                        "3 min walk from Kashi Vishwanath Temple"
+                      ]
+                    }
+                  ),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                    motion.div,
+                    {
+                      variants: fadeUp,
+                      className: "flex flex-col sm:flex-row gap-3 justify-center",
+                      children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(
+                          Button,
                           {
-                            iconNode: stairs,
-                            className: "w-4.5 h-4.5 text-secondary-foreground",
-                            style: { width: "1.1rem", height: "1.1rem" }
+                            "data-ocid": "hero.primary_button",
+                            onClick: () => window.open(
+                              "https://reservations.ithstays.com/booking/book-rooms-rudreshwarmahadeokothibyithstays",
+                              "_blank"
+                            ),
+                            size: "lg",
+                            className: "bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-6 text-base rounded-full shadow-lg",
+                            children: "Book Now"
                           }
                         ),
-                        label: "Heritage Staircases",
-                        desc: "Access to rooms is via Steep traditional staircases. Elevators are not available."
-                      }
-                    ].map(({ icon: Icon2, label, desc }) => /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { className: "flex items-start gap-3", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-9 h-9 rounded-lg bg-secondary flex items-center justify-center flex-shrink-0 mt-0.5", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-                        Icon2,
-                        {
-                          className: "w-4.5 h-4.5 text-secondary-foreground",
-                          style: { width: "1.1rem", height: "1.1rem" }
-                        }
-                      ) }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-medium text-foreground text-sm", children: label }),
-                        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground mt-0.5", children: desc })
-                      ] })
-                    ] }, label)) }) })
-                  ] }) })
-                ]
-              }
-            ) })
-          }
-        ),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "section-divider" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "section",
-          {
-            id: "rooms",
-            className: "py-20 sm:py-28 px-4 sm:px-6 relative z-10",
-            children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-6xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
-              motion.div,
-              {
-                variants: stagger,
-                initial: "hidden",
-                whileInView: "visible",
-                viewport: { once: true, margin: "-80px" },
-                children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { variants: fadeUp, className: "text-center mb-14", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium tracking-widest uppercase text-primary mb-3", children: "Our Rooms" }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight", children: "Crafted for Your Comfort" })
-                  ] }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(
-                    RoomsGrid,
-                    {
-                      onInquire: () => {
-                        var _a4;
-                        return (_a4 = document.querySelector("#contact")) == null ? void 0 : _a4.scrollIntoView({ behavior: "smooth" });
-                      },
-                      onImageClick: handleImageClick
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(
+                          Button,
+                          {
+                            onClick: () => scrollTo("#rooms"),
+                            size: "lg",
+                            variant: "outline",
+                            className: "border-white/40 text-white bg-white/10 hover:bg-white/20 hover:text-white px-8 py-6 text-base rounded-full",
+                            children: "View Rooms"
+                          }
+                        )
+                      ]
                     }
                   )
                 ]
               }
-            ) })
-          }
-        ),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "section-divider" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "section",
-          {
-            id: "amenities",
-            className: "py-20 sm:py-28 px-4 sm:px-6 bg-secondary/30 relative z-10",
-            children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-5xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
-              motion.div,
+            ) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "relative z-10 flex justify-center pb-8", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+              motion.button,
               {
-                variants: stagger,
-                initial: "hidden",
-                whileInView: "visible",
-                viewport: { once: true, margin: "-80px" },
-                children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { variants: fadeUp, className: "text-center mb-14", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium tracking-widest uppercase text-primary mb-3", children: "Facilities" }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight", children: "Everything You Need" })
-                  ] }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(
-                    motion.div,
-                    {
-                      variants: stagger,
-                      className: "grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6",
-                      children: [
+                type: "button",
+                onClick: () => scrollTo("#about"),
+                animate: { y: [0, 6, 0] },
+                transition: {
+                  duration: 2,
+                  repeat: Number.POSITIVE_INFINITY,
+                  ease: "easeInOut"
+                },
+                className: "text-white/60 hover:text-white/90 transition-colors",
+                "aria-label": "Scroll down",
+                children: /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronDown, { className: "w-7 h-7" })
+              }
+            ) })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "section",
+            {
+              id: "about",
+              className: "py-20 sm:py-28 px-4 sm:px-6 bg-background relative z-10",
+              children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-5xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                motion.div,
+                {
+                  variants: stagger,
+                  initial: "hidden",
+                  whileInView: "visible",
+                  viewport: { once: true, margin: "-80px" },
+                  className: "grid md:grid-cols-2 gap-12 items-center",
+                  children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(
+                        motion.p,
                         {
-                          icon: Coffee,
-                          label: "Hearty Breakfast",
-                          desc: "Fresh homemade vegetarian & vegan meals"
-                        },
+                          variants: fadeUp,
+                          className: "text-sm font-medium tracking-widest uppercase text-primary mb-3",
+                          children: "About Us"
+                        }
+                      ),
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                        motion.h2,
                         {
-                          icon: Clock,
-                          label: "Late Check-in",
-                          desc: "Available with advance notice"
-                        },
+                          variants: fadeUp,
+                          className: "font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight mb-5",
+                          children: [
+                            "A 300-Year-Old",
+                            /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+                            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "italic font-light", children: "Heritage Haveli" })
+                          ]
+                        }
+                      ),
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                        motion.div,
                         {
-                          icon: Leaf,
-                          label: "Free Vegan Toiletries",
-                          desc: "Premium set for all rooms"
-                        },
-                        {
-                          icon: MapPin,
-                          label: "Local Experiences",
-                          desc: "City tours & cultural immersion"
-                        },
-                        {
-                          icon: Shirt,
-                          label: "Laundry Service",
-                          desc: "Washing machine available for fee"
-                        },
+                          variants: fadeUp,
+                          className: "space-y-4 text-muted-foreground leading-relaxed",
+                          children: [
+                            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Step into a world of royal elegance, deep spirituality, and living history at Rudreshwar Mahadeo Kothi - a 300-year-old ancestral haveli steeped in tradition. Just a 3-minute walk from the Kashi Vishwanath Temple and 10 minutes from the sacred ghats of the Ganges." }),
+                            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "This heritage home features soaring ceilings, ornate courtyards, intricate carvings, and an in-house Lord Vishwanath Temple - a rare private shrine within the property. The Yaksh Vinayaka Shrine, one of the 56 revered Vinayak temples of Varanasi, is also located here." }),
+                            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Traditional ritual facilities - Rudrabhishek, Mahamrityunjaya Path, and other pujas - can be arranged on request. Modern amenities ensure a seamless stay without losing the soul of this living heritage." })
+                          ]
+                        }
+                      )
+                    ] }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(motion.div, { variants: fadeUp, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "border-border shadow-sm overflow-hidden", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-primary/8 px-6 pt-0 pb-2 border-b border-border", children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display text-xl font-semibold text-foreground", children: "What's Included" }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mt-1", children: "Every stay, every room" })
+                      ] }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "p-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-4", children: [
                         {
                           icon: Wifi,
-                          label: "Free Wi-Fi",
-                          desc: "High-speed throughout the property"
+                          label: "Free High-Speed Wi-Fi",
+                          desc: "Throughout the property"
+                        },
+                        {
+                          icon: Coffee,
+                          label: "Vegetarian Breakfast",
+                          desc: "Free light breakfast for direct bookers"
+                        },
+                        {
+                          icon: Wind,
+                          label: "Air Conditioning",
+                          desc: "All rooms climate-controlled"
                         },
                         {
                           icon: Droplets,
@@ -41078,442 +42213,566 @@ function App() {
                           desc: "24x7 in all bathrooms"
                         },
                         {
-                          icon: VolumeX,
-                          label: "Soundproofing",
-                          desc: "Soundproofed windows & doors"
-                        }
-                      ].map(({ icon: Icon2, label, desc }) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                        motion.div,
-                        {
-                          variants: fadeUp,
-                          className: "bg-card rounded-2xl p-5 flex flex-col items-center text-center border border-border shadow-xs hover:shadow-md transition-shadow",
-                          children: [
-                            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-3", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon2, { className: "w-5 h-5 text-primary" }) }),
-                            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-sm text-foreground", children: label }),
-                            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground mt-1", children: desc })
-                          ]
-                        },
-                        label
-                      ))
-                    }
-                  )
-                ]
-              }
-            ) })
-          }
-        ),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "section-divider" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "section",
-          {
-            id: "distances",
-            className: "py-20 sm:py-28 px-4 sm:px-6 relative z-10",
-            children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-5xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
-              motion.div,
-              {
-                variants: stagger,
-                initial: "hidden",
-                whileInView: "visible",
-                viewport: { once: true, margin: "-80px" },
-                children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { variants: fadeUp, className: "text-center mb-14", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium tracking-widest uppercase text-primary mb-3", children: "Location" }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight", children: "Important Distances" }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground mt-3", children: "Everything in Varanasi, minutes away" })
-                  ] }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(
-                    motion.div,
-                    {
-                      variants: stagger,
-                      className: "grid grid-cols-2 sm:grid-cols-3 gap-4",
-                      children: DISTANCES.map(({ place, time: time2, type }, idx) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-                        motion.div,
-                        {
-                          "data-ocid": `distances.item.${idx + 1}`,
-                          variants: fadeUp,
-                          className: "bg-card rounded-2xl border border-border p-5 shadow-xs hover:shadow-md transition-shadow",
-                          children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start gap-3", children: [
-                            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5", children: /* @__PURE__ */ jsxRuntimeExports.jsx(MapPin, { className: "w-4 h-4 text-primary" }) }),
-                            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-foreground text-sm leading-snug", children: place }),
-                              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-primary font-display font-semibold text-lg mt-1", children: time2 }),
-                              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground capitalize", children: type })
-                            ] })
-                          ] })
-                        },
-                        place
-                      ))
-                    }
-                  )
-                ]
-              }
-            ) })
-          }
-        ),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "section-divider" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "section",
-          {
-            id: "gallery",
-            className: "py-20 sm:py-28 px-4 sm:px-6 bg-secondary/30 relative z-10",
-            children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-5xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
-              motion.div,
-              {
-                initial: "hidden",
-                whileInView: "visible",
-                viewport: { once: true, margin: "-80px" },
-                variants: stagger,
-                children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { variants: fadeUp, className: "text-center mb-14", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium tracking-widest uppercase text-primary mb-3", children: "Gallery" }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight", children: "A Glimpse of the Haveli" })
-                  ] }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(motion.div, { variants: fadeUp, className: "masonry-grid", children: GALLERY_IMAGES.map(({ src, alt }, idx) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-                    "div",
-                    {
-                      className: "masonry-item group cursor-zoom-in",
-                      onClick: () => handleGalleryClick(idx),
-                      children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-                        "img",
-                        {
-                          src,
-                          alt: alt || "gallery image",
-                          className: "w-full object-cover transition-transform duration-500 group-hover:scale-105",
-                          loading: "lazy"
-                        }
-                      )
-                    },
-                    src
-                  )) })
-                ]
-              }
-            ) })
-          }
-        ),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "section-divider" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "section",
-          {
-            id: "reviews",
-            className: "py-20 sm:py-28 px-4 sm:px-6 relative z-10",
-            children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-5xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
-              motion.div,
-              {
-                initial: "hidden",
-                whileInView: "visible",
-                viewport: { once: true, margin: "-80px" },
-                variants: stagger,
-                children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { variants: fadeUp, className: "text-center mb-14", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium tracking-widest uppercase text-primary mb-3", children: "Guest Stories" }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight mb-4", children: "Loved by Our Guests" }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "inline-flex items-center gap-2 bg-secondary rounded-full px-4 py-2 border border-border", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex gap-0.5", children: [
-                        [1, 2, 3, 4].map((s2) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-                          Star,
-                          {
-                            className: "w-3.5 h-3.5 fill-amber-400 text-amber-400"
-                          },
-                          s2
-                        )),
-                        /* @__PURE__ */ jsxRuntimeExports.jsx(Star, { className: "w-3.5 h-3.5 fill-amber-400/60 text-amber-400/60" })
-                      ] }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-semibold text-foreground", children: "Rated 4.6 / 5 on Google" })
-                    ] })
-                  ] }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(ReviewsSection, {})
-                ]
-              }
-            ) })
-          }
-        ),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "section-divider" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "section",
-          {
-            id: "directions",
-            className: "py-16 sm:py-20 px-4 sm:px-6 bg-secondary/30 relative z-10",
-            children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-3xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
-              motion.div,
-              {
-                initial: "hidden",
-                whileInView: "visible",
-                viewport: { once: true, margin: "-80px" },
-                variants: stagger,
-                children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { variants: fadeUp, className: "text-center mb-10", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium tracking-widest uppercase text-primary mb-3", children: "Getting Here" }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-3xl sm:text-4xl font-semibold text-foreground leading-tight", children: "How to Find Us" })
-                  ] }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { variants: fadeUp, children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                      "button",
-                      {
-                        type: "button",
-                        "data-ocid": "directions.toggle",
-                        onClick: () => setDirectionsOpen((v2) => !v2),
-                        className: "w-full flex items-center justify-between bg-card border border-border rounded-2xl px-6 py-4 text-left hover:shadow-md transition-shadow",
-                        children: [
-                          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-semibold text-foreground", children: "View Directions" }),
-                          /* @__PURE__ */ jsxRuntimeExports.jsx(
-                            ChevronDown,
+                          icon: () => /* @__PURE__ */ jsxRuntimeExports.jsx(
+                            Icon,
                             {
-                              className: `w-5 h-5 text-muted-foreground transition-transform duration-300 ${directionsOpen ? "rotate-180" : ""}`
+                              iconNode: stairs,
+                              className: "w-4.5 h-4.5 text-secondary-foreground",
+                              style: { width: "1.1rem", height: "1.1rem" }
                             }
-                          )
-                        ]
-                      }
-                    ),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(AnimatePresence, { children: directionsOpen && /* @__PURE__ */ jsxRuntimeExports.jsx(
-                      motion.div,
-                      {
-                        initial: { height: 0, opacity: 0 },
-                        animate: { height: "auto", opacity: 1 },
-                        exit: { height: 0, opacity: 0 },
-                        transition: { duration: 0.3 },
-                        className: "overflow-hidden",
-                        children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-card border border-t-0 border-border rounded-b-2xl px-6 py-6 space-y-6 text-sm text-muted-foreground leading-relaxed", children: [
-                          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                            /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "font-semibold text-foreground mb-2", children: "If Flying into Varanasi" }),
-                            /* @__PURE__ */ jsxRuntimeExports.jsxs("ol", { className: "list-decimal list-inside space-y-1", children: [
-                              /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
-                                "Use pre-paid taxi to",
-                                " ",
-                                /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Godowlia Chauraha" }),
-                                ", then switch to e-rickshaw (tuk-tuk) to the property."
-                              ] }),
-                              /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "We also offer a pick-up service for Rs 2,000 - our staff will meet you outside the terminal with a placard." })
-                            ] })
-                          ] }),
-                          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                            /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "font-semibold text-foreground mb-2", children: "If Taking a Train" }),
-                            /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "mb-2", children: [
-                              "From ",
-                              /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Varanasi Junction (BSB)" }),
-                              ",",
-                              " ",
-                              /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Banaras Station (BSBS)" }),
-                              ", or",
-                              " ",
-                              /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "DDU Junction" }),
-                              ":"
-                            ] }),
-                            /* @__PURE__ */ jsxRuntimeExports.jsxs("ol", { className: "list-decimal list-inside space-y-1", children: [
-                              /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
-                                "Take a taxi/auto to",
-                                " ",
-                                /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Godowlia Chauraha" }),
-                                ", then an e-rickshaw to the property."
-                              ] }),
-                              /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
-                                "Get dropped at the entry to the lane of Gate 1 to",
-                                " ",
-                                /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Kashi Vishwanath Temple" }),
-                                "."
-                              ] }),
-                              /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
-                                "Walk about 20 metres -",
-                                " ",
-                                /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Rudreshwar Mahadeo Kothi" }),
-                                " is the",
-                                " ",
-                                /* @__PURE__ */ jsxRuntimeExports.jsx("em", { children: "first house on the left" }),
-                                " (one shop after Vishwanath Kothi Restaurant)."
-                              ] })
-                            ] })
-                          ] }),
-                          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-primary/5 border border-primary/20 rounded-xl px-4 py-3", children: [
-                            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-foreground font-medium text-xs uppercase tracking-wide mb-1", children: "Address" }),
-                            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "CK-37/29, Bansphatak Road, Gate No.1 Near Pitambari Saree Opposite of Bank Of Baroda Varanasi 221001, Uttar Pradesh, India" })
-                          ] })
+                          ),
+                          label: "Heritage Staircases",
+                          desc: "Access to rooms is via Steep traditional staircases. Elevators are not available."
+                        }
+                      ].map(({ icon: Icon2, label, desc }) => /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { className: "flex items-start gap-3", children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-9 h-9 rounded-lg bg-secondary flex items-center justify-center flex-shrink-0 mt-0.5", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                          Icon2,
+                          {
+                            className: "w-4.5 h-4.5 text-secondary-foreground",
+                            style: { width: "1.1rem", height: "1.1rem" }
+                          }
+                        ) }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-medium text-foreground text-sm", children: label }),
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground mt-0.5", children: desc })
                         ] })
-                      }
-                    ) })
-                  ] })
-                ]
-              }
-            ) })
-          }
-        ),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "section-divider" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "section",
-          {
-            id: "contact",
-            className: "py-20 sm:py-28 px-4 sm:px-6 relative z-10",
-            children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-3xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
-              motion.div,
-              {
-                initial: "hidden",
-                whileInView: "visible",
-                viewport: { once: true, margin: "-80px" },
-                variants: stagger,
-                children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { variants: fadeUp, className: "text-center mb-8", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium tracking-widest uppercase text-primary mb-3", children: "Stay With Us" }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight mb-3", children: "Book Your Stay" }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground mb-5", children: "Send us a message and Team Rudreshwar will confirm availability within 24 hours." }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap gap-3 justify-center", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                        "a",
-                        {
-                          href: "tel:+919920685754",
-                          "data-ocid": "contact.call_button",
-                          className: "inline-flex items-center gap-2 bg-secondary text-foreground hover:bg-secondary/80 border border-border rounded-full px-5 py-2.5 text-sm font-medium transition-colors",
-                          children: [
-                            /* @__PURE__ */ jsxRuntimeExports.jsx(Phone, { className: "w-4 h-4" }),
-                            "Call Us: +91 99206 85754 +91 9889244273 +91 9044301567"
-                          ]
-                        }
-                      ),
-                      /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                        "a",
-                        {
-                          href: "mailto:rmkothivns@gmail.com",
-                          "data-ocid": "contact.email_button",
-                          className: "inline-flex items-center gap-2 bg-secondary text-foreground hover:bg-secondary/80 border border-border rounded-full px-5 py-2.5 text-sm font-medium transition-colors",
-                          children: [
-                            /* @__PURE__ */ jsxRuntimeExports.jsx(Mail, { className: "w-4 h-4" }),
-                            "Email Us"
-                          ]
-                        }
-                      ),
-                      /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                        "a",
-                        {
-                          href: "https://reservations.ithstays.com/booking/book-rooms-rudreshwarmahadeokothibyithstays",
-                          target: "_blank",
-                          rel: "noopener noreferrer",
-                          "data-ocid": "contact.booking_button",
-                          className: "inline-flex items-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-5 py-2.5 text-sm font-medium transition-colors",
-                          children: [
-                            /* @__PURE__ */ jsxRuntimeExports.jsx(ExternalLink, { className: "w-4 h-4" }),
-                            "Book Online Now"
-                          ]
-                        }
-                      )
+                      ] }, label)) }) })
+                    ] }) })
+                  ]
+                }
+              ) })
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "section-divider" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "section",
+            {
+              id: "rooms",
+              className: "py-20 sm:py-28 px-4 sm:px-6 relative z-10",
+              children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-6xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                motion.div,
+                {
+                  variants: stagger,
+                  initial: "hidden",
+                  whileInView: "visible",
+                  viewport: { once: true, margin: "-80px" },
+                  children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { variants: fadeUp, className: "text-center mb-14", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium tracking-widest uppercase text-primary mb-3", children: "Our Rooms" }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight", children: "Crafted for Your Comfort" })
                     ] }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex gap-6 justify-center mt-5 text-sm text-muted-foreground", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { className: "text-foreground", children: "Check-in:" }),
-                        " 12 noon"
-                      ] }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
-                        /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { className: "text-foreground", children: "Check-out:" }),
-                        " 11 am"
-                      ] })
-                    ] })
-                  ] }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(motion.div, { variants: fadeUp, children: /* @__PURE__ */ jsxRuntimeExports.jsx(BookingForm, {}) }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { variants: fadeUp, className: "mt-8", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                      "button",
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      RoomsGrid,
                       {
-                        type: "button",
-                        "data-ocid": "rules.toggle",
-                        onClick: () => setRulesOpen((v2) => !v2),
-                        className: "w-full flex items-center justify-between bg-card border border-border rounded-2xl px-6 py-4 text-left hover:shadow-md transition-shadow",
-                        children: [
-                          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-semibold text-foreground", children: "House Rules" }),
-                          /* @__PURE__ */ jsxRuntimeExports.jsx(
-                            ChevronDown,
-                            {
-                              className: `w-5 h-5 text-muted-foreground transition-transform duration-300 ${rulesOpen ? "rotate-180" : ""}`
-                            }
-                          )
-                        ]
+                        onInquire: () => {
+                          var _a4;
+                          return (_a4 = document.querySelector("#contact")) == null ? void 0 : _a4.scrollIntoView({ behavior: "smooth" });
+                        },
+                        onImageClick: handleImageClick
                       }
-                    ),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(AnimatePresence, { children: rulesOpen && /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    )
+                  ]
+                }
+              ) })
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "section-divider" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "section",
+            {
+              id: "amenities",
+              className: "py-20 sm:py-28 px-4 sm:px-6 bg-secondary/30 relative z-10",
+              children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-5xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                motion.div,
+                {
+                  variants: stagger,
+                  initial: "hidden",
+                  whileInView: "visible",
+                  viewport: { once: true, margin: "-80px" },
+                  children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { variants: fadeUp, className: "text-center mb-14", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium tracking-widest uppercase text-primary mb-3", children: "Facilities" }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight", children: "Everything You Need" })
+                    ] }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(
                       motion.div,
                       {
-                        initial: { height: 0, opacity: 0 },
-                        animate: { height: "auto", opacity: 1 },
-                        exit: { height: 0, opacity: 0 },
-                        transition: { duration: 0.3 },
-                        className: "overflow-hidden",
-                        children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-card border border-t-0 border-border rounded-b-2xl px-6 py-5", children: /* @__PURE__ */ jsxRuntimeExports.jsx("ol", { className: "space-y-2", children: HOUSE_RULES.map((rule, idx) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                          "li",
+                        variants: stagger,
+                        className: "grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6",
+                        children: [
                           {
-                            "data-ocid": `rules.item.${idx + 1}`,
-                            className: "flex items-start gap-3 text-sm text-muted-foreground",
+                            icon: Coffee,
+                            label: "Hearty Breakfast",
+                            desc: "Fresh homemade vegetarian & vegan meals"
+                          },
+                          {
+                            icon: Clock,
+                            label: "Late Check-in",
+                            desc: "Available with advance notice"
+                          },
+                          {
+                            icon: Leaf,
+                            label: "Free Vegan Toiletries",
+                            desc: "Premium set for all rooms"
+                          },
+                          {
+                            icon: MapPin,
+                            label: "Local Experiences",
+                            desc: "City tours & cultural immersion"
+                          },
+                          {
+                            icon: Shirt,
+                            label: "Laundry Service",
+                            desc: "Washing machine available for fee"
+                          },
+                          {
+                            icon: Wifi,
+                            label: "Free Wi-Fi",
+                            desc: "High-speed throughout the property"
+                          },
+                          {
+                            icon: Droplets,
+                            label: "Hot & Cold Shower",
+                            desc: "24x7 in all bathrooms"
+                          },
+                          {
+                            icon: VolumeX,
+                            label: "Soundproofing",
+                            desc: "Soundproofed windows & doors"
+                          }
+                        ].map(({ icon: Icon2, label, desc }) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                          motion.div,
+                          {
+                            variants: fadeUp,
+                            className: "bg-card rounded-2xl p-5 flex flex-col items-center text-center border border-border shadow-xs hover:shadow-md transition-shadow",
                             children: [
-                              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "w-5 h-5 rounded-full bg-primary/10 text-primary text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5", children: idx + 1 }),
-                              rule
+                              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-3", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon2, { className: "w-5 h-5 text-primary" }) }),
+                              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-sm text-foreground", children: label }),
+                              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground mt-1", children: desc })
                             ]
                           },
-                          rule
-                        )) }) })
+                          label
+                        ))
                       }
-                    ) })
-                  ] })
-                ]
-              }
-            ) })
-          }
-        )
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("footer", { className: "bg-foreground text-primary-foreground py-14 px-4 sm:px-6 relative z-10", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid sm:grid-cols-3 gap-10 mb-10", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-4", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-8 h-8 rounded-full bg-primary flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Flame, { className: "w-4 h-4 text-primary-foreground" }) }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-display text-lg font-semibold text-primary-foreground", children: "Rudreshwar Mahadeo Kothi" })
+                    )
+                  ]
+                }
+              ) })
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "section-divider" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "section",
+            {
+              id: "distances",
+              className: "py-20 sm:py-28 px-4 sm:px-6 relative z-10",
+              children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-5xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                motion.div,
+                {
+                  variants: stagger,
+                  initial: "hidden",
+                  whileInView: "visible",
+                  viewport: { once: true, margin: "-80px" },
+                  children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { variants: fadeUp, className: "text-center mb-14", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium tracking-widest uppercase text-primary mb-3", children: "Location" }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight", children: "Important Distances" }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground mt-3", children: "Everything in Varanasi, minutes away" })
+                    ] }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      motion.div,
+                      {
+                        variants: stagger,
+                        className: "grid grid-cols-2 sm:grid-cols-3 gap-4",
+                        children: DISTANCES.map(({ place, time: time2, type }, idx) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+                          motion.div,
+                          {
+                            "data-ocid": `distances.item.${idx + 1}`,
+                            variants: fadeUp,
+                            className: "bg-card rounded-2xl border border-border p-5 shadow-xs hover:shadow-md transition-shadow",
+                            children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start gap-3", children: [
+                              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5", children: /* @__PURE__ */ jsxRuntimeExports.jsx(MapPin, { className: "w-4 h-4 text-primary" }) }),
+                              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-foreground text-sm leading-snug", children: place }),
+                                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-primary font-display font-semibold text-lg mt-1", children: time2 }),
+                                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground capitalize", children: type })
+                              ] })
+                            ] })
+                          },
+                          place
+                        ))
+                      }
+                    )
+                  ]
+                }
+              ) })
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "section-divider" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "section",
+            {
+              id: "gallery",
+              className: "py-20 sm:py-28 px-4 sm:px-6 bg-secondary/30 relative z-10",
+              children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-5xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                motion.div,
+                {
+                  initial: "hidden",
+                  whileInView: "visible",
+                  viewport: { once: true, margin: "-80px" },
+                  variants: stagger,
+                  children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { variants: fadeUp, className: "text-center mb-14", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium tracking-widest uppercase text-primary mb-3", children: "Gallery" }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight", children: "A Glimpse of the Haveli" })
+                    ] }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(motion.div, { variants: fadeUp, className: "masonry-grid", children: GALLERY_IMAGES.map(({ src: src2, alt }, idx) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      "div",
+                      {
+                        className: "masonry-item group cursor-zoom-in",
+                        onClick: () => handleGalleryClick(idx),
+                        children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                          "img",
+                          {
+                            src: src2,
+                            alt: alt || "gallery image",
+                            className: "w-full object-cover transition-transform duration-500 group-hover:scale-105",
+                            loading: "lazy"
+                          }
+                        )
+                      },
+                      src2
+                    )) })
+                  ]
+                }
+              ) })
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "section-divider" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "section",
+            {
+              id: "reviews",
+              className: "py-20 sm:py-28 px-4 sm:px-6 relative z-10",
+              children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-5xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                motion.div,
+                {
+                  initial: "hidden",
+                  whileInView: "visible",
+                  viewport: { once: true, margin: "-80px" },
+                  variants: stagger,
+                  children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { variants: fadeUp, className: "text-center mb-14", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium tracking-widest uppercase text-primary mb-3", children: "Guest Stories" }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight mb-4", children: "Loved by Our Guests" }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "inline-flex items-center gap-2 bg-secondary rounded-full px-4 py-2 border border-border", children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex gap-0.5", children: [
+                          [1, 2, 3, 4].map((s2) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+                            Star,
+                            {
+                              className: "w-3.5 h-3.5 fill-amber-400 text-amber-400"
+                            },
+                            s2
+                          )),
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(Star, { className: "w-3.5 h-3.5 fill-amber-400/60 text-amber-400/60" })
+                        ] }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-semibold text-foreground", children: "Rated 4.6 / 5 on Google" })
+                      ] })
+                    ] }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(ReviewsSection, {})
+                  ]
+                }
+              ) })
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "section-divider" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "section",
+            {
+              id: "directions",
+              className: "py-16 sm:py-20 px-4 sm:px-6 bg-secondary/30 relative z-10",
+              children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-3xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                motion.div,
+                {
+                  initial: "hidden",
+                  whileInView: "visible",
+                  viewport: { once: true, margin: "-80px" },
+                  variants: stagger,
+                  children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { variants: fadeUp, className: "text-center mb-10", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium tracking-widest uppercase text-primary mb-3", children: "Getting Here" }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-3xl sm:text-4xl font-semibold text-foreground leading-tight", children: "How to Find Us" })
+                    ] }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { variants: fadeUp, children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                        "button",
+                        {
+                          type: "button",
+                          "data-ocid": "directions.toggle",
+                          onClick: () => setDirectionsOpen((v2) => !v2),
+                          className: "w-full flex items-center justify-between bg-card border border-border rounded-2xl px-6 py-4 text-left hover:shadow-md transition-shadow",
+                          children: [
+                            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-semibold text-foreground", children: "View Directions" }),
+                            /* @__PURE__ */ jsxRuntimeExports.jsx(
+                              ChevronDown,
+                              {
+                                className: `w-5 h-5 text-muted-foreground transition-transform duration-300 ${directionsOpen ? "rotate-180" : ""}`
+                              }
+                            )
+                          ]
+                        }
+                      ),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(AnimatePresence, { children: directionsOpen && /* @__PURE__ */ jsxRuntimeExports.jsx(
+                        motion.div,
+                        {
+                          initial: { height: 0, opacity: 0 },
+                          animate: { height: "auto", opacity: 1 },
+                          exit: { height: 0, opacity: 0 },
+                          transition: { duration: 0.3 },
+                          className: "overflow-hidden",
+                          children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-card border border-t-0 border-border rounded-b-2xl px-6 py-6 space-y-6 text-sm text-muted-foreground leading-relaxed", children: [
+                            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                              /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "font-semibold text-foreground mb-2", children: "If Flying into Varanasi" }),
+                              /* @__PURE__ */ jsxRuntimeExports.jsxs("ol", { className: "list-decimal list-inside space-y-1", children: [
+                                /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+                                  "Use pre-paid taxi to",
+                                  " ",
+                                  /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Godowlia Chauraha" }),
+                                  ", then switch to e-rickshaw (tuk-tuk) to the property."
+                                ] }),
+                                /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "We also offer a pick-up service for Rs 2,000 - our staff will meet you outside the terminal with a placard." })
+                              ] })
+                            ] }),
+                            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                              /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "font-semibold text-foreground mb-2", children: "If Taking a Train" }),
+                              /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "mb-2", children: [
+                                "From ",
+                                /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Varanasi Junction (BSB)" }),
+                                ",",
+                                " ",
+                                /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Banaras Station (BSBS)" }),
+                                ", or",
+                                " ",
+                                /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "DDU Junction" }),
+                                ":"
+                              ] }),
+                              /* @__PURE__ */ jsxRuntimeExports.jsxs("ol", { className: "list-decimal list-inside space-y-1", children: [
+                                /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+                                  "Take a taxi/auto to",
+                                  " ",
+                                  /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Godowlia Chauraha" }),
+                                  ", then an e-rickshaw to the property."
+                                ] }),
+                                /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+                                  "Get dropped at the entry to the lane of Gate 1 to",
+                                  " ",
+                                  /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Kashi Vishwanath Temple" }),
+                                  "."
+                                ] }),
+                                /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+                                  "Walk about 20 metres -",
+                                  " ",
+                                  /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { children: "Rudreshwar Mahadeo Kothi" }),
+                                  " is the",
+                                  " ",
+                                  /* @__PURE__ */ jsxRuntimeExports.jsx("em", { children: "first house on the left" }),
+                                  " (one shop after Vishwanath Kothi Restaurant)."
+                                ] })
+                              ] })
+                            ] }),
+                            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-primary/5 border border-primary/20 rounded-xl px-4 py-3", children: [
+                              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-foreground font-medium text-xs uppercase tracking-wide mb-1", children: "Address" }),
+                              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "CK-37/29, Bansphatak Road, Gate No.1 Near Pitambari Saree Opposite of Bank Of Baroda Varanasi 221001, Uttar Pradesh, India" })
+                            ] })
+                          ] })
+                        }
+                      ) })
+                    ] })
+                  ]
+                }
+              ) })
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "section-divider" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "section",
+            {
+              id: "contact",
+              className: "py-20 sm:py-28 px-4 sm:px-6 relative z-10",
+              children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-3xl mx-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                motion.div,
+                {
+                  initial: "hidden",
+                  whileInView: "visible",
+                  viewport: { once: true, margin: "-80px" },
+                  variants: stagger,
+                  children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { variants: fadeUp, className: "text-center mb-8", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium tracking-widest uppercase text-primary mb-3", children: "Stay With Us" }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight mb-3", children: "Book Your Stay" }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground mb-5", children: "Send us a message and Team Rudreshwar will confirm availability within 24 hours." }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap gap-3 justify-center", children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                          "a",
+                          {
+                            href: "tel:+919920685754",
+                            "data-ocid": "contact.call_button",
+                            className: "inline-flex items-center gap-2 bg-secondary text-foreground hover:bg-secondary/80 border border-border rounded-full px-5 py-2.5 text-sm font-medium transition-colors",
+                            children: [
+                              /* @__PURE__ */ jsxRuntimeExports.jsx(Phone, { className: "w-4 h-4" }),
+                              "Call Us: +91 99206 85754 +91 9889244273 +91 9044301567"
+                            ]
+                          }
+                        ),
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                          "a",
+                          {
+                            href: "mailto:rmkothivns@gmail.com",
+                            "data-ocid": "contact.email_button",
+                            className: "inline-flex items-center gap-2 bg-secondary text-foreground hover:bg-secondary/80 border border-border rounded-full px-5 py-2.5 text-sm font-medium transition-colors",
+                            children: [
+                              /* @__PURE__ */ jsxRuntimeExports.jsx(Mail, { className: "w-4 h-4" }),
+                              "Email Us"
+                            ]
+                          }
+                        ),
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                          "a",
+                          {
+                            href: "https://reservations.ithstays.com/booking/book-rooms-rudreshwarmahadeokothibyithstays",
+                            target: "_blank",
+                            rel: "noopener noreferrer",
+                            "data-ocid": "contact.booking_button",
+                            className: "inline-flex items-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-5 py-2.5 text-sm font-medium transition-colors",
+                            children: [
+                              /* @__PURE__ */ jsxRuntimeExports.jsx(ExternalLink, { className: "w-4 h-4" }),
+                              "Book Online Now"
+                            ]
+                          }
+                        )
+                      ] }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex gap-6 justify-center mt-5 text-sm text-muted-foreground", children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { className: "text-foreground", children: "Check-in:" }),
+                          " 12 noon"
+                        ] }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("strong", { className: "text-foreground", children: "Check-out:" }),
+                          " 11 am"
+                        ] })
+                      ] })
+                    ] }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(motion.div, { variants: fadeUp, children: /* @__PURE__ */ jsxRuntimeExports.jsx(BookingForm, {}) }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { variants: fadeUp, className: "mt-8", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                        "button",
+                        {
+                          type: "button",
+                          "data-ocid": "rules.toggle",
+                          onClick: () => setRulesOpen((v2) => !v2),
+                          className: "w-full flex items-center justify-between bg-card border border-border rounded-2xl px-6 py-4 text-left hover:shadow-md transition-shadow",
+                          children: [
+                            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-semibold text-foreground", children: "House Rules" }),
+                            /* @__PURE__ */ jsxRuntimeExports.jsx(
+                              ChevronDown,
+                              {
+                                className: `w-5 h-5 text-muted-foreground transition-transform duration-300 ${rulesOpen ? "rotate-180" : ""}`
+                              }
+                            )
+                          ]
+                        }
+                      ),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(AnimatePresence, { children: rulesOpen && /* @__PURE__ */ jsxRuntimeExports.jsx(
+                        motion.div,
+                        {
+                          initial: { height: 0, opacity: 0 },
+                          animate: { height: "auto", opacity: 1 },
+                          exit: { height: 0, opacity: 0 },
+                          transition: { duration: 0.3 },
+                          className: "overflow-hidden",
+                          children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-card border border-t-0 border-border rounded-b-2xl px-6 py-5", children: /* @__PURE__ */ jsxRuntimeExports.jsx("ol", { className: "space-y-2", children: HOUSE_RULES.map((rule, idx) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                            "li",
+                            {
+                              "data-ocid": `rules.item.${idx + 1}`,
+                              className: "flex items-start gap-3 text-sm text-muted-foreground",
+                              children: [
+                                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "w-5 h-5 rounded-full bg-primary/10 text-primary text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5", children: idx + 1 }),
+                                rule
+                              ]
+                            },
+                            rule
+                          )) }) })
+                        }
+                      ) })
+                    ] })
+                  ]
+                }
+              ) })
+            }
+          )
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("footer", { className: "bg-foreground text-primary-foreground py-14 px-4 sm:px-6 relative z-10", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-5xl mx-auto", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid sm:grid-cols-3 gap-10 mb-10", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mb-4", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-8 h-8 rounded-full bg-primary flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Flame, { className: "w-4 h-4 text-primary-foreground" }) }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-display text-lg font-semibold text-primary-foreground", children: "Rudreshwar Mahadeo Kothi" })
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-primary-foreground/60 leading-relaxed", children: "A 300-year-old heritage haveli managed by Mr. Dr V.N. Singh and Team Rudreshwar Kothi, in the heart of Varanasi." })
             ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-primary-foreground/60 leading-relaxed", children: "A 300-year-old heritage haveli managed by Mr. Dr V.N. Singh and Team Rudreshwar Kothi, in the heart of Varanasi." })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "font-semibold text-sm uppercase tracking-widest text-primary-foreground/50 mb-4", children: "Contact" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("ul", { className: "space-y-3", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { className: "flex items-start gap-2 text-sm text-primary-foreground/70", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx(MapPin, { className: "w-4 h-4 mt-0.5 flex-shrink-0 text-primary-foreground/40" }),
-                "CK-37/29, Bansphatak Road,",
-                /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-                "Varanasi 221001, UP, India"
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { className: "flex items-center gap-2 text-sm text-primary-foreground/70", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx(Phone, { className: "w-4 h-4 flex-shrink-0 text-primary-foreground/40" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx(
-                  "a",
-                  {
-                    href: "tel:+919920685754",
-                    className: "hover:text-primary-foreground transition-colors",
-                    children: "+91 99206 85754"
-                  }
-                )
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { className: "flex items-center gap-2 text-sm text-primary-foreground/70", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx(Mail, { className: "w-4 h-4 flex-shrink-0 text-primary-foreground/40" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx(
-                  "a",
-                  {
-                    href: "mailto:rmkothivns@gmail.com",
-                    className: "hover:text-primary-foreground transition-colors",
-                    children: "rmkothivns@gmail.com"
-                  }
-                )
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "font-semibold text-sm uppercase tracking-widest text-primary-foreground/50 mb-4", children: "Contact" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("ul", { className: "space-y-3", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { className: "flex items-start gap-2 text-sm text-primary-foreground/70", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(MapPin, { className: "w-4 h-4 mt-0.5 flex-shrink-0 text-primary-foreground/40" }),
+                  "CK-37/29, Bansphatak Road,",
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+                  "Varanasi 221001, UP, India"
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { className: "flex items-center gap-2 text-sm text-primary-foreground/70", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(Phone, { className: "w-4 h-4 flex-shrink-0 text-primary-foreground/40" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "a",
+                    {
+                      href: "tel:+919920685754",
+                      className: "hover:text-primary-foreground transition-colors",
+                      children: "+91 99206 85754"
+                    }
+                  )
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { className: "flex items-center gap-2 text-sm text-primary-foreground/70", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(Mail, { className: "w-4 h-4 flex-shrink-0 text-primary-foreground/40" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "a",
+                    {
+                      href: "mailto:rmkothivns@gmail.com",
+                      className: "hover:text-primary-foreground transition-colors",
+                      children: "rmkothivns@gmail.com"
+                    }
+                  )
+                ] })
               ] })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "font-semibold text-sm uppercase tracking-widest text-primary-foreground/50 mb-4", children: "Quick Links" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-2", children: ["About", "Rooms", "Amenities", "Gallery", "Reviews"].map(
+                (item) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "a",
+                  {
+                    href: `#${item.toLowerCase()}`,
+                    className: "text-sm text-primary-foreground/60 hover:text-primary-foreground transition-colors",
+                    children: item
+                  }
+                ) }, item)
+              ) })
             ] })
           ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "font-semibold text-sm uppercase tracking-widest text-primary-foreground/50 mb-4", children: "Quick Links" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-2", children: ["About", "Rooms", "Amenities", "Gallery", "Reviews"].map(
-              (item) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-                "a",
-                {
-                  href: `#${item.toLowerCase()}`,
-                  className: "text-sm text-primary-foreground/60 hover:text-primary-foreground transition-colors",
-                  children: item
-                }
-              ) }, item)
-            ) })
-          ] })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border-t border-primary-foreground/10 pt-6 text-center", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm text-primary-foreground/40", children: [
-          "© 2026 Rudreshwar Mahadeo Kothi — A Heritage Property. All rights reserved.",
-          " "
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border-t border-primary-foreground/10 pt-6 text-center", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm text-primary-foreground/40", children: [
+            "© 2026 Rudreshwar Mahadeo Kothi — A Heritage Property. All rights reserved.",
+            " "
+          ] }) })
         ] }) })
-      ] }) }),
+      ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(
         ImageLightbox,
         {
@@ -41880,5 +43139,5 @@ BigInt.prototype.toJSON = function() {
 };
 const queryClient = new QueryClient();
 ReactDOM.createRoot(document.getElementById("root")).render(
-  /* @__PURE__ */ jsxRuntimeExports.jsx(QueryClientProvider, { client: queryClient, children: /* @__PURE__ */ jsxRuntimeExports.jsx(InternetIdentityProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(ReactLenis, { root: true, children: /* @__PURE__ */ jsxRuntimeExports.jsx(App, {}) }) }) })
+  /* @__PURE__ */ jsxRuntimeExports.jsx(QueryClientProvider, { client: queryClient, children: /* @__PURE__ */ jsxRuntimeExports.jsx(InternetIdentityProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(App, {}) }) })
 );
