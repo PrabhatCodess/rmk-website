@@ -14720,6 +14720,1242 @@ function checkDCE() {
 }
 var clientExports = client.exports;
 const ReactDOM = /* @__PURE__ */ getDefaultExportFromCjs(clientExports);
+var version = "1.3.19";
+function clamp$1(min, input, max) {
+  return Math.max(min, Math.min(input, max));
+}
+function lerp(x2, y2, t) {
+  return (1 - t) * x2 + t * y2;
+}
+function damp(x2, y2, lambda, deltaTime) {
+  return lerp(x2, y2, 1 - Math.exp(-lambda * deltaTime));
+}
+function modulo(n, d2) {
+  return (n % d2 + d2) % d2;
+}
+var Animate = class {
+  constructor() {
+    __publicField(this, "isRunning", false);
+    __publicField(this, "value", 0);
+    __publicField(this, "from", 0);
+    __publicField(this, "to", 0);
+    __publicField(this, "currentTime", 0);
+    // These are instanciated in the fromTo method
+    __publicField(this, "lerp");
+    __publicField(this, "duration");
+    __publicField(this, "easing");
+    __publicField(this, "onUpdate");
+  }
+  /**
+   * Advance the animation by the given delta time
+   *
+   * @param deltaTime - The time in seconds to advance the animation
+   */
+  advance(deltaTime) {
+    var _a3;
+    if (!this.isRunning) return;
+    let completed = false;
+    if (this.duration && this.easing) {
+      this.currentTime += deltaTime;
+      const linearProgress = clamp$1(0, this.currentTime / this.duration, 1);
+      completed = linearProgress >= 1;
+      const easedProgress = completed ? 1 : this.easing(linearProgress);
+      this.value = this.from + (this.to - this.from) * easedProgress;
+    } else if (this.lerp) {
+      this.value = damp(this.value, this.to, this.lerp * 60, deltaTime);
+      if (Math.round(this.value) === this.to) {
+        this.value = this.to;
+        completed = true;
+      }
+    } else {
+      this.value = this.to;
+      completed = true;
+    }
+    if (completed) {
+      this.stop();
+    }
+    (_a3 = this.onUpdate) == null ? void 0 : _a3.call(this, this.value, completed);
+  }
+  /** Stop the animation */
+  stop() {
+    this.isRunning = false;
+  }
+  /**
+   * Set up the animation from a starting value to an ending value
+   * with optional parameters for lerping, duration, easing, and onUpdate callback
+   *
+   * @param from - The starting value
+   * @param to - The ending value
+   * @param options - Options for the animation
+   */
+  fromTo(from, to, { lerp: lerp2, duration, easing, onStart, onUpdate }) {
+    this.from = this.value = from;
+    this.to = to;
+    this.lerp = lerp2;
+    this.duration = duration;
+    this.easing = easing;
+    this.currentTime = 0;
+    this.isRunning = true;
+    onStart == null ? void 0 : onStart();
+    this.onUpdate = onUpdate;
+  }
+};
+function debounce(callback, delay2) {
+  let timer;
+  return function(...args) {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      timer = void 0;
+      callback.apply(this, args);
+    }, delay2);
+  };
+}
+var Dimensions = class {
+  constructor(wrapper, content, { autoResize = true, debounce: debounceValue = 250 } = {}) {
+    __publicField(this, "width", 0);
+    __publicField(this, "height", 0);
+    __publicField(this, "scrollHeight", 0);
+    __publicField(this, "scrollWidth", 0);
+    // These are instanciated in the constructor as they need information from the options
+    __publicField(this, "debouncedResize");
+    __publicField(this, "wrapperResizeObserver");
+    __publicField(this, "contentResizeObserver");
+    __publicField(this, "resize", () => {
+      this.onWrapperResize();
+      this.onContentResize();
+    });
+    __publicField(this, "onWrapperResize", () => {
+      if (this.wrapper instanceof Window) {
+        this.width = window.innerWidth;
+        this.height = window.innerHeight;
+      } else {
+        this.width = this.wrapper.clientWidth;
+        this.height = this.wrapper.clientHeight;
+      }
+    });
+    __publicField(this, "onContentResize", () => {
+      if (this.wrapper instanceof Window) {
+        this.scrollHeight = this.content.scrollHeight;
+        this.scrollWidth = this.content.scrollWidth;
+      } else {
+        this.scrollHeight = this.wrapper.scrollHeight;
+        this.scrollWidth = this.wrapper.scrollWidth;
+      }
+    });
+    this.wrapper = wrapper;
+    this.content = content;
+    if (autoResize) {
+      this.debouncedResize = debounce(this.resize, debounceValue);
+      if (this.wrapper instanceof Window) {
+        window.addEventListener("resize", this.debouncedResize);
+      } else {
+        this.wrapperResizeObserver = new ResizeObserver(this.debouncedResize);
+        this.wrapperResizeObserver.observe(this.wrapper);
+      }
+      this.contentResizeObserver = new ResizeObserver(this.debouncedResize);
+      this.contentResizeObserver.observe(this.content);
+    }
+    this.resize();
+  }
+  destroy() {
+    var _a3, _b3;
+    (_a3 = this.wrapperResizeObserver) == null ? void 0 : _a3.disconnect();
+    (_b3 = this.contentResizeObserver) == null ? void 0 : _b3.disconnect();
+    if (this.wrapper === window && this.debouncedResize) {
+      window.removeEventListener("resize", this.debouncedResize);
+    }
+  }
+  get limit() {
+    return {
+      x: this.scrollWidth - this.width,
+      y: this.scrollHeight - this.height
+    };
+  }
+};
+var Emitter = class {
+  constructor() {
+    __publicField(this, "events", {});
+  }
+  /**
+   * Emit an event with the given data
+   * @param event Event name
+   * @param args Data to pass to the event handlers
+   */
+  emit(event, ...args) {
+    var _a3;
+    const callbacks = this.events[event] || [];
+    for (let i = 0, length = callbacks.length; i < length; i++) {
+      (_a3 = callbacks[i]) == null ? void 0 : _a3.call(callbacks, ...args);
+    }
+  }
+  /**
+   * Add a callback to the event
+   * @param event Event name
+   * @param cb Callback function
+   * @returns Unsubscribe function
+   */
+  on(event, cb) {
+    if (this.events[event]) {
+      this.events[event].push(cb);
+    } else {
+      this.events[event] = [cb];
+    }
+    return () => {
+      var _a3;
+      this.events[event] = (_a3 = this.events[event]) == null ? void 0 : _a3.filter((i) => cb !== i);
+    };
+  }
+  /**
+   * Remove a callback from the event
+   * @param event Event name
+   * @param callback Callback function
+   */
+  off(event, callback) {
+    var _a3;
+    this.events[event] = (_a3 = this.events[event]) == null ? void 0 : _a3.filter((i) => callback !== i);
+  }
+  /**
+   * Remove all event listeners and clean up
+   */
+  destroy() {
+    this.events = {};
+  }
+};
+var LINE_HEIGHT = 100 / 6;
+var listenerOptions = { passive: false };
+function getDeltaMultiplier(deltaMode, size) {
+  if (deltaMode === 1) return LINE_HEIGHT;
+  if (deltaMode === 2) return size;
+  return 1;
+}
+var VirtualScroll = class {
+  constructor(element, options = { wheelMultiplier: 1, touchMultiplier: 1 }) {
+    __publicField(this, "touchStart", {
+      x: 0,
+      y: 0
+    });
+    __publicField(this, "lastDelta", {
+      x: 0,
+      y: 0
+    });
+    __publicField(this, "window", {
+      width: 0,
+      height: 0
+    });
+    __publicField(this, "emitter", new Emitter());
+    /**
+     * Event handler for 'touchstart' event
+     *
+     * @param event Touch event
+     */
+    __publicField(this, "onTouchStart", (event) => {
+      const { clientX, clientY } = event.targetTouches ? event.targetTouches[0] : event;
+      this.touchStart.x = clientX;
+      this.touchStart.y = clientY;
+      this.lastDelta = {
+        x: 0,
+        y: 0
+      };
+      this.emitter.emit("scroll", {
+        deltaX: 0,
+        deltaY: 0,
+        event
+      });
+    });
+    /** Event handler for 'touchmove' event */
+    __publicField(this, "onTouchMove", (event) => {
+      const { clientX, clientY } = event.targetTouches ? event.targetTouches[0] : event;
+      const deltaX = -(clientX - this.touchStart.x) * this.options.touchMultiplier;
+      const deltaY = -(clientY - this.touchStart.y) * this.options.touchMultiplier;
+      this.touchStart.x = clientX;
+      this.touchStart.y = clientY;
+      this.lastDelta = {
+        x: deltaX,
+        y: deltaY
+      };
+      this.emitter.emit("scroll", {
+        deltaX,
+        deltaY,
+        event
+      });
+    });
+    __publicField(this, "onTouchEnd", (event) => {
+      this.emitter.emit("scroll", {
+        deltaX: this.lastDelta.x,
+        deltaY: this.lastDelta.y,
+        event
+      });
+    });
+    /** Event handler for 'wheel' event */
+    __publicField(this, "onWheel", (event) => {
+      let { deltaX, deltaY, deltaMode } = event;
+      const multiplierX = getDeltaMultiplier(deltaMode, this.window.width);
+      const multiplierY = getDeltaMultiplier(deltaMode, this.window.height);
+      deltaX *= multiplierX;
+      deltaY *= multiplierY;
+      deltaX *= this.options.wheelMultiplier;
+      deltaY *= this.options.wheelMultiplier;
+      this.emitter.emit("scroll", { deltaX, deltaY, event });
+    });
+    __publicField(this, "onWindowResize", () => {
+      this.window = {
+        width: window.innerWidth,
+        height: window.innerHeight
+      };
+    });
+    this.element = element;
+    this.options = options;
+    window.addEventListener("resize", this.onWindowResize);
+    this.onWindowResize();
+    this.element.addEventListener("wheel", this.onWheel, listenerOptions);
+    this.element.addEventListener(
+      "touchstart",
+      this.onTouchStart,
+      listenerOptions
+    );
+    this.element.addEventListener(
+      "touchmove",
+      this.onTouchMove,
+      listenerOptions
+    );
+    this.element.addEventListener("touchend", this.onTouchEnd, listenerOptions);
+  }
+  /**
+   * Add an event listener for the given event and callback
+   *
+   * @param event Event name
+   * @param callback Callback function
+   */
+  on(event, callback) {
+    return this.emitter.on(event, callback);
+  }
+  /** Remove all event listeners and clean up */
+  destroy() {
+    this.emitter.destroy();
+    window.removeEventListener("resize", this.onWindowResize);
+    this.element.removeEventListener("wheel", this.onWheel, listenerOptions);
+    this.element.removeEventListener(
+      "touchstart",
+      this.onTouchStart,
+      listenerOptions
+    );
+    this.element.removeEventListener(
+      "touchmove",
+      this.onTouchMove,
+      listenerOptions
+    );
+    this.element.removeEventListener(
+      "touchend",
+      this.onTouchEnd,
+      listenerOptions
+    );
+  }
+};
+var defaultEasing$1 = (t) => Math.min(1, 1.001 - 2 ** (-10 * t));
+var Lenis = class {
+  constructor({
+    wrapper = window,
+    content = document.documentElement,
+    eventsTarget = wrapper,
+    smoothWheel = true,
+    syncTouch = false,
+    syncTouchLerp = 0.075,
+    touchInertiaExponent = 1.7,
+    duration,
+    // in seconds
+    easing,
+    lerp: lerp2 = 0.1,
+    infinite = false,
+    orientation = "vertical",
+    // vertical, horizontal
+    gestureOrientation = orientation === "horizontal" ? "both" : "vertical",
+    // vertical, horizontal, both
+    touchMultiplier = 1,
+    wheelMultiplier = 1,
+    autoResize = true,
+    prevent,
+    virtualScroll,
+    overscroll = true,
+    autoRaf = false,
+    anchors = false,
+    autoToggle = false,
+    // https://caniuse.com/?search=transition-behavior
+    allowNestedScroll = false,
+    __experimental__naiveDimensions = false,
+    naiveDimensions = __experimental__naiveDimensions,
+    stopInertiaOnNavigate = false
+  } = {}) {
+    __publicField(this, "_isScrolling", false);
+    // true when scroll is animating
+    __publicField(this, "_isStopped", false);
+    // true if user should not be able to scroll - enable/disable programmatically
+    __publicField(this, "_isLocked", false);
+    // same as isStopped but enabled/disabled when scroll reaches target
+    __publicField(this, "_preventNextNativeScrollEvent", false);
+    __publicField(this, "_resetVelocityTimeout", null);
+    __publicField(this, "_rafId", null);
+    /**
+     * Whether or not the user is touching the screen
+     */
+    __publicField(this, "isTouching");
+    /**
+     * The time in ms since the lenis instance was created
+     */
+    __publicField(this, "time", 0);
+    /**
+     * User data that will be forwarded through the scroll event
+     *
+     * @example
+     * lenis.scrollTo(100, {
+     *   userData: {
+     *     foo: 'bar'
+     *   }
+     * })
+     */
+    __publicField(this, "userData", {});
+    /**
+     * The last velocity of the scroll
+     */
+    __publicField(this, "lastVelocity", 0);
+    /**
+     * The current velocity of the scroll
+     */
+    __publicField(this, "velocity", 0);
+    /**
+     * The direction of the scroll
+     */
+    __publicField(this, "direction", 0);
+    /**
+     * The options passed to the lenis instance
+     */
+    __publicField(this, "options");
+    /**
+     * The target scroll value
+     */
+    __publicField(this, "targetScroll");
+    /**
+     * The animated scroll value
+     */
+    __publicField(this, "animatedScroll");
+    // These are instanciated here as they don't need information from the options
+    __publicField(this, "animate", new Animate());
+    __publicField(this, "emitter", new Emitter());
+    // These are instanciated in the constructor as they need information from the options
+    __publicField(this, "dimensions");
+    // This is not private because it's used in the Snap class
+    __publicField(this, "virtualScroll");
+    __publicField(this, "onScrollEnd", (e) => {
+      if (!(e instanceof CustomEvent)) {
+        if (this.isScrolling === "smooth" || this.isScrolling === false) {
+          e.stopPropagation();
+        }
+      }
+    });
+    __publicField(this, "dispatchScrollendEvent", () => {
+      this.options.wrapper.dispatchEvent(
+        new CustomEvent("scrollend", {
+          bubbles: this.options.wrapper === window,
+          // cancelable: false,
+          detail: {
+            lenisScrollEnd: true
+          }
+        })
+      );
+    });
+    __publicField(this, "onTransitionEnd", (event) => {
+      if (event.propertyName.includes("overflow")) {
+        this.checkOverflow();
+      }
+    });
+    __publicField(this, "onClick", (event) => {
+      const path = event.composedPath();
+      const linkElements = path.filter(
+        (node) => node instanceof HTMLAnchorElement && node.href
+      );
+      const linkElementsUrls = linkElements.map(
+        (element) => new URL(element.href)
+      );
+      const currentUrl = new URL(window.location.href);
+      if (this.options.anchors) {
+        const anchorElementUrl = linkElementsUrls.find(
+          (targetUrl) => currentUrl.host === targetUrl.host && currentUrl.pathname === targetUrl.pathname && targetUrl.hash
+        );
+        if (anchorElementUrl) {
+          const options = typeof this.options.anchors === "object" && this.options.anchors ? this.options.anchors : void 0;
+          const target = `#${anchorElementUrl.hash.split("#")[1]}`;
+          this.scrollTo(target, options);
+          return;
+        }
+      }
+      if (this.options.stopInertiaOnNavigate) {
+        const hasPageLinkElementUrl = linkElementsUrls.some(
+          (targetUrl) => currentUrl.host === targetUrl.host && currentUrl.pathname !== targetUrl.pathname
+        );
+        if (hasPageLinkElementUrl) {
+          this.reset();
+          return;
+        }
+      }
+    });
+    __publicField(this, "onPointerDown", (event) => {
+      if (event.button === 1) {
+        this.reset();
+      }
+    });
+    __publicField(this, "onVirtualScroll", (data) => {
+      if (typeof this.options.virtualScroll === "function" && this.options.virtualScroll(data) === false)
+        return;
+      const { deltaX, deltaY, event } = data;
+      this.emitter.emit("virtual-scroll", { deltaX, deltaY, event });
+      if (event.ctrlKey) return;
+      if (event.lenisStopPropagation) return;
+      const isTouch = event.type.includes("touch");
+      const isWheel = event.type.includes("wheel");
+      this.isTouching = event.type === "touchstart" || event.type === "touchmove";
+      const isClickOrTap = deltaX === 0 && deltaY === 0;
+      const isTapToStop = this.options.syncTouch && isTouch && event.type === "touchstart" && isClickOrTap && !this.isStopped && !this.isLocked;
+      if (isTapToStop) {
+        this.reset();
+        return;
+      }
+      const isUnknownGesture = this.options.gestureOrientation === "vertical" && deltaY === 0 || this.options.gestureOrientation === "horizontal" && deltaX === 0;
+      if (isClickOrTap || isUnknownGesture) {
+        return;
+      }
+      let composedPath = event.composedPath();
+      composedPath = composedPath.slice(0, composedPath.indexOf(this.rootElement));
+      const prevent = this.options.prevent;
+      const gestureOrientation = Math.abs(deltaX) >= Math.abs(deltaY) ? "horizontal" : "vertical";
+      if (composedPath.find(
+        (node) => {
+          var _a3, _b3, _c2, _d2, _e2;
+          return node instanceof HTMLElement && (typeof prevent === "function" && (prevent == null ? void 0 : prevent(node)) || ((_a3 = node.hasAttribute) == null ? void 0 : _a3.call(node, "data-lenis-prevent")) || gestureOrientation === "vertical" && ((_b3 = node.hasAttribute) == null ? void 0 : _b3.call(node, "data-lenis-prevent-vertical")) || gestureOrientation === "horizontal" && ((_c2 = node.hasAttribute) == null ? void 0 : _c2.call(node, "data-lenis-prevent-horizontal")) || isTouch && ((_d2 = node.hasAttribute) == null ? void 0 : _d2.call(node, "data-lenis-prevent-touch")) || isWheel && ((_e2 = node.hasAttribute) == null ? void 0 : _e2.call(node, "data-lenis-prevent-wheel")) || this.options.allowNestedScroll && this.hasNestedScroll(node, {
+            deltaX,
+            deltaY
+          }));
+        }
+      ))
+        return;
+      if (this.isStopped || this.isLocked) {
+        if (event.cancelable) {
+          event.preventDefault();
+        }
+        return;
+      }
+      const isSmooth = this.options.syncTouch && isTouch || this.options.smoothWheel && isWheel;
+      if (!isSmooth) {
+        this.isScrolling = "native";
+        this.animate.stop();
+        event.lenisStopPropagation = true;
+        return;
+      }
+      let delta = deltaY;
+      if (this.options.gestureOrientation === "both") {
+        delta = Math.abs(deltaY) > Math.abs(deltaX) ? deltaY : deltaX;
+      } else if (this.options.gestureOrientation === "horizontal") {
+        delta = deltaX;
+      }
+      if (!this.options.overscroll || this.options.infinite || this.options.wrapper !== window && this.limit > 0 && (this.animatedScroll > 0 && this.animatedScroll < this.limit || this.animatedScroll === 0 && deltaY > 0 || this.animatedScroll === this.limit && deltaY < 0)) {
+        event.lenisStopPropagation = true;
+      }
+      if (event.cancelable) {
+        event.preventDefault();
+      }
+      const isSyncTouch = isTouch && this.options.syncTouch;
+      const isTouchEnd = isTouch && event.type === "touchend";
+      const hasTouchInertia = isTouchEnd;
+      if (hasTouchInertia) {
+        delta = Math.sign(this.velocity) * Math.abs(this.velocity) ** this.options.touchInertiaExponent;
+      }
+      this.scrollTo(this.targetScroll + delta, {
+        programmatic: false,
+        ...isSyncTouch ? {
+          lerp: hasTouchInertia ? this.options.syncTouchLerp : 1
+        } : {
+          lerp: this.options.lerp,
+          duration: this.options.duration,
+          easing: this.options.easing
+        }
+      });
+    });
+    __publicField(this, "onNativeScroll", () => {
+      if (this._resetVelocityTimeout !== null) {
+        clearTimeout(this._resetVelocityTimeout);
+        this._resetVelocityTimeout = null;
+      }
+      if (this._preventNextNativeScrollEvent) {
+        this._preventNextNativeScrollEvent = false;
+        return;
+      }
+      if (this.isScrolling === false || this.isScrolling === "native") {
+        const lastScroll = this.animatedScroll;
+        this.animatedScroll = this.targetScroll = this.actualScroll;
+        this.lastVelocity = this.velocity;
+        this.velocity = this.animatedScroll - lastScroll;
+        this.direction = Math.sign(
+          this.animatedScroll - lastScroll
+        );
+        if (!this.isStopped) {
+          this.isScrolling = "native";
+        }
+        this.emit();
+        if (this.velocity !== 0) {
+          this._resetVelocityTimeout = setTimeout(() => {
+            this.lastVelocity = this.velocity;
+            this.velocity = 0;
+            this.isScrolling = false;
+            this.emit();
+          }, 400);
+        }
+      }
+    });
+    /**
+     * RequestAnimationFrame for lenis
+     *
+     * @param time The time in ms from an external clock like `requestAnimationFrame` or Tempus
+     */
+    __publicField(this, "raf", (time2) => {
+      const deltaTime = time2 - (this.time || time2);
+      this.time = time2;
+      this.animate.advance(deltaTime * 1e-3);
+      if (this.options.autoRaf) {
+        this._rafId = requestAnimationFrame(this.raf);
+      }
+    });
+    window.lenisVersion = version;
+    if (!window.lenis) {
+      window.lenis = {};
+    }
+    window.lenis.version = version;
+    if (orientation === "horizontal") {
+      window.lenis.horizontal = true;
+    }
+    if (syncTouch === true) {
+      window.lenis.touch = true;
+    }
+    if (!wrapper || wrapper === document.documentElement) {
+      wrapper = window;
+    }
+    if (typeof duration === "number" && typeof easing !== "function") {
+      easing = defaultEasing$1;
+    } else if (typeof easing === "function" && typeof duration !== "number") {
+      duration = 1;
+    }
+    this.options = {
+      wrapper,
+      content,
+      eventsTarget,
+      smoothWheel,
+      syncTouch,
+      syncTouchLerp,
+      touchInertiaExponent,
+      duration,
+      easing,
+      lerp: lerp2,
+      infinite,
+      gestureOrientation,
+      orientation,
+      touchMultiplier,
+      wheelMultiplier,
+      autoResize,
+      prevent,
+      virtualScroll,
+      overscroll,
+      autoRaf,
+      anchors,
+      autoToggle,
+      allowNestedScroll,
+      naiveDimensions,
+      stopInertiaOnNavigate
+    };
+    this.dimensions = new Dimensions(wrapper, content, { autoResize });
+    this.updateClassName();
+    this.targetScroll = this.animatedScroll = this.actualScroll;
+    this.options.wrapper.addEventListener("scroll", this.onNativeScroll);
+    this.options.wrapper.addEventListener("scrollend", this.onScrollEnd, {
+      capture: true
+    });
+    if (this.options.anchors || this.options.stopInertiaOnNavigate) {
+      this.options.wrapper.addEventListener(
+        "click",
+        this.onClick
+      );
+    }
+    this.options.wrapper.addEventListener(
+      "pointerdown",
+      this.onPointerDown
+    );
+    this.virtualScroll = new VirtualScroll(eventsTarget, {
+      touchMultiplier,
+      wheelMultiplier
+    });
+    this.virtualScroll.on("scroll", this.onVirtualScroll);
+    if (this.options.autoToggle) {
+      this.checkOverflow();
+      this.rootElement.addEventListener("transitionend", this.onTransitionEnd);
+    }
+    if (this.options.autoRaf) {
+      this._rafId = requestAnimationFrame(this.raf);
+    }
+  }
+  /**
+   * Destroy the lenis instance, remove all event listeners and clean up the class name
+   */
+  destroy() {
+    this.emitter.destroy();
+    this.options.wrapper.removeEventListener("scroll", this.onNativeScroll);
+    this.options.wrapper.removeEventListener("scrollend", this.onScrollEnd, {
+      capture: true
+    });
+    this.options.wrapper.removeEventListener(
+      "pointerdown",
+      this.onPointerDown
+    );
+    if (this.options.anchors || this.options.stopInertiaOnNavigate) {
+      this.options.wrapper.removeEventListener(
+        "click",
+        this.onClick
+      );
+    }
+    this.virtualScroll.destroy();
+    this.dimensions.destroy();
+    this.cleanUpClassName();
+    if (this._rafId) {
+      cancelAnimationFrame(this._rafId);
+    }
+  }
+  on(event, callback) {
+    return this.emitter.on(event, callback);
+  }
+  off(event, callback) {
+    return this.emitter.off(event, callback);
+  }
+  get overflow() {
+    const property = this.isHorizontal ? "overflow-x" : "overflow-y";
+    return getComputedStyle(this.rootElement)[property];
+  }
+  checkOverflow() {
+    if (["hidden", "clip"].includes(this.overflow)) {
+      this.internalStop();
+    } else {
+      this.internalStart();
+    }
+  }
+  setScroll(scroll) {
+    if (this.isHorizontal) {
+      this.options.wrapper.scrollTo({ left: scroll, behavior: "instant" });
+    } else {
+      this.options.wrapper.scrollTo({ top: scroll, behavior: "instant" });
+    }
+  }
+  /**
+   * Force lenis to recalculate the dimensions
+   */
+  resize() {
+    this.dimensions.resize();
+    this.animatedScroll = this.targetScroll = this.actualScroll;
+    this.emit();
+  }
+  emit() {
+    this.emitter.emit("scroll", this);
+  }
+  reset() {
+    this.isLocked = false;
+    this.isScrolling = false;
+    this.animatedScroll = this.targetScroll = this.actualScroll;
+    this.lastVelocity = this.velocity = 0;
+    this.animate.stop();
+  }
+  /**
+   * Start lenis scroll after it has been stopped
+   */
+  start() {
+    if (!this.isStopped) return;
+    if (this.options.autoToggle) {
+      this.rootElement.style.removeProperty("overflow");
+      return;
+    }
+    this.internalStart();
+  }
+  internalStart() {
+    if (!this.isStopped) return;
+    this.reset();
+    this.isStopped = false;
+    this.emit();
+  }
+  /**
+   * Stop lenis scroll
+   */
+  stop() {
+    if (this.isStopped) return;
+    if (this.options.autoToggle) {
+      this.rootElement.style.setProperty("overflow", "clip");
+      return;
+    }
+    this.internalStop();
+  }
+  internalStop() {
+    if (this.isStopped) return;
+    this.reset();
+    this.isStopped = true;
+    this.emit();
+  }
+  /**
+   * Scroll to a target value
+   *
+   * @param target The target value to scroll to
+   * @param options The options for the scroll
+   *
+   * @example
+   * lenis.scrollTo(100, {
+   *   offset: 100,
+   *   duration: 1,
+   *   easing: (t) => 1 - Math.cos((t * Math.PI) / 2),
+   *   lerp: 0.1,
+   *   onStart: () => {
+   *     console.log('onStart')
+   *   },
+   *   onComplete: () => {
+   *     console.log('onComplete')
+   *   },
+   * })
+   */
+  scrollTo(_target, {
+    offset = 0,
+    immediate = false,
+    lock = false,
+    programmatic = true,
+    // called from outside of the class
+    lerp: lerp2 = programmatic ? this.options.lerp : void 0,
+    duration = programmatic ? this.options.duration : void 0,
+    easing = programmatic ? this.options.easing : void 0,
+    onStart,
+    onComplete,
+    force = false,
+    // scroll even if stopped
+    userData
+  } = {}) {
+    if ((this.isStopped || this.isLocked) && !force) return;
+    let target = _target;
+    let adjustedOffset = offset;
+    if (typeof target === "string" && ["top", "left", "start", "#"].includes(target)) {
+      target = 0;
+    } else if (typeof target === "string" && ["bottom", "right", "end"].includes(target)) {
+      target = this.limit;
+    } else {
+      let node = null;
+      if (typeof target === "string") {
+        node = document.querySelector(target);
+        if (!node) {
+          if (target === "#top") {
+            target = 0;
+          } else {
+            console.warn("Lenis: Target not found", target);
+          }
+        }
+      } else if (target instanceof HTMLElement && (target == null ? void 0 : target.nodeType)) {
+        node = target;
+      }
+      if (node) {
+        if (this.options.wrapper !== window) {
+          const wrapperRect = this.rootElement.getBoundingClientRect();
+          adjustedOffset -= this.isHorizontal ? wrapperRect.left : wrapperRect.top;
+        }
+        const rect = node.getBoundingClientRect();
+        target = (this.isHorizontal ? rect.left : rect.top) + this.animatedScroll;
+      }
+    }
+    if (typeof target !== "number") return;
+    target += adjustedOffset;
+    target = Math.round(target);
+    if (this.options.infinite) {
+      if (programmatic) {
+        this.targetScroll = this.animatedScroll = this.scroll;
+        const distance2 = target - this.animatedScroll;
+        if (distance2 > this.limit / 2) {
+          target -= this.limit;
+        } else if (distance2 < -this.limit / 2) {
+          target += this.limit;
+        }
+      }
+    } else {
+      target = clamp$1(0, target, this.limit);
+    }
+    if (target === this.targetScroll) {
+      onStart == null ? void 0 : onStart(this);
+      onComplete == null ? void 0 : onComplete(this);
+      return;
+    }
+    this.userData = userData ?? {};
+    if (immediate) {
+      this.animatedScroll = this.targetScroll = target;
+      this.setScroll(this.scroll);
+      this.reset();
+      this.preventNextNativeScrollEvent();
+      this.emit();
+      onComplete == null ? void 0 : onComplete(this);
+      this.userData = {};
+      requestAnimationFrame(() => {
+        this.dispatchScrollendEvent();
+      });
+      return;
+    }
+    if (!programmatic) {
+      this.targetScroll = target;
+    }
+    if (typeof duration === "number" && typeof easing !== "function") {
+      easing = defaultEasing$1;
+    } else if (typeof easing === "function" && typeof duration !== "number") {
+      duration = 1;
+    }
+    this.animate.fromTo(this.animatedScroll, target, {
+      duration,
+      easing,
+      lerp: lerp2,
+      onStart: () => {
+        if (lock) this.isLocked = true;
+        this.isScrolling = "smooth";
+        onStart == null ? void 0 : onStart(this);
+      },
+      onUpdate: (value, completed) => {
+        this.isScrolling = "smooth";
+        this.lastVelocity = this.velocity;
+        this.velocity = value - this.animatedScroll;
+        this.direction = Math.sign(this.velocity);
+        this.animatedScroll = value;
+        this.setScroll(this.scroll);
+        if (programmatic) {
+          this.targetScroll = value;
+        }
+        if (!completed) this.emit();
+        if (completed) {
+          this.reset();
+          this.emit();
+          onComplete == null ? void 0 : onComplete(this);
+          this.userData = {};
+          requestAnimationFrame(() => {
+            this.dispatchScrollendEvent();
+          });
+          this.preventNextNativeScrollEvent();
+        }
+      }
+    });
+  }
+  preventNextNativeScrollEvent() {
+    this._preventNextNativeScrollEvent = true;
+    requestAnimationFrame(() => {
+      this._preventNextNativeScrollEvent = false;
+    });
+  }
+  hasNestedScroll(node, { deltaX, deltaY }) {
+    const time2 = Date.now();
+    if (!node._lenis) node._lenis = {};
+    const cache = node._lenis;
+    let hasOverflowX;
+    let hasOverflowY;
+    let isScrollableX;
+    let isScrollableY;
+    let hasOverscrollBehaviorX;
+    let hasOverscrollBehaviorY;
+    let scrollWidth;
+    let scrollHeight;
+    let clientWidth;
+    let clientHeight;
+    if (time2 - (cache.time ?? 0) > 2e3) {
+      cache.time = Date.now();
+      const computedStyle = window.getComputedStyle(node);
+      cache.computedStyle = computedStyle;
+      hasOverflowX = ["auto", "overlay", "scroll"].includes(
+        computedStyle.overflowX
+      );
+      hasOverflowY = ["auto", "overlay", "scroll"].includes(
+        computedStyle.overflowY
+      );
+      hasOverscrollBehaviorX = ["auto"].includes(
+        computedStyle.overscrollBehaviorX
+      );
+      hasOverscrollBehaviorY = ["auto"].includes(
+        computedStyle.overscrollBehaviorY
+      );
+      cache.hasOverflowX = hasOverflowX;
+      cache.hasOverflowY = hasOverflowY;
+      if (!(hasOverflowX || hasOverflowY)) return false;
+      scrollWidth = node.scrollWidth;
+      scrollHeight = node.scrollHeight;
+      clientWidth = node.clientWidth;
+      clientHeight = node.clientHeight;
+      isScrollableX = scrollWidth > clientWidth;
+      isScrollableY = scrollHeight > clientHeight;
+      cache.isScrollableX = isScrollableX;
+      cache.isScrollableY = isScrollableY;
+      cache.scrollWidth = scrollWidth;
+      cache.scrollHeight = scrollHeight;
+      cache.clientWidth = clientWidth;
+      cache.clientHeight = clientHeight;
+      cache.hasOverscrollBehaviorX = hasOverscrollBehaviorX;
+      cache.hasOverscrollBehaviorY = hasOverscrollBehaviorY;
+    } else {
+      isScrollableX = cache.isScrollableX;
+      isScrollableY = cache.isScrollableY;
+      hasOverflowX = cache.hasOverflowX;
+      hasOverflowY = cache.hasOverflowY;
+      scrollWidth = cache.scrollWidth;
+      scrollHeight = cache.scrollHeight;
+      clientWidth = cache.clientWidth;
+      clientHeight = cache.clientHeight;
+      hasOverscrollBehaviorX = cache.hasOverscrollBehaviorX;
+      hasOverscrollBehaviorY = cache.hasOverscrollBehaviorY;
+    }
+    if (!(hasOverflowX && isScrollableX || hasOverflowY && isScrollableY)) {
+      return false;
+    }
+    const orientation = Math.abs(deltaX) >= Math.abs(deltaY) ? "horizontal" : "vertical";
+    let scroll;
+    let maxScroll;
+    let delta;
+    let hasOverflow;
+    let isScrollable;
+    let hasOverscrollBehavior;
+    if (orientation === "horizontal") {
+      scroll = Math.round(node.scrollLeft);
+      maxScroll = scrollWidth - clientWidth;
+      delta = deltaX;
+      hasOverflow = hasOverflowX;
+      isScrollable = isScrollableX;
+      hasOverscrollBehavior = hasOverscrollBehaviorX;
+    } else if (orientation === "vertical") {
+      scroll = Math.round(node.scrollTop);
+      maxScroll = scrollHeight - clientHeight;
+      delta = deltaY;
+      hasOverflow = hasOverflowY;
+      isScrollable = isScrollableY;
+      hasOverscrollBehavior = hasOverscrollBehaviorY;
+    } else {
+      return false;
+    }
+    if (!hasOverscrollBehavior && (scroll >= maxScroll || scroll <= 0)) {
+      return true;
+    }
+    const willScroll = delta > 0 ? scroll < maxScroll : scroll > 0;
+    return willScroll && hasOverflow && isScrollable;
+  }
+  /**
+   * The root element on which lenis is instanced
+   */
+  get rootElement() {
+    return this.options.wrapper === window ? document.documentElement : this.options.wrapper;
+  }
+  /**
+   * The limit which is the maximum scroll value
+   */
+  get limit() {
+    if (this.options.naiveDimensions) {
+      if (this.isHorizontal) {
+        return this.rootElement.scrollWidth - this.rootElement.clientWidth;
+      }
+      return this.rootElement.scrollHeight - this.rootElement.clientHeight;
+    }
+    return this.dimensions.limit[this.isHorizontal ? "x" : "y"];
+  }
+  /**
+   * Whether or not the scroll is horizontal
+   */
+  get isHorizontal() {
+    return this.options.orientation === "horizontal";
+  }
+  /**
+   * The actual scroll value
+   */
+  get actualScroll() {
+    const wrapper = this.options.wrapper;
+    return this.isHorizontal ? wrapper.scrollX ?? wrapper.scrollLeft : wrapper.scrollY ?? wrapper.scrollTop;
+  }
+  /**
+   * The current scroll value
+   */
+  get scroll() {
+    return this.options.infinite ? modulo(this.animatedScroll, this.limit) : this.animatedScroll;
+  }
+  /**
+   * The progress of the scroll relative to the limit
+   */
+  get progress() {
+    return this.limit === 0 ? 1 : this.scroll / this.limit;
+  }
+  /**
+   * Current scroll state
+   */
+  get isScrolling() {
+    return this._isScrolling;
+  }
+  set isScrolling(value) {
+    if (this._isScrolling !== value) {
+      this._isScrolling = value;
+      this.updateClassName();
+    }
+  }
+  /**
+   * Check if lenis is stopped
+   */
+  get isStopped() {
+    return this._isStopped;
+  }
+  set isStopped(value) {
+    if (this._isStopped !== value) {
+      this._isStopped = value;
+      this.updateClassName();
+    }
+  }
+  /**
+   * Check if lenis is locked
+   */
+  get isLocked() {
+    return this._isLocked;
+  }
+  set isLocked(value) {
+    if (this._isLocked !== value) {
+      this._isLocked = value;
+      this.updateClassName();
+    }
+  }
+  /**
+   * Check if lenis is smooth scrolling
+   */
+  get isSmooth() {
+    return this.isScrolling === "smooth";
+  }
+  /**
+   * The class name applied to the wrapper element
+   */
+  get className() {
+    let className = "lenis";
+    if (this.options.autoToggle) className += " lenis-autoToggle";
+    if (this.isStopped) className += " lenis-stopped";
+    if (this.isLocked) className += " lenis-locked";
+    if (this.isScrolling) className += " lenis-scrolling";
+    if (this.isScrolling === "smooth") className += " lenis-smooth";
+    return className;
+  }
+  updateClassName() {
+    this.cleanUpClassName();
+    this.rootElement.className = `${this.rootElement.className} ${this.className}`.trim();
+  }
+  cleanUpClassName() {
+    this.rootElement.className = this.rootElement.className.replace(/lenis(-\w+)?/g, "").trim();
+  }
+};
+var Store = class {
+  constructor(state) {
+    __publicField(this, "listeners", []);
+    this.state = state;
+  }
+  set(state) {
+    this.state = state;
+    for (const listener of this.listeners) {
+      listener(this.state);
+    }
+  }
+  subscribe(listener) {
+    this.listeners = [...this.listeners, listener];
+    return () => {
+      this.listeners = this.listeners.filter((l) => l !== listener);
+    };
+  }
+  get() {
+    return this.state;
+  }
+};
+var LenisContext = reactExports.createContext(null);
+var rootLenisContextStore = new Store(null);
+var ReactLenis = reactExports.forwardRef(
+  ({
+    children,
+    root: root2 = false,
+    options = {},
+    autoRaf = true,
+    className = "",
+    ...props
+  }, ref) => {
+    const wrapperRef = reactExports.useRef(null);
+    const contentRef = reactExports.useRef(null);
+    const [lenis, setLenis] = reactExports.useState(void 0);
+    reactExports.useImperativeHandle(
+      ref,
+      () => ({
+        wrapper: wrapperRef.current,
+        content: contentRef.current,
+        lenis
+      }),
+      [lenis]
+    );
+    reactExports.useEffect(() => {
+      const lenis2 = new Lenis({
+        ...options,
+        ...wrapperRef.current && contentRef.current && {
+          wrapper: wrapperRef.current,
+          content: contentRef.current
+        },
+        autoRaf: (options == null ? void 0 : options.autoRaf) ?? autoRaf
+        // this is to avoid breaking the autoRaf prop if it's still used (require breaking change)
+      });
+      setLenis(lenis2);
+      return () => {
+        lenis2.destroy();
+        setLenis(void 0);
+      };
+    }, [autoRaf, JSON.stringify({ ...options, wrapper: null, content: null })]);
+    const callbacksRefs = reactExports.useRef([]);
+    const addCallback = reactExports.useCallback(
+      (callback, priority) => {
+        callbacksRefs.current.push({ callback, priority });
+        callbacksRefs.current.sort((a2, b2) => a2.priority - b2.priority);
+      },
+      []
+    );
+    const removeCallback = reactExports.useCallback(
+      (callback) => {
+        callbacksRefs.current = callbacksRefs.current.filter(
+          (cb) => cb.callback !== callback
+        );
+      },
+      []
+    );
+    reactExports.useEffect(() => {
+      if (root2 && lenis) {
+        rootLenisContextStore.set({ lenis, addCallback, removeCallback });
+        return () => rootLenisContextStore.set(null);
+      }
+    }, [root2, lenis, addCallback, removeCallback]);
+    reactExports.useEffect(() => {
+      if (!lenis) return;
+      const onScroll = (data) => {
+        for (const { callback } of callbacksRefs.current) {
+          callback(data);
+        }
+      };
+      lenis.on("scroll", onScroll);
+      return () => {
+        lenis.off("scroll", onScroll);
+      };
+    }, [lenis]);
+    if (!children) return null;
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(
+      LenisContext.Provider,
+      {
+        value: { lenis, addCallback, removeCallback },
+        children: root2 && root2 !== "asChild" ? children : /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "div",
+          {
+            ref: wrapperRef,
+            className: `${className} ${(lenis == null ? void 0 : lenis.className) ?? ""}`.trim(),
+            ...props,
+            children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { ref: contentRef, children })
+          }
+        )
+      }
+    );
+  }
+);
 function setRef$1(ref, value) {
   if (typeof ref === "function") {
     return ref(value);
@@ -17648,35 +18884,24 @@ const createLucideIcon = (iconName, iconNode) => {
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$n = [["path", { d: "m6 9 6 6 6-6", key: "qrunsl" }]];
-const ChevronDown = createLucideIcon("chevron-down", __iconNode$n);
+const __iconNode$m = [["path", { d: "m6 9 6 6 6-6", key: "qrunsl" }]];
+const ChevronDown = createLucideIcon("chevron-down", __iconNode$m);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$m = [["path", { d: "m15 18-6-6 6-6", key: "1wnfg3" }]];
-const ChevronLeft = createLucideIcon("chevron-left", __iconNode$m);
+const __iconNode$l = [["path", { d: "m15 18-6-6 6-6", key: "1wnfg3" }]];
+const ChevronLeft = createLucideIcon("chevron-left", __iconNode$l);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$l = [["path", { d: "m9 18 6-6-6-6", key: "mthhwq" }]];
-const ChevronRight = createLucideIcon("chevron-right", __iconNode$l);
-/**
- * @license lucide-react v0.511.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode$k = [
-  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
-  ["path", { d: "m9 12 2 2 4-4", key: "dzmm74" }]
-];
-const CircleCheck = createLucideIcon("circle-check", __iconNode$k);
+const __iconNode$k = [["path", { d: "m9 18 6-6-6-6", key: "mthhwq" }]];
+const ChevronRight = createLucideIcon("chevron-right", __iconNode$k);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -17685,9 +18910,9 @@ const CircleCheck = createLucideIcon("circle-check", __iconNode$k);
  */
 const __iconNode$j = [
   ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
-  ["polyline", { points: "12 6 12 12 16 14", key: "68esgv" }]
+  ["path", { d: "m9 12 2 2 4-4", key: "dzmm74" }]
 ];
-const Clock = createLucideIcon("clock", __iconNode$j);
+const CircleCheck = createLucideIcon("circle-check", __iconNode$j);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -17695,6 +18920,17 @@ const Clock = createLucideIcon("clock", __iconNode$j);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$i = [
+  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
+  ["polyline", { points: "12 6 12 12 16 14", key: "68esgv" }]
+];
+const Clock = createLucideIcon("clock", __iconNode$i);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$h = [
   ["path", { d: "M10 2v2", key: "7u0qdc" }],
   ["path", { d: "M14 2v2", key: "6buw04" }],
   [
@@ -17706,14 +18942,14 @@ const __iconNode$i = [
   ],
   ["path", { d: "M6 2v2", key: "colzsn" }]
 ];
-const Coffee = createLucideIcon("coffee", __iconNode$i);
+const Coffee = createLucideIcon("coffee", __iconNode$h);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$h = [
+const __iconNode$g = [
   [
     "path",
     {
@@ -17729,19 +18965,7 @@ const __iconNode$h = [
     }
   ]
 ];
-const Droplets = createLucideIcon("droplets", __iconNode$h);
-/**
- * @license lucide-react v0.511.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode$g = [
-  ["path", { d: "M15 3h6v6", key: "1q9fwt" }],
-  ["path", { d: "M10 14 21 3", key: "gplh6r" }],
-  ["path", { d: "M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6", key: "a6xqqp" }]
-];
-const ExternalLink = createLucideIcon("external-link", __iconNode$g);
+const Droplets = createLucideIcon("droplets", __iconNode$g);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -17749,15 +18973,11 @@ const ExternalLink = createLucideIcon("external-link", __iconNode$g);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$f = [
-  [
-    "path",
-    {
-      d: "M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z",
-      key: "96xj49"
-    }
-  ]
+  ["path", { d: "M15 3h6v6", key: "1q9fwt" }],
+  ["path", { d: "M10 14 21 3", key: "gplh6r" }],
+  ["path", { d: "M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6", key: "a6xqqp" }]
 ];
-const Flame = createLucideIcon("flame", __iconNode$f);
+const ExternalLink = createLucideIcon("external-link", __iconNode$f);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -17768,12 +18988,12 @@ const __iconNode$e = [
   [
     "path",
     {
-      d: "M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z",
-      key: "c3ymky"
+      d: "M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z",
+      key: "96xj49"
     }
   ]
 ];
-const Heart = createLucideIcon("heart", __iconNode$e);
+const Flame = createLucideIcon("flame", __iconNode$e);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -30703,21 +31923,21 @@ function mod(a2, b2) {
   const result = a2 % b2;
   return result >= _0n$6 ? result : b2 + result;
 }
-function pow2(x2, power, modulo) {
+function pow2(x2, power, modulo2) {
   let res = x2;
   while (power-- > _0n$6) {
     res *= res;
-    res %= modulo;
+    res %= modulo2;
   }
   return res;
 }
-function invert(number2, modulo) {
+function invert(number2, modulo2) {
   if (number2 === _0n$6)
     throw new Error("invert: expected non-zero number");
-  if (modulo <= _0n$6)
-    throw new Error("invert: expected positive modulus, got " + modulo);
-  let a2 = mod(number2, modulo);
-  let b2 = modulo;
+  if (modulo2 <= _0n$6)
+    throw new Error("invert: expected positive modulus, got " + modulo2);
+  let a2 = mod(number2, modulo2);
+  let b2 = modulo2;
   let x2 = _0n$6, u = _1n$7;
   while (a2 !== _0n$6) {
     const q2 = b2 / a2;
@@ -30728,7 +31948,7 @@ function invert(number2, modulo) {
   const gcd = b2;
   if (gcd !== _1n$7)
     throw new Error("invert: does not exist");
-  return mod(x2, modulo);
+  return mod(x2, modulo2);
 }
 function assertIsSquare(Fp3, root2, n) {
   if (!Fp3.eql(Fp3.sqr(root2), n))
@@ -30830,7 +32050,7 @@ function FpSqrt(P2) {
     return sqrt9mod16(P2);
   return tonelliShanks(P2);
 }
-const isNegativeLE = (num, modulo) => (mod(num, modulo) & _1n$7) === _1n$7;
+const isNegativeLE = (num, modulo2) => (mod(num, modulo2) & _1n$7) === _1n$7;
 const FIELD_FIELDS = [
   "create",
   "isValid",
@@ -37925,7 +39145,7 @@ class IdleManager {
     events.forEach(function(name) {
       document.addEventListener(name, _resetTimer, true);
     });
-    const debounce = (func, wait) => {
+    const debounce2 = (func, wait) => {
       let timeout2;
       return (...args) => {
         const context = this;
@@ -37938,7 +39158,7 @@ class IdleManager {
       };
     };
     if (options == null ? void 0 : options.captureScroll) {
-      const scroll = debounce(_resetTimer, (options == null ? void 0 : options.scrollDebounce) ?? 100);
+      const scroll = debounce2(_resetTimer, (options == null ? void 0 : options.scrollDebounce) ?? 100);
       window.addEventListener("scroll", scroll, true);
     }
     _resetTimer();
@@ -38123,8 +39343,8 @@ function wrap(value) {
   return newValue;
 }
 const unwrap = (value) => reverseTransformCache.get(value);
-function openDB(name, version, { blocked, upgrade, blocking, terminated } = {}) {
-  const request2 = indexedDB.open(name, version);
+function openDB(name, version2, { blocked, upgrade, blocking, terminated } = {}) {
+  const request2 = indexedDB.open(name, version2);
   const openPromise = wrap(request2);
   if (upgrade) {
     request2.addEventListener("upgradeneeded", (event) => {
@@ -38187,12 +39407,12 @@ replaceTraps((oldTraps) => ({
 }));
 const AUTH_DB_NAME = "auth-client-db";
 const OBJECT_STORE_NAME = "ic-keyval";
-const _openDbStore = async (dbName = AUTH_DB_NAME, storeName = OBJECT_STORE_NAME, version) => {
+const _openDbStore = async (dbName = AUTH_DB_NAME, storeName = OBJECT_STORE_NAME, version2) => {
   if (isBrowser && (localStorage == null ? void 0 : localStorage.getItem(KEY_STORAGE_DELEGATION))) {
     localStorage.removeItem(KEY_STORAGE_DELEGATION);
     localStorage.removeItem(KEY_STORAGE_KEY);
   }
-  return await openDB(dbName, version, {
+  return await openDB(dbName, version2, {
     upgrade: (database) => {
       if (database.objectStoreNames.contains(storeName)) {
         database.clear(storeName);
@@ -38227,8 +39447,8 @@ class IdbKeyVal {
    * @param {DBCreateOptions['version']} options.version version of the database. Increment to safely upgrade
    */
   static async create(options) {
-    const { dbName = AUTH_DB_NAME, storeName = OBJECT_STORE_NAME, version = DB_VERSION } = options ?? {};
-    const db = await _openDbStore(dbName, storeName, version);
+    const { dbName = AUTH_DB_NAME, storeName = OBJECT_STORE_NAME, version: version2 = DB_VERSION } = options ?? {};
+    const db = await _openDbStore(dbName, storeName, version2);
     return new IdbKeyVal(db, storeName);
   }
   /**
@@ -38892,22 +40112,64 @@ function useSubmitBookingInquiry() {
 }
 const SEED_REVIEWS = [
   {
+    guestName: "Prabhakar Kalavacherla",
+    rating: BigInt(5),
+    comment: "My wife and I waited for a long time to visit Benares- several decades. We wanted to stay at a place that was modern and ancient at the same time. Clearly, BrijRama Palace met that criteria but it is pricey place. Almost by chance I chanced upon Rudreshwar Mahadeo Kothi. I will say that photos online won't do justice as one has to experience the hospitality and warmth of these two elderly couple that run the place. Dr. Kiran and Dr. Balaji have mastered the age old Indian art of treating guests like Gods. Dr. Kiran in particular is just amazing and her quiet personality coupled with her inexhausible sense of service is just out of the world.\n\nThe facilities are not necessarily top notch when compared to a good star hotel. However, please don't even get disuaded by that as the warmth and hospitality more than compensates for any shortcomings.\n\nThe house itself is steeped in centuries of history and it is right in the heart of the temple area. My wife and I could not help feeling low when it was time to leave the place. But we made a promise to visit Benares and this next time our place of stay is determined. Thank you Dr. Kiran and Dr. Balaji.",
+    stayDate: "6 weeks ago"
+  },
+  {
+    guestName: "Krishma Maniar",
+    rating: BigInt(5),
+    comment: "Our stay was very delightful at Rudreshwar Mahadeo Kothi. Mr & Mrs Singh are the warmest host. Very helpful, guided us so well, helped us arrange boat ride n darshan. The property is 200 meters away from the kashi vishwanath temple, it was very convenient. Delicious breakfast. We booked family room, for us family of 4.Clean and neat rooms.",
+    stayDate: "9 weeks ago"
+  },
+  {
+    guestName: "finding nemu",
+    rating: BigInt(5),
+    comment: "This stay is beyond rating - this place is priceless. Balaji uncle and Kiran Aunty are the best hosts you will ever find on Airbnb, India. The stay is right in the heart of the old city of Benaras. The ghats and Vishwanath Dham are at a walkable ditance. There are plenty of shops and restaurants around. The stay offered a luggage transport support as well. The food at the stay is delicious. I didn‘t feel the need to eat outside as we got warm homemade food. Whatever I and my husband needed, uncle got it ready for us. This property is an ancestral heritage with a Shiv temple right in its courtyard. The hosts also gave us the opportunity of Rudra Abhishek in the temple. At the stay, we tried the banarasi pan and all special benarasi sweets. Kiran Aunty recommended us to even visit Sarnath which we undertook to experience Buddha‘s first sermon. I am not sure how to thank Uncle and Aunty for the best homestay experience I have ever had in any part of India. This place was totally worth it. Here we were not guests, rather part of a family. I had tears in my eyes as I had to bid bye to this place. This stay and Benaras will forever be in our hearts. See you soon !",
+    stayDate: "Recently"
+  },
+  {
+    guestName: "jonnalagadda keerthi",
+    rating: BigInt(5),
+    comment: "One of the best places to stay in Kashi—just a two-minute walk from Kashi Vishwanath Mandir and very close to all other temples and ghats. The house was incredibly beautiful, well maintained, and the bathrooms were spotlessly clean. the place was calm and serene. Kiran Aunty, Balaji Uncle, and the staff Akshay and Akash Bhaiyya were extremely warm and welcoming—it truly felt like visiting our relatives in Kashi. The best part was the temple within the house. The homemade food was absolutely delicious. Thank you for the wonderful hospitality; this would be our go to place in Kashi and we will definitely recommend this place to everyone.",
+    stayDate: "13 weeks ago"
+  },
+  {
+    guestName: "Neelesh Saran",
+    rating: BigInt(5),
+    comment: "Homely, and perfectly kept",
+    stayDate: "15 weeks ago"
+  },
+  {
+    guestName: "Bhavna Sharma",
+    rating: BigInt(5),
+    comment: "Very nice and homely stay\nWill definitely recommend\nA home away from your home.\nOur host Mr and Mrs Singh will definitely treat you as their own children\nYou will be comfortable as it's your home.",
+    stayDate: "18 weeks ago"
+  },
+  {
+    guestName: "Shivangi Singh",
+    rating: BigInt(5),
+    comment: "Rudreshwar Mahadeo Kothi in Kashi is more than just a place; it's an experience that touches the soul. ✨\nThe moment you step inside, you're enveloped in an atmosphere of profound peace and spirituality.\nThe intricate architecture and the serene ambiance create a perfect setting for reflection and devotion. Every corner of the kothi resonates with history and devotion, making it a must-visit for anyone seeking a deeper connection with the divine.\nPlus, the hosts Dr.V.N Singh and Dr.Kiran Singh are incredibly wonderful. They made us feel so comfortable, it just felt like home. They made sure that we don’t have any problems at all, and the major plus point is- it's conveniently located just a two-minute walk from the Kashi Vishwanath Temple!\nHighly recommended stay if you’re visiting Varanasi. It's a place that leaves a lasting impression on your heart. 💞",
+    stayDate: "20 weeks ago"
+  },
+  {
+    guestName: "Shruti Bansal",
+    rating: BigInt(5),
+    comment: "I had a wonderful stay at this homestay! The place was clean, cozy, and beautifully maintained. The hosts were warm, welcoming, and always ready to help",
+    stayDate: "20 weeks ago"
+  },
+  {
+    guestName: "abhishek pandey",
+    rating: BigInt(5),
+    comment: "Right in the heart of the city , this is a must stay place. Easy access to Kashi Viswanath ji and other famous street food next dooor is a blessing. And a beautiful temple within the compound just makes it blissful.\n\nA truly warm host in VN Singh sir and wondeful caretakers (Akash & Akshay) made the stay memorable. When you get delicious home cooked food - made to order what else can you ask for.\n\nRooms are great.. just be mindful of the noisy ones on special festive evenings, with windows facing the main street.",
+    stayDate: "22 weeks ago"
+  },
+  {
     guestName: "SB0901",
     rating: BigInt(5),
-    comment: "An Incredibly Beautiful House.. very aesthetically done... super comfortable... an Old World Charm... best location to stay in Varanasi, everything is just minutes-walk away. Hosts are very warm and super Caring. We had a great stay there and would definitely be staying there in future too.",
-    stayDate: "April 2025"
-  },
-  {
-    guestName: "Mudit Mani Goswami",
-    rating: BigInt(5),
-    comment: "Excellent home stay. Luxurious Heritage property in the heart of city. Very close to Kashi Vishwanath Temple & Ganges.",
-    stayDate: "March 2025"
-  },
-  {
-    guestName: "Madhumita Bagchi",
-    rating: BigInt(5),
-    comment: "Wonderful heritage property - a truly memorable stay in the heart of Varanasi.",
-    stayDate: "March 2025"
+    comment: "An Incredibly Beautiful House .. very aesthetically done ... super comfortable ... an Old World Charm... best location to stay in Varanasi , everything is just minutes-walk away .. Hosts are very warm and super Caring.. we had a great stay there and would definetely be staying there in future too .",
+    stayDate: "51 weeks ago"
   }
 ];
 const ROOM_IMAGES = {
@@ -40062,7 +41324,7 @@ function App() {
                           ] }),
                           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-primary/5 border border-primary/20 rounded-xl px-4 py-3", children: [
                             /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-foreground font-medium text-xs uppercase tracking-wide mb-1", children: "Address" }),
-                            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "CK-37/29, Bansphatak Road, Varanasi 221001, Uttar Pradesh, India" })
+                            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "CK-37/29, Bansphatak Road, Gate No.1 Near Pitambari Saree Opposite of Bank Of Baroda Varanasi 221001, Uttar Pradesh, India" })
                           ] })
                         ] })
                       }
@@ -40090,7 +41352,7 @@ function App() {
                   /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { variants: fadeUp, className: "text-center mb-8", children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium tracking-widest uppercase text-primary mb-3", children: "Stay With Us" }),
                     /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight mb-3", children: "Book Your Stay" }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground mb-5", children: "Send us a message and the ITH Stays team will confirm availability within 24 hours." }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground mb-5", children: "Send us a message and Team Rudreshwar will confirm availability within 24 hours." }),
                     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap gap-3 justify-center", children: [
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "a",
@@ -40100,14 +41362,14 @@ function App() {
                           className: "inline-flex items-center gap-2 bg-secondary text-foreground hover:bg-secondary/80 border border-border rounded-full px-5 py-2.5 text-sm font-medium transition-colors",
                           children: [
                             /* @__PURE__ */ jsxRuntimeExports.jsx(Phone, { className: "w-4 h-4" }),
-                            "Call Us: +91 99206 85754"
+                            "Call Us: +91 99206 85754 +91 9889244273 +91 9044301567"
                           ]
                         }
                       ),
                       /* @__PURE__ */ jsxRuntimeExports.jsxs(
                         "a",
                         {
-                          href: "mailto:rmk.vns@ithstays.com",
+                          href: "mailto:rmkothivns@gmail.com",
                           "data-ocid": "contact.email_button",
                           className: "inline-flex items-center gap-2 bg-secondary text-foreground hover:bg-secondary/80 border border-border rounded-full px-5 py-2.5 text-sm font-medium transition-colors",
                           children: [
@@ -40198,7 +41460,7 @@ function App() {
               /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-8 h-8 rounded-full bg-primary flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Flame, { className: "w-4 h-4 text-primary-foreground" }) }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-display text-lg font-semibold text-primary-foreground", children: "Rudreshwar Mahadeo Kothi" })
             ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-primary-foreground/60 leading-relaxed", children: "A 300-year-old heritage haveli managed by ITH Stays, in the heart of Varanasi." })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-primary-foreground/60 leading-relaxed", children: "A 300-year-old heritage haveli managed by Mr. Dr V.N. Singh and Team Rudreshwar Kothi, in the heart of Varanasi." })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "font-semibold text-sm uppercase tracking-widest text-primary-foreground/50 mb-4", children: "Contact" }),
@@ -40225,9 +41487,9 @@ function App() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   "a",
                   {
-                    href: "mailto:rmk.vns@ithstays.com",
+                    href: "mailto:rmkothivns@gmail.com",
                     className: "hover:text-primary-foreground transition-colors",
-                    children: "rmk.vns@ithstays.com"
+                    children: "rmkothivns@gmail.com"
                   }
                 )
               ] })
@@ -40248,30 +41510,8 @@ function App() {
           ] })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border-t border-primary-foreground/10 pt-6 text-center", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm text-primary-foreground/40", children: [
-          "(c) ",
-          (/* @__PURE__ */ new Date()).getFullYear(),
-          " Rudreshwar Mahadeo Kothi - ITH Living LLP. Built with",
-          " ",
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Heart,
-            {
-              className: "w-3 h-3 inline text-primary",
-              fill: "currentColor"
-            }
-          ),
-          " ",
-          "using",
-          " ",
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "a",
-            {
-              href: `https://caffeine.ai?utm_source=caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(window.location.hostname)}`,
-              target: "_blank",
-              rel: "noopener noreferrer",
-              className: "underline underline-offset-2 hover:text-primary-foreground/70 transition-colors",
-              children: "caffeine.ai"
-            }
-          )
+          "© 2026 Rudreshwar Mahadeo Kothi — A Heritage Property. All rights reserved.",
+          " "
         ] }) })
       ] }) }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -40382,27 +41622,49 @@ function ReviewsSection() {
       }
     );
   }
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid sm:grid-cols-3 gap-5", children: allReviews.slice(0, 6).map((review, idx) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid sm:grid-cols-3 gap-5", children: allReviews.slice(0, 9).map((review, idx) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+    ReviewItem,
+    {
+      review,
+      idx,
+      marker: reviewMarkers[idx] ?? `reviews.item.${idx + 1}`
+    },
+    `${review.guestName}-${idx}`
+  )) });
+}
+function ReviewItem({ review, idx, marker }) {
+  const [isExpanded, setIsExpanded] = reactExports.useState(false);
+  const isLong = review.comment.length > 200;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
     motion.div,
     {
-      "data-ocid": reviewMarkers[idx] ?? `reviews.item.${idx + 1}`,
+      "data-ocid": marker,
       variants: fadeUp,
-      className: "bg-card rounded-2xl border border-border p-5 flex flex-col shadow-xs",
+      className: "bg-card rounded-2xl border border-border p-5 flex flex-col shadow-xs h-fit",
       children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(StarRating, { rating: Number(review.rating) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm text-foreground/80 leading-relaxed mt-3 mb-4 flex-1 line-clamp-5", children: [
-          '"',
-          review.comment,
-          '"'
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-3 mb-4 flex-1 flex flex-col items-start w-full", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: `text-sm text-foreground/80 leading-relaxed whitespace-pre-wrap ${!isExpanded && isLong ? "line-clamp-5" : ""}`, children: [
+            '"',
+            review.comment,
+            '"'
+          ] }),
+          isLong && /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "button",
+            {
+              onClick: () => setIsExpanded(!isExpanded),
+              className: "text-xs font-semibold text-primary mt-2 hover:underline cursor-pointer focus:outline-none",
+              children: isExpanded ? "Read Less" : "Read More"
+            }
+          )
         ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "pt-3 border-t border-border/50", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "pt-3 border-t border-border/50 mt-auto w-full", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-sm text-foreground", children: review.guestName }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-muted-foreground mt-0.5", children: review.stayDate })
         ] })
       ]
-    },
-    `${review.guestName}-${idx}`
-  )) });
+    }
+  );
 }
 function BookingForm() {
   const [form, setForm] = reactExports.useState({
@@ -40453,7 +41715,7 @@ function BookingForm() {
         children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(CircleCheck, { className: "w-14 h-14 text-green-600 mx-auto mb-4" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display text-2xl font-semibold text-foreground mb-2", children: "Inquiry Sent!" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground leading-relaxed max-w-sm mx-auto", children: "Thank you for reaching out. The ITH Stays team will confirm availability within 24 hours." }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground leading-relaxed max-w-sm mx-auto", children: "Thank you for reaching out. Team Rudreshwar will confirm availability within 24 hours." }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             Button,
             {
@@ -40618,5 +41880,5 @@ BigInt.prototype.toJSON = function() {
 };
 const queryClient = new QueryClient();
 ReactDOM.createRoot(document.getElementById("root")).render(
-  /* @__PURE__ */ jsxRuntimeExports.jsx(QueryClientProvider, { client: queryClient, children: /* @__PURE__ */ jsxRuntimeExports.jsx(InternetIdentityProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(App, {}) }) })
+  /* @__PURE__ */ jsxRuntimeExports.jsx(QueryClientProvider, { client: queryClient, children: /* @__PURE__ */ jsxRuntimeExports.jsx(InternetIdentityProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(ReactLenis, { root: true, children: /* @__PURE__ */ jsxRuntimeExports.jsx(App, {}) }) }) })
 );
