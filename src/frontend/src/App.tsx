@@ -477,7 +477,7 @@ function RoomCard({ room, idx, onInquire, onImageClick, roomMarker, inquireMarke
             onClick={() =>
               window.open(
                 room.bookingUrl ||
-                "https://reservations.ithstays.com/booking/book-rooms-rudreshwarmahadeokothibyithstays",
+                "https://live.ipms247.com/booking/book-rooms-rudreshwarmahadeokothibyvns",
                 "_blank",
               )
             }
@@ -771,7 +771,7 @@ export default function App() {
                   data-ocid="nav.book_button"
                   onClick={() =>
                     window.open(
-                      "https://reservations.ithstays.com/booking/book-rooms-rudreshwarmahadeokothibyithstays",
+                      "https://live.ipms247.com/booking/book-rooms-rudreshwarmahadeokothibyvns",
                       "_blank",
                     )
                   }
@@ -822,7 +822,7 @@ export default function App() {
                       data-ocid="nav.book_button"
                       onClick={() =>
                         window.open(
-                          "https://reservations.ithstays.com/booking/book-rooms-rudreshwarmahadeokothibyithstays",
+                          "https://live.ipms247.com/booking/book-rooms-rudreshwarmahadeokothibyvns",
                           "_blank",
                         )
                       }
@@ -897,7 +897,7 @@ export default function App() {
                         data-ocid="hero.primary_button"
                         onClick={() =>
                           window.open(
-                            "https://reservations.ithstays.com/booking/book-rooms-rudreshwarmahadeokothibyithstays",
+                            "https://live.ipms247.com/booking/book-rooms-rudreshwarmahadeokothibyvns",
                             "_blank",
                           )
                         }
@@ -1490,7 +1490,7 @@ export default function App() {
                           Email Us
                         </a>
                         <a
-                          href="https://reservations.ithstays.com/booking/book-rooms-rudreshwarmahadeokothibyithstays"
+                          href="https://live.ipms247.com/booking/book-rooms-rudreshwarmahadeokothibyvns"
                           target="_blank"
                           rel="noopener noreferrer"
                           data-ocid="contact.booking_button"
