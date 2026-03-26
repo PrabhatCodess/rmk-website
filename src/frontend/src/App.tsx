@@ -516,7 +516,7 @@ const FALLBACK_ROOMS: FallbackRoom[] = [
     pricePerNight: BigInt(0),
     maxGuests: BigInt(4),
     bookingUrl:
-      "https://reservations.ithstays.com/booking/roomwisedata.php?hid=rudreshwarmahadeokothibyithstays&roomtypeunkid=5596100000000000001",
+      "https://live.ipms247.com/booking/book-rooms-rudreshwarmahadeokothibyvns",
   },
   {
     name: "Superior Room - Street View",
@@ -534,7 +534,7 @@ const FALLBACK_ROOMS: FallbackRoom[] = [
     pricePerNight: BigInt(0),
     maxGuests: BigInt(2),
     bookingUrl:
-      "https://reservations.ithstays.com/booking/roomwisedata.php?hid=rudreshwarmahadeokothibyithstays&roomtypeunkid=5596100000000000002",
+      "https://live.ipms247.com/booking/book-rooms-rudreshwarmahadeokothibyvns",
   },
   {
     name: "Superior Room - Terrace Access",
@@ -552,7 +552,7 @@ const FALLBACK_ROOMS: FallbackRoom[] = [
     pricePerNight: BigInt(0),
     maxGuests: BigInt(2),
     bookingUrl:
-      "https://reservations.ithstays.com/booking/roomwisedata.php?hid=rudreshwarmahadeokothibyithstays&roomtypeunkid=5596100000000000003",
+      "https://live.ipms247.com/booking/book-rooms-rudreshwarmahadeokothibyvns",
   },
   {
     name: "Standard Room - Private Bathroom",
@@ -570,7 +570,7 @@ const FALLBACK_ROOMS: FallbackRoom[] = [
     pricePerNight: BigInt(0),
     maxGuests: BigInt(2),
     bookingUrl:
-      "https://reservations.ithstays.com/booking/roomwisedata.php?hid=rudreshwarmahadeokothibyithstays&roomtypeunkid=5596100000000000004",
+      "https://live.ipms247.com/booking/book-rooms-rudreshwarmahadeokothibyvns",
   },
 ];
 
@@ -728,23 +728,25 @@ export default function App() {
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
           {/* Navigation */}
           <header className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-border">
-            <nav className="max-w-6xl mx-auto px-4 sm:px-6 h-[4.5rem] flex items-center justify-between">
+            <nav className="max-w-6xl mx-auto px-2 sm:px-6 h-[4.5rem] sm:h-[6.5rem] flex items-center justify-between">
               {/* Logo */}
               <button
                 type="button"
                 onClick={() => scrollTo("#hero")}
-                className="flex items-center gap-2 group"
+                className="flex items-center h-10 relative shrink-0"
               >
-                <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
-                  <Flame className="w-4 h-4 text-primary-foreground" />
-                </div>
-                <span className="font-display font-semibold text-lg text-foreground tracking-tight leading-none">
+                <img src="/logo.png" alt="Logo" className="w-16 h-16 sm:w-32 sm:h-32 object-cover relative " />
+
+                <img src="/logo_2.png" alt="Logo_2" className="h-24 sm:h-52 w-auto object-contain relative right-14 sm:right-28 bottom-1 sm:bottom-2 " />
+
+
+                {/* <span className="font-display font-semibold text-lg text-foreground tracking-tight leading-none">
                   Rudreshwar
                   <br />
                   <span className="text-xs font-body font-medium text-muted-foreground tracking-widest uppercase">
                     Mahadeo Kothi
                   </span>
-                </span>
+                </span> */}
               </button>
 
               {/* Desktop nav links */}
@@ -1574,15 +1576,11 @@ export default function App() {
                 <div className="grid sm:grid-cols-3 gap-10 mb-10">
                   {/* Brand */}
                   <div>
-                    <div className="flex items-center gap-2 mb-4">
-                      <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
-                        <Flame className="w-4 h-4 text-primary-foreground" />
-                      </div>
-                      <span className="font-display text-lg font-semibold text-primary-foreground">
-                        Rudreshwar Mahadeo Kothi
-                      </span>
+                    <div className="flex items-center h-10 relative mb-16 sm:mb-20 mt-4 sm:mt-8 right-0 sm:right-14  ">
+                      <img src="/logo.png" alt="Logo" className="w-20 h-20 sm:w-32 sm:h-32 object-cover relative " />
+                      <img src="/logo_2.png" alt="Logo_2" className="h-40 sm:h-60 w-auto object-cover relative right-16 sm:right-24 bottom-1 sm:bottom-2 " />
                     </div>
-                    <p className="text-sm text-primary-foreground/60 leading-relaxed">
+                    <p className="text-sm text-primary-foreground/60 leading-relaxed relative bottom-6 sm:bottom-12 ">
                       A 300-year-old heritage haveli managed by Mr. Dr V.N. Singh and Team Rudreshwar Kothi, in the
                       heart of Varanasi.
                     </p>
@@ -1603,10 +1601,16 @@ export default function App() {
                       <li className="flex items-center gap-2 text-sm text-primary-foreground/70">
                         <Phone className="w-4 h-4 flex-shrink-0 text-primary-foreground/40" />
                         <a
-                          href="tel:+919920685754"
+                          href="tel:+919335106436"
                           className="hover:text-primary-foreground transition-colors"
                         >
-                          +91 99206 85754
+                          +91 9335106436
+                          <br />
+                          +91 9889244273
+                          <br />
+                          +91 7860597574
+                          <br />
+                          +91 9044301567
                         </a>
                       </li>
                       <li className="flex items-center gap-2 text-sm text-primary-foreground/70">
