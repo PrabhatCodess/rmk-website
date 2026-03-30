@@ -1,40 +1,14 @@
-@font-face {
-  font-family: "Rage Italic";
-  /* Replace with the actual font files you provide */
-  src: url("/assets/fonts/RageItalic.woff2") format("woff2"),
-    url("/assets/fonts/RageItalic.woff") format("woff");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Great+Vibes&display=swap');
 
 /* apply the custom font to both display and body */
 :root {
-  --font-display: "Rage Italic", Georgia, serif;
-  --font-body: "Rage Italic", system-ui, sans-serif;
+  --font-display: "Rage Italic", "Great Vibes", Georgia, serif;
+  --font-body: "Figtree", system-ui, sans-serif;
 }
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Fraunces (Display Serif) */
-@font-face {
-  font-family: "Fraunces";
-  src: url("/assets/fonts/Fraunces.woff2") format("woff2");
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* Figtree (Body) */
-@font-face {
-  font-family: "Figtree";
-  src: url("/assets/fonts/Figtree.woff2") format("woff2");
-  font-weight: 300 900;
-  font-style: normal;
-  font-display: swap;
-}
 
 @layer base {
   :root {
