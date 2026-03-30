@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { inject } from "@vercel/analytics"
+import { Analytics } from "@vercel/analytics/react"
 import {
   CheckCircle2,
   ChevronDown,
@@ -1672,6 +1672,7 @@ export default function App() {
           />
         </motion.div>
       )}
+      <Analytics />
     </div>
   );
 }
@@ -2062,6 +2063,4 @@ function BookingForm() {
       </p>
     </form>
   );
-  inject()
 }
-
