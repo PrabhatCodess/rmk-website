@@ -163,9 +163,9 @@ function ImageLightbox({
   const imageNumber = currentIndex + 1;
   const totalImages = images.length;
   return <AnimatePresence>
-      {isOpen && <>
-          {/* Backdrop */}
-          <motion.div initial={{
+    {isOpen && <>
+      {/* Backdrop */}
+      <motion.div initial={{
         opacity: 0
       }} animate={{
         opacity: 1
@@ -173,16 +173,16 @@ function ImageLightbox({
         opacity: 0
       }} onClick={onClose} className="fixed inset-0 bg-black/95 z-50" />
 
-          {/* Lightbox Content */}
-          <motion.div initial={{
+      {/* Lightbox Content */}
+      <motion.div initial={{
         opacity: 0
       }} animate={{
         opacity: 1
       }} exit={{
         opacity: 0
       }} className="fixed inset-0 z-50 flex flex-col items-center justify-center p-4">
-            {/* Close Button */}
-            <motion.button initial={{
+        {/* Close Button */}
+        <motion.button initial={{
           opacity: 0
         }} animate={{
           opacity: 1
@@ -192,23 +192,23 @@ function ImageLightbox({
           e.stopPropagation();
           onClose();
         }} className="absolute top-6 right-6 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer z-50" aria-label="Close lightbox">
-              <X className="w-6 h-6" />
-            </motion.button>
+          <X className="w-6 h-6" />
+        </motion.button>
 
-            {/* Image Counter */}
-            <motion.div initial={{
+        {/* Image Counter */}
+        <motion.div initial={{
           opacity: 0
         }} animate={{
           opacity: 1
         }} exit={{
           opacity: 0
         }} className="absolute top-6 left-6 text-white text-sm font-medium">
-              {roomName} - {imageNumber} / {totalImages}
-            </motion.div>
+          {roomName} - {imageNumber} / {totalImages}
+        </motion.div>
 
-            {/* Main Image Container */}
-            <div className="relative w-full h-full flex items-center justify-center max-w-7xl">
-              <motion.img key={currentIndex} src={currentImage} alt={`${roomName} - Image ${imageNumber}`} initial={{
+        {/* Main Image Container */}
+        <div className="relative w-full h-full flex items-center justify-center max-w-7xl">
+          <motion.img key={currentIndex} src={currentImage} alt={`${roomName} - Image ${imageNumber}`} initial={{
             opacity: 0,
             scale: 0.95
           }} animate={{
@@ -221,45 +221,45 @@ function ImageLightbox({
             duration: 0.2
           }} className="max-w-full max-h-[80vh] object-contain" />
 
-              {/* Left Arrow */}
-              {totalImages > 1 && <motion.button initial={{
+          {/* Left Arrow */}
+          {totalImages > 1 && <motion.button initial={{
             opacity: 0
           }} animate={{
             opacity: 1
           }} exit={{
             opacity: 0
           }} onClick={onPrev} className="absolute left-4 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors group" aria-label="Previous image">
-                  <ChevronLeft className="w-6 h-6 group-hover:scale-110 transition-transform" />
-                </motion.button>}
+            <ChevronLeft className="w-6 h-6 group-hover:scale-110 transition-transform" />
+          </motion.button>}
 
-              {/* Right Arrow */}
-              {totalImages > 1 && <motion.button initial={{
+          {/* Right Arrow */}
+          {totalImages > 1 && <motion.button initial={{
             opacity: 0
           }} animate={{
             opacity: 1
           }} exit={{
             opacity: 0
           }} onClick={onNext} className="absolute right-4 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors group" aria-label="Next image">
-                  <ChevronRight className="w-6 h-6 group-hover:scale-110 transition-transform" />
-                </motion.button>}
-            </div>
+            <ChevronRight className="w-6 h-6 group-hover:scale-110 transition-transform" />
+          </motion.button>}
+        </div>
 
-            {/* Image Indicator Dots */}
-            {totalImages > 1 && <motion.div initial={{
+        {/* Image Indicator Dots */}
+        {totalImages > 1 && <motion.div initial={{
           opacity: 0
         }} animate={{
           opacity: 1
         }} exit={{
           opacity: 0
         }} className="absolute bottom-6 flex gap-2">
-                {images.map((_, idx) => <motion.button key={idx} onClick={() => {
+          {images.map((_, idx) => <motion.button key={idx} onClick={() => {
             // This would require additional state management
             // For now, we'll keep arrow navigation only
           }} className={`w-2 h-2 rounded-full transition-all ${idx === currentIndex ? "bg-white w-8" : "bg-white/40 hover:bg-white/60"}`} aria-label={`Go to image ${idx + 1}`} />)}
-              </motion.div>}
-          </motion.div>
-        </>}
-    </AnimatePresence>;
+        </motion.div>}
+      </motion.div>
+    </>}
+  </AnimatePresence>;
 }
 
 // small reusable card used by RoomsGrid so each instance can manage its own
@@ -302,10 +302,10 @@ function RoomCard({
     })
   };
   return <motion.div data-ocid={roomMarker} variants={fadeUp} className="room-card rounded-2xl overflow-hidden bg-card border border-border shadow-xs hover:shadow-md transition-shadow flex flex-col">
-      {/* Room image carousel */}
-      <div onClick={() => onImageClick?.(idx, imgIdx)} className="overflow-hidden h-48 relative group bg-muted cursor-pointer">
-        <AnimatePresence initial={false} custom={direction} mode="popLayout">
-          {images.length > 0 ? <motion.img key={imgIdx} src={images[imgIdx]} alt={room.name} custom={direction} variants={slideVariants} initial="enter" animate="center" exit="exit" transition={{
+    {/* Room image carousel */}
+    <div onClick={() => onImageClick?.(idx, imgIdx)} className="overflow-hidden h-48 relative group bg-muted cursor-pointer">
+      <AnimatePresence initial={false} custom={direction} mode="popLayout">
+        {images.length > 0 ? <motion.img key={imgIdx} src={images[imgIdx]} alt={room.name} custom={direction} variants={slideVariants} initial="enter" animate="center" exit="exit" transition={{
           x: {
             type: "spring",
             stiffness: 500,
@@ -318,63 +318,63 @@ function RoomCard({
             ease: "easeInOut"
           }
         }} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" /> : <div className="absolute inset-0 w-full h-full bg-muted flex items-center justify-center">
-              {/* placeholder in case no image available */}
-              <Image className="w-6 h-6 text-muted-foreground" />
-            </div>}
-        </AnimatePresence>
-        {images.length > 1 && <>
-            <button onClick={e => {
+          {/* placeholder in case no image available */}
+          <Image className="w-6 h-6 text-muted-foreground" />
+        </div>}
+      </AnimatePresence>
+      {images.length > 1 && <>
+        <button onClick={e => {
           e.stopPropagation();
           prev();
         }} className="absolute left-2 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer bg-black/30 hover:bg-black/60 text-white rounded-full p-1 transition-all duration-200 hover:scale-110">
-              <ChevronLeft className="w-4 h-4" />
-            </button>
-            <button onClick={e => {
+          <ChevronLeft className="w-4 h-4" />
+        </button>
+        <button onClick={e => {
           e.stopPropagation();
           next();
         }} className="absolute right-2 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer bg-black/30 hover:bg-black/60 text-white rounded-full p-1 transition-all duration-200 hover:scale-110">
-              <ChevronRight className="w-4 h-4" />
-            </button>
-          </>}
-      </div>
+          <ChevronRight className="w-4 h-4" />
+        </button>
+      </>}
+    </div>
 
-      {/* Content */}
-      <div className="p-5 flex flex-col flex-1">
-        <div className="flex items-start justify-between gap-2 mb-2">
-          <h3 className="font-display text-lg font-semibold text-foreground leading-snug">
-            {room.name}
-          </h3>
-          <div className="flex items-center gap-1 text-muted-foreground flex-shrink-0">
-            <Users className="w-3.5 h-3.5" />
-            <span className="text-xs">Up to {Number(room.maxGuests)}</span>
-          </div>
-        </div>
-
-        <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-          {room.description}
-        </p>
-
-        {/* Amenity tags */}
-        <div className="flex flex-wrap gap-1.5 mb-5">
-          {room.amenities.slice(0, 4).map(a => <Badge key={a} variant="secondary" className="text-xs font-normal rounded-full bg-secondary text-secondary-foreground">
-              {a}
-            </Badge>)}
-          {room.amenities.length > 4 && <Badge variant="secondary" className="text-xs font-normal rounded-full bg-secondary/60 text-secondary-foreground/60">
-              +{room.amenities.length - 4} more
-            </Badge>}
-        </div>
-
-        {/* Buttons */}
-        <div className="mt-auto flex flex-col gap-2">
-          <Button data-ocid={bookNowMarker} onClick={() => window.open(room.bookingUrl || "https://live.ipms247.com/booking/book-rooms-rudreshwarmahadeokothibyvns", "_blank")} className="w-full bg-primary text-primary-foreground hover:bg-primary/90 rounded-full">
-            Book Now
-          </Button>
-          <Button data-ocid={inquireMarker} onClick={onInquire} variant="outline" className="w-full border-border rounded-full text-sm">
-            Inquire
-          </Button>
+    {/* Content */}
+    <div className="p-5 flex flex-col flex-1">
+      <div className="flex items-start justify-between gap-2 mb-2">
+        <h3 className="font-display text-lg font-semibold text-foreground leading-snug">
+          {room.name}
+        </h3>
+        <div className="flex items-center gap-1 text-muted-foreground flex-shrink-0">
+          <Users className="w-3.5 h-3.5" />
+          <span className="text-xs">Up to {Number(room.maxGuests)}</span>
         </div>
       </div>
-    </motion.div>;
+
+      <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+        {room.description}
+      </p>
+
+      {/* Amenity tags */}
+      <div className="flex flex-wrap gap-1.5 mb-5">
+        {room.amenities.slice(0, 4).map(a => <Badge key={a} variant="secondary" className="text-xs font-normal rounded-full bg-secondary text-secondary-foreground">
+          {a}
+        </Badge>)}
+        {room.amenities.length > 4 && <Badge variant="secondary" className="text-xs font-normal rounded-full bg-secondary/60 text-secondary-foreground/60">
+          +{room.amenities.length - 4} more
+        </Badge>}
+      </div>
+
+      {/* Buttons */}
+      <div className="mt-auto flex flex-col gap-2">
+        <Button data-ocid={bookNowMarker} onClick={() => window.open(room.bookingUrl || "https://live.ipms247.com/booking/book-rooms-rudreshwarmahadeokothibyvns", "_blank")} className="w-full bg-primary text-primary-foreground hover:bg-primary/90 rounded-full">
+          Book Now
+        </Button>
+        <Button data-ocid={inquireMarker} onClick={onInquire} variant="outline" className="w-full border-border rounded-full text-sm">
+          Inquire
+        </Button>
+      </div>
+    </div>
+  </motion.div>;
 }
 const FALLBACK_ROOMS = [{
   name: "Kashi Family Suite",
@@ -443,8 +443,8 @@ function StarRating({
   max = 5
 }) {
   return <div className="flex gap-0.5">
-      {STAR_POSITIONS.slice(0, max).map(pos => <Star key={pos} className={`w-4 h-4 ${pos <= rating ? "star-filled" : "star-empty"}`} />)}
-    </div>;
+    {STAR_POSITIONS.slice(0, max).map(pos => <Star key={pos} className={`w-4 h-4 ${pos <= rating ? "star-filled" : "star-empty"}`} />)}
+  </div>;
 }
 
 /* Fade-in section animation  */
@@ -565,60 +565,60 @@ export default function App() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [lightboxOpen, lightboxRoomIdx]);
   return <div className="relative min-h-screen font-body">
-      <AnimatePresence>
-        {loading && <Loader onFinish={() => setLoading(false)} />}
-      </AnimatePresence>
-      {!loading && <motion.div initial={{
+    <AnimatePresence>
+      {loading && <Loader onFinish={() => setLoading(false)} />}
+    </AnimatePresence>
+    {!loading && <motion.div initial={{
       opacity: 0
     }} animate={{
       opacity: 1
     }} exit={{
       opacity: 0
     }}>
-          {/* Navigation */}
-          <header className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-border">
-            <nav className="max-w-6xl mx-auto px-2 sm:px-6 h-[4.5rem] sm:h-[6.5rem] flex items-center justify-between">
-              {/* Logo */}
-              <button type="button" onClick={() => scrollTo("#hero")} className="flex items-center h-10 relative shrink-0">
-                <img src="/logo.png" alt="Logo" className="w-16 h-16 sm:w-32 sm:h-32 object-cover relative " />
+      {/* Navigation */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-border">
+        <nav className="max-w-6xl mx-auto px-2 sm:px-6 h-[4.5rem] sm:h-[6.5rem] flex items-center justify-between">
+          {/* Logo */}
+          <button type="button" onClick={() => scrollTo("#hero")} className="flex items-center h-10 relative shrink-0">
+            <img src="/logo.png" alt="Logo" className="w-16 h-16 sm:w-32 sm:h-32 object-cover relative " />
 
-                <img src="/logo_2.png" alt="Logo_2" className="h-24 sm:h-52 w-auto object-contain relative right-14 sm:right-28 bottom-1 sm:bottom-2 " />
+            <img src="/logo_2.png" alt="Logo_2" className="h-24 sm:h-52 w-auto object-contain relative right-14 sm:right-28 bottom-1 sm:bottom-2 " />
 
 
-                {/* <span className="font-display font-semibold text-lg text-foreground tracking-tight leading-none">
-                  Rudreshwar
-                  <br />
-                  <span className="text-xs font-body font-medium text-muted-foreground tracking-widest uppercase">
-                    Mahadeo Kothi
-                  </span>
-                 </span> */}
-              </button>
+            <span className="font-display font-semibold text-lg text-foreground tracking-tight leading-none">
+              Rudreshwar
+              <br />
+              <span className="text-xs font-body font-medium text-muted-foreground tracking-widest uppercase">
+                Mahadeo Kothi
+              </span>
+            </span>
+          </button>
 
-              {/* Desktop nav links */}
-              <ul className="hidden md:flex items-center gap-6">
-                {navLinks.map(link => <li key={link.href}>
-                    <a href={link.href} data-ocid={`nav.${link.label.toLowerCase()}.link`} onClick={e => {
+          {/* Desktop nav links */}
+          <ul className="hidden md:flex items-center gap-6">
+            {navLinks.map(link => <li key={link.href}>
+              <a href={link.href} data-ocid={`nav.${link.label.toLowerCase()}.link`} onClick={e => {
                 e.preventDefault();
                 scrollTo(link.href);
               }} className="text-sm font-medium text-muted-foreground hover:text-white transition-colors">
-                      {link.label}
-                    </a>
-                  </li>)}
-              </ul>
+                {link.label}
+              </a>
+            </li>)}
+          </ul>
 
-              <div className="flex items-center gap-3">
-                <Button data-ocid="nav.book_button" onClick={() => window.open("https://live.ipms247.com/booking/book-rooms-rudreshwarmahadeokothibyvns", "_blank")} className="hidden sm:flex bg-primary text-primary-foreground hover:bg-primary/90 text-sm px-5 rounded-full">
-                  Book Now
-                </Button>
-                <button type="button" className="md:hidden p-2 rounded-md text-foreground" onClick={() => setMobileMenuOpen(v => !v)} aria-label="Toggle menu">
-                  {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-                </button>
-              </div>
-            </nav>
+          <div className="flex items-center gap-3">
+            <Button data-ocid="nav.book_button" onClick={() => window.open("https://live.ipms247.com/booking/book-rooms-rudreshwarmahadeokothibyvns", "_blank")} className="hidden sm:flex bg-primary text-primary-foreground hover:bg-primary/90 text-sm px-5 rounded-full">
+              Book Now
+            </Button>
+            <button type="button" className="md:hidden p-2 rounded-md text-foreground" onClick={() => setMobileMenuOpen(v => !v)} aria-label="Toggle menu">
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
+        </nav>
 
-            {/* Mobile menu */}
-            <AnimatePresence>
-              {mobileMenuOpen && <motion.div initial={{
+        {/* Mobile menu */}
+        <AnimatePresence>
+          {mobileMenuOpen && <motion.div initial={{
             height: 0,
             opacity: 0
           }} animate={{
@@ -630,136 +630,136 @@ export default function App() {
           }} transition={{
             duration: 0.25
           }} className="md:hidden overflow-hidden bg-background border-t border-border">
-                  <div className="px-4 py-4 flex flex-col gap-3">
-                    {navLinks.map(link => <a key={link.href} href={link.href} onClick={e => {
+            <div className="px-4 py-4 flex flex-col gap-3">
+              {navLinks.map(link => <a key={link.href} href={link.href} onClick={e => {
                 e.preventDefault();
                 scrollTo(link.href);
               }} className="py-2 text-base font-medium text-foreground border-b border-border/50 last:border-0">
-                        {link.label}
-                      </a>)}
-                    <Button data-ocid="nav.book_button" onClick={() => window.open("https://live.ipms247.com/booking/book-rooms-rudreshwarmahadeokothibyvns", "_blank")} className="mt-2 bg-primary text-primary-foreground w-full rounded-full">
-                      Book Now
-                    </Button>
+                {link.label}
+              </a>)}
+              <Button data-ocid="nav.book_button" onClick={() => window.open("https://live.ipms247.com/booking/book-rooms-rudreshwarmahadeokothibyvns", "_blank")} className="mt-2 bg-primary text-primary-foreground w-full rounded-full">
+                Book Now
+              </Button>
+            </div>
+          </motion.div>}
+        </AnimatePresence>
+      </header>
+
+      <div>
+        <main>
+          {/* Hero */}
+          <section id="hero" className="relative min-h-screen flex flex-col">
+            {/* Background image */}
+            <div className="absolute inset-0 overflow-hidden">
+              <img src="/assets/generated/hero-temple-shrine.dim_1200x700.jpg" alt="Rudreshwar Mahadeo Kothi heritage haveli temple shrine entrance" className="w-full h-full object-cover" />
+              <div className="hero-overlay absolute inset-0" />
+            </div>
+
+            {/* Content */}
+            <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-4 sm:px-6 pt-20">
+              <motion.div variants={stagger} initial="hidden" animate="visible" className="max-w-2xl">
+                {/* Badge */}
+                <motion.div variants={fadeUp} className="flex justify-center mb-6">
+                  <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm border border-white/25 rounded-full px-4 py-1.5">
+                    <Star className="w-3.5 h-3.5 fill-amber-300 text-amber-300" />
+                    <span className="text-white/90 text-xs font-medium tracking-widest uppercase">
+                      Heritage Haveli - AirBnB Guest Favorite
+                    </span>
                   </div>
-                </motion.div>}
-            </AnimatePresence>
-          </header>
+                </motion.div>
 
-          <div>
-            <main>
-              {/* Hero */}
-              <section id="hero" className="relative min-h-screen flex flex-col">
-                {/* Background image */}
-                <div className="absolute inset-0 overflow-hidden">
-                  <img src="/assets/generated/hero-temple-shrine.dim_1200x700.jpg" alt="Rudreshwar Mahadeo Kothi heritage haveli temple shrine entrance" className="w-full h-full object-cover" />
-                  <div className="hero-overlay absolute inset-0" />
-                </div>
+                <motion.h1 variants={fadeUp} className="font-display text-4xl sm:text-5xl md:text-6xl font-semibold text-white leading-[1.1] tracking-tight mb-4">
+                  Rudreshwar
+                  <br />
+                  <span className="italic text-amber-200">Mahadeo Kothi</span>
+                </motion.h1>
 
-                {/* Content */}
-                <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-4 sm:px-6 pt-20">
-                  <motion.div variants={stagger} initial="hidden" animate="visible" className="max-w-2xl">
-                    {/* Badge */}
-                    <motion.div variants={fadeUp} className="flex justify-center mb-6">
-                      <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm border border-white/25 rounded-full px-4 py-1.5">
-                        <Star className="w-3.5 h-3.5 fill-amber-300 text-amber-300" />
-                        <span className="text-white/90 text-xs font-medium tracking-widest uppercase">
-                          Heritage Haveli - AirBnB Guest Favorite
-                        </span>
-                      </div>
-                    </motion.div>
+                <motion.p variants={fadeUp} className="text-white/80 text-lg sm:text-xl font-light mb-8 leading-relaxed">
+                  Heritage Haveli in the Heart of Varanasi
+                  <br className="hidden sm:block" />3 min walk from Kashi
+                  Vishwanath Temple
+                </motion.p>
 
-                    <motion.h1 variants={fadeUp} className="font-display text-4xl sm:text-5xl md:text-6xl font-semibold text-white leading-[1.1] tracking-tight mb-4">
-                      Rudreshwar
-                      <br />
-                      <span className="italic text-amber-200">Mahadeo Kothi</span>
-                    </motion.h1>
+                <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-3 justify-center">
+                  <Button data-ocid="hero.primary_button" onClick={() => window.open("https://live.ipms247.com/booking/book-rooms-rudreshwarmahadeokothibyvns", "_blank")} size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-6 text-base rounded-full shadow-lg">
+                    Book Now
+                  </Button>
+                  <Button onClick={() => scrollTo("#rooms")} size="lg" variant="outline" className="border-white/40 text-white bg-white/10 hover:bg-white/20 hover:text-white px-8 py-6 text-base rounded-full">
+                    View Rooms
+                  </Button>
+                </motion.div>
+              </motion.div>
+            </div>
 
-                    <motion.p variants={fadeUp} className="text-white/80 text-lg sm:text-xl font-light mb-8 leading-relaxed">
-                      Heritage Haveli in the Heart of Varanasi
-                      <br className="hidden sm:block" />3 min walk from Kashi
-                      Vishwanath Temple
-                    </motion.p>
-
-                    <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-3 justify-center">
-                      <Button data-ocid="hero.primary_button" onClick={() => window.open("https://live.ipms247.com/booking/book-rooms-rudreshwarmahadeokothibyvns", "_blank")} size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-6 text-base rounded-full shadow-lg">
-                        Book Now
-                      </Button>
-                      <Button onClick={() => scrollTo("#rooms")} size="lg" variant="outline" className="border-white/40 text-white bg-white/10 hover:bg-white/20 hover:text-white px-8 py-6 text-base rounded-full">
-                        View Rooms
-                      </Button>
-                    </motion.div>
-                  </motion.div>
-                </div>
-
-                {/* Scroll cue */}
-                <div className="relative z-10 flex justify-center pb-8">
-                  <motion.button type="button" onClick={() => scrollTo("#about")} animate={{
+            {/* Scroll cue */}
+            <div className="relative z-10 flex justify-center pb-8">
+              <motion.button type="button" onClick={() => scrollTo("#about")} animate={{
                 y: [0, 6, 0]
               }} transition={{
                 duration: 2,
                 repeat: Number.POSITIVE_INFINITY,
                 ease: "easeInOut"
               }} className="text-white/60 hover:text-white/90 transition-colors" aria-label="Scroll down">
-                    <ChevronDown className="w-7 h-7" />
-                  </motion.button>
-                </div>
-              </section>
+                <ChevronDown className="w-7 h-7" />
+              </motion.button>
+            </div>
+          </section>
 
-              {/* About */}
-              <section id="about" className="py-20 sm:py-28 px-4 sm:px-6 bg-background relative z-10">
-                <div className="max-w-5xl mx-auto">
-                  <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{
+          {/* About */}
+          <section id="about" className="py-20 sm:py-28 px-4 sm:px-6 bg-background relative z-10">
+            <div className="max-w-5xl mx-auto">
+              <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{
                 once: true,
                 margin: "-80px"
               }} className="grid md:grid-cols-2 gap-12 items-center">
-                    {/* Text */}
-                    <div>
-                      <motion.p variants={fadeUp} className="text-sm font-medium tracking-widest uppercase text-primary mb-3">
-                        About Us
-                      </motion.p>
-                      <motion.h2 variants={fadeUp} className="font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight mb-5">
-                        A 300-Year-Old
-                        <br />
-                        <span className="italic font-light">Heritage Haveli</span>
-                      </motion.h2>
-                      <motion.div variants={fadeUp} className="space-y-4 text-muted-foreground leading-relaxed">
-                        <p>
-                          Step into a world of royal elegance, deep spirituality, and
-                          living history at Rudreshwar Mahadeo Kothi - a 300-year-old
-                          ancestral haveli steeped in tradition. Just a 3-minute walk
-                          from the Kashi Vishwanath Temple and 10 minutes from the
-                          sacred ghats of the Ganges.
-                        </p>
-                        <p>
-                          This heritage home features soaring ceilings, ornate
-                          courtyards, intricate carvings, and an in-house Lord
-                          Vishwanath Temple - a rare private shrine within the
-                          property. The Yaksh Vinayaka Shrine, one of the 56 revered
-                          Vinayak temples of Varanasi, is also located here.
-                        </p>
-                        <p>
-                          Traditional ritual facilities - Rudrabhishek,
-                          Mahamrityunjaya Path, and other pujas - can be arranged on
-                          request. Modern amenities ensure a seamless stay without
-                          losing the soul of this living heritage.
-                        </p>
-                      </motion.div>
-                    </div>
+                {/* Text */}
+                <div>
+                  <motion.p variants={fadeUp} className="text-sm font-medium tracking-widest uppercase text-primary mb-3">
+                    About Us
+                  </motion.p>
+                  <motion.h2 variants={fadeUp} className="font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight mb-5">
+                    A 300-Year-Old
+                    <br />
+                    <span className="italic font-light">Heritage Haveli</span>
+                  </motion.h2>
+                  <motion.div variants={fadeUp} className="space-y-4 text-muted-foreground leading-relaxed">
+                    <p>
+                      Step into a world of royal elegance, deep spirituality, and
+                      living history at Rudreshwar Mahadeo Kothi - a 300-year-old
+                      ancestral haveli steeped in tradition. Just a 3-minute walk
+                      from the Kashi Vishwanath Temple and 10 minutes from the
+                      sacred ghats of the Ganges.
+                    </p>
+                    <p>
+                      This heritage home features soaring ceilings, ornate
+                      courtyards, intricate carvings, and an in-house Lord
+                      Vishwanath Temple - a rare private shrine within the
+                      property. The Yaksh Vinayaka Shrine, one of the 56 revered
+                      Vinayak temples of Varanasi, is also located here.
+                    </p>
+                    <p>
+                      Traditional ritual facilities - Rudrabhishek,
+                      Mahamrityunjaya Path, and other pujas - can be arranged on
+                      request. Modern amenities ensure a seamless stay without
+                      losing the soul of this living heritage.
+                    </p>
+                  </motion.div>
+                </div>
 
-                    {/* Highlights card */}
-                    <motion.div variants={fadeUp}>
-                      <Card className="border-border shadow-sm overflow-hidden">
-                        <div className="bg-primary/8 px-6 pt-0 pb-2 border-b border-border">
-                          <h3 className="font-display text-xl font-semibold text-foreground">
-                            What's Included
-                          </h3>
-                          <p className="text-sm text-muted-foreground mt-1">
-                            Every stay, every room
-                          </p>
-                        </div>
-                        <CardContent className="p-6">
-                          <ul className="space-y-4">
-                            {[{
+                {/* Highlights card */}
+                <motion.div variants={fadeUp}>
+                  <Card className="border-border shadow-sm overflow-hidden">
+                    <div className="bg-primary/8 px-6 pt-0 pb-2 border-b border-border">
+                      <h3 className="font-display text-xl font-semibold text-foreground">
+                        What's Included
+                      </h3>
+                      <p className="text-sm text-muted-foreground mt-1">
+                        Every stay, every room
+                      </p>
+                    </div>
+                    <CardContent className="p-6">
+                      <ul className="space-y-4">
+                        {[{
                           icon: Wifi,
                           label: "Free High-Speed Wi-Fi",
                           desc: "Throughout the property"
@@ -787,74 +787,74 @@ export default function App() {
                           label,
                           desc
                         }) => <li key={label} className="flex items-start gap-3">
-                                <div className="w-9 h-9 rounded-lg bg-secondary flex items-center justify-center flex-shrink-0 mt-0.5">
-                                  <Icon className="w-4.5 h-4.5 text-secondary-foreground" style={{
-                              width: "1.1rem",
-                              height: "1.1rem"
-                            }} />
-                                </div>
-                                <div>
-                                  <p className="font-medium text-foreground text-sm">
-                                    {label}
-                                  </p>
-                                  <p className="text-xs text-muted-foreground mt-0.5">
-                                    {desc}
-                                  </p>
-                                </div>
-                              </li>)}
-                          </ul>
-                        </CardContent>
-                      </Card>
-                    </motion.div>
-                  </motion.div>
-                </div>
-              </section>
+                            <div className="w-9 h-9 rounded-lg bg-secondary flex items-center justify-center flex-shrink-0 mt-0.5">
+                              <Icon className="w-4.5 h-4.5 text-secondary-foreground" style={{
+                                width: "1.1rem",
+                                height: "1.1rem"
+                              }} />
+                            </div>
+                            <div>
+                              <p className="font-medium text-foreground text-sm">
+                                {label}
+                              </p>
+                              <p className="text-xs text-muted-foreground mt-0.5">
+                                {desc}
+                              </p>
+                            </div>
+                          </li>)}
+                      </ul>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              </motion.div>
+            </div>
+          </section>
 
-              <div className="section-divider" />
+          <div className="section-divider" />
 
-              {/* Rooms */}
-              <section id="rooms" className="py-20 sm:py-28 px-4 sm:px-6 relative z-10">
-                <div className="max-w-6xl mx-auto">
-                  <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{
+          {/* Rooms */}
+          <section id="rooms" className="py-20 sm:py-28 px-4 sm:px-6 relative z-10">
+            <div className="max-w-6xl mx-auto">
+              <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{
                 once: true,
                 margin: "-80px"
               }}>
-                    <motion.div variants={fadeUp} className="text-center mb-14">
-                      <p className="text-sm font-medium tracking-widest uppercase text-primary mb-3">
-                        Our Rooms
-                      </p>
-                      <h2 className="font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight">
-                        Crafted for Your Comfort
-                      </h2>
-                    </motion.div>
+                <motion.div variants={fadeUp} className="text-center mb-14">
+                  <p className="text-sm font-medium tracking-widest uppercase text-primary mb-3">
+                    Our Rooms
+                  </p>
+                  <h2 className="font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight">
+                    Crafted for Your Comfort
+                  </h2>
+                </motion.div>
 
-                    <RoomsGrid onInquire={() => document.querySelector("#contact")?.scrollIntoView({
+                <RoomsGrid onInquire={() => document.querySelector("#contact")?.scrollIntoView({
                   behavior: "smooth"
                 })} onImageClick={handleImageClick} />
-                  </motion.div>
-                </div>
-              </section>
+              </motion.div>
+            </div>
+          </section>
 
-              <div className="section-divider" />
+          <div className="section-divider" />
 
-              {/* Amenities */}
-              <section id="amenities" className="py-20 sm:py-28 px-4 sm:px-6 bg-secondary/30 relative z-10">
-                <div className="max-w-5xl mx-auto">
-                  <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{
+          {/* Amenities */}
+          <section id="amenities" className="py-20 sm:py-28 px-4 sm:px-6 bg-secondary/30 relative z-10">
+            <div className="max-w-5xl mx-auto">
+              <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{
                 once: true,
                 margin: "-80px"
               }}>
-                    <motion.div variants={fadeUp} className="text-center mb-14">
-                      <p className="text-sm font-medium tracking-widest uppercase text-primary mb-3">
-                        Facilities
-                      </p>
-                      <h2 className="font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight">
-                        Everything You Need
-                      </h2>
-                    </motion.div>
+                <motion.div variants={fadeUp} className="text-center mb-14">
+                  <p className="text-sm font-medium tracking-widest uppercase text-primary mb-3">
+                    Facilities
+                  </p>
+                  <h2 className="font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight">
+                    Everything You Need
+                  </h2>
+                </motion.div>
 
-                    <motion.div variants={stagger} className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6">
-                      {[{
+                <motion.div variants={stagger} className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6">
+                  {[{
                     icon: Coffee,
                     label: "Hearty Breakfast",
                     desc: "Fresh homemade vegetarian & vegan meals"
@@ -891,405 +891,405 @@ export default function App() {
                     label,
                     desc
                   }) => <motion.div key={label} variants={fadeUp} className="bg-card rounded-2xl p-5 flex flex-col items-center text-center border border-border shadow-xs hover:shadow-md transition-shadow">
-                          <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-3">
-                            <Icon className="w-5 h-5 text-primary" />
-                          </div>
-                          <p className="font-semibold text-sm text-foreground">
-                            {label}
-                          </p>
-                          <p className="text-xs text-muted-foreground mt-1">{desc}</p>
-                        </motion.div>)}
-                    </motion.div>
-                  </motion.div>
-                </div>
-              </section>
+                      <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-3">
+                        <Icon className="w-5 h-5 text-primary" />
+                      </div>
+                      <p className="font-semibold text-sm text-foreground">
+                        {label}
+                      </p>
+                      <p className="text-xs text-muted-foreground mt-1">{desc}</p>
+                    </motion.div>)}
+                </motion.div>
+              </motion.div>
+            </div>
+          </section>
 
-              <div className="section-divider" />
+          <div className="section-divider" />
 
-              {/* Important Distances */}
-              <section id="distances" className="py-20 sm:py-28 px-4 sm:px-6 relative z-10">
-                <div className="max-w-5xl mx-auto">
-                  <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{
+          {/* Important Distances */}
+          <section id="distances" className="py-20 sm:py-28 px-4 sm:px-6 relative z-10">
+            <div className="max-w-5xl mx-auto">
+              <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={{
                 once: true,
                 margin: "-80px"
               }}>
-                    <motion.div variants={fadeUp} className="text-center mb-14">
-                      <p className="text-sm font-medium tracking-widest uppercase text-primary mb-3">
-                        Location
-                      </p>
-                      <h2 className="font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight">
-                        Important Distances
-                      </h2>
-                      <p className="text-muted-foreground mt-3">
-                        Everything in Varanasi, minutes away
-                      </p>
-                    </motion.div>
+                <motion.div variants={fadeUp} className="text-center mb-14">
+                  <p className="text-sm font-medium tracking-widest uppercase text-primary mb-3">
+                    Location
+                  </p>
+                  <h2 className="font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight">
+                    Important Distances
+                  </h2>
+                  <p className="text-muted-foreground mt-3">
+                    Everything in Varanasi, minutes away
+                  </p>
+                </motion.div>
 
-                    <motion.div variants={stagger} className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                      {DISTANCES.map(({
+                <motion.div variants={stagger} className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                  {DISTANCES.map(({
                     place,
                     time,
                     type
                   }, idx) => <motion.div key={place} data-ocid={`distances.item.${idx + 1}`} variants={fadeUp} className="bg-card rounded-2xl border border-border p-5 shadow-xs hover:shadow-md transition-shadow">
-                          <div className="flex items-start gap-3">
-                            <div className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                              <MapPin className="w-4 h-4 text-primary" />
-                            </div>
-                            <div>
-                              <p className="font-semibold text-foreground text-sm leading-snug">
-                                {place}
-                              </p>
-                              <p className="text-primary font-display font-semibold text-lg mt-1">
-                                {time}
-                              </p>
-                              <p className="text-xs text-muted-foreground capitalize">
-                                {type}
-                              </p>
-                            </div>
-                          </div>
-                        </motion.div>)}
-                    </motion.div>
-                  </motion.div>
-                </div>
-              </section>
+                      <div className="flex items-start gap-3">
+                        <div className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                          <MapPin className="w-4 h-4 text-primary" />
+                        </div>
+                        <div>
+                          <p className="font-semibold text-foreground text-sm leading-snug">
+                            {place}
+                          </p>
+                          <p className="text-primary font-display font-semibold text-lg mt-1">
+                            {time}
+                          </p>
+                          <p className="text-xs text-muted-foreground capitalize">
+                            {type}
+                          </p>
+                        </div>
+                      </div>
+                    </motion.div>)}
+                </motion.div>
+              </motion.div>
+            </div>
+          </section>
 
-              <div className="section-divider" />
+          <div className="section-divider" />
 
-              {/* Gallery */}
-              <section id="gallery" className="py-20 sm:py-28 px-4 sm:px-6 bg-secondary/30 relative z-10">
-                <div className="max-w-5xl mx-auto">
-                  <motion.div initial="hidden" whileInView="visible" viewport={{
+          {/* Gallery */}
+          <section id="gallery" className="py-20 sm:py-28 px-4 sm:px-6 bg-secondary/30 relative z-10">
+            <div className="max-w-5xl mx-auto">
+              <motion.div initial="hidden" whileInView="visible" viewport={{
                 once: true,
                 margin: "-80px"
               }} variants={stagger}>
-                    <motion.div variants={fadeUp} className="text-center mb-14">
-                      <p className="text-sm font-medium tracking-widest uppercase text-primary mb-3">
-                        Gallery
-                      </p>
-                      <h2 className="font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight">
-                        A Glimpse of the Haveli
-                      </h2>
-                    </motion.div>
+                <motion.div variants={fadeUp} className="text-center mb-14">
+                  <p className="text-sm font-medium tracking-widest uppercase text-primary mb-3">
+                    Gallery
+                  </p>
+                  <h2 className="font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight">
+                    A Glimpse of the Haveli
+                  </h2>
+                </motion.div>
 
-                    <motion.div variants={fadeUp} className="masonry-grid">
-                      {GALLERY_IMAGES.map(({
+                <motion.div variants={fadeUp} className="masonry-grid">
+                  {GALLERY_IMAGES.map(({
                     src,
                     alt
                   }, idx) => <div key={src} className="masonry-item group cursor-zoom-in" onClick={() => handleGalleryClick(idx)}>
-                          <img src={src} alt={alt || "gallery image"} className="w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
-                        </div>)}
-                    </motion.div>
-                  </motion.div>
-                </div>
-              </section>
+                      <img src={src} alt={alt || "gallery image"} className="w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+                    </div>)}
+                </motion.div>
+              </motion.div>
+            </div>
+          </section>
 
-              <div className="section-divider" />
+          <div className="section-divider" />
 
-              {/* Reviews */}
-              <section id="reviews" className="py-20 sm:py-28 px-4 sm:px-6 relative z-10">
-                <div className="max-w-5xl mx-auto">
-                  <motion.div initial="hidden" whileInView="visible" viewport={{
+          {/* Reviews */}
+          <section id="reviews" className="py-20 sm:py-28 px-4 sm:px-6 relative z-10">
+            <div className="max-w-5xl mx-auto">
+              <motion.div initial="hidden" whileInView="visible" viewport={{
                 once: true,
                 margin: "-80px"
               }} variants={stagger}>
-                    <motion.div variants={fadeUp} className="text-center mb-14">
-                      <p className="text-sm font-medium tracking-widest uppercase text-primary mb-3">
-                        Guest Stories
-                      </p>
-                      <h2 className="font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight mb-4">
-                        Loved by Our Guests
-                      </h2>
-                      {/* Google rating badge */}
-                      <div className="inline-flex items-center gap-2 bg-secondary rounded-full px-4 py-2 border border-border">
-                        <div className="flex gap-0.5">
-                          {[1, 2, 3, 4].map(s => <Star key={s} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />)}
-                          <Star className="w-3.5 h-3.5 fill-amber-400/60 text-amber-400/60" />
-                        </div>
-                        <span className="text-sm font-semibold text-foreground">
-                          Rated 4.6 / 5 on Google
-                        </span>
-                      </div>
-                    </motion.div>
-
-                    <ReviewsSection />
-                  </motion.div>
-                </div>
-              </section>
-
-              <div className="section-divider" />
-
-              {/* Directions */}
-              <section id="directions" className="py-16 sm:py-20 px-4 sm:px-6 bg-secondary/30 relative z-10">
-                <div className="max-w-3xl mx-auto">
-                  <motion.div initial="hidden" whileInView="visible" viewport={{
-                once: true,
-                margin: "-80px"
-              }} variants={stagger}>
-                    <motion.div variants={fadeUp} className="text-center mb-10">
-                      <p className="text-sm font-medium tracking-widest uppercase text-primary mb-3">
-                        Getting Here
-                      </p>
-                      <h2 className="font-display text-3xl sm:text-4xl font-semibold text-foreground leading-tight">
-                        How to Find Us
-                      </h2>
-                    </motion.div>
-
-                    <motion.div variants={fadeUp}>
-                      <button type="button" data-ocid="directions.toggle" onClick={() => setDirectionsOpen(v => !v)} className="w-full flex items-center justify-between bg-card border border-border rounded-2xl px-6 py-4 text-left hover:shadow-md transition-shadow">
-                        <span className="font-semibold text-foreground">
-                          View Directions
-                        </span>
-                        <ChevronDown className={`w-5 h-5 text-muted-foreground transition-transform duration-300 ${directionsOpen ? "rotate-180" : ""}`} />
-                      </button>
-
-                      <AnimatePresence>
-                        {directionsOpen && <motion.div initial={{
-                      height: 0,
-                      opacity: 0
-                    }} animate={{
-                      height: "auto",
-                      opacity: 1
-                    }} exit={{
-                      height: 0,
-                      opacity: 0
-                    }} transition={{
-                      duration: 0.3
-                    }} className="overflow-hidden">
-                            <div className="bg-card border border-t-0 border-border rounded-b-2xl px-6 py-6 space-y-6 text-sm text-muted-foreground leading-relaxed">
-                              <div>
-                                <h4 className="font-semibold text-foreground mb-2">
-                                  If Flying into Varanasi
-                                </h4>
-                                <ol className="list-decimal list-inside space-y-1">
-                                  <li>
-                                    Use pre-paid taxi to{" "}
-                                    <strong>Godowlia Chauraha</strong>, then switch to
-                                    e-rickshaw (tuk-tuk) to the property.
-                                  </li>
-                                  <li>
-                                    We also offer a pick-up service for Rs 2,000 - our
-                                    staff will meet you outside the terminal with a
-                                    placard.
-                                  </li>
-                                </ol>
-                              </div>
-                              <div>
-                                <h4 className="font-semibold text-foreground mb-2">
-                                  If Taking a Train
-                                </h4>
-                                <p className="mb-2">
-                                  From <strong>Varanasi Junction (BSB)</strong>,{" "}
-                                  <strong>Banaras Station (BSBS)</strong>, or{" "}
-                                  <strong>DDU Junction</strong>:
-                                </p>
-                                <ol className="list-decimal list-inside space-y-1">
-                                  <li>
-                                    Take a taxi/auto to{" "}
-                                    <strong>Godowlia Chauraha</strong>, then an
-                                    e-rickshaw to the property.
-                                  </li>
-                                  <li>
-                                    Get dropped at the entry to the lane of Gate 1 to{" "}
-                                    <strong>Kashi Vishwanath Temple</strong>.
-                                  </li>
-                                  <li>
-                                    Walk about 20 metres -{" "}
-                                    <strong>Rudreshwar Mahadeo Kothi</strong> is the{" "}
-                                    <em>first house on the left</em> (one shop after
-                                    Vishwanath Kothi Restaurant).
-                                  </li>
-                                </ol>
-                              </div>
-                              <div className="bg-primary/5 border border-primary/20 rounded-xl px-4 py-3">
-                                <p className="text-foreground font-medium text-xs uppercase tracking-wide mb-1">
-                                  Address
-                                </p>
-                                <p>
-                                  CK-37/29, Bansphatak Road, Gate No.1 Near Pitambari Saree Opposite of Bank Of Baroda Varanasi 221001, Uttar
-                                  Pradesh, India
-                                </p>
-                              </div>
-                            </div>
-                          </motion.div>}
-                      </AnimatePresence>
-                    </motion.div>
-                  </motion.div>
-                </div>
-              </section>
-
-              <div className="section-divider" />
-
-              {/* Booking Form */}
-              <section id="contact" className="py-20 sm:py-28 px-4 sm:px-6 relative z-10">
-                <div className="max-w-3xl mx-auto">
-                  <motion.div initial="hidden" whileInView="visible" viewport={{
-                once: true,
-                margin: "-80px"
-              }} variants={stagger}>
-                    <motion.div variants={fadeUp} className="text-center mb-8">
-                      <p className="text-sm font-medium tracking-widest uppercase text-primary mb-3">
-                        Stay With Us
-                      </p>
-                      <h2 className="font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight mb-3">
-                        Book Your Stay
-                      </h2>
-                      <p className="text-muted-foreground mb-5">
-                        Send us a message and Team Rudreshwar will confirm
-                        availability within 24 hours.
-                      </p>
-
-                      {/* Direct contact links */}
-                      <div className="flex flex-wrap gap-3 justify-center">
-                        <a href="tel:+919920685754" data-ocid="contact.call_button" className="inline-flex items-center gap-2 bg-secondary text-foreground hover:bg-secondary/80 border border-border rounded-full px-5 py-2.5 text-sm font-medium transition-colors">
-                          <Phone className="w-4 h-4" />
-                          Call Us: +91 99206 85754
-                          +91 9889244273
-                          +91 9044301567
-                        </a>
-                        <a href="mailto:rmkothivns@gmail.com" data-ocid="contact.email_button" className="inline-flex items-center gap-2 bg-secondary text-foreground hover:bg-secondary/80 border border-border rounded-full px-5 py-2.5 text-sm font-medium transition-colors">
-                          <Mail className="w-4 h-4" />
-                          Email Us
-                        </a>
-                        <a href="https://live.ipms247.com/booking/book-rooms-rudreshwarmahadeokothibyvns" target="_blank" rel="noopener noreferrer" data-ocid="contact.booking_button" className="inline-flex items-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-5 py-2.5 text-sm font-medium transition-colors">
-                          <ExternalLink className="w-4 h-4" />
-                          Book Online Now
-                        </a>
-                      </div>
-
-                      {/* Check-in / out info */}
-                      <div className="flex gap-6 justify-center mt-5 text-sm text-muted-foreground">
-                        <span>
-                          <strong className="text-foreground">Check-in:</strong> 12
-                          noon
-                        </span>
-                        <span>
-                          <strong className="text-foreground">Check-out:</strong> 11
-                          am
-                        </span>
-                      </div>
-                    </motion.div>
-
-                    <motion.div variants={fadeUp}>
-                      <BookingForm />
-                    </motion.div>
-
-                    {/* House Rules collapsible */}
-                    <motion.div variants={fadeUp} className="mt-8">
-                      <button type="button" data-ocid="rules.toggle" onClick={() => setRulesOpen(v => !v)} className="w-full flex items-center justify-between bg-card border border-border rounded-2xl px-6 py-4 text-left hover:shadow-md transition-shadow">
-                        <span className="font-semibold text-foreground">
-                          House Rules
-                        </span>
-                        <ChevronDown className={`w-5 h-5 text-muted-foreground transition-transform duration-300 ${rulesOpen ? "rotate-180" : ""}`} />
-                      </button>
-
-                      <AnimatePresence>
-                        {rulesOpen && <motion.div initial={{
-                      height: 0,
-                      opacity: 0
-                    }} animate={{
-                      height: "auto",
-                      opacity: 1
-                    }} exit={{
-                      height: 0,
-                      opacity: 0
-                    }} transition={{
-                      duration: 0.3
-                    }} className="overflow-hidden">
-                            <div className="bg-card border border-t-0 border-border rounded-b-2xl px-6 py-5">
-                              <ol className="space-y-2">
-                                {HOUSE_RULES.map((rule, idx) => <li key={rule} data-ocid={`rules.item.${idx + 1}`} className="flex items-start gap-3 text-sm text-muted-foreground">
-                                    <span className="w-5 h-5 rounded-full bg-primary/10 text-primary text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">
-                                      {idx + 1}
-                                    </span>
-                                    {rule}
-                                  </li>)}
-                              </ol>
-                            </div>
-                          </motion.div>}
-                      </AnimatePresence>
-                    </motion.div>
-                  </motion.div>
-                </div>
-              </section>
-            </main>
-
-            {/* Footer */}
-            <footer className="bg-foreground text-primary-foreground py-14 px-4 sm:px-6 relative z-10">
-              <div className="max-w-5xl mx-auto">
-                <div className="grid sm:grid-cols-3 gap-10 mb-10">
-                  {/* Brand */}
-                  <div>
-                    <div className="flex items-center h-10 relative mb-16 sm:mb-20 mt-4 sm:mt-8 right-0 sm:right-14  ">
-                      <img src="/logo.png" alt="Logo" className="w-20 h-20 sm:w-32 sm:h-32 object-cover relative " />
-                      <img src="/logo_2.png" alt="Logo_2" className="h-40 sm:h-60 w-auto object-cover relative right-16 sm:right-24 bottom-1 sm:bottom-2 " />
-                    </div>
-                    <p className="text-sm text-primary-foreground/60 leading-relaxed relative bottom-6 sm:bottom-12 ">
-                      A 300-year-old heritage haveli managed by Mr. Dr V.N. Singh and Team Rudreshwar Kothi, in the
-                      heart of Varanasi.
-                    </p>
-                  </div>
-
-                  {/* Contact */}
-                  <div>
-                    <h4 className="font-semibold text-sm uppercase tracking-widest text-primary-foreground/50 mb-4">
-                      Contact
-                    </h4>
-                    <ul className="space-y-3">
-                      <li className="flex items-start gap-2 text-sm text-primary-foreground/70">
-                        <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0 text-primary-foreground/40" />
-                        CK-37/29, Bansphatak Road,
-                        <br />
-                        Varanasi 221001, UP, India
-                      </li>
-                      <li className="flex items-center gap-2 text-sm text-primary-foreground/70">
-                        <Phone className="w-4 h-4 flex-shrink-0 text-primary-foreground/40" />
-                        <a href="tel:+919335106436" className="hover:text-primary-foreground transition-colors">
-                          +91 9335106436
-                          <br />
-                          +91 9889244273
-                          <br />
-                          +91 7860597574
-                          <br />
-                          +91 9044301567
-                        </a>
-                      </li>
-                      <li className="flex items-center gap-2 text-sm text-primary-foreground/70">
-                        <Mail className="w-4 h-4 flex-shrink-0 text-primary-foreground/40" />
-                        <a href="mailto:rmkothivns@gmail.com" className="hover:text-primary-foreground transition-colors">
-                          rmkothivns@gmail.com
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-
-                  {/* Quick links */}
-                  <div>
-                    <h4 className="font-semibold text-sm uppercase tracking-widest text-primary-foreground/50 mb-4">
-                      Quick Links
-                    </h4>
-                    <ul className="space-y-2">
-                      {["About", "Rooms", "Amenities", "Gallery", "Reviews"].map(item => <li key={item}>
-                            <a href={`#${item.toLowerCase()}`} className="text-sm text-primary-foreground/60 hover:text-primary-foreground transition-colors">
-                              {item}
-                            </a>
-                          </li>)}
-                    </ul>
-                  </div>
-                </div>
-
-                <div className="border-t border-primary-foreground/10 pt-6 text-center">
-                  <p className="text-sm text-primary-foreground/40">
-                    © 2026 Rudreshwar Mahadeo Kothi — A Heritage Property. All rights reserved.{" "}
+                <motion.div variants={fadeUp} className="text-center mb-14">
+                  <p className="text-sm font-medium tracking-widest uppercase text-primary mb-3">
+                    Guest Stories
                   </p>
-                </div>
-              </div>
-            </footer>
-          </div>
+                  <h2 className="font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight mb-4">
+                    Loved by Our Guests
+                  </h2>
+                  {/* Google rating badge */}
+                  <div className="inline-flex items-center gap-2 bg-secondary rounded-full px-4 py-2 border border-border">
+                    <div className="flex gap-0.5">
+                      {[1, 2, 3, 4].map(s => <Star key={s} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />)}
+                      <Star className="w-3.5 h-3.5 fill-amber-400/60 text-amber-400/60" />
+                    </div>
+                    <span className="text-sm font-semibold text-foreground">
+                      Rated 4.6 / 5 on Google
+                    </span>
+                  </div>
+                </motion.div>
 
-          {/* Image Lightbox */}
-          <ImageLightbox isOpen={lightboxOpen} images={getCurrentImageArray()} currentIndex={lightboxImageIdx} onClose={handleCloseLightbox} onPrev={handlePrevImage} onNext={handleNextImage} roomName={lightboxRoomIdx === -1 ? "Gallery" : FALLBACK_ROOMS[lightboxRoomIdx]?.name || "Room"} />
-        </motion.div>}
-    </div>;
+                <ReviewsSection />
+              </motion.div>
+            </div>
+          </section>
+
+          <div className="section-divider" />
+
+          {/* Directions */}
+          <section id="directions" className="py-16 sm:py-20 px-4 sm:px-6 bg-secondary/30 relative z-10">
+            <div className="max-w-3xl mx-auto">
+              <motion.div initial="hidden" whileInView="visible" viewport={{
+                once: true,
+                margin: "-80px"
+              }} variants={stagger}>
+                <motion.div variants={fadeUp} className="text-center mb-10">
+                  <p className="text-sm font-medium tracking-widest uppercase text-primary mb-3">
+                    Getting Here
+                  </p>
+                  <h2 className="font-display text-3xl sm:text-4xl font-semibold text-foreground leading-tight">
+                    How to Find Us
+                  </h2>
+                </motion.div>
+
+                <motion.div variants={fadeUp}>
+                  <button type="button" data-ocid="directions.toggle" onClick={() => setDirectionsOpen(v => !v)} className="w-full flex items-center justify-between bg-card border border-border rounded-2xl px-6 py-4 text-left hover:shadow-md transition-shadow">
+                    <span className="font-semibold text-foreground">
+                      View Directions
+                    </span>
+                    <ChevronDown className={`w-5 h-5 text-muted-foreground transition-transform duration-300 ${directionsOpen ? "rotate-180" : ""}`} />
+                  </button>
+
+                  <AnimatePresence>
+                    {directionsOpen && <motion.div initial={{
+                      height: 0,
+                      opacity: 0
+                    }} animate={{
+                      height: "auto",
+                      opacity: 1
+                    }} exit={{
+                      height: 0,
+                      opacity: 0
+                    }} transition={{
+                      duration: 0.3
+                    }} className="overflow-hidden">
+                      <div className="bg-card border border-t-0 border-border rounded-b-2xl px-6 py-6 space-y-6 text-sm text-muted-foreground leading-relaxed">
+                        <div>
+                          <h4 className="font-semibold text-foreground mb-2">
+                            If Flying into Varanasi
+                          </h4>
+                          <ol className="list-decimal list-inside space-y-1">
+                            <li>
+                              Use pre-paid taxi to{" "}
+                              <strong>Godowlia Chauraha</strong>, then switch to
+                              e-rickshaw (tuk-tuk) to the property.
+                            </li>
+                            <li>
+                              We also offer a pick-up service for Rs 2,000 - our
+                              staff will meet you outside the terminal with a
+                              placard.
+                            </li>
+                          </ol>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold text-foreground mb-2">
+                            If Taking a Train
+                          </h4>
+                          <p className="mb-2">
+                            From <strong>Varanasi Junction (BSB)</strong>,{" "}
+                            <strong>Banaras Station (BSBS)</strong>, or{" "}
+                            <strong>DDU Junction</strong>:
+                          </p>
+                          <ol className="list-decimal list-inside space-y-1">
+                            <li>
+                              Take a taxi/auto to{" "}
+                              <strong>Godowlia Chauraha</strong>, then an
+                              e-rickshaw to the property.
+                            </li>
+                            <li>
+                              Get dropped at the entry to the lane of Gate 1 to{" "}
+                              <strong>Kashi Vishwanath Temple</strong>.
+                            </li>
+                            <li>
+                              Walk about 20 metres -{" "}
+                              <strong>Rudreshwar Mahadeo Kothi</strong> is the{" "}
+                              <em>first house on the left</em> (one shop after
+                              Vishwanath Kothi Restaurant).
+                            </li>
+                          </ol>
+                        </div>
+                        <div className="bg-primary/5 border border-primary/20 rounded-xl px-4 py-3">
+                          <p className="text-foreground font-medium text-xs uppercase tracking-wide mb-1">
+                            Address
+                          </p>
+                          <p>
+                            CK-37/29, Bansphatak Road, Gate No.1 Near Pitambari Saree Opposite of Bank Of Baroda Varanasi 221001, Uttar
+                            Pradesh, India
+                          </p>
+                        </div>
+                      </div>
+                    </motion.div>}
+                  </AnimatePresence>
+                </motion.div>
+              </motion.div>
+            </div>
+          </section>
+
+          <div className="section-divider" />
+
+          {/* Booking Form */}
+          <section id="contact" className="py-20 sm:py-28 px-4 sm:px-6 relative z-10">
+            <div className="max-w-3xl mx-auto">
+              <motion.div initial="hidden" whileInView="visible" viewport={{
+                once: true,
+                margin: "-80px"
+              }} variants={stagger}>
+                <motion.div variants={fadeUp} className="text-center mb-8">
+                  <p className="text-sm font-medium tracking-widest uppercase text-primary mb-3">
+                    Stay With Us
+                  </p>
+                  <h2 className="font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight mb-3">
+                    Book Your Stay
+                  </h2>
+                  <p className="text-muted-foreground mb-5">
+                    Send us a message and Team Rudreshwar will confirm
+                    availability within 24 hours.
+                  </p>
+
+                  {/* Direct contact links */}
+                  <div className="flex flex-wrap gap-3 justify-center">
+                    <a href="tel:+919920685754" data-ocid="contact.call_button" className="inline-flex items-center gap-2 bg-secondary text-foreground hover:bg-secondary/80 border border-border rounded-full px-5 py-2.5 text-sm font-medium transition-colors">
+                      <Phone className="w-4 h-4" />
+                      Call Us: +91 99206 85754
+                      +91 9889244273
+                      +91 9044301567
+                    </a>
+                    <a href="mailto:rmkothivns@gmail.com" data-ocid="contact.email_button" className="inline-flex items-center gap-2 bg-secondary text-foreground hover:bg-secondary/80 border border-border rounded-full px-5 py-2.5 text-sm font-medium transition-colors">
+                      <Mail className="w-4 h-4" />
+                      Email Us
+                    </a>
+                    <a href="https://live.ipms247.com/booking/book-rooms-rudreshwarmahadeokothibyvns" target="_blank" rel="noopener noreferrer" data-ocid="contact.booking_button" className="inline-flex items-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-5 py-2.5 text-sm font-medium transition-colors">
+                      <ExternalLink className="w-4 h-4" />
+                      Book Online Now
+                    </a>
+                  </div>
+
+                  {/* Check-in / out info */}
+                  <div className="flex gap-6 justify-center mt-5 text-sm text-muted-foreground">
+                    <span>
+                      <strong className="text-foreground">Check-in:</strong> 12
+                      noon
+                    </span>
+                    <span>
+                      <strong className="text-foreground">Check-out:</strong> 11
+                      am
+                    </span>
+                  </div>
+                </motion.div>
+
+                <motion.div variants={fadeUp}>
+                  <BookingForm />
+                </motion.div>
+
+                {/* House Rules collapsible */}
+                <motion.div variants={fadeUp} className="mt-8">
+                  <button type="button" data-ocid="rules.toggle" onClick={() => setRulesOpen(v => !v)} className="w-full flex items-center justify-between bg-card border border-border rounded-2xl px-6 py-4 text-left hover:shadow-md transition-shadow">
+                    <span className="font-semibold text-foreground">
+                      House Rules
+                    </span>
+                    <ChevronDown className={`w-5 h-5 text-muted-foreground transition-transform duration-300 ${rulesOpen ? "rotate-180" : ""}`} />
+                  </button>
+
+                  <AnimatePresence>
+                    {rulesOpen && <motion.div initial={{
+                      height: 0,
+                      opacity: 0
+                    }} animate={{
+                      height: "auto",
+                      opacity: 1
+                    }} exit={{
+                      height: 0,
+                      opacity: 0
+                    }} transition={{
+                      duration: 0.3
+                    }} className="overflow-hidden">
+                      <div className="bg-card border border-t-0 border-border rounded-b-2xl px-6 py-5">
+                        <ol className="space-y-2">
+                          {HOUSE_RULES.map((rule, idx) => <li key={rule} data-ocid={`rules.item.${idx + 1}`} className="flex items-start gap-3 text-sm text-muted-foreground">
+                            <span className="w-5 h-5 rounded-full bg-primary/10 text-primary text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">
+                              {idx + 1}
+                            </span>
+                            {rule}
+                          </li>)}
+                        </ol>
+                      </div>
+                    </motion.div>}
+                  </AnimatePresence>
+                </motion.div>
+              </motion.div>
+            </div>
+          </section>
+        </main>
+
+        {/* Footer */}
+        <footer className="bg-foreground text-primary-foreground py-14 px-4 sm:px-6 relative z-10">
+          <div className="max-w-5xl mx-auto">
+            <div className="grid sm:grid-cols-3 gap-10 mb-10">
+              {/* Brand */}
+              <div>
+                <div className="flex items-center h-10 relative mb-16 sm:mb-20 mt-4 sm:mt-8 right-0 sm:right-14  ">
+                  <img src="/logo.png" alt="Logo" className="w-20 h-20 sm:w-32 sm:h-32 object-cover relative " />
+                  <img src="/logo_2.png" alt="Logo_2" className="h-40 sm:h-60 w-auto object-cover relative right-16 sm:right-24 bottom-1 sm:bottom-2 " />
+                </div>
+                <p className="text-sm text-primary-foreground/60 leading-relaxed relative bottom-6 sm:bottom-12 ">
+                  A 300-year-old heritage haveli managed by Mr. Dr V.N. Singh and Team Rudreshwar Kothi, in the
+                  heart of Varanasi.
+                </p>
+              </div>
+
+              {/* Contact */}
+              <div>
+                <h4 className="font-semibold text-sm uppercase tracking-widest text-primary-foreground/50 mb-4">
+                  Contact
+                </h4>
+                <ul className="space-y-3">
+                  <li className="flex items-start gap-2 text-sm text-primary-foreground/70">
+                    <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0 text-primary-foreground/40" />
+                    CK-37/29, Bansphatak Road,
+                    <br />
+                    Varanasi 221001, UP, India
+                  </li>
+                  <li className="flex items-center gap-2 text-sm text-primary-foreground/70">
+                    <Phone className="w-4 h-4 flex-shrink-0 text-primary-foreground/40" />
+                    <a href="tel:+919335106436" className="hover:text-primary-foreground transition-colors">
+                      +91 9335106436
+                      <br />
+                      +91 9889244273
+                      <br />
+                      +91 7860597574
+                      <br />
+                      +91 9044301567
+                    </a>
+                  </li>
+                  <li className="flex items-center gap-2 text-sm text-primary-foreground/70">
+                    <Mail className="w-4 h-4 flex-shrink-0 text-primary-foreground/40" />
+                    <a href="mailto:rmkothivns@gmail.com" className="hover:text-primary-foreground transition-colors">
+                      rmkothivns@gmail.com
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Quick links */}
+              <div>
+                <h4 className="font-semibold text-sm uppercase tracking-widest text-primary-foreground/50 mb-4">
+                  Quick Links
+                </h4>
+                <ul className="space-y-2">
+                  {["About", "Rooms", "Amenities", "Gallery", "Reviews"].map(item => <li key={item}>
+                    <a href={`#${item.toLowerCase()}`} className="text-sm text-primary-foreground/60 hover:text-primary-foreground transition-colors">
+                      {item}
+                    </a>
+                  </li>)}
+                </ul>
+              </div>
+            </div>
+
+            <div className="border-t border-primary-foreground/10 pt-6 text-center">
+              <p className="text-sm text-primary-foreground/40">
+                © 2026 Rudreshwar Mahadeo Kothi — A Heritage Property. All rights reserved.{" "}
+              </p>
+            </div>
+          </div>
+        </footer>
+      </div>
+
+      {/* Image Lightbox */}
+      <ImageLightbox isOpen={lightboxOpen} images={getCurrentImageArray()} currentIndex={lightboxImageIdx} onClose={handleCloseLightbox} onPrev={handlePrevImage} onNext={handleNextImage} roomName={lightboxRoomIdx === -1 ? "Gallery" : FALLBACK_ROOMS[lightboxRoomIdx]?.name || "Room"} />
+    </motion.div>}
+  </div>;
 }
 
 /* 
@@ -1311,19 +1311,19 @@ function RoomsGrid({
   const bookNowMarkers = ["rooms.primary_button.1", "rooms.primary_button.2", "rooms.primary_button.3", "rooms.primary_button.4"];
   if (isLoading) {
     return <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {[1, 2, 3, 4].map(i => <div key={i} className="rounded-2xl overflow-hidden bg-card border border-border animate-pulse">
-            <div className="h-48 bg-muted" />
-            <div className="p-5 space-y-3">
-              <div className="h-5 bg-muted rounded w-2/3" />
-              <div className="h-3 bg-muted rounded w-full" />
-              <div className="h-3 bg-muted rounded w-5/6" />
-            </div>
-          </div>)}
-      </div>;
+      {[1, 2, 3, 4].map(i => <div key={i} className="rounded-2xl overflow-hidden bg-card border border-border animate-pulse">
+        <div className="h-48 bg-muted" />
+        <div className="p-5 space-y-3">
+          <div className="h-5 bg-muted rounded w-2/3" />
+          <div className="h-3 bg-muted rounded w-full" />
+          <div className="h-3 bg-muted rounded w-5/6" />
+        </div>
+      </div>)}
+    </div>;
   }
   return <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-      {displayRooms.slice(0, 4).map((room, idx) => <RoomCard key={room.name} room={room} idx={idx} onInquire={onInquire} onImageClick={onImageClick} roomMarker={roomMarkers[idx]} inquireMarker={inquireMarkers[idx]} bookNowMarker={bookNowMarkers[idx]} />)}
-    </div>;
+    {displayRooms.slice(0, 4).map((room, idx) => <RoomCard key={room.name} room={room} idx={idx} onInquire={onInquire} onImageClick={onImageClick} roomMarker={roomMarkers[idx]} inquireMarker={inquireMarkers[idx]} bookNowMarker={bookNowMarkers[idx]} />)}
+  </div>;
 }
 
 /* REVIEWS */
@@ -1336,25 +1336,25 @@ function ReviewsSection() {
   const reviewMarkers = ["reviews.item.1", "reviews.item.2", "reviews.item.3"];
   if (isLoading) {
     return <div className="grid sm:grid-cols-3 gap-5">
-        {[1, 2, 3].map(i => <div key={i} className="rounded-2xl bg-card border border-border p-5 animate-pulse space-y-3">
-            <div className="h-4 bg-muted rounded w-1/2" />
-            <div className="h-3 bg-muted rounded w-full" />
-            <div className="h-3 bg-muted rounded w-4/5" />
-          </div>)}
-      </div>;
+      {[1, 2, 3].map(i => <div key={i} className="rounded-2xl bg-card border border-border p-5 animate-pulse space-y-3">
+        <div className="h-4 bg-muted rounded w-1/2" />
+        <div className="h-3 bg-muted rounded w-full" />
+        <div className="h-3 bg-muted rounded w-4/5" />
+      </div>)}
+    </div>;
   }
   if (allReviews.length === 0) {
     return <div data-ocid="reviews.empty_state" className="text-center py-16 px-4 rounded-2xl bg-card border border-border">
-        <Star className="w-10 h-10 text-muted-foreground/40 mx-auto mb-3" />
-        <p className="font-medium text-foreground">No reviews yet</p>
-        <p className="text-sm text-muted-foreground mt-1">
-          Be the first to share your experience!
-        </p>
-      </div>;
+      <Star className="w-10 h-10 text-muted-foreground/40 mx-auto mb-3" />
+      <p className="font-medium text-foreground">No reviews yet</p>
+      <p className="text-sm text-muted-foreground mt-1">
+        Be the first to share your experience!
+      </p>
+    </div>;
   }
   return <div className="grid sm:grid-cols-3 gap-5">
-      {allReviews.slice(0, 9).map((review, idx) => <ReviewItem key={`${review.guestName}-${idx}`} review={review} idx={idx} marker={reviewMarkers[idx] ?? `reviews.item.${idx + 1}`} />)}
-    </div>;
+    {allReviews.slice(0, 9).map((review, idx) => <ReviewItem key={`${review.guestName}-${idx}`} review={review} idx={idx} marker={reviewMarkers[idx] ?? `reviews.item.${idx + 1}`} />)}
+  </div>;
 }
 function ReviewItem({
   review,
@@ -1364,29 +1364,29 @@ function ReviewItem({
   const [isExpanded, setIsExpanded] = useState(false);
   const isLong = review.comment.length > 200;
   return <motion.div data-ocid={marker} variants={fadeUp} className="bg-card rounded-2xl border border-border p-5 flex flex-col shadow-xs h-fit">
-      {/* Stars */}
-      <StarRating rating={Number(review.rating)} />
+    {/* Stars */}
+    <StarRating rating={Number(review.rating)} />
 
-      {/* Comment */}
-      <div className="mt-3 mb-4 flex-1 flex flex-col items-start w-full">
-        <p className={`text-sm text-foreground/80 leading-relaxed whitespace-pre-wrap ${!isExpanded && isLong ? "line-clamp-5" : ""}`}>
-          "{review.comment}"
-        </p>
-        {isLong && <button onClick={() => setIsExpanded(!isExpanded)} className="text-xs font-semibold text-primary mt-2 hover:underline cursor-pointer focus:outline-none">
-            {isExpanded ? "Read Less" : "Read More"}
-          </button>}
-      </div>
+    {/* Comment */}
+    <div className="mt-3 mb-4 flex-1 flex flex-col items-start w-full">
+      <p className={`text-sm text-foreground/80 leading-relaxed whitespace-pre-wrap ${!isExpanded && isLong ? "line-clamp-5" : ""}`}>
+        "{review.comment}"
+      </p>
+      {isLong && <button onClick={() => setIsExpanded(!isExpanded)} className="text-xs font-semibold text-primary mt-2 hover:underline cursor-pointer focus:outline-none">
+        {isExpanded ? "Read Less" : "Read More"}
+      </button>}
+    </div>
 
-      {/* Guest info */}
-      <div className="pt-3 border-t border-border/50 mt-auto w-full">
-        <p className="font-semibold text-sm text-foreground">
-          {review.guestName}
-        </p>
-        <p className="text-xs text-muted-foreground mt-0.5">
-          {review.stayDate}
-        </p>
-      </div>
-    </motion.div>;
+    {/* Guest info */}
+    <div className="pt-3 border-t border-border/50 mt-auto w-full">
+      <p className="font-semibold text-sm text-foreground">
+        {review.guestName}
+      </p>
+      <p className="text-xs text-muted-foreground mt-0.5">
+        {review.stayDate}
+      </p>
+    </div>
+  </motion.div>;
 }
 
 /*
@@ -1420,6 +1420,29 @@ function BookingForm() {
         numberOfGuests: BigInt(form.guests || "1"),
         message: form.message
       });
+
+      const accessKey = "ab98583a-0205-457d-8e13-5ab57644d035";
+      if (accessKey) {
+        await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+          },
+          body: JSON.stringify({
+            access_key: accessKey,
+            subject: `New Booking Inquiry from ${form.name}`,
+            from_name: "Rudreshwar Kothi Website",
+            Name: form.name,
+            Email: form.email,
+            "Check-in Date": form.checkIn,
+            "Check-out Date": form.checkOut,
+            Guests: form.guests,
+            Message: form.message || "No message provided."
+          })
+        }).catch(err => console.error("Web3Forms error:", err));
+      }
+
       setSubmitted(true);
       setForm({
         name: "",
@@ -1441,82 +1464,82 @@ function BookingForm() {
       opacity: 1,
       scale: 1
     }} className="text-center py-16 px-6 bg-card rounded-2xl border border-border shadow-xs">
-        <CheckCircle2 className="w-14 h-14 text-green-600 mx-auto mb-4" />
-        <h3 className="font-display text-2xl font-semibold text-foreground mb-2">
-          Inquiry Sent!
-        </h3>
-        <p className="text-muted-foreground leading-relaxed max-w-sm mx-auto">
-          Thank you for reaching out. Team Rudreshwar will confirm availability within 24 hours.
-        </p>
-        <Button onClick={() => setSubmitted(false)} variant="outline" className="mt-6 rounded-full border-border">
-          Send Another Inquiry
-        </Button>
-      </motion.div>;
+      <CheckCircle2 className="w-14 h-14 text-green-600 mx-auto mb-4" />
+      <h3 className="font-display text-2xl font-semibold text-foreground mb-2">
+        Inquiry Sent!
+      </h3>
+      <p className="text-muted-foreground leading-relaxed max-w-sm mx-auto">
+        Thank you for reaching out. Team Rudreshwar will confirm availability within 24 hours.
+      </p>
+      <Button onClick={() => setSubmitted(false)} variant="outline" className="mt-6 rounded-full border-border">
+        Send Another Inquiry
+      </Button>
+    </motion.div>;
   }
   return <form ref={formRef} onSubmit={handleSubmit} className="bg-card rounded-2xl border border-border p-6 sm:p-8 shadow-xs space-y-5">
-      {submitMutation.isPending && <div data-ocid="booking.loading_state" className="flex items-center gap-2 text-sm text-muted-foreground bg-muted rounded-lg px-4 py-3">
-          <Loader2 className="w-4 h-4 animate-spin" />
-          Sending your inquiry...
-        </div>}
+    {submitMutation.isPending && <div data-ocid="booking.loading_state" className="flex items-center gap-2 text-sm text-muted-foreground bg-muted rounded-lg px-4 py-3">
+      <Loader2 className="w-4 h-4 animate-spin" />
+      Sending your inquiry...
+    </div>}
 
-      {submitMutation.isError && <div className="flex items-center gap-2 text-sm text-destructive bg-destructive/8 rounded-lg px-4 py-3">
-          Something went wrong. Please try again.
-        </div>}
+    {submitMutation.isError && <div className="flex items-center gap-2 text-sm text-destructive bg-destructive/8 rounded-lg px-4 py-3">
+      Something went wrong. Please try again.
+    </div>}
 
-      <div className="grid sm:grid-cols-2 gap-4">
-        <div className="space-y-1.5">
-          <Label htmlFor="name" className="text-sm font-medium">
-            Full Name
-          </Label>
-          <Input id="name" name="name" data-ocid="booking.name_input" placeholder="Your full name" value={form.name} onChange={handleChange} required className="rounded-lg bg-background border-input" />
-        </div>
-        <div className="space-y-1.5">
-          <Label htmlFor="email" className="text-sm font-medium">
-            Email Address
-          </Label>
-          <Input id="email" name="email" type="email" data-ocid="booking.email_input" placeholder="you@email.com" value={form.email} onChange={handleChange} required className="rounded-lg bg-background border-input" />
-        </div>
-      </div>
-
-      <div className="grid sm:grid-cols-3 gap-4">
-        <div className="space-y-1.5">
-          <Label htmlFor="checkIn" className="text-sm font-medium">
-            Check-in Date
-          </Label>
-          <Input id="checkIn" name="checkIn" type="date" data-ocid="booking.checkin_input" value={form.checkIn} onChange={handleChange} required className="rounded-lg bg-background border-input" />
-        </div>
-        <div className="space-y-1.5">
-          <Label htmlFor="checkOut" className="text-sm font-medium">
-            Check-out Date
-          </Label>
-          <Input id="checkOut" name="checkOut" type="date" data-ocid="booking.checkout_input" value={form.checkOut} onChange={handleChange} required className="rounded-lg bg-background border-input" />
-        </div>
-        <div className="space-y-1.5">
-          <Label htmlFor="guests" className="text-sm font-medium">
-            Guests
-          </Label>
-          <Input id="guests" name="guests" type="number" min="1" max="10" data-ocid="booking.guests_input" placeholder="2" value={form.guests} onChange={handleChange} required className="rounded-lg bg-background border-input" />
-        </div>
-      </div>
-
+    <div className="grid sm:grid-cols-2 gap-4">
       <div className="space-y-1.5">
-        <Label htmlFor="message" className="text-sm font-medium">
-          Message{" "}
-          <span className="text-muted-foreground font-normal">(optional)</span>
+        <Label htmlFor="name" className="text-sm font-medium">
+          Full Name
         </Label>
-        <Textarea id="message" name="message" data-ocid="booking.message_textarea" placeholder="Any special requests, room preferences, or questions for the team..." value={form.message} onChange={handleChange} rows={4} className="rounded-lg bg-background border-input resize-none" />
+        <Input id="name" name="name" data-ocid="booking.name_input" placeholder="Your full name" value={form.name} onChange={handleChange} required className="rounded-lg bg-background border-input" />
       </div>
+      <div className="space-y-1.5">
+        <Label htmlFor="email" className="text-sm font-medium">
+          Email Address
+        </Label>
+        <Input id="email" name="email" type="email" data-ocid="booking.email_input" placeholder="you@email.com" value={form.email} onChange={handleChange} required className="rounded-lg bg-background border-input" />
+      </div>
+    </div>
 
-      <Button data-ocid="booking.submit_button" type="submit" disabled={submitMutation.isPending} size="lg" className="w-full bg-primary text-primary-foreground hover:bg-primary/90 rounded-full py-6 text-base">
-        {submitMutation.isPending ? <>
-            <Loader2 className="w-4 h-4 animate-spin mr-2" />
-            Sending...
-          </> : "Send Booking Inquiry"}
-      </Button>
+    <div className="grid sm:grid-cols-3 gap-4">
+      <div className="space-y-1.5">
+        <Label htmlFor="checkIn" className="text-sm font-medium">
+          Check-in Date
+        </Label>
+        <Input id="checkIn" name="checkIn" type="date" data-ocid="booking.checkin_input" value={form.checkIn} onChange={handleChange} required className="rounded-lg bg-background border-input" />
+      </div>
+      <div className="space-y-1.5">
+        <Label htmlFor="checkOut" className="text-sm font-medium">
+          Check-out Date
+        </Label>
+        <Input id="checkOut" name="checkOut" type="date" data-ocid="booking.checkout_input" value={form.checkOut} onChange={handleChange} required className="rounded-lg bg-background border-input" />
+      </div>
+      <div className="space-y-1.5">
+        <Label htmlFor="guests" className="text-sm font-medium">
+          Guests
+        </Label>
+        <Input id="guests" name="guests" type="number" min="1" max="10" data-ocid="booking.guests_input" placeholder="2" value={form.guests} onChange={handleChange} required className="rounded-lg bg-background border-input" />
+      </div>
+    </div>
 
-      <p className="text-xs text-muted-foreground text-center">
-        We typically respond within 24 hours. No payment required at this stage.
-      </p>
-    </form>;
+    <div className="space-y-1.5">
+      <Label htmlFor="message" className="text-sm font-medium">
+        Message{" "}
+        <span className="text-muted-foreground font-normal">(optional)</span>
+      </Label>
+      <Textarea id="message" name="message" data-ocid="booking.message_textarea" placeholder="Any special requests, room preferences, or questions for the team..." value={form.message} onChange={handleChange} rows={4} className="rounded-lg bg-background border-input resize-none" />
+    </div>
+
+    <Button data-ocid="booking.submit_button" type="submit" disabled={submitMutation.isPending} size="lg" className="w-full bg-primary text-primary-foreground hover:bg-primary/90 rounded-full py-6 text-base">
+      {submitMutation.isPending ? <>
+        <Loader2 className="w-4 h-4 animate-spin mr-2" />
+        Sending...
+      </> : "Send Booking Inquiry"}
+    </Button>
+
+    <p className="text-xs text-muted-foreground text-center">
+      We typically respond within 24 hours. No payment required at this stage.
+    </p>
+  </form>;
   inject();
 }

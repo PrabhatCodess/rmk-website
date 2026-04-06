@@ -608,16 +608,18 @@ export default function Home() {
           }} className="flex items-center h-10 relative shrink-0">
             <img src="/logo.png" alt="Logo" className="w-16 h-16 sm:w-32 sm:h-32 object-cover relative " />
 
-            <img src="/logo_2.png" alt="Logo_2" className="h-24 sm:h-52 w-auto object-contain relative right-14 sm:right-28 bottom-1 sm:bottom-2 " />
+            <span className="font-display font-semibold text-2xl text-foreground tracking-tight leading-none relative right-10">
+              Rudreshwar
+              <br />
+              <span className="text-lg font-body font-medium text-muted-foreground tracking-widest uppercase">
+                Mahadeo Kothi
+              </span>
+            </span>
 
 
-            {/* <span className="font-display font-semibold text-lg text-foreground tracking-tight leading-none">
-                  Rudreshwar
-                  <br />
-                  <span className="text-xs font-body font-medium text-muted-foreground tracking-widest uppercase">
-                    Mahadeo Kothi
-                  </span>
-                 </span> */}
+            {/* <img src="/logo_2.png" alt="Logo_2" className="h-24 sm:h-52 w-auto object-contain relative right-14 sm:right-28 bottom-1 sm:bottom-2 " /> */}
+
+
           </button>
 
           {/* Desktop nav links */}
@@ -1247,7 +1249,16 @@ export default function Home() {
               <div>
                 <div className="flex items-center h-10 relative mb-16 sm:mb-20 mt-4 sm:mt-8 right-0 sm:right-14  ">
                   <img src="/logo.png" alt="Logo" className="w-20 h-20 sm:w-32 sm:h-32 object-cover relative " />
-                  <img src="/logo_2.png" alt="Logo_2" className="h-40 sm:h-60 w-auto object-cover relative right-16 sm:right-24 bottom-1 sm:bottom-2 " />
+                  {/* <img src="/logo_2.png" alt="Logo_2" className="h-40 sm:h-60 w-auto object-cover relative right-16 sm:right-24 bottom-1 sm:bottom-2 " /> */}
+
+                  <span className="font-display font-semibold text-2xl text-foreground tracking-tight leading-none relative right-10 text-white ">
+                    Rudreshwar
+                    <br />
+                    <span className="text-lg font-body font-medium text-muted-foreground tracking-widest uppercase">
+                      Mahadeo Kothi
+                    </span>
+                  </span>
+
                 </div>
                 <p className="text-sm text-primary-foreground/60 leading-relaxed relative bottom-6 sm:bottom-12 ">
                   A 300-year-old heritage haveli managed by Mr. Dr V.N. Singh and Team Rudreshwar Kothi, in the
@@ -1446,6 +1457,29 @@ function BookingForm() {
         numberOfGuests: BigInt(form.guests || "1"),
         message: form.message
       });
+
+      const accessKey = "ab98583a-0205-457d-8e13-5ab57644d035";
+      if (accessKey) {
+        await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+          },
+          body: JSON.stringify({
+            access_key: accessKey,
+            subject: `New Booking Inquiry from ${form.name}`,
+            from_name: "Rudreshwar Kothi Website",
+            Name: form.name,
+            Email: form.email,
+            "Check-in Date": form.checkIn,
+            "Check-out Date": form.checkOut,
+            Guests: form.guests,
+            Message: form.message || "No message provided."
+          })
+        }).catch(err => console.error("Web3Forms error:", err));
+      }
+
       setSubmitted(true);
       setForm({
         name: "",

@@ -2,17 +2,18 @@
   "name": "rmk-website",
   "type": "module",
   "engines": {
-    "node": ">=16.0.0",
-    "pnpm": ">=7.0.0",
-    "npm": "please use pnpm"
+    "node": ">=16.0.0"
   },
+  "workspaces": [
+    "src/frontend"
+  ],
   "scripts": {
-    "start": "cd src/frontend && pnpm install && npx vite --host",
-    "dev": "cd src/frontend && pnpm install && npx vite --host",
-    "build": "pnpm -r --if-present run build",
-    "typecheck": "pnpm -r --if-present run typecheck",
-    "check": "pnpm -r --if-present run check",
-    "fix": "pnpm -r --if-present run fix"
+    "start": "cd src/frontend && npm install && npx vite --host",
+    "dev": "cd src/frontend && npm install && npx vite --host",
+    "build": "npm run build --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "check": "npm run check --workspaces --if-present",
+    "fix": "npm run fix --workspaces --if-present"
   },
   "devDependencies": {
     "baseline-browser-mapping": "^2.10.0",

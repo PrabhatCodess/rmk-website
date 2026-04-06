@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<body>
+<button onclick="sendTest()">Send Test Web3Forms</button>
+<pre id="log"></pre>
+<script>
+async function sendTest() {
+  const log = document.getElementById('log');
+  log.innerText = 'Sending...';
+  try {
+    const res = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify({
+        access_key: "ab98583a-0205-457d-8e13-5ab57644d035",
+        name: "Test User",
+        email: "test@example.com",
+        message: "Hello from browser test."
+      })
+    });
+    const txt = await res.text();
+    log.innerText = 'Status: ' + res.status + '\nResponse: ' + txt;
+  } catch(e) {
+    log.innerText = 'Error: ' + e;
+  }
+}
+sendTest();
+</script>
+</body>
+</html>

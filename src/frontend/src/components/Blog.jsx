@@ -986,6 +986,29 @@ function BookingForm() {
         numberOfGuests: BigInt(form.guests || "1"),
         message: form.message
       });
+
+      const accessKey = "ab98583a-0205-457d-8e13-5ab57644d035";
+      if (accessKey) {
+        await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+          },
+          body: JSON.stringify({
+            access_key: accessKey,
+            subject: `New Booking Inquiry from ${form.name}`,
+            from_name: "Rudreshwar Kothi Website",
+            Name: form.name,
+            Email: form.email,
+            "Check-in Date": form.checkIn,
+            "Check-out Date": form.checkOut,
+            Guests: form.guests,
+            Message: form.message || "No message provided."
+          })
+        }).catch(err => console.error("Web3Forms error:", err));
+      }
+
       setSubmitted(true);
       setForm({
         name: "",
