@@ -605,13 +605,13 @@ export default function Home() {
           <button type="button" onClick={e => {
             e.preventDefault();
             handleNavClick("#hero");
-          }} className="flex items-center h-10 relative shrink-0">
-            <img src="/logo.png" alt="Logo" className="w-16 h-16 sm:w-32 sm:h-32 object-cover relative " />
+          }} className="flex items-center h-20 relative shrink-0">
+            <img src="/logo.png" alt="Logo" className="w-16 h-16 sm:w-32 sm:h-32 object-cover " />
 
-            <span className="font-display font-semibold text-2xl text-foreground tracking-tight leading-none relative right-10">
+            <span className="font-display font-semibold text-2xl text-foreground tracking-tight leading-none -ml-6 sm:-ml-12 ">
               Rudreshwar
               <br />
-              <span className="text-lg font-body font-medium text-muted-foreground tracking-widest uppercase">
+              <span className="text-lg font-body font-medium text-muted-foreground tracking-widest uppercase ">
                 Mahadeo Kothi
               </span>
             </span>
@@ -1251,7 +1251,7 @@ export default function Home() {
                   <img src="/logo.png" alt="Logo" className="w-20 h-20 sm:w-32 sm:h-32 object-cover relative " />
                   {/* <img src="/logo_2.png" alt="Logo_2" className="h-40 sm:h-60 w-auto object-cover relative right-16 sm:right-24 bottom-1 sm:bottom-2 " /> */}
 
-                  <span className="font-display font-semibold text-2xl text-foreground tracking-tight leading-none relative right-10 text-white ">
+                  <span className="font-display font-semibold text-2xl text-foreground tracking-tight text-center leading-none text-white -ml-8 sm:-ml-12 ">
                     Rudreshwar
                     <br />
                     <span className="text-lg font-body font-medium text-muted-foreground tracking-widest uppercase">
