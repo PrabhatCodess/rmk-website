@@ -181,26 +181,26 @@ export default function Blog() {
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
 
           {/* NAVIGATION (Modern floating pill -> Grand Modern Header) */}
-          <motion.header 
+          <motion.header
             initial={{ y: -100 }}
             animate={{ y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="fixed top-0 left-0 w-full z-50 bg-white shadow-[0_10px_40px_rgba(0,0,0,0.04)] border-b border-black/5"
           >
             <nav className="max-w-[100rem] mx-auto px-6 sm:px-12 lg:px-20 h-[6.5rem] lg:h-[8.5rem] flex items-center justify-between">
-              
+
               {/* Logo Area (Left) */}
               <div className="flex-1 flex justify-start">
                 <button type="button" onClick={e => {
                   e.preventDefault();
                   handleNavClick("#hero");
                 }} className="relative shrink-0 block overflow-hidden">
-                  <motion.img 
+                  <motion.img
                     whileHover={{ scale: 1.04 }}
                     transition={{ duration: 0.6, ease: "easeOut" }}
-                    src="/Rudreshwar%20Mahadeo%20Kothi.png" 
-                    alt="Rudreshwar Mahadeo Kothi Logo" 
-                    className="h-20 lg:h-[7.5rem] w-auto object-contain origin-left" 
+                    src="/Rudreshwar%20Mahadeo%20Kothi.png"
+                    alt="Rudreshwar Mahadeo Kothi Logo"
+                    className="h-20 lg:h-[7.5rem] w-auto object-contain origin-left"
                   />
                 </button>
               </div>
@@ -208,7 +208,7 @@ export default function Blog() {
               {/* Desktop Nav Links (Center) */}
               <ul className="hidden lg:flex flex-1 items-center justify-center gap-10">
                 {navLinks.map((link, idx) => (
-                  <motion.li 
+                  <motion.li
                     key={link.href}
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -241,11 +241,11 @@ export default function Blog() {
             {/* Mobile menu */}
             <AnimatePresence>
               {mobileMenuOpen && (
-                <motion.div 
-                  initial={{ height: 0, opacity: 0 }} 
-                  animate={{ height: "auto", opacity: 1 }} 
-                  exit={{ height: 0, opacity: 0 }} 
-                  transition={{ duration: 0.3, ease: "easeInOut" }} 
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
                   className="lg:hidden bg-white border-t border-zinc-100 overflow-hidden shadow-2xl absolute w-full left-0 top-full"
                 >
                   <div className="px-6 py-8 flex flex-col gap-4">
@@ -360,11 +360,11 @@ export default function Blog() {
             <div className="max-w-7xl mx-auto relative z-10">
               <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 mb-20">
                 <div className="lg:col-span-5 space-y-8">
-                <div className="flex flex-col items-start">
-                  <div className="bg-white/95 px-6 py-4 rounded-xl shadow-lg border border-white/10 inline-block mb-2">
-                    <img src="/Rudreshwar%20Mahadeo%20Kothi.png" alt="Rudreshwar Mahadeo Kothi Logo" className="h-16 sm:h-20 w-auto object-contain" />
+                  <div className="flex flex-col items-start">
+                    <div className="bg-white/95 px-6 py-4 rounded-xl shadow-lg border border-white/10 inline-block mb-2">
+                      <img src="/Rudreshwar%20Mahadeo%20Kothi.png" alt="Rudreshwar Mahadeo Kothi Logo" className="h-16 sm:h-40 w-auto object-contain" />
+                    </div>
                   </div>
-                </div>
                   <p className="text-zinc-400 leading-relaxed text-lg max-w-sm">
                     A 300-year-old heritage haveli offering royal elegance and deep spirituality in the heart of ancient Varanasi.
                   </p>

@@ -174,7 +174,7 @@ function ImageLightbox({
     if (!touchStart) return;
     const touchEnd = e.changedTouches[0].clientX;
     const distance = touchStart - touchEnd;
-    
+
     if (distance > 50) {
       onNext();
     } else if (distance < -50) {
@@ -228,7 +228,7 @@ function ImageLightbox({
         </motion.div>
 
         {/* Main Image Container */}
-        <div 
+        <div
           className="relative w-full h-full flex items-center justify-center max-w-7xl"
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
@@ -775,7 +775,7 @@ export default function Home() {
       <div>
         <main>
           {/* Hero */}
-          <section id="hero" className="relative min-h-screen flex flex-col pt-0 lg:pt-10 lg:pb-10">
+          <section id="hero" className="relative min-h-screen flex flex-col pt-0 lg:pt-20 lg:pb-10">
             {/* Background image */}
             <div className="absolute inset-0 overflow-hidden">
               <img src="/assets/generated/hero-temple-shrine.dim_1200x700.jpg" alt="Rudreshwar Mahadeo Kothi heritage haveli temple shrine entrance" className="w-full h-full object-cover" />
@@ -1369,7 +1369,7 @@ export default function Home() {
               <div className="lg:col-span-5 space-y-8">
                 <div className="flex flex-col items-start">
                   <div className="bg-white/95 px-6 py-4 rounded-xl shadow-lg border border-white/10 inline-block mb-2">
-                    <img src="/Rudreshwar%20Mahadeo%20Kothi.png" alt="Rudreshwar Mahadeo Kothi Logo" className="h-16 sm:h-20 w-auto object-contain" />
+                    <img src="/Rudreshwar%20Mahadeo%20Kothi.png" alt="Rudreshwar Mahadeo Kothi Logo" className="h-20 sm:h-40 w-auto object-cover" />
                   </div>
                 </div>
                 <p className="text-zinc-400 leading-relaxed text-lg max-w-sm">
