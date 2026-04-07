@@ -30,9 +30,14 @@ const router = createRouter({
 
 // Register generic types for router
 
+import { HelmetProvider } from 'react-helmet-async';
 const queryClient = new QueryClient();
-ReactDOM.createRoot(document.getElementById("root")).render(<QueryClientProvider client={queryClient}>
-    <InternetIdentityProvider>
-      <RouterProvider router={router} />
-    </InternetIdentityProvider>
-  </QueryClientProvider>);
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <QueryClientProvider client={queryClient}>
+    <HelmetProvider>
+      <InternetIdentityProvider>
+        <RouterProvider router={router} />
+      </InternetIdentityProvider>
+    </HelmetProvider>
+  </QueryClientProvider>
+);
