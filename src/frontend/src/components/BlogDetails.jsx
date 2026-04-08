@@ -9,8 +9,9 @@ import { AnimatePresence, motion } from "motion/react";
 import { useState, useEffect, useRef } from "react";
 import Lenis from "lenis";
 import Loader from "./Loader";
+
 import { useGetAllGuestReviews, useGetRooms, useSubmitBookingInquiry } from "../hooks/useQueries";
-import BlogGrid from "./BlogGrid";
+
 
 /* Seed reviews  */
 const SEED_REVIEWS = [{
@@ -469,10 +470,17 @@ const stagger = {
     }
   }
 };
-import { useNavigate } from "@tanstack/react-router";
-
+import { useNavigate, useParams } from "@tanstack/react-router";
+import { blogs } from "./BlogsData";
 /* APP */
-export default function Blog() {
+export default function BlogDetails() {
+
+ const { slug } = useParams({ select: (params) => params });
+  const blog = blogs.find((b) => b.slug === slug);
+
+  if (!blog) return <h2>Blog Not Found 😢</h2>;
+
+
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [directionsOpen, setDirectionsOpen] = useState(false);
@@ -670,24 +678,38 @@ export default function Blog() {
           
 
 
-<section id="rooms" className="py-2 sm:py-2 px-4 sm:px-6 relative z-10">
-  <div className="max-w-6xl mx-auto">
-    <motion.div variants={stagger} initial="hidden" whileInView="visible">
-      
-      <motion.div className="text-center mb-14">
-        <p className="text-sm font-medium tracking-widest uppercase text-primary mb-3">
-          Latest
-        </p>
-        <h2 className="font-display text-4xl sm:text-5xl font-semibold text-foreground">
-          Blogs
-        </h2>
-      </motion.div>
 
-  <BlogGrid/>
+    
+    
 
-    </motion.div>
-  </div>
-</section>
+{/* Start Blog Details */}
+
+ <main className="pt-2 sm:pt-3 pb-20 px-4 sm:px-6 relative z-10 bg-background">
+          <div className="max-w-4xl mx-auto">
+            <div className="mb-10 text-center">
+              <Badge variant="secondary" className="mb-4">Experiences</Badge>
+              <h1 className="font-display text-4xl sm:text-5xl font-semibold text-foreground leading-tight mb-6">
+              {blog.title}
+              </h1>
+              <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+               {blog.desc}
+              </p>
+            </div>
+
+            <div className="rounded-3xl overflow-hidden mb-12 shadow-lg border border-border">
+              <img src={blog.img} alt="Ganga River Varanasi" className="w-full h-[400px] sm:h-[500px] object-cover" />
+            </div>
+
+            <article className="prose prose-lg dark:prose-invert prose-amber max-w-none text-muted-foreground"   dangerouslySetInnerHTML={{ __html: blog.content }}>
+            
+            </article>
+          </div>
+        </main>
+
+{/* End Blog Details */}
+
+   
+ 
 
           <div className="section-divider" />
 
