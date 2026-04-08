@@ -6,7 +6,7 @@ import { RouterProvider, createRouter, createRootRoute, createRoute } from '@tan
 import { inject } from "@vercel/analytics";
 import Home from "./components/Home";
 import Blog from "./components/Blog";
-
+import BlogDetails from "./components/BlogDetails";
 // Inject Vercel Analytics
 inject();
 BigInt.prototype.toJSON = function () {
@@ -23,7 +23,14 @@ const blogRoute = createRoute({
   path: '/blog',
   component: Blog
 });
-const routeTree = rootRoute.addChildren([indexRoute, blogRoute]);
+
+
+const blogdetailsRoute = createRoute({
+  getParentRoute: () => rootRoute,
+   path: '/blog-details/$slug',
+  component: BlogDetails
+});
+const routeTree = rootRoute.addChildren([indexRoute, blogRoute,blogdetailsRoute]);
 const router = createRouter({
   routeTree
 });
