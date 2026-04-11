@@ -16,7 +16,7 @@ const BlogGrid = () => {
             <h1><b>{blog.title}</b></h1>
             <p>{blog.desc}</p>
 
-            {/* ✅ FIXED LINK */}<br/>
+            {/* ✅ FIXED LINK */}<br />
             <Link
               to="/blog-details/$slug"
               params={{ slug: blog.slug }}

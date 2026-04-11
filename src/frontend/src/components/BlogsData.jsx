@@ -3,7 +3,7 @@ export const blogs = [
     slug: "why-choosing-hotel-near-kashi-vishwanath",
     title: "Why Choosing a Hotel Near Kashi Vishwanath Temple Makes Your Varanasi Trip Truly Special",
     desc: "Discover why staying in a hotel near Kashi Vishwanath Temple enhances your spiritual journey. Explore ghats, temples and top attractions with ease.",
-    img: "/assets/generated/blog2.jpeg",
+    img: "/assets/generated/blog_3.jpeg",
     content: `
       <p className="lead text-xl font-medium text-foreground mb-8">Varanasi is a city where every corner breathes history, devotion, and culture. Choosing a hotel near Kashi Vishwanath Temple does more than place you close to a famous shrine—it transforms your entire travel experience. For spiritual travellers, cultural explorers, or first-time visitors, staying nearby ensures easy access, peaceful surroundings, and the most authentic feel of the city.</p>
       
