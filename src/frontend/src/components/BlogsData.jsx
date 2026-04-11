@@ -50,7 +50,7 @@ export const blogs = [
     `
   },
   {
-   slug: "how-a-hotel-near-the-ganga-river-makes-your-varanasi-trip-more-meaningful",
+    slug: "how-a-hotel-near-the-ganga-river-makes-your-varanasi-trip-more-meaningful",
     title: "How a Hotel Near the Ganga River Makes Your Varanasi Trip More Meaningful",
     desc: " Discover how a riverfront stay enhances your trip with comfort, views, and easy access to major ghats.",
     img: "/assets/generated/blog-hero.jpeg",
