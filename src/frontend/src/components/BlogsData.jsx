@@ -1,5 +1,55 @@
 export const blogs = [
   {
+    slug: "why-choosing-hotel-near-kashi-vishwanath",
+    title: "Why Choosing a Hotel Near Kashi Vishwanath Temple Makes Your Varanasi Trip Truly Special",
+    desc: "Discover why staying in a hotel near Kashi Vishwanath Temple enhances your spiritual journey. Explore ghats, temples and top attractions with ease.",
+    img: "/assets/generated/blog_3.jpeg",
+    content: `
+      <p className="lead text-xl font-medium text-foreground mb-8">Varanasi is a city where every corner breathes history, devotion, and culture. Choosing a hotel near Kashi Vishwanath Temple does more than place you close to a famous shrine—it transforms your entire travel experience. For spiritual travellers, cultural explorers, or first-time visitors, staying nearby ensures easy access, peaceful surroundings, and the most authentic feel of the city.</p>
+      
+      <p>If you are planning a trip and want a stay that is immersive and convenient, selecting this location becomes one of the smartest decisions you can make.</p>
+
+      <h2 className="text-foreground font-display font-semibold mt-12 mb-5 text-3xl">Why Staying Near the Kashi Vishwanath Temple Completes Your Trip</h2>
+      <p>The Kashi Vishwanath Temple is one of the holiest places in India, attracting millions of devotees every year. Staying close eliminates long travel routes, traffic delays, and the stress of navigating narrow lanes. You get the comfort of peaceful morning darshans, relaxed temple visits, and the freedom to explore at your own pace.</p>
+      <p>A centrally located stay like Rudreshwar Mahadeo Kothi positions you just right—close enough for convenient access, yet in a serene pocket of the old city.</p>
+
+      <h2 className="text-foreground font-display font-semibold mt-12 mb-5 text-3xl">Benefits of Staying in a Hotel Near Kashi Vishwanath Temple</h2>
+      <p><strong>1. Short Walk to the Temple</strong><br/>
+      Being just minutes away from the shrine allows you to visit during quieter hours—early mornings, late evenings, or after ceremonies—without any rush.</p>
+      <p><strong>2. Easy Access to Nearby Ghats</strong><br/>
+      This area places you close to the Ganga ghats. Whether you want to watch the Ganga Aarti sunrise, take a boat ride, or enjoy a peaceful stroll, everything becomes accessible.</p>
+      <p><strong>3. Seamless Connection to the Old City</strong><br/>
+      Cultural landmarks, bustling markets, and heritage lanes surround this locality—giving you the true essence of Varanasi.</p>
+
+      <h2 className="text-foreground font-display font-semibold mt-12 mb-5 text-3xl">Explore the City Effortlessly From Your Hotel Near Kashi Vishwanath Temple</h2>
+      <p>Staying here makes sightseeing easier. From your centrally located stay, you’re close to:</p>
+      <ul className="list-disc pl-5 mb-4">
+        <li>Dashashwamedh Ghat — ideal for witnessing the evening Aarti</li>
+        <li>Sankat Mochan Hanuman Temple</li>
+        <li>Tulsi Manas Mandir</li>
+        <li>Bharat Mata Mandir</li>
+        <li>Kal Bhairav Mandir</li>
+      </ul>
+      <p>Even major attractions like Sarnath and BHU Bharat Kala Bhawan become easy to reach from this central neighbourhood.</p>
+
+      <h2 className="text-foreground font-display font-semibold mt-12 mb-5 text-3xl">Experience the Magic of the Ganga Aarti from a Hotel Near Kashi Vishwanath Temple</h2>
+      <p>Staying near the Ganga ensures you’re close to one of the most powerful spiritual ceremonies in the country. Whether it’s the Ganga Arti morning at Assi Ghat or the bustling Dashashwamedh Aarti, being nearby means you never miss the moment.</p>
+      <p>You can simply walk to the ghat, enjoy the ceremony, and return peacefully without long commutes.</p>
+
+      <h2 className="text-foreground font-display font-semibold mt-12 mb-5 text-3xl">Enjoy Better Views & Relaxation With Nearby Riverfront Access</h2>
+      <p>Choosing accommodation near the river has its own charm. A river view hotel Varanasi offers calming visuals—boats floating at dusk, priests performing rituals, and the soft glow of diyas on the water. Even if your stay is slightly away from the river, being near the ghats ensures the atmosphere is always serene.</p>
+
+      <div className="my-10 p-8 rounded-2xl bg-secondary/30 border border-secondary shadow-sm">
+        <h2 className="text-foreground font-display font-semibold mb-4 text-2xl !mt-0">Convenience, Culture & Comfort All in One Place</h2>
+        <p>For travellers who want traditional charm blended with modern comfort, Rudreshwar Mahadeo Kothi stands out beautifully. With its heritage-inspired design and proximity to key attractions, it provides an ideal balance of location and experience. As a hotel near Godowlia Varanasi, it also keeps you close to markets, food joints, and local shopping hubs.</p>
+        <p className="mb-0">Whether you’re heading for darshan, exploring ghats, attending spiritual ceremonies, or discovering historical sites, staying in this area keeps everything within reach.</p>
+      </div>
+
+      <p>Choosing a hotel near Kashi Vishwanath Temple is not just about convenience—it’s about experiencing Varanasi in its purest form. You stay close to the heart of devotion, the charm of ancient lanes, and the peaceful rhythm of the Ganga. With the added comfort of a thoughtfully designed stay, your journey becomes deeply fulfilling.</p>
+      <p>If you want your Varanasi trip to feel complete—spiritually, culturally, and emotionally—start by choosing the right location. Few choices match the authenticity and accessibility of staying near this historic temple.</p>
+    `
+  },
+  {
    slug: "how-a-hotel-near-the-ganga-river-makes-your-varanasi-trip-more-meaningful",
     title: "How a Hotel Near the Ganga River Makes Your Varanasi Trip More Meaningful",
     desc: " Discover how a riverfront stay enhances your trip with comfort, views, and easy access to major ghats.",
