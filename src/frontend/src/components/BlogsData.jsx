@@ -2,9 +2,10 @@ export const blogs = [
   {
     slug: "river-view-hotel-varanasi-for-first-time-visitors",
     title: "River View Hotel Varanasi for First Time Visitors",
-    desc: "Visiting Varanasi for the first time is an emotional, cultural, and spiritual experience. The city moves to the rhythm of the Ganga sunrise boat rides, temple bells, river chants, evening lamps, and narrow lanes filled with stories. One of the best ways to understand this ancient city is by staying in a river-view hotel in Varanasi, where the Ganga is not just scenery but part of your daily routine.",
+    desc: "Visiting Varanasi for the first time is an emotional, cultural, and spiritual experience. The city moves to the rhythm of the Ganga sunrise boat rides, temple bells, river chants, evening lamps, and narrow lanes filled with stories.",
     img: "/assets/generated/River.jpg",
     content: `
+    <p className="lead text-xl font-medium text-foreground mb-8"> One of the best ways to understand this ancient city is by staying in a river-view hotel in Varanasi, where the Ganga is not just scenery but part of your daily routine.</p>
       <p className="lead text-xl font-medium text-foreground mb-8">For first-time visitors, choosing the right stay can shape the entire trip. A good location, authentic ambience, and easy access to the ghats matter more here than in most Indian cities. That’s where a river view hotel becomes truly meaningful.</p>
    <h2 className="text-foreground font-display font-semibold mt-12 mb-5 text-3xl">   Why A River View Hotel Varanasi Makes Your First Trip Special</h2>
 <p>Most people hear about sunrise boat rides or the famous Ganga Arti, but don’t realise how much easier everything becomes when you stay close to the river itself. When you choose a river view hotel in Varanasi, you wake up to the sound of temple bells and step out directly toward the ghats without long commutes or confusion.
