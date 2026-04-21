@@ -23,12 +23,12 @@ export const blogs = [
   <h2 className="text-foreground font-display font-semibold mt-12 mb-5 text-3xl">3. Short Travel Distance to Cultural Landmarks</h2>
 <p>Varanasi is not only about the Ganga. Some important places are best explored in the morning when crowds are fewer.</p>
 <p>Nearby highlights include:</p>
-<ul>
-<li>•	Sarnath – where Buddha gave his first sermon </li>
-<li>•	BHU Bharat Kala Bhawan – showcasing rare paintings, sculptures, and textiles </li>
-<li>•	Sankat Mochan Temple – known for its spiritual atmosphere </li>
-<li>•	Tulsi Manas Mandir – built at the place where Ramcharitmanas was written </li>
-<li>•	Bharat Mata Mandir – featuring a marble map of undivided India </li>
+<ul className="list-disc pl-5 mb-4">
+<li>Sarnath – where Buddha gave his first sermon </li>
+<li>BHU Bharat Kala Bhawan – showcasing rare paintings, sculptures, and textiles </li>
+<li>Sankat Mochan Temple – known for its spiritual atmosphere </li>
+<li>Tulsi Manas Mandir – built at the place where Ramcharitmanas was written </li>
+<li>Bharat Mata Mandir – featuring a marble map of undivided India </li>
 
 </ul>
 <p>Being centrally located reduces travel fatigue and lets you explore more without rushing.</p>
@@ -38,10 +38,10 @@ export const blogs = [
 <p>Many hotels advertise river proximity, but only a true river view hotel offers uninterrupted views. Look for upper-floor rooms or rooftop spaces for panoramic visuals.
 </p><h2 className="text-foreground font-display font-semibold mt-12 mb-5 text-3xl">2. Look for Walkable Access to Main Spots</h2>
 <p>First-timers especially benefit from staying near:</p>
-<ul>
-<li>•	Kashi Vishwanath Temple </li>
-<li>•	Kal Bhairav Mandir </li>
-<li>•	Godowlia Market </li>
+<ul className="list-disc pl-5 mb-4">
+<li>Kashi Vishwanath Temple </li>
+<li>Kal Bhairav Mandir </li>
+<li>Godowlia Market </li>
 </ul>
 <p>Being close to these ensures you experience Varanasi fully, rituals, food, cultural lanes, and markets.</p>
 <h2 className="text-foreground font-display font-semibold mt-12 mb-5 text-3xl">3. Choose a Place That Matches the City’s Character</h2>
