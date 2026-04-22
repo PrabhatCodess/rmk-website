@@ -1,5 +1,11 @@
 export const blogs = [
   {
+     seo: {
+      title: "River View Hotel Varanasi",
+      description:"Planning your first trip to Varanasi? Learn how choosing a river view hotel in Varanasi enhances your sunrise views, Ganga Aarti experience, and ghat access.",
+      keywords:"River View Hotel Varanasi for First Time Visitors",
+      image: "/assets/generated/River.jpg",
+    },
     slug: "river-view-hotel-varanasi-for-first-time-visitors",
     title: "River View Hotel Varanasi for First Time Visitors",
     desc: "Visiting Varanasi for the first time is an emotional, cultural, and spiritual experience. The city moves to the rhythm of the Ganga sunrise boat rides, temple bells, river chants, evening lamps, and narrow lanes filled with stories.",
@@ -61,6 +67,12 @@ export const blogs = [
         `
   },
   {
+    seo: {
+      title: "Best Hotel Near Kashi Vishwanath Temple for a Peaceful Stay",
+      description:"Discover why staying in a hotel near Kashi Vishwanath Temple enhances your spiritual journey. Explore ghats, temples and top attractions with ease.",
+      keywords:"Hotel Near Kashi Vishwanath Temple",
+      image: "/assets/generated/blog_3.jpeg",
+    },
     slug: "why-choosing-hotel-near-kashi-vishwanath",
     title: "Why Choosing a Hotel Near Kashi Vishwanath Temple Makes Your Varanasi Trip Truly Special",
     desc: "Discover why staying in a hotel near Kashi Vishwanath Temple enhances your spiritual journey. Explore ghats, temples and top attractions with ease.",
@@ -111,6 +123,12 @@ export const blogs = [
     `
   },
   {
+     seo: {
+      title: "Best Hotel Near Ganga River Varanasi for a Meaningful Stay",
+      description:"Looking for the best hotel near Ganga River in Varanasi Discover how a riverfront stay enhances your trip with comfort, views, and easy access to major ghats.",
+      keywords:"Hotel Near Ganga River Varanasi",
+      image: "/assets/generated/blog-hero.jpeg",
+    },
     slug: "how-a-hotel-near-the-ganga-river-makes-your-varanasi-trip-more-meaningful",
     title: "How a Hotel Near the Ganga River Makes Your Varanasi Trip More Meaningful",
     desc: " Discover how a riverfront stay enhances your trip with comfort, views, and easy access to major ghats.",
@@ -213,6 +231,12 @@ export const blogs = [
     `
   },
   {
+     seo: {
+      title: "Hotel Near Ganga River Varanasi for a Perfect Trip Experience",
+      description:"Stay at a hotel near Ganga River Varanasi for easy access to ghats, temples, and boat rides. Enjoy peaceful mornings, spiritual views, and a truly authentic city experience.",
+      keywords:"Hotel Near Ganga River Varanasi",
+      image: "/assets/generated/1.jpg",
+    },
     slug: "why-staying-near-the-ganga-river-makes-your-varanasi-trip-perfect",
     title: "Why Staying Near the Ganga River Makes Your Varanasi Trip Perfect",
     desc: "Varanasi is one of those places where every lane tells a story, every ghat carries centuries of devotion, and every sunrise feels like a new spiritual beginning.",
@@ -251,6 +275,14 @@ You can walk to the ghats, attend the evening Aarti effortlessly, experience ear
     `
   },
   {
+      seo: {
+      title: "Hotel Near Dashashwamedh Ghat for the Perfect Varanasi Stay",
+      description:
+        "Stay at a hotel near Dashashwamedh Ghat and experience Ganga Aarti, temples, and river views with ease. Discover the best location for your Varanasi trip.",
+      keywords:
+        "Hotel Near Dashashwamedh Ghat",
+      image: "/assets/generated/blog_4.jpeg",
+    },
     slug: "hotel-near-dashashwamedh-ghat-varanasi-stay",
     title: "What to Expect When You Stay in a Hotel Near Dashashwamedh Ghat",
     desc: "Stay at a hotel near Dashashwamedh Ghat and experience Ganga Aarti, temples, and river views with ease. Discover the best location for your Varanasi trip.",
