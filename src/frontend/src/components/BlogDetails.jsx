@@ -699,7 +699,16 @@ export default function BlogDetails() {
     
 
 {/* Start Blog Details */}
+ {/* SEO META */}
+<title>{blog.seo.title}</title>
+<meta name="description" content={blog.seo.description} />
+<meta name="keywords" content={blog.seo.keywords} />
 
+<meta property="og:title" content={blog.seo.title} />
+<meta property="og:description" content={blog.seo.description} />
+<meta property="og:image" content={blog.seo.image} />
+
+        
  <main className="pt-2 sm:pt-3 pb-20 px-4 sm:px-6 relative z-10 bg-background">
           <div className="max-w-4xl mx-auto">
             <div className="mb-10 text-center">
