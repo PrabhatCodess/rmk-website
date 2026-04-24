@@ -1,4 +1,73 @@
 export const blogs = [
+   {
+     seo: {
+      title: "Hotel Near Kashi Vishwanath Temple",
+      description:"Stay at Rudreshwar Mahadev Kothi, the best hotel near Kashi Vishwanath Temple. Enjoy comfort, culture, and easy access to ghats, Ganga Aarti, and major Varanasi sites.",
+      keywords:"Rudreshwar Mahadev Kothi – Best Hotel Near Kashi Vishwanath Temple",
+      image: "/assets/generated/RM-kothi-1.png",
+    },
+    slug: "rudreshwar-mahadev-kothi–experience-comfort-and-culture-at-the-best-hotel-near-kashi-vishwanath-temple",
+    title: "Rudreshwar Mahadev Kothi – Experience Comfort & Culture at the Best Hotel Near Kashi Vishwanath Temple",
+    desc: "Visiting Varanasi for the first time is an emotional, cultural, and spiritual experience. The city moves to the rhythm of the Ganga sunrise boat rides, temple bells, river chants, evening lamps, and narrow lanes filled with stories.",
+    img: "/assets/generated/RM-kothi-Cover.png",
+    content: ` 
+  <div className="rounded-3xl overflow-hidden mb-12 shadow-lg border border-border">
+              <img src='/assets/generated/RM-kothi-1.png' alt="Ganga River Varanasi" className="w-full h-[400px] sm:h-[500px] object-cover" />
+            </div>
+<h2 className="text-foreground font-display font-semibold mt-12 mb-5 text-3xl">Why a Hotel Near Kashi Vishwanath Temple Matters</h2>
+<p>For first-time travellers and returning devotees alike, staying at a hotel near Kashi Vishwanath Temple changes the pace and ease of your entire journey. Kashi Vishwanath Temple attracts thousands of visitors daily. Early mornings and late evenings are the best times for darshan, but reaching the temple from distant neighbourhoods can be exhausting due to traffic restrictions and narrow lanes.
+</p><p>Choosing a place like Rudreshwar Mahadev Kothi ensures you remain close enough to walk comfortably or take a short ride. This saves time and helps you enjoy the temple the way it was meant to be experienced—peacefully, without rushing through crowds.
+</p><p>This is especially useful during festival periods, when lakhs of pilgrims visit, or during early hours when the Ganga breeze and temple bells create an atmosphere impossible to describe in words.
+</p>
+  <div className="rounded-3xl overflow-hidden mb-12 shadow-lg border border-border">
+              <img src='/assets/generated/RM-kothi-2.jpeg' alt="Ganga River Varanasi" className="w-full h-[400px] sm:h-[500px] object-cover" />
+            </div>
+ <h2 className="text-foreground font-display font-semibold mt-12 mb-5 text-3xl">A Stay That Connects You With Varanasi’s Soul</h2>
+<p>Varanasi is not a city you just visit; it is a city you feel. Staying at a thoughtfully designed landmark like Rudreshwar Mahadev Kothi helps you experience this emotional depth every day. The architecture, decor, and ambience reflect a quiet old-world charm that aligns perfectly with Varanasi’s spiritual energy.
+ </p><h2 className="text-foreground font-display font-semibold mt-12 mb-5 text-3xl">Wake Up to a City of Rituals</h2>
+<p>Early morning is the best time to explore Varanasi. The morning Ganga Arti, the soft glow of sunrise, and the sight of priests preparing the ghats set a rhythm that stays with you long after your trip ends. Staying close to the river makes it easy to join locals for these daily rituals or simply walk along the ghats to watch the city awaken.
+ </p>
+ <h2 className="text-foreground font-display font-semibold mt-12 mb-5 text-3xl">Experience the Evening Aarti Without the Rush</h2>
+<p>The famed Ganga Arti at Dashashwamedh Ghat attracts massive crowds. Arriving early is essential to get a good view. A hotel near Kashi Vishwanath Temple, especially one positioned near the river, allows you to reach the Aarti location without battling long commutes or traffic. After the ceremony, returning to the comfort of Rudreshwar Mahadev Kothi is simple and peaceful.
+ </p>
+<h2 className="text-foreground font-display font-semibold mt-12 mb-5 text-3xl">Close to Varanasi’s Cultural & Spiritual Landmarks</h2>
+<p>One of the biggest advantages of choosing a stay near the old city is easy access to places that hold immense cultural significance.
+</p><p>Places worth exploring nearby include:</p>
+<ul className="list-disc pl-5 mb-4">
+<li>	Kal Bhairav Mandir – known as the “Kotwal of Kashi,” this temple is an essential spiritual stop </li>
+<li>	Sarnath – located about 10 km from the old city, where Lord Buddha delivered his first sermon </li>
+<li>	BHUBharatKalaBhawan – a treasure for lovers of art, textiles, and sculptures </li>
+<li>	Sankat Mochan Temple – famous for its peaceful environment and weekly musical gatherings </li>
+<li>	Tulsi Manas Mandir – a marble temple dedicated to the place where Tulsidas composed the Ramcharitmanas </li>
+<li>	Bharat Mata Mandir – featuring a unique marble map of undivided India </li>
+</ul>
+<p>Being near the old city means you can cover several of these in a single day without long detours.</p>
+<div className="rounded-3xl overflow-hidden mb-12 shadow-lg border border-border">
+              <img src='/assets/generated/RM-kothi-3.jpeg' alt="Ganga River Varanasi" className="w-full h-[400px] sm:h-[500px] object-cover" />
+            </div>
+<h2 className="text-foreground font-display font-semibold mt-12 mb-5 text-3xl">Why Rudreshwar Mahadev Kothi Stands Out</h2>
+<p>Among the many stays around the old city, Rudreshwar Mahadev Kothi has become a favourite among travellers who prefer meaningful experiences over generic accommodation.</p>
+<h2 className="text-foreground font-display font-semibold mt-12 mb-5 text-3xl">1. A Blend of Comfort and Heritage</h2>
+<p>The interiors balance contemporary comfort with traditional design. Handmade decor pieces, warm lighting, and thoughtful spatial planning create a homely yet culturally rooted environment.
+</p>
+<h2 className="text-foreground font-display font-semibold mt-12 mb-5 text-3xl">2. Proximity Without the Noise</h2>
+<p>While being near the old city’s most important sites, Rudreshwar Mahadev Kothi is positioned to offer peaceful evenings, comfortable sleep, and quiet mornings—something many hotels closer to the main intersections struggle to provide.
+</p>
+<h2 className="text-foreground font-display font-semibold mt-12 mb-5 text-3xl">3. A Stay Built Around the Traveller’s Journey</h2>
+<p>Whether you're visiting the temple before sunrise, attending the Ganga Aarti, exploring ancient alleys, or taking a guided trip to Sarnath, the location works as a perfect base.
+</p><p>The staff’s familiarity with Varanasi’s rhythms—festival days, temple timings, crowd patterns, and cultural nuances—helps guests move through the city effortlessly.
+</p>
+<div className="rounded-3xl overflow-hidden mb-12 shadow-lg border border-border">
+              <img src='/assets/generated/RM-kothi-4.jpeg' alt="Ganga River Varanasi" className="w-full h-[400px] sm:h-[500px] object-cover" />
+            </div>
+<h2 className="text-foreground font-display font-semibold mt-12 mb-5 text-3xl">The Ideal Hotel Near Kashi Vishwanath Temple for a Fulfilling Trip</h2>
+<p>If your purpose is to experience Varanasi, not just visit it, choosing a meaningful stay matters. Rudreshwar Mahadev Kothi offers the rare combination of thoughtful comfort, river proximity, heritage design, and easy connectivity to the city’s spiritual heart.
+</p>
+<p>For devotees, culture seekers, photographers, or slow travellers looking to absorb the essence of Kashi, this is more than a hotel near Kashi Vishwanath Temple—it becomes a memorable part of the journey.</p>
+
+    
+        `
+  },
   {
      seo: {
       title: "River View Hotel Varanasi",
