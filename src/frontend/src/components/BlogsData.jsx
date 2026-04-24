@@ -23,7 +23,7 @@ Located within easy reach of the sacred ghats and the old city’s cultural lane
 </p><p>This is especially useful during festival periods, when lakhs of pilgrims visit, or during early hours when the Ganga breeze and temple bells create an atmosphere impossible to describe in words.
 </p>
   <div className="rounded-3xl overflow-hidden mb-12 shadow-lg border border-border">
-              <img src='/assets/generated/RM-kothi-2.jpeg' alt="Ganga River Varanasi" className="w-full h-[400px] sm:h-[500px] object-cover" />
+              <img src='/assets/generated/RM-kothi-2.jpeg' alt="Ganga River Varanasi" className="border border-border w-full h-[400px] sm:h-[500px] object-cover" />
             </div>
  <h2 className="text-foreground font-display font-semibold mt-12 mb-5 text-3xl">A Stay That Connects You With Varanasi’s Soul</h2>
 <p>Varanasi is not a city you just visit; it is a city you feel. Staying at a thoughtfully designed landmark like Rudreshwar Mahadev Kothi helps you experience this emotional depth every day. The architecture, decor, and ambience reflect a quiet old-world charm that aligns perfectly with Varanasi’s spiritual energy.
