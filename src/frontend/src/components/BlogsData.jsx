@@ -8,9 +8,10 @@ export const blogs = [
     },
     slug: "rudreshwar-mahadev-kothi–experience-comfort-and-culture-at-the-best-hotel-near-kashi-vishwanath-temple",
     title: "Rudreshwar Mahadev Kothi – Experience Comfort & Culture at the Best Hotel Near Kashi Vishwanath Temple",
-    desc: "Visiting Varanasi for the first time is an emotional, cultural, and spiritual experience. The city moves to the rhythm of the Ganga sunrise boat rides, temple bells, river chants, evening lamps, and narrow lanes filled with stories.",
+    desc: "Visiting Varanasi for the first time is an emotional, cultural, and spiritual experience. ",
     img: "/assets/generated/RM-kothi-Cover.png",
     content: ` 
+    <p>The city moves to the rhythm of the Ganga sunrise boat rides, temple bells, river chants, evening lamps, and narrow lanes filled with stories.</p>
   <div className="rounded-3xl overflow-hidden mb-12 shadow-lg border border-border">
               <img src='/assets/generated/RM-kothi-1.png' alt="Ganga River Varanasi" className="w-full h-[400px] sm:h-[500px] object-cover" />
             </div>
