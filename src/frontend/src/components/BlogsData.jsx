@@ -19,7 +19,7 @@ Located within easy reach of the sacred ghats and the old city’s cultural lane
             </div>
 <h2 className="text-foreground font-display font-semibold mt-12 mb-5 text-3xl">Why a Hotel Near Kashi Vishwanath Temple Matters</h2>
 <p>For first-time travellers and returning devotees alike, staying at a hotel near Kashi Vishwanath Temple changes the pace and ease of your entire journey. Kashi Vishwanath Temple attracts thousands of visitors daily. Early mornings and late evenings are the best times for darshan, but reaching the temple from distant neighbourhoods can be exhausting due to traffic restrictions and narrow lanes.
-</p><p>Choosing a place like Rudreshwar Mahadev Kothi ensures you remain close enough to walk comfortably or take a short ride. This saves time and helps you enjoy the temple the way it was meant to be experienced—peacefully, without rushing through crowds.
+</p><p>Choosing a place like <a href="https://rmkothi.com/">Rudreshwar Mahadev Kothi</a> ensures you remain close enough to walk comfortably or take a short ride. This saves time and helps you enjoy the temple the way it was meant to be experienced—peacefully, without rushing through crowds.
 </p><p>This is especially useful during festival periods, when lakhs of pilgrims visit, or during early hours when the Ganga breeze and temple bells create an atmosphere impossible to describe in words.
 </p>
   <div className="rounded-3xl overflow-hidden mb-12 shadow-lg border border-border">
