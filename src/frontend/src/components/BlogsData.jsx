@@ -2,16 +2,18 @@ export const blogs = [
    {
      seo: {
       title: "Hotel Near Kashi Vishwanath Temple",
-      description:"Stay at Rudreshwar Mahadev Kothi, the best hotel near Kashi Vishwanath Temple. Enjoy comfort, culture, and easy access to ghats, Ganga Aarti, and major Varanasi sites.",
-      keywords:"Rudreshwar Mahadev Kothi – Best Hotel Near Kashi Vishwanath Temple",
+      description: "Stay at Rudreshwar Mahadev Kothi, the best hotel near Kashi Vishwanath Temple. Enjoy comfort, culture, and easy access to ghats, Ganga Aarti, and major Varanasi sites.",
+      keywords: "Rudreshwar Mahadev Kothi – Best Hotel Near Kashi Vishwanath Temple",
       image: "/assets/generated/RM-kothi-1.png",
     },
     slug: "rudreshwar-mahadev-kothi–experience-comfort-and-culture-at-the-best-hotel-near-kashi-vishwanath-temple",
     title: "Rudreshwar Mahadev Kothi – Experience Comfort & Culture at the Best Hotel Near Kashi Vishwanath Temple",
-    desc: "Visiting Varanasi for the first time is an emotional, cultural, and spiritual experience. ",
+    desc: "Finding the right hotel near Kashi Vishwanath Temple is one of the most important decisions you make when planning a trip to Varanasi.",
     img: "/assets/generated/RM-kothi-Cover.png",
     content: ` 
-    <p>The city moves to the rhythm of the Ganga sunrise boat rides, temple bells, river chants, evening lamps, and narrow lanes filled with stories.</p>
+    <p>The city is a blend of ancient tradition, peaceful spirituality, and everyday chaos that somehow feels beautifully organised. Staying close to the temple gives you more than convenience—it gives you proximity to the city’s heartbeat. And that’s exactly what Rudreshwar Mahadev Kothi, one of the most charming boutique stays near the river, delivers.
+Located within easy reach of the sacred ghats and the old city’s cultural lanes, Rudreshwar Mahadev Kothi blends heritage architecture with warm hospitality, making it a perfect stay for travellers who want comfort without losing the authentic essence of Varanasi.
+</p>
   <div className="rounded-3xl overflow-hidden mb-12 shadow-lg border border-border">
               <img src='/assets/generated/RM-kothi-1.png' alt="Ganga River Varanasi" className="w-full h-[400px] sm:h-[500px] object-cover" />
             </div>
@@ -26,7 +28,7 @@ export const blogs = [
  <h2 className="text-foreground font-display font-semibold mt-12 mb-5 text-3xl">A Stay That Connects You With Varanasi’s Soul</h2>
 <p>Varanasi is not a city you just visit; it is a city you feel. Staying at a thoughtfully designed landmark like Rudreshwar Mahadev Kothi helps you experience this emotional depth every day. The architecture, decor, and ambience reflect a quiet old-world charm that aligns perfectly with Varanasi’s spiritual energy.
  </p><h2 className="text-foreground font-display font-semibold mt-12 mb-5 text-3xl">Wake Up to a City of Rituals</h2>
-<p>Early morning is the best time to explore Varanasi. The morning Ganga Arti, the soft glow of sunrise, and the sight of priests preparing the ghats set a rhythm that stays with you long after your trip ends. Staying close to the river makes it easy to join locals for these daily rituals or simply walk along the ghats to watch the city awaken.
+<p> The early morning is the best time to explore Varanasi. The morning Ganga Arti, the soft glow of sunrise, and the sight of priests preparing the ghats set a rhythm that stays with you long after your trip ends. Staying close to the river makes it easy to join locals for these daily rituals or simply walk along the ghats to watch the city awaken.
  </p>
  <h2 className="text-foreground font-display font-semibold mt-12 mb-5 text-3xl">Experience the Evening Aarti Without the Rush</h2>
 <p>The famed Ganga Arti at Dashashwamedh Ghat attracts massive crowds. Arriving early is essential to get a good view. A hotel near Kashi Vishwanath Temple, especially one positioned near the river, allows you to reach the Aarti location without battling long commutes or traffic. After the ceremony, returning to the comfort of Rudreshwar Mahadev Kothi is simple and peaceful.
