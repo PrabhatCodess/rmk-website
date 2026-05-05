@@ -1,4 +1,43 @@
 export const blogs = [
+ {
+    seo: {
+      title: "RM Kothi – Best Hotel Near Kashi Vishwanath Temple, Varanasi",
+      description:
+        "Stay at RM Kothi, a serene hotel near Kashi Vishwanath Temple. Experience culture, Ganga Aarti, and Varanasi’s heritage with comfort and easy access to major attractions.",
+      keywords: "Hotel Near Ganga Ghat Varanasi",
+    },
+    slug: "hotel-near-kashi-vishwanath-temple",
+    title:
+      "RM Kothi: Experience the Soul of Banaras at a Hotel Near Kashi Vishwanath Temple",
+    desc: "Varanasi often called the oldest living city is not just a destination but an emotion woven through rituals, riverfronts, and centuries of devotion. And if you truly want to feel its depth, choosing a hotel near Kashi Vishwanath Temple is one of the best decisions you can make.",
+    img: "/assets/generated/blog-11-cover.jpeg",
+    content: ` 
+ <p>Staying close to the city’s spiritual core allows you to experience Banaras the way it is meant to be lived-through its temples, narrow lanes, morning chants, and riverfront rhythms. <a href="https://rmkothi.com/"> RM Kothi </a>, a boutique heritage stay, places you right in the middle of this cultural universe while offering comfort and calm after a day of exploration.</p>
+  <div className="rounded-3xl overflow-hidden mb-12 shadow-lg border border-border">
+</div>
+<h2 className="text-foreground font-display font-semibold mt-12 mb-5 text-3xl">Why Staying Near the Spiritual Centre Matters</h2>
+<p>Staying at a <a href="https://rmkothi.com/"> hotel near Kashi Vishwanath Temple</a> gives travellers the unique advantage of being steps away from the sacred heart of Varanasi-Kashi Vishwanath Temple. The temple isn’t just a holy site; it is the city’s pulse. The lanes leading toward it are alive from dawn to night, filled with devotees, rituals, and aromas of incense.</p>
+<p>From here, the Ganga riverfront is only a short walk away. Whether you want to witness the Ganga Arti on the historic Dashashwamedh Ghat or experience the quiet beauty of the morning Ganga Arti sunrise, staying close means you never miss these moments. The temple bells, the glow of oil lamps, and the sound of conch shells become part of your daily rhythm.</p>
+<h2 className="text-foreground font-display font-semibold mt-12 mb-5 text-3xl">A Hotel Near Kashi Vishwanath Temple That Connects You to Real Varanasi</h2>
+<p>What makes <a href="https://rmkothi.com/">RM Kothi</a> special is that it places you near not just the temple, but all the locations that shape the city’s identity. The surrounding lanes take you to historical and cultural landmarks like the powerful Kal Bhairav Mandir, the artistic treasure house Bharat Kala Bhavan, and the mythologically rich Tulsi Manas Mandir.</p>
+<p>Travellers often speak of how Varanasi feels like several worlds coexisting in a single city. In just a few minutes from the hotel, you can go from the silence of the ghats to the scholarly environment of Banaras Hindu University, or to the bustling spirituality of the Vishwanath Gali.</p>
+<h2 className="text-foreground font-display font-semibold mt-12 mb-5 text-3xl">Culture, Rituals, and Daily Life-All Within Reach</h2>
+<p>One of the biggest advantages of staying at a <a href="https://rmkothi.com/">hotel near Kashi Vishwanath Temple</a> is the ability to immerse yourself in Varanasi’s living culture. Early mornings are an experience of their own as you walk toward the river to witness the sunrise over the Ganga-a moment that feels timeless.</p>
+<p>The surrounding areas take you deeper into Varanasi’s cultural tapestry with landmarks like Sankat Mochan Hanuman Temple, Bharat Mata Mandir, and even day excursions to the historic Buddhist site of Sarnath. These spaces reveal the many spiritual layers of the city-Hinduism, Buddhism, art, heritage, and philosophy, all interacting seamlessly.</p>
+<h2 className="text-foreground font-display font-semibold mt-12 mb-5 text-3xl">Comfort That Complements Culture</h2>
+<p>RM Kothi ensures that after exploring these long, vibrant days, you return to a place that feels peaceful, warm, and well-connected. When choosing a hotel near Kashi Vishwanath Temple, travellers often look for convenience, accessibility, and comfort-and that’s exactly what RM Kothi offers without overwhelming you with noise or crowds.</p>
+<p>Its location allows you to walk easily to the ghats, yet retreat to a space that feels private and serene. Whether you’re planning to attend the evening <a href="https://rmkothi.com/">Ganga Arti</a>, explore artist enclaves, or visit temples like Kashi Vishwanath Temple early morning, your travel becomes effortless.</p>
+<h2 className="text-foreground font-display font-semibold mt-12 mb-5 text-3xl">A Place That Makes Your Varanasi Trip Meaningful</h2>
+<p>Most travellers visit Varanasi seeking something deeper-a feeling, an experience, a shift. Staying at a hotel near Kashi Vishwanath Temple makes that possible because you’re living inside the essence of the city, not just visiting it.</p>
+<p>RM Kothi supports this experience with its thoughtful hospitality, heritage aesthetics, and intuitive location. Whether your purpose is spiritual, cultural, or personal, the stay enhances your journey by keeping you close to everything that defines Banaras.</p>
+<p>Varanasi is not a place you rush through-it’s a place you absorb slowly. And for that, staying close to the temple, the ghats, and the rituals is essential. <a href="https://rmkothi.com/">RM Kothi</a> ensures that your experience is rooted in both comfort and authenticity, allowing the city’s spiritual energy to unfold naturally around you.</p>
+<p>When you choose a hotel near Kashi Vishwanath Temple, you are not just choosing convenience-you are choosing a front-row seat to the <a href="https://rmkothi.com/">soul of India’s</a> oldest city.</p>
+
+      `,
+  },
+
+
+    
 {
     seo: {
       title: "River View Hotel Varanasi | Stay Near Ganga River & Kashi Vishwanath Temple",
