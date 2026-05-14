@@ -39,7 +39,7 @@ export const blogs = [
 </ul>
 <p>A good <a href="https://rmkothi.com/">hotel near Ganga Ghat Varanasi</a> should allow quick access to this cultural hub. It reduces travel time and lets you move freely between landmarks, markets, and riverside activities.</p>
 <p><a href="https://rmkothi.com/">RM Kothi</a>, for instance, offers this advantage with its location close to the central ghat belt, making it convenient for both spiritual travellers and explorers.</p>
-<h2 className="text-foreground font-display font-semibold mt-12 mb-5 text-3xl">Peacefulness Despite the Bustling Surroundings</h2>
+<h3 className="text-foreground font-display font-semibold mt-12 mb-5 text-3xl">Peacefulness Despite the Bustling Surroundings</h3>
 <p>Varanasi is energetic, intense, and crowded — in the best way possible. But your hotel should be a space of calm.</p>
 <p>Look for:</p>
 <ul className="list-disc pl-5 mb-4">
