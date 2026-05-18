@@ -46,20 +46,20 @@ export const blogs = [
 <p>One of the biggest advantages of staying at Rudreshwar Mahadeo Kothi is its excellent location. The hotel is close to many popular attractions in Varanasi, making local travel convenient and time-saving.</p>
 <p>Some nearby attractions include:</p>
 
-<h3>Kashi Vishwanath Temple</h3>
+<h3 className="text-foreground font-display font-semibold mt-12 mb-5 text-3xl">Kashi Vishwanath Temple</h3>
 <p>One of the most sacred Shiva temples in India, visited by millions of devotees every year.</p>
 
-<h3>Dashashwamedh Ghat</h3>
+<h3 className="text-foreground font-display font-semibold mt-12 mb-5 text-3xl">Dashashwamedh Ghat</h3>
 <p>Famous for the grand evening Ganga Aarti that attracts visitors from across the world.</p>
 
-<h3>Assi Ghat</h3>
+<h3 className="text-foreground font-display font-semibold mt-12 mb-5 text-3xl">Assi Ghat</h3>
 <p>A peaceful and lively ghat known for yoga sessions, cultural events, and morning activities.</p>
 
 
-<h3>Banaras Hindu University (BHU)</h3>
+<h3 className="text-foreground font-display font-semibold mt-12 mb-5 text-3xl">Banaras Hindu University (BHU)</h3>
 <p>One of India’s most prestigious universities with historical and cultural importance.</p>
 
-<h3>Local Markets</h3>
+<h3 className="text-foreground font-display font-semibold mt-12 mb-5 text-3xl">Local Markets</h3>
 <p>Explore traditional Banarasi silk sarees, handicrafts, street food, and souvenirs in nearby markets.
 Staying near these attractions helps travelers experience the city without transportation stress.
 </p>
@@ -77,14 +77,14 @@ Staying near these attractions helps travelers experience the city without trans
 <p>Tourists visiting Varanasi for the first time often prefer hotels near the Ganga River because they can explore most attractions on foot and experience the authentic atmosphere of the city.</p>
 
 
-<h2>Enjoy Local Food and Banarasi Culture</h2>
+<h2 className="text-foreground font-display font-semibold mt-12 mb-5 text-3xl">Enjoy Local Food and Banarasi Culture</h2>
 <p>Another advantage of staying near the Ganga River is access to authentic Banarasi cuisine. Visitors can enjoy local delicacies like kachori sabzi, tamatar chaat, Banarasi paan, lassi, and traditional sweets from nearby food shops.
 </p>
 <p>The cultural vibe around the ghats is truly special. Music performances, spiritual chants, local festivals, and traditional rituals make Varanasi different from every other city in India.</p>
 <p>By choosing Rudreshwar Mahadeo Kothi, guests get an opportunity to experience this culture closely while enjoying a comfortable stay.</p>
 
 
-<h2>Best Choice for a Memorable Stay in Varanasi</h2>
+<h2 className="text-foreground font-display font-semibold mt-12 mb-5 text-3xl">Best Choice for a Memorable Stay in Varanasi</h2>
 <p>If you are planning a trip to the spiritual capital of India and searching for the best hotel near Ganga River Varanasi, Rudreshwar Mahadeo Kothi offers everything needed for a peaceful and memorable experience.</p>
 <p>Its comfortable rooms, convenient location, warm hospitality, and easy access to famous ghats and temples make it an excellent accommodation choice for every traveler. Whether you want to explore spirituality, culture, history, or local traditions, staying near the Ganga River allows you to enjoy the real essence of Varanasi.
 </p>
